@@ -1,0 +1,96 @@
+
+;; JENNY'S RANDOM GAME SCRIPT ;;
+
+(load "ai-original\ai-original_constants")
+(load "ai-original\ai-original_building-count")         
+(load "ai-original\ai-original_population")     
+
+;******************************
+#load-if-defined MONUMENT-RACE
+
+(load "ai-original\ai-original_wonder-rush")
+
+#end-if
+;******************************
+#load-if-defined DEATH-MATCH
+
+(load "ai-original\ai-original_init-goals")
+
+(load "ai-original\ai-original_map-loads")
+(load "ai-original\ai-original_diplomacy")
+
+(load "ai-original\ai-original_deathmatch")
+
+;(load "supplement")
+;(load "troop-center")
+;(load "airbase")
+;(load "mech-factory")
+;(load "heavy-weapons")
+;(load "jedi-temple")
+
+(load "ai-original\ai-original_attack")
+(load "ai-original\ai-original_resign")
+
+#end-if
+;******************************
+#load-if-defined DEFEND-MONUMENT
+
+(load "ai-original\ai-original_map-loads")
+(load "ai-original\ai-original_diplomacy")
+
+(load "ai-original\ai-original_wonder-kill")
+
+#end-if
+;******************************
+#load-if-not-defined DEATH-MATCH
+#load-if-not-defined DEFEND-MONUMENT
+#load-if-not-defined MONUMENT-RACE
+
+(load "ai-original\ai-original_age-advancement")
+(load "ai-original\ai-original_init-goals")
+(load "ai-original\ai-original_map-loads")
+
+(load "ai-original\ai-original_sn-homebase")
+(load "ai-original\ai-original_sn-gather")
+(load "ai-original\ai-original_escrow")
+(load "ai-original\ai-original_sn-soldiers")    ;; strategic numbers dealing specifically w/ soldiers like attack/defend
+
+(load "ai-original\ai-original_rush")
+
+(load "ai-original\ai-original_diplomacy")              ;; have sub-loads (loads dip feeder, dip bully, dip feeder)
+(load "ai-original\ai-original_attack")                 ;; sends out attacks, sets military parity, sets enemy army/navy/air sizes
+
+(load "ai-original\ai-original_combat-arm")             ;; sets the combat-arm/combat-supp
+
+(load "ai-original\ai-original_homebase")               ;; workers, command center, prefab shelters, farms, power cores, shield generators
+(load "ai-original\ai-original_animal")
+(load "ai-original\ai-original_food")
+(load "ai-original\ai-original_carbon")
+(load "ai-original\ai-original_nova")                   
+(load "ai-original\ai-original_ore")
+(load "ai-original\ai-original_tower")                  
+(load "ai-original\ai-original_troop-center")
+(load "ai-original\ai-original_shipyard")       
+        
+(load "ai-original\ai-original_spaceport")      
+(load "ai-original\ai-original_jedi-temple")            
+(load "ai-original\ai-original_mech-factory")
+(load "ai-original\ai-original_war-center")
+
+(load "ai-original\ai-original_airbase")
+(load "ai-original\ai-original_fortress")
+(load "ai-original\ai-original_heavy-weapons")
+(load "ai-original\ai-original_research-center")
+
+(load "ai-original\ai-original_monument")
+
+(load "ai-original\ai-original_research")               ;; tech item research - unit upgrades are in appropriate building files
+(load "ai-original\ai-original_cheats")
+        
+(load "ai-original\ai-original_resign")         
+
+
+#end-if
+#end-if
+#end-if
+;******************************

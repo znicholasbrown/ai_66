@@ -1,0 +1,31 @@
+
+; build during tech-level-2 research
+(defrule
+        (resource-found carbon)
+        (building-type-count BLDG-MAIN > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON == 0)
+        (dropsite-min-distance carbon > 5)
+        (can-build BLDG-DROPCARBON)
+=>
+        (build BLDG-DROPCARBON)
+)
+
+; build as needed
+(defrule
+        (current-age >= tech-level-2)
+        (resource-found carbon)
+        (dropsite-min-distance carbon > 5)
+        (can-build BLDG-DROPCARBON)
+=>
+        (build BLDG-DROPCARBON)
+)
+
+(defrule
+        (timer-triggered t-carbonctr)
+=>
+        (disable-timer t-carbonctr)
+        (enable-timer t-carbonctr 60)
+)
+
+

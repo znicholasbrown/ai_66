@@ -1,0 +1,379 @@
+
+#load-if-not-defined DIFFICULTY-EASIEST
+
+;start the pass
+(defrule
+        (difficulty <= easy)
+        (nor
+                (map-type fortress) 
+                (map-type arena)
+        )
+=>
+        (enable-wall-placement 2)
+        (disable-self)
+)
+
+(defrule
+        (current-age > tech-level-1)
+=>
+        (set-goal wall-build NOTICE)
+        (enable-timer t-tower 1)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NOTICE)
+        (or
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+=>
+        (set-goal wall-build POOR)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build POOR)
+        (current-age >= tech-level-3)
+=>
+        (set-goal wall-build NOTICE)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NOTICE)
+        (or
+                (or
+                        (goal rush-control RUSHING)
+                        (goal castle-attempt YES)
+                )
+                (or
+                        (or
+                                (goal 1 10)
+                                (difficulty >= easy)
+                        )
+                        (map-type fortress)
+                )
+        )
+=>
+        (set-goal wall-build NO)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NOTICE)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NO)
+        (or
+                (goal personality 1)
+                (goal personality 2)
+        )
+        (not (map-type fortress) )
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NO)
+        (current-age == tech-level-4)
+        (nor 
+                (map-type fortress)
+                (goal castle-attempt YES)
+        )
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build YES)
+        (goal wonder-attempt POSSIBLE)
+=>
+        (set-goal wall-build NO)
+        (disable-self)
+)
+
+(defrule
+        (goal wall-build NO)
+        (building-type-count-total BLDG-MONUMENT > 0)
+        (nor 
+                (map-type fortress) 
+                (or
+                        (map-type tundra)
+                        (map-type ice-lake)
+                )
+        )
+=>
+        (set-goal wall-build YES)
+)
+
+;build walls
+
+(defrule
+        (current-age == tech-level-2)
+        (goal wall-build YES)
+        (can-build-wall-with-escrow 2 BLDG-BARRIER-LINE)
+        (or
+                (can-afford-complete-wall 2 BLDG-BARRIER-LINE)
+                (metal-amount > 125)
+        )
+=>
+        (release-escrow metal)
+        (build-wall 2 BLDG-BARRIER-LINE)
+)
+
+(defrule
+        (goal wall-build YES)
+        (can-build-wall-with-escrow 2 BLDG-BARRIER-LINE)
+        (or
+                (can-afford-complete-wall 2 BLDG-BARRIER-LINE)
+                (metal-amount > 300)
+        )
+=>
+        (release-escrow metal)
+        (build-wall 2 BLDG-BARRIER-LINE)
+)
+
+(defrule
+        (goal wall-build NO)
+        (building-type-count-total BLDG-GATE > 0)
+        (wall-completed-percentage 2 >= 75)
+        (wall-completed-percentage 2 < 100)
+        (can-build-wall-with-escrow 2 BLDG-BARRIER-LINE)
+=>
+        (release-escrow metal)
+        (build-wall 2 BLDG-BARRIER-LINE)
+)
+
+(defrule
+        (goal wall-build YES)
+        (building-type-count-total BLDG-GATE < 4)
+        (can-build-gate-with-escrow 2)
+=>
+        (release-escrow metal)
+        (build-gate 2)
+)
+
+(defrule
+        (goal wall-build YES)
+        (not (goal castle-attempt YES))
+        (wall-completed-percentage 2 == 100)
+        (building-type-count-total BLDG-GATE == 0)
+=>
+        (delete-building BLDG-BARRIER-LINE)
+        (set-goal wall-build NO)
+)
+
+(defrule
+        (goal wall-build YES)
+        (wall-completed-percentage 2 == 100)
+=>
+        (set-goal wall-build NO)
+)
+
+;*****************************************
+
+#load-if-defined DIFFICULTY-EASY
+
+(defrule
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-TURRET-LINE < 2)
+        (goal wall-build NO)
+        (can-build BLDG-TURRET-LINE)
+=>
+        (build BLDG-TURRET-LINE)
+)
+
+(defrule
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-MISSILE-LINE < 2)
+        (goal wall-build NO)
+        (can-build BLDG-MISSILE-LINE)
+=>
+        (build BLDG-MISSILE-LINE)
+)
+
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASY
+
+(defrule
+        (goal turret-control TURRET-MISSILE)
+        (can-build BLDG-MISSILE-LINE)
+        (not (goal wonder-attempt POSSIBLE) )
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-MISSILE-LINE < 5)
+        (or
+                (goal wall-build NO)
+                (timer-triggered t-tower)
+        )
+=>
+        (build BLDG-MISSILE-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-LASER)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (goal turret-control TURRET-LASER)
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-TURRET-LINE < 3)
+        (or
+                (goal wall-build NO)
+                (timer-triggered t-tower)
+        )
+        (nor
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-build BLDG-TURRET-LINE)
+=>
+        (build BLDG-TURRET-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-MISSILE)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal turret-control TURRET-LASER)
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-TURRET-LINE < 6)
+        (or
+                (goal wall-build NO)
+                (timer-triggered t-tower)
+        )
+        (not (goal rush-control IMPERIAL) )
+        (can-build BLDG-TURRET-LINE)
+=>
+        (build BLDG-TURRET-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-MISSILE)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (goal turret-control TURRET-LASER)
+        (can-build BLDG-TURRET-LINE)
+        (not (goal wonder-attempt POSSIBLE))
+        (not (goal castle-attempt YES) )
+        (building-type-count-total BLDG-TURRET-LINE < 9)
+        (or
+                (goal wall-build NO)
+                (timer-triggered t-tower)
+        )
+=>
+        (build BLDG-TURRET-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-MISSILE)
+)
+
+; post-monument watch towers -- go nuts!
+(defrule
+        (building-type-count-total BLDG-MONUMENT > 0)
+        (goal turret-control TURRET-LASER)
+        (can-build BLDG-TURRET-LINE)
+=>
+        (build BLDG-TURRET-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-MISSILE)
+)
+
+(defrule
+        (building-type-count-total BLDG-MONUMENT > 0)
+        (goal turret-control TURRET-MISSILE)
+        (can-build BLDG-MISSILE-LINE)
+=>
+        (build BLDG-MISSILE-LINE)
+        (set-goal turret-control CHANGE-TURRET-TO-LASER)
+)
+
+(defrule
+        (goal turret-control CHANGE-TURRET-TO-MISSILE)
+        (current-age < tech-level-3)
+=>
+        (set-goal turret-control TURRET-LASER)
+)
+
+(defrule
+        (goal turret-control CHANGE-TURRET-TO-MISSILE)
+=>
+        (set-goal turret-control TURRET-MISSILE)
+)
+
+(defrule
+        (goal turret-control CHANGE-TURRET-TO-LASER)
+=>
+        (set-goal turret-control TURRET-LASER)
+)
+
+#end-if
+
+(defrule
+        (timer-triggered t-tower)
+        (or
+                (can-afford-complete-wall 2 BLDG-BARRIER-LINE)
+                (metal-amount > 500)
+        )
+=>
+        (disable-timer t-tower)
+        (enable-timer t-tower 60)
+)
+
+(defrule
+        (timer-triggered t-tower)
+=>
+        (disable-timer t-tower)
+        (enable-timer t-tower 300)
+)
+
+;; upgrades ;;
+
+(defrule        
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (building-type-count BLDG-BARRIER-LINE > 0)
+        (can-research ut-heavy-wall)
+=>
+        (research ut-heavy-wall)
+)
+
+(defrule        
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age > tech-level-2)
+        (building-type-count BLDG-BARRIER-LINE > 0)
+        (can-research-with-escrow ut-shield-wall)
+=>
+        (research ut-shield-wall)
+)
+
+
+(defrule
+        (difficulty <= moderate)
+        (current-age > tech-level-2)
+        (building-type-count BLDG-TURRET-LINE > 0)
+        (can-research ut-medium-turret)
+=>
+        (research ut-medium-turret)
+)
+
+(defrule
+        (current-age > tech-level-3)
+        (difficulty <= moderate)
+        (building-type-count BLDG-TURRET-LINE > 0)
+        (can-research ut-adv-turret)
+=>
+        (research ut-adv-turret)
+)
+
+(defrule        
+        (current-age > tech-level-3)
+        (difficulty <= hard)
+        (building-type-count BLDG-MISSILE-LINE > 0)
+        (can-research ut-adv-missile-turret)
+=>
+        (research ut-adv-missile-turret)
+)
+
+#end-if

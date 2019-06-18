@@ -1,0 +1,43 @@
+
+#load-if-defined REBEL
+
+(defrule
+        (current-age >= tech-level-2)
+        (goal start-military YES)
+        (goal age-advancement NOTICE)
+        (building-type-count-total BLDG-WARCTR == 0)
+        (can-build BLDG-WARCTR)
+        =>
+        (build BLDG-WARCTR)
+)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defrule
+        (current-age >= tech-level-2)
+        (goal start-military YES)
+        (building-type-count-total BLDG-WARCTR == 0)
+        (can-build BLDG-WARCTR)
+        =>
+        (build BLDG-WARCTR)
+)
+
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (building-type-count-total BLDG-WARCTR == 0)
+        (can-build BLDG-WARCTR)
+=>
+        (build BLDG-WARCTR)
+)
+
+#end-if
+#end-if

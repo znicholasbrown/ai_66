@@ -1,0 +1,144 @@
+;error trapping
+(defrule
+        (current-age == tech-level-4)
+        (not (goal rush-control NO) )
+=>
+        (set-goal rush-control NO)
+)
+
+;should we launch a rush?
+(defrule
+        (goal rush-control NOTICE)
+=>
+        (generate-random-number 12)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control NOTICE)
+        (difficulty > hard)
+        (random-number == 1)
+        (or
+                (not (goal 1 10) )
+                (map-type water-mass)
+        )
+=>
+        (set-goal rush-control RUSHING)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control NOTICE)
+        (difficulty > hard)
+        (random-number == 2)
+        (or
+                (not (goal 1 10) )
+                (map-type water-mass)
+        )
+=>
+        (set-goal rush-control FEUDAL)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control NOTICE)
+        (difficulty > hard)
+        (random-number >= 3)
+        (random-number <= 8)
+=>
+        (set-goal rush-control CASTLE)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control NOTICE)
+        (difficulty <= hard)
+        (random-number <= 9)
+=>
+        (set-goal rush-control CASTLE)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control NOTICE)
+=>
+        (set-goal rush-control IMPERIAL)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control FEUDAL)
+        (or
+                (map-type forest)
+                (map-type fortress)
+        )
+=>
+        (set-goal rush-control IMPERIAL)
+        (disable-self)
+)
+
+(defrule
+        (goal rush-control RUSHING)
+        (current-age == tech-level-1)
+        (or
+                (map-type forest)
+                (map-type fortress)
+        )
+=>
+        (set-goal rush-control IMPERIAL)
+        (disable-self)
+)
+
+
+;*******************************************************
+;FEUDAL RUSH RULES
+(defrule
+        (goal rush-control FEUDAL)
+        (current-age >= tech-level-2)
+=>
+        (set-goal rush-control RUSHING)
+        (disable-self)
+)
+
+;go after boomers
+(defrule
+        (current-age >= tech-level-2) 
+        (difficulty <= easy)
+        (players-current-age every-enemy <= tech-level-2)
+        (players-civilian-population every-enemy > civ-castle)
+=>
+        (set-goal rush-control RUSHING)
+        (disable-self)
+)
+
+;end the feudal rush
+(defrule
+        (goal rush-control RUSHING)
+        (current-age == tech-level-2)
+        (players-current-age any-enemy > tech-level-2)
+=>
+        (set-goal rush-control IMPERIAL)
+        (disable-self)
+)
+
+;*******************************************************
+;should we launch a castle rush?
+(defrule
+        (goal rush-control CASTLE)
+        (current-age >= tech-level-3)
+=>
+        (set-goal rush-control RUSHING)
+        (disable-self)
+)
+
+;end the rush
+(defrule
+        (goal rush-control RUSHING)
+        (current-age == tech-level-3)
+        (players-current-age any-enemy == tech-level-4)
+=>
+        (set-goal rush-control IMPERIAL)
+        (disable-self)
+)
+
+

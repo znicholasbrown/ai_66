@@ -1,0 +1,780 @@
+
+;starting goals
+(defrule
+        (true)
+=>
+        (set-goal military-parity YES)  ;goal 3
+        (set-goal attack-control NO)    ;goal 4
+        (set-goal resource-needed NO)   ;goal 5
+
+        (set-goal rush-control NOTICE)  ;goal 6
+        (set-goal secondary-build NO)   ;goal 8
+        (set-goal combat-arm NOTICE)    ;goal 11
+
+        (set-goal soldiers-available NO);goal 10
+        (set-goal combat-supp UNIT20)   ;goal 12
+        (set-goal attack-enabled YES)   ;goal 13
+        (set-goal age-advancement NO)   ;goal 14
+
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-goal upgrade-conflict NO)                  ;goal 16
+        (set-goal wonder-attempt MAYBE)                 ;goal 20
+        (set-goal sea-owner NO)                                 ;goal 23
+        (set-goal enemy-soldiers NO)                    ;goal 26
+        (set-goal jedi-rating NO)                               ;goal 27
+
+        (set-goal get-mad NO)                                   ;goal 28
+        (set-goal siege-available YES)                  ;goal 34
+        (set-goal turret-control TURRET-LASER)  ;goal 41
+        (set-goal special-map NO)                               ;goal 42
+        (set-goal start-military NO)                    ;goal 43
+        (set-goal halt-worker NO)                               ;goal 67
+        (set-goal power-forward NO)                             ;goal 68
+        (set-goal train-air YES)                                ;goal 69
+        (set-goal have-been-attacked NO)                ;goal 70
+
+        (set-goal debug NO)                                             ;goal 65
+
+        (disable-self)
+)
+
+(defrule
+        (true)
+        =>
+        (set-goal train-counter1 NO)                    ;goal 44
+        (set-goal train-counter2 NO)                    ;goal 47
+        (set-goal train-counter3 NO)                    ;goal 48
+        (set-goal train-counter4 NO)                    ;goal 49
+        (set-goal train-counter5 NO)                    ;goal 50
+        (set-goal train-counter6 NO)                    ;goal 51
+        (set-goal train-counter7 NO)                    ;goal 52
+        (set-goal train-counter8 NO)                    ;goal 53
+        (set-goal train-counter9 NO)                    ;goal 54
+        (set-goal train-counter10 NO)                   ;goal 55
+        (set-goal train-counter11 NO)                   ;goal 56
+        (set-goal train-counter12 NO)                   ;goal 57
+        (set-goal train-counter13 NO)                   ;goal 58
+        (set-goal train-counter14 NO)                   ;goal 59
+        (set-goal train-counter-start NO)               ;goal 66
+        (disable-self)
+)
+
+(defrule
+        (true)
+        =>
+        (set-goal reduce-units1 NO)                             ;goal 45
+        (set-goal reduce-units2 NO)                             ;goal 60
+        (set-goal reduce-units3 NO)                             ;goal 61
+        (set-goal reduce-units4 NO)                             ;goal 62
+        (set-goal reduce-units5 NO)                             ;goal 63
+        (set-goal reduce-units6 NO)                             ;goal 64
+        (disable-self)
+)
+
+(defrule
+        (difficulty >= hard)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-TRAINTROOPER > 0)
+        (unit-type-count-total UNIT-WORKER > five-percent-pop)
+        =>
+        (set-goal start-military YES)
+        (disable-self)
+)
+
+(defrule
+        (difficulty == hardest)
+        (goal start-military NO)
+        =>
+        (set-goal start-military YES)
+)
+
+#load-if-defined REBEL
+
+(defrule
+        (true)
+        =>
+        (set-goal upgrade-conflict YES)
+        (disable-self)
+)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined WOOKIEES
+#load-if-not-defined FEDERATION
+
+(defrule
+        (true)
+        =>
+        (set-goal jedi-rating GOOD)
+        (disable-self)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined EMPIRE
+#load-if-not-defined NABOO
+
+(defrule
+        (true)          
+        =>
+        (set-goal jedi-rating POOR)
+        (disable-self)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined WOOKIEES
+#load-if-not-defined NABOO
+
+(defrule
+        (true)
+        =>
+        (set-goal mech-rating GOOD)
+        (disable-self)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (true)          
+        =>
+        (set-goal mech-rating POOR)
+        (disable-self)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (goal train-counter-start NO)
+        (players-current-age any-enemy >= tech-level-3)
+        (town-under-attack)
+        =>
+        (set-goal train-counter-start YES)
+)
+
+(defrule
+        (goal train-counter-start YES)
+        (or
+                (players-current-age any-enemy < tech-level-3)
+                (not (town-under-attack))
+        )
+        =>
+        (set-goal train-counter-start NO)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (goal train-counter-start NO)
+        (or
+                (players-current-age any-enemy >= tech-level-3)
+                (building-type-count-total BLDG-TRAINAIR > 0)
+        )
+        (town-under-attack)
+        =>
+        (set-goal train-counter-start YES)
+)
+
+(defrule
+        (goal train-counter-start YES)
+        (or
+                (and
+                        (players-current-age any-enemy < tech-level-3)  
+                        (building-type-count-total BLDG-TRAINAIR == 0)
+                )
+                (not (town-under-attack))
+        )
+        =>
+        (set-goal train-counter-start NO)
+)
+
+#end-if
+#end-if
+#end-if
+
+;reduce normal unit production to make room for counter units
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units1 NO)
+        (goal mech-rating POOR)
+        (goal train-counter10 YES)
+        =>
+        (set-goal reduce-units1 YES)
+)
+
+(defrule
+        (goal reduce-units1 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter10 NO)
+        )
+        (goal mech-rating POOR)
+        =>
+        (set-goal reduce-units1 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units2 NO)
+        (goal mech-rating POOR)
+        (goal train-counter6 YES)
+        =>
+        (set-goal reduce-units2 YES)
+)
+
+(defrule
+        (goal reduce-units2 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter6 NO)
+        )
+        (goal mech-rating POOR)
+        =>
+        (set-goal reduce-units2 NO)
+)
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units3 NO)
+        (goal mech-rating POOR)
+        (goal train-counter13 YES)
+        =>
+        (set-goal reduce-units3 YES)
+)
+
+(defrule
+        (goal reduce-units3 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter13 NO)
+        )
+        (goal mech-rating POOR)
+        =>
+        (set-goal reduce-units3 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units3 NO)
+        (or
+                (civ-selected EMPIRE)
+                (or
+                        (and
+                                (civ-selected GUNGANS)
+                                (not (goal special-map WATER))
+                        )
+                        (and
+                                (civ-selected FEDERATION)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        (goal train-counter4 YES)
+        =>
+        (set-goal reduce-units3 YES)
+)
+
+(defrule
+        (goal reduce-units3 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter4 NO)
+        )
+        (or
+                (civ-selected EMPIRE)
+                (or
+                        (and
+                                (civ-selected GUNGANS)
+                                (not (goal special-map WATER))
+                        )
+                        (and
+                                (civ-selected FEDERATION)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        =>
+        (set-goal reduce-units3 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units3 NO)
+        (or
+                (civ-selected GUNGANS)
+                (civ-selected FEDERATION)
+        )
+        (goal special-map WATER)
+        (or
+                (goal train-counter3 YES)
+                (goal train-counter10 YES)
+        )
+        =>
+        (set-goal reduce-units3 YES)
+)
+
+(defrule
+        (goal reduce-units3 YES)
+        (or
+                (population-headroom >= 5)
+                (and
+                        (goal train-counter3 NO)
+                        (goal train-counter10 NO)
+                )
+        )
+        (or
+                (civ-selected GUNGANS)
+                (civ-selected FEDERATION)
+        )
+        (goal special-map WATER)
+        =>
+        (set-goal reduce-units3 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units4 NO)
+        (goal mech-rating POOR)
+        (goal train-counter7 YES)
+        =>
+        (set-goal reduce-units4 YES)
+)
+
+(defrule
+        (goal reduce-units4 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter7 NO)
+        )
+        (goal mech-rating POOR)
+        =>
+        (set-goal reduce-units4 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units4 NO)
+        (or
+                (civ-selected EMPIRE)
+                (or
+                        (and
+                                (civ-selected GUNGANS)
+                                (not (goal special-map WATER))
+                        )
+                        (and
+                                (civ-selected FEDERATION)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        (or
+                (goal train-counter3 YES)
+                (goal train-counter10 YES)
+        )
+        =>
+        (set-goal reduce-units4 YES)
+)
+
+(defrule
+        (goal reduce-units4 YES)
+        (or
+                (population-headroom >= 5)
+                (and
+                        (goal train-counter3 NO)
+                        (goal train-counter10 NO)
+                )
+        )
+        (or
+                (civ-selected EMPIRE)
+                (or
+                        (and
+                                (civ-selected GUNGANS)
+                                (not (goal special-map WATER))
+                        )
+                        (and
+                                (civ-selected FEDERATION)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        =>
+        (set-goal reduce-units4 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units4 NO)
+        (or
+                (civ-selected GUNGANS)
+                (civ-selected FEDERATION)
+        )
+        (goal special-map WATER)
+        (goal train-counter11 YES)
+        =>
+        (set-goal reduce-units4 YES)
+)
+
+(defrule
+        (goal reduce-units4 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter11 NO)
+        )
+        (or
+                (civ-selected GUNGANS)
+                (civ-selected FEDERATION)
+        )
+        (goal special-map WATER)
+        =>
+        (set-goal reduce-units4 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units5 NO)
+        (or
+                (civ-selected REBEL)
+                (or
+                        (civ-selected WOOKIEES)
+                        (civ-selected EMPIRE)
+                )
+        )
+        (goal train-counter5 YES)
+        =>
+        (set-goal reduce-units5 YES)
+)
+
+(defrule
+        (goal reduce-units5 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter5 NO)
+        )
+        (or
+                (civ-selected REBEL)
+                (or
+                        (civ-selected WOOKIEES)
+                        (civ-selected EMPIRE)
+                )
+        )
+        =>
+        (set-goal reduce-units5 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units5 NO)
+        (not (goal special-map WATER))
+        (or
+                (civ-selected NABOO)
+                (or
+                        (civ-selected GUNGANS)
+                        (civ-selected FEDERATION)
+                )
+        )
+        (goal train-counter5 YES)
+        =>
+        (set-goal reduce-units5 YES)
+)
+
+(defrule
+        (goal reduce-units5 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter5 NO)
+        )
+        (not (goal special-map WATER))
+        (or
+                (civ-selected NABOO)
+                (or
+                        (civ-selected GUNGANS)
+                        (civ-selected FEDERATION)
+                )
+        )
+        =>
+        (set-goal reduce-units5 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units5 NO)
+        (civ-selected NABOO)
+        (goal special-map WATER)
+        (or
+                (goal train-counter8 YES)
+                (or
+                        (goal train-counter9 YES)
+                        (or
+                                (goal train-counter11 YES)
+                                (goal train-counter12 YES)
+                        )
+                )
+        )
+        =>
+        (set-goal reduce-units5 YES)
+)
+
+(defrule
+        (goal reduce-units5 YES)
+        (or
+                (population-headroom >= 5)
+                (and
+                        (goal train-counter8 NO)
+                        (and
+                                (goal train-counter9 NO)
+                                (and
+                                        (goal train-counter11 NO)
+                                        (goal train-counter12 NO)
+                                )
+                        )
+                )
+        )
+        (civ-selected NABOO)
+        (goal special-map WATER)
+        =>
+        (set-goal reduce-units5 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units6 NO)
+        (or
+                (civ-selected REBEL)
+                (or
+                        (civ-selected WOOKIEES)
+                        (and
+                                (civ-selected NABOO)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        (goal train-counter4 YES)
+        =>
+        (set-goal reduce-units6 YES)
+)
+
+(defrule
+        (goal reduce-units6 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter4 NO)
+        )
+        (or
+                (civ-selected REBEL)
+                (or
+                        (civ-selected WOOKIEES)
+                        (and
+                                (civ-selected NABOO)
+                                (not (goal special-map WATER))
+                        )
+                )
+        )
+        =>
+        (set-goal reduce-units6 NO)
+)
+
+(defrule
+        (population-headroom < 5)
+        (goal reduce-units6 NO)
+        (civ-selected NABOO)
+        (goal special-map WATER)
+        (goal train-counter14 YES)
+        =>
+        (set-goal reduce-units6 YES)
+)
+
+(defrule
+        (goal reduce-units6 YES)
+        (or
+                (population-headroom >= 5)
+                (goal train-counter14 NO)
+        )
+        (civ-selected NABOO)
+        (goal special-map WATER)
+        =>
+        (set-goal reduce-units6 NO)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined DIFFICULTY-HARDEST
+#load-if-not-defined POPULATION-CAP-25
+#load-if-not-defined POPULATION-CAP-50
+
+;RESEARCH
+
+(defrule
+        (difficulty <= moderate)
+        (goal start-military NO)
+        (current-age == tech-level-1)
+        (research-completed rt-basic-training)
+        =>
+        (set-goal start-military YES)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal start-military YES)
+        (current-age == tech-level-1)
+        (not (research-completed rt-basic-training))
+        =>
+        (set-goal start-military NO)
+)
+
+;*** TECH 2 ***
+
+(defrule
+        (difficulty <= moderate)
+;       (goal start-military NO)
+        (current-age == tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (research-completed rt-fusion-cutter)
+        (research-completed rt-irrigation)
+        =>
+        (set-goal start-military YES)
+        (set-goal halt-worker NO)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (not (research-completed rt-upgraded-motivator))
+        (not (research-completed rt-fusion-cutter))
+        (not (research-completed rt-irrigation))
+        =>
+        (set-goal start-military NO)
+        (set-goal halt-worker YES)
+)
+
+;***TECH 3***
+
+(defrule
+        (difficulty <= hard)
+        (goal start-military YES)
+        (current-age == tech-level-3)
+        (or
+                (not (research-completed rt-optimized-motivator))
+                (or
+                        (not (research-completed rt-enh-fusion-cutter))
+                        (not (research-completed rt-harvesting))
+                )
+        )
+        =>
+        (set-goal start-military NO)
+        (set-goal halt-worker YES)
+)
+
+(defrule
+        (difficulty <= hard)
+;       (goal start-military NO)
+        (current-age == tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (research-completed rt-enh-fusion-cutter)
+        (research-completed rt-harvesting)
+        =>
+        (set-goal start-military YES)
+        (set-goal halt-worker NO)
+;       (disable-self)
+)
+
+(defrule
+        (civ-selected FEDERATION)
+        (research-completed rt-optimized-motivator)
+        =>
+        (set-goal start-military YES)
+)
+
+#end-if
+#end-if
+#end-if
+
+;; upgrades ;;
+(defrule
+        (true)
+=>
+        (set-goal troop-upgrades NO)
+        (set-goal fighter-upgrades NO)
+        (set-goal mech2-upgrades NO)
+)
+
+;troops
+(defrule
+        (soldier-count >= five-percent-pop)
+        (or
+                (or (goal combat-arm TROOPS)
+                        (goal combat-supp TROOPS)
+                )       
+                (goal pre-unique-arm TROOPS)
+        )
+=>
+        (set-goal troop-upgrades YES)
+)
+
+;fighter
+(defrule
+        (soldier-count >= five-percent-pop)
+        (or-list 6
+                (goal combat-arm BOMBER)
+                (goal combat-arm FIGHTER)
+                (goal combat-supp BOMBER)
+                (goal combat-supp FIGHTER)
+                (goal pre-unique-arm BOMBER)
+                (goal pre-unique-arm FIGHTER)
+        )
+=>
+        (set-goal fighter-upgrades YES)
+)
+
+;mech
+(defrule
+        (soldier-count >= five-percent-pop)
+        (or-list 7
+                (goal pre-unique-arm MECH1)
+                (goal combat-arm MECH1)
+                (goal combat-arm MECH2)
+                (goal combat-arm MECH3)
+                (goal combat-supp MECH1)
+                (goal combat-supp MECH2)
+                (goal combat-supp MECH3)
+        )
+=>
+        (set-goal mech2-upgrades YES)
+)

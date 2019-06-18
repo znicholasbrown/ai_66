@@ -1,0 +1,663 @@
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIES
+
+(defrule
+        (goal siege-available YES)
+        (or
+                (or
+                        (players-building-type-count any-enemy BLDG-TURRET-LINE > 1)
+                        (players-building-type-count any-enemy BLDG-GOVTCTR > 0)
+                )
+                (or
+                        (players-building-type-count any-enemy BLDG-MISSILE-LINE > 0)
+                        (players-building-type-count any-enemy BLDG-MAIN > 1)
+                )
+        )
+=>
+        (set-goal siege-available NO)
+)
+
+(defrule
+        (goal siege-available YES)
+        (or
+                (or
+                        (players-building-type-count any-enemy BLDG-BARRIER1 > 10)
+                        (players-building-type-count any-enemy BLDG-BARRIER2 > 10)
+                )
+                (players-building-type-count any-enemy BLDG-BARRIER3 > 10)
+        )
+=>
+        (set-goal siege-available NO)
+)
+
+(defrule
+        (goal siege-available NO)
+        (or
+                (population >= pop-cap)
+                (or
+                        (or
+                                (unit-type-count SIEGE-RAM-LINE > 0)
+                                (unit-type-count SIEGE-ARTILLERY-LINE > 0)
+                        )
+                        (or
+                                (unit-type-count UNIT-PACKED1 > 0)
+                                (unit-type-count UNIT-UNPACKED1 > 0)
+                        )
+                )
+        )
+=>
+        (set-goal siege-available YES)
+)
+
+(defrule
+        (goal siege-available NO)
+        (goal 1 10)
+        (or
+                (unit-type-count BOAT-ARTILLERY-LINE > 1)
+                (unit-type-count SUB-ARTILLERY-LINE > 1)
+        )
+=>
+        (set-goal siege-available YES)
+)
+
+
+;************* ARTILLERY **************
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL3-artillery-arm)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL3-artillery-supp)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL4-artillery-arm)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL4-artillery-supp)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+#load-if-not-defined EMPIRE
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL3-artillery-arm-water)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL3-artillery-supp-water)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL4-artillery-arm-water)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-ARTILLERY-LINE < TL4-artillery-supp-water)
+        (can-train SIEGE-ARTILLERY-LINE)
+=>
+        (train SIEGE-ARTILLERY-LINE)
+)
+
+#end-if
+
+
+;*************** RAM ***************
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-RAM-LINE < TL3-ram-arm)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-RAM-LINE < TL3-ram-supp)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-RAM-LINE < TL4-ram-arm)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (not (civ-selected EMPIRE))
+                        (not (goal special-map WATER))
+                )
+                (civ-selected EMPIRE)
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-RAM-LINE < TL4-ram-supp)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+#load-if-not-defined EMPIRE
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-RAM-LINE < TL3-ram-arm-water)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-RAM-LINE < TL3-ram-supp-water)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-RAM-LINE < TL4-ram-arm-water)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total SIEGE-RAM-LINE < TL4-ram-supp-water)
+        (can-train SIEGE-RAM-LINE)
+=>
+        (train SIEGE-RAM-LINE)
+)
+
+#end-if
+
+
+;*********** A-A MOBILE ************
+
+;(defrule
+;       (goal start-military YES)
+;       (goal combat-arm MECH/HW)
+;       (current-age == tech-level-3)
+;;      (building-type-count-total BLDG-RESCTR > 0)
+;       (unit-type-count-total SIEGE-MISSILE-LINE < 3)
+;       (can-train SIEGE-MISSILE-LINE)
+;=>
+;       (train SIEGE-MISSILE-LINE)
+;)
+
+;(defrule
+;       (goal start-military YES)
+;       (goal combat-supp MECH/HW)
+;       (current-age == tech-level-3)
+;;      (building-type-count-total BLDG-RESCTR > 0)
+;       (unit-type-count-total SIEGE-MISSILE-LINE < 2)
+;       (can-train SIEGE-MISSILE-LINE)
+;=>
+;       (train SIEGE-MISSILE-LINE)
+;)
+
+;(defrule
+;       (goal start-military YES)
+;       (goal combat-arm MECH/HW)
+;       (current-age >= tech-level-4)
+;       (unit-type-count-total SIEGE-MISSILE-LINE < 2)
+;       (can-train SIEGE-MISSILE-LINE)
+;=>
+;       (train SIEGE-MISSILE-LINE)
+;)
+
+;(defrule
+;       (goal start-military YES)
+;       (goal combat-supp MECH/HW)
+;       (current-age >= tech-level-4)
+;       (unit-type-count-total SIEGE-MISSILE-LINE < 1)
+;       (can-train SIEGE-MISSILE-LINE)
+;=>
+;       (train SIEGE-MISSILE-LINE)
+;)
+
+(defrule
+        (civ-selected EMPIRE)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (not (goal castle-attempt YES))
+        =>
+        (set-goal castle-attempt YES)
+)
+
+;*********** UPGRADE CONFLICT **********
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (not (goal upgrade-conflict YES))
+        (current-age == tech-level-3)
+        (or
+                (unit-type-count SIEGE-RAM-LINE < five-percent-pop)
+                (or
+                        (unit-type-count SIEGE-ARTILLERY-LINE < five-percent-pop)
+                        (or
+                                (unit-type-count UNIT-MECH1-LINE < five-percent-pop)
+                                (unit-type-count UNIT-MECH2-LINE < five-percent-pop)
+                        )
+                )
+        )               
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+(defrule
+        (not (goal upgrade-conflict NO))
+        (current-age == tech-level-3)
+        (or
+                (unit-type-count SIEGE-RAM-LINE < five-percent-pop)
+                (or
+                        (unit-type-count SIEGE-ARTILLERY-LINE < five-percent-pop)
+                        (or
+                                (unit-type-count UNIT-MECH1-LINE < five-percent-pop)
+                                (unit-type-count UNIT-MECH2-LINE < five-percent-pop)
+                        )
+                )               
+        )
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (not (goal upgrade-conflict NO))
+        (current-age >= tech-level-4)
+        (not (town-under-attack))
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (not (goal upgrade-conflict YES))
+        (current-age >= tech-level-4)
+        (town-under-attack)
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+#end-if
+#end-if
+#end-if
+
+;*********** HEAVY WEAPONS FACTORY ************
+
+(defrule
+        (goal start-military YES)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (building-type-count-total BLDG-TRAINHEAVY == 0)
+        (can-build-with-escrow BLDG-TRAINHEAVY)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINHEAVY)
+)
+
+(defrule
+        (difficulty == moderate)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-GOVTCTR > 0)
+        (building-type-count BLDG-TRAINAIR > 0)
+        (building-type-count BLDG-TRAINMECH > 0)
+        (building-type-count BLDG-TRAINHEAVY == 1)
+        (can-build BLDG-TRAINHEAVY)
+=>
+        (build BLDG-TRAINHEAVY)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal start-military YES)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-GOVTCTR > 0)
+        (building-type-count BLDG-TRAINAIR > 0)
+        (building-type-count BLDG-TRAINMECH > 0)
+        (building-type-count BLDG-TRAINHEAVY == 1)
+        (can-build BLDG-TRAINHEAVY)
+=>
+        (build-forward BLDG-TRAINHEAVY)
+)
+
+
+;************* UPGRADE ***************
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-artillery-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-artillery-2)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-ram-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-ram-2)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-missile-launcher-2)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research ut-missile-launcher-2)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal train-counter-start YES)
+        (current-age == tech-level-3)
+        (unit-type-count-total SIEGE-RAM-LINE < counter-units)
+        (or
+                (cc-players-building-type-count any-enemy BLDG-TURRET-LINE >= enemy-units)
+                (cc-players-building-type-count any-enemy BLDG-MISSILE-LINE >= enemy-units)
+        )
+        =>
+        (set-goal train-counter1 YES)
+;       (set-escrow-percentage carbon 50)
+;       (set-escrow-percentage nova 50)
+)
+
+(defrule
+        (goal train-counter1 YES)
+        (current-age == tech-level-3)
+        (can-train SIEGE-RAM-LINE)
+        =>
+        (train SIEGE-RAM-LINE)
+)
+
+(defrule
+        (goal train-counter1 YES)
+        (current-age == tech-level-3)
+        (or
+                (and
+                        (cc-players-building-type-count every-enemy BLDG-TURRET-LINE <= 1)
+                        (cc-players-building-type-count every-enemy BLDG-MISSILE-LINE <= 1)
+                )
+                (unit-type-count-total SIEGE-RAM-LINE >= counter-units)
+        )
+        =>
+        (set-goal train-counter1 NO)
+;       (set-escrow-percentage carbon 0)
+;       (set-escrow-percentage nova 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (current-age >= tech-level-3)
+        (or
+                (unit-type-count-total SIEGE-MISSILE-LINE < air-counter-units)
+                (unit-type-count-total UNIT-FIGHTER-LINE < counter-units)
+        )
+        (cc-players-unit-type-count any-enemy UNIT-BOMBER-LINE >= enemy-units)
+        =>
+        (set-goal train-counter3 YES)
+;       (set-escrow-percentage carbon 50)
+;       (set-escrow-percentage nova 50)
+)               
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter3 YES)
+        (can-train SIEGE-MISSILE-LINE)
+        =>
+        (train SIEGE-MISSILE-LINE)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter3 YES)
+        (or
+                (unit-type-count-total SIEGE-MISSILE-LINE >= air-counter-units)
+                (or
+                        (unit-type-count-total UNIT-FIGHTER-LINE >= counter-units)
+                        (cc-players-unit-type-count every-enemy UNIT-BOMBER-LINE <= 1)
+                )
+        )
+        =>
+        (set-goal train-counter3 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (goal train-counter-start YES)
+        (unit-type-count-total SIEGE-MISSILE-LINE < air-counter-units)
+        (cc-players-unit-type-count any-enemy UNIT-FIGHTER-LINE >= enemy-units)
+        =>
+        (set-goal train-counter10 YES)
+;       (set-escrow-percentage carbon 50)
+;       (set-escrow-percentage nova 50)
+)               
+
+(defrule
+        (goal train-counter10 YES)
+        (can-train SIEGE-MISSILE-LINE)
+        =>
+        (train SIEGE-MISSILE-LINE)
+)
+
+(defrule
+        (goal train-counter10 YES)
+        (or
+                (unit-type-count-total SIEGE-MISSILE-LINE >= air-counter-units)
+                (cc-players-unit-type-count every-enemy UNIT-FIGHTER-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter10 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (or
+                (goal train-counter1 YES)
+                (or
+                        (goal train-counter3 YES)
+                        (goal train-counter10 YES)
+                )
+        )
+        (building-type-count-total BLDG-TRAINHEAVY == 0)
+        (can-build BLDG-TRAINHEAVY)
+        =>
+        (build BLDG-TRAINHEAVY)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;50 min
+        (goal mech-rating POOR)
+        (current-age >= tech-level-4)
+        (can-research ut-artillery-2)
+=>
+        (research ut-artillery-2)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating POOR)
+        (current-age >= tech-level-4)
+        (can-research ut-ram-2)
+=>
+        (research ut-ram-2)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating POOR)
+        (current-age >= tech-level-4)
+        (can-research ut-missile-launcher-2)
+=>
+        (research ut-missile-launcher-2)
+)
+
+#end-if
+#end-if
+#end-if

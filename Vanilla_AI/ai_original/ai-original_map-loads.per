@@ -1,0 +1,699 @@
+#load-if-defined GAME-SPEED-LOCKED
+(defrule
+        (true)
+=>
+        (set-goal rush-control 0)
+        (disable-self)
+)
+#else
+(defrule
+        (true)
+=>
+        (set-goal rush-control 0)
+        (disable-self)
+)
+#end-if
+;*************************************************************
+(defrule
+        (not (map-type precipice) )
+=>
+        (set-strategic-number sn-minimum-water-body-size-for-dock 3000)
+        (disable-self)
+)
+
+;*******************************
+#load-if-defined WATER-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined LAND-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SPACE-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map ASTEROID)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined PLANETS-AND-MOONS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map ASTEROID)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SEARCH-AND-DESTROY-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined TEAM-LAND-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+
+;*******************************
+#load-if-defined TEAM-SPACE-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map ASTEROID)
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-KASHYYYK-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-ENDOR-MAP              
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+
+;*******************************
+#load-if-defined STAR-WARS-WORLD-GEDDES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map ASTEROID)
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-KESSEL-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-TATOOINE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 10)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-YAVIN-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined SEA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined SHORELINE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined LAND-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined SPACE-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map ASTEROID)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined NOVA-LAKE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined LARGE-SEA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-KRANT-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-HOTH-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-HANOON-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined STAR-WARS-WORLD-REYTHA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+
+;*******************************
+#load-if-defined STAR-WARS-WORLD-DAGOBAH-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+
+;*******************************
+#load-if-defined STAR-WARS-WORLD-ZALORIIS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+
+;*******************************
+#load-if-defined STAR-WARS-WORLD-NABOO-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+#load-if-defined DEFEND-MONUMENT
+(defrule
+        (goal wonder-attempt DEFEND)
+=>
+        (set-goal wall-build YES)
+        (disable-self)
+)
+#end-if
+#end-if
+;*******************************
+#load-if-defined CUSTOM-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined RAIDERS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+
+(defrule
+        (game-time < 90)
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 6)
+
+        (set-strategic-number sn-cap-civilian-explorers 6)
+        (set-strategic-number sn-cap-civilian-builders 0)
+        (set-strategic-number sn-cap-civilian-gatherers 0)
+
+        (set-strategic-number sn-percent-civilian-explorers 100)
+        (set-strategic-number sn-percent-civilian-builders 0)
+        (set-strategic-number sn-percent-civilian-gatherers 0)
+
+        (disable-self)
+)
+
+(defrule
+        (game-time > 180)
+        (unit-type-count UNIT-WORKER < 15)
+        (starting-resources < high-resources)
+        (unit-type-count UNIT-FASTBIKE-LINE == 0)
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 1)
+        (set-strategic-number sn-cap-civilian-explorers 1)
+        (set-strategic-number sn-percent-civilian-explorers 5)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 80)
+        (disable-self)
+)
+
+(defrule
+        (game-time > 180)
+        (unit-type-count UNIT-WORKER < 15)
+        (starting-resources == high-resources)
+        (unit-type-count UNIT-FASTBIKE-LINE == 0)
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 1)
+        (set-strategic-number sn-cap-civilian-explorers 1)
+        (set-strategic-number sn-percent-civilian-explorers 5)
+        (set-strategic-number sn-percent-civilian-builders 80)
+        (set-strategic-number sn-percent-civilian-gatherers 15)
+        (disable-self)
+)
+
+(defrule
+   (game-time > 30)
+        (building-type-count BLDG-MAIN < 1)
+        (can-build BLDG-MAIN)
+=>
+        (build BLDG-MAIN)
+)
+
+
+#end-if
+;*******************************
+#load-if-defined RIVERS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined SWAMP-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined TUNDRA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal special-map WATER)
+        (set-goal 1 1)
+        (set-goal 2 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined DESERT-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined ARENA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined FOREST-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined FORTRESS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined ICE-LAKE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined NOVA-ASSAULT-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined PRECIPICE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined FLATS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined MOTHERLODE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SAVANNAH-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+#end-if
+;*************************************************************
+
+#load-if-defined REGICIDE
+(defrule
+        (building-type-count-total BLDG-GOVTCTR == 0)
+        (not (goal castle-attempt YES) )
+=>
+        (set-goal castle-attempt YES)
+)
+
+(defrule
+        (current-age < tech-level-4)
+        (not (goal rush-control IMPERIAL) )
+=>
+        (set-goal rush-control IMPERIAL)
+)
+
+(defrule        ;200 in regicide
+        (goal military-parity SUPERIOR)
+        (can-spy)
+=>
+        (spy)
+        (disable-self)
+)
+
+#end-if

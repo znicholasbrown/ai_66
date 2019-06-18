@@ -1,0 +1,790 @@
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+
+;*********** MECH 1 ************
+
+(defrule
+        (goal mech-rating POOR)
+        (goal start-military YES)
+        (current-age >= tech-level-3)
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (unit-type-count-total UNIT-MECH1-LINE < TL3-mech1-supp)
+        (can-train UNIT-MECH1-LINE)
+        =>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH1-LINE < TL3-mech1-arm)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH1-LINE < TL3-mech1-supp)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH1-LINE < TL4-mech1-arm)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH1-LINE < TL4-mech1-supp)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+#load-if-defined GUNGANS
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH1-LINE < TL3-mech1-arm-water)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH1-LINE < TL3-mech1-supp-water)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH1-LINE < TL4-mech1-arm-water)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH1-LINE < TL4-mech1-supp-water)
+        (can-train UNIT-MECH1-LINE)
+=>
+        (train UNIT-MECH1-LINE)
+)
+
+#end-if
+
+;*********** MECH 2 ************
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MECH2-LINE < TL3-mech2-arm)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH2-LINE < TL3-mech2-supp)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH2-LINE < TL4-mech2-arm)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH2-LINE < TL4-mech2-supp)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+#load-if-defined GUNGANS
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MECH2-LINE < TL3-mech2-arm-water)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal combat-supp MECH/HW)
+        (current-age == tech-level-3)
+        (unit-type-count-total UNIT-MECH2-LINE < TL3-mech2-supp-water)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH2-LINE < TL4-mech2-arm-water)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (unit-type-count-total UNIT-MECH2-LINE < TL4-mech2-supp-water)
+        (can-train UNIT-MECH2-LINE)
+=>
+        (train UNIT-MECH2-LINE)
+)
+
+#end-if
+
+;**************** MECH 3 ****************
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH3-LINE < TL4-mech3-arm)
+        (can-train UNIT-MECH3-LINE)
+=>
+        (train UNIT-MECH3-LINE)
+)
+
+(defrule
+        (or
+                (and
+                        (civ-selected GUNGANS)
+                        (not (goal special-map WATER))
+                )
+                (not (civ-selected GUNGANS))
+        )
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH3-LINE < TL4-mech3-supp)
+        (can-train UNIT-MECH3-LINE)
+=>
+        (train UNIT-MECH3-LINE)
+)
+
+#load-if-defined GUNGANS
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH3-LINE < TL4-mech3-arm-water)
+        (can-train UNIT-MECH3-LINE)
+=>
+        (train UNIT-MECH3-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-supp MECH/HW)
+        (current-age >= tech-level-4)
+        (unit-type-count-total UNIT-MECH3-LINE < TL4-mech3-supp-water)
+        (can-train UNIT-MECH3-LINE)
+=>
+        (train UNIT-MECH3-LINE)
+)
+
+#end-if
+
+;************ MECH FACTORY ***************
+
+(defrule
+        (goal mech-rating POOR)
+        (goal start-military YES)
+        (current-age >= tech-level-3)
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (building-type-count-total BLDG-TRAINMECH == 0)
+        (can-build BLDG-TRAINMECH)
+        =>
+        (build BLDG-TRAINMECH)
+)
+
+(defrule
+        (goal start-military YES)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-2)
+        (building-type-count-total BLDG-TRAINMECH == 0)
+        (building-type-count-total BLDG-TRAINTROOPER > 0)
+        (can-build-with-escrow BLDG-TRAINMECH)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINMECH)
+)
+
+(defrule
+        (difficulty == moderate)
+        (goal start-military YES)
+        (goal combat-arm MECH/HW)
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-TRAINMECH == 1)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (building-type-count-total BLDG-RESCTR > 0)
+        (can-build BLDG-TRAINMECH)
+=>
+        (build BLDG-TRAINMECH)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal start-military YES)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-TRAINMECH == 1)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (building-type-count-total BLDG-RESCTR > 0)
+        (can-build BLDG-TRAINMECH)
+=>
+        (build-forward BLDG-TRAINMECH)
+)
+
+
+;*********** UPGRADES *************
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-single-mech-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-single-mech-2)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-dual-mech-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-dual-mech-2)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research-with-escrow ut-multi-mech-2)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research ut-multi-mech-2)
+)
+
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal train-counter-start YES)
+        (cc-players-unit-type-count any-enemy UNIT-MECH1-LINE >= enemy-units)
+        (unit-type-count-total UNIT-MECH2-LINE < counter-units)
+        =>
+        (set-goal train-counter6 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)       
+
+(defrule
+        (goal train-counter6 YES)
+        (can-train UNIT-MECH2-LINE)
+        =>
+        (train UNIT-MECH2-LINE)
+)       
+
+(defrule
+        (goal train-counter6 YES)
+        (unit-type-count-total UNIT-MECH2-LINE >= counter-units)
+        (cc-players-unit-type-count every-enemy UNIT-MECH1-LINE <= 1)
+        =>
+        (set-goal train-counter6 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter-start YES)
+        (or
+                (cc-players-unit-type-count any-enemy UNIT-MECH2-LINE >= enemy-units)
+                (cc-players-unit-type-count any-enemy UNIT-GRENTRP >= enemy-units)
+        )
+        (unit-type-count-total UNIT-MECH2-LINE < counter-units)
+        =>
+        (set-goal train-counter7 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter-start YES)
+        (cc-players-unit-type-count any-enemy UNIT-MECH3-LINE >= enemy-units)
+        (cc-players-unit-type-count any-enemy SIEGE-MISSILE-LINE >= enemy-units)                        
+        (or
+                (unit-type-count-total UNIT-MECH2-LINE < counter-units)
+                (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        )
+        =>
+        (set-goal train-counter8 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (or
+                (goal train-counter7 YES)
+                (goal train-counter8 YES)
+        )
+        (can-train UNIT-MECH2-LINE)
+        =>
+        (train UNIT-MECH2-LINE)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter7 YES)
+        (or
+                (or
+                        (cc-players-unit-type-count any-enemy UNIT-MECH2-LINE >= enemy-units)
+                        (cc-players-unit-type-count any-enemy UNIT-GRENTRP >= enemy-units)
+                )
+                (cc-players-unit-type-count every-enemy UNIT-MECH2-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter7 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter8 YES)
+        (or             
+                (or
+                        (unit-type-count-total UNIT-MECH2-LINE < counter-units)
+                        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+                )
+                (and
+                        (cc-players-unit-type-count every-enemy UNIT-MECH3-LINE <= 1)
+                        (cc-players-unit-type-count every-enemy SIEGE-MISSILE-LINE <= 1)
+                )
+        )
+        =>
+        (set-goal train-counter8 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter-start YES)
+        (or
+                (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+                (or
+                        (and
+                                (current-age == tech-level-3)
+                                (unit-type-count-total UNIT-MECH2-LINE < counter-units)
+                        )
+                        (and
+                                (current-age >= tech-level-4)
+                                (unit-type-count-total UNIT-MECH3-LINE < counter-units)
+                        )
+                )
+        )       
+        (cc-players-unit-type-count any-enemy UNIT-PACKED1 >= enemy-units)
+        =>
+        (set-goal train-counter9 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)
+
+;(defrule
+;       (goal mech-rating GOOD)
+;       (goal train-counter9 YES)
+;       (current-age >= tech-level-4)
+;       =>
+;       (set-escrow-percentage nova 50)
+;       (set-escrow-percentage carbon 0)
+;)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter9 YES)
+        (current-age == tech-level-3)
+        (can-train UNIT-MECH2-LINE)
+        =>
+        (train UNIT-MECH2-LINE)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter9 YES)
+        (current-age >= tech-level-4)
+        (can-train UNIT-MECH3-LINE)
+        =>
+        (train UNIT-MECH3-LINE)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter9 YES)
+        (or             
+                (current-age >= tech-level-4)
+                (or
+                        (or
+                                (unit-type-count-total UNIT-MECH2-LINE >= counter-units)
+                                (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                        )
+                        (cc-players-unit-type-count every-enemy UNIT-PACKED1 <= 1)
+                )
+        )
+        =>
+        (set-goal train-counter9 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter9 YES)
+        (current-age >= tech-level-4)
+        (or
+                (or
+                        (unit-type-count-total UNIT-MECH3-LINE >= counter-units)
+                        (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                )
+                (cc-players-unit-type-count every-enemy UNIT-PACKED1 <= 1)
+        )
+        =>
+        (set-goal train-counter9 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (current-age >= tech-level-4)
+        (cc-players-unit-type-count any-enemy SIEGE-RAM-LINE >= enemy-units)
+        (or
+                (unit-type-count-total UNIT-MECH3-LINE < counter-units)
+                (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        )
+        =>
+        (set-goal train-counter12 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter12 YES)
+        (can-train UNIT-MECH3-LINE)
+        =>
+        (train UNIT-MECH3-LINE)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter12 YES)
+        (or
+                (or
+                        (unit-type-count-total UNIT-MECH3-LINE < counter-units)
+                        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+                )
+                (cc-players-unit-type-count every-enemy SIEGE-RAM-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter12 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)
+
+(defrule
+        (goal train-counter-start YES)
+        (cc-players-unit-type-count any-enemy UNIT-LASER-LINE >= enemy-units)
+        (unit-type-count-total UNIT-MECH1-LINE < counter-units)
+        =>
+        (set-goal train-counter13 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)       
+
+(defrule
+        (goal train-counter13 YES)
+        (can-train UNIT-MECH1-LINE)
+        =>
+        (train UNIT-MECH1-LINE)
+)       
+
+(defrule
+        (goal train-counter13 YES)
+        (or
+                (unit-type-count-total UNIT-MECH1-LINE >= counter-units)
+                (cc-players-unit-type-count every-enemy UNIT-LASER-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter13 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter-start YES)
+        (or
+                (cc-players-unit-type-count any-enemy UNIT-BOUNTY >= enemy-units)
+                (or
+                        (cc-players-unit-type-count any-enemy UNIT-MOUNTED-LINE >= enemy-units)
+                        (or
+                                (cc-players-unit-type-count any-enemy UNIT-MISSILE-LINE >= enemy-units)                         
+                                (cc-players-unit-type-count any-enemy UNIT-GRENTRP >= enemy-units)                              
+                        )
+                )
+        )
+        (or
+                (unit-type-count-total UNIT-MECH1-LINE < counter-units)
+                (unit-type-count-total UNIT-LASER-LINE < counter-units)
+        )
+        =>
+        (set-goal train-counter14 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter14 YES)
+        (can-train UNIT-MECH1-LINE)
+        =>
+        (train UNIT-MECH1-LINE)
+)       
+
+(defrule
+        (goal mech-rating GOOD)
+        (goal train-counter14 YES)
+        (or
+                (or
+                        (unit-type-count-total UNIT-MECH1-LINE < counter-units)
+                        (unit-type-count-total UNIT-LASER-LINE < counter-units)
+                )
+                (and
+                        (cc-players-unit-type-count every-enemy UNIT-BOUNTY <= 1)
+                        (and
+                                (cc-players-unit-type-count every-enemy UNIT-MOUNTED-LINE <= 1)
+                                (and
+                                        (cc-players-unit-type-count every-enemy UNIT-MISSILE-LINE <= 1)                         
+                                        (cc-players-unit-type-count every-enemy UNIT-GRENTRP <= 1)                              
+                                )
+                        )
+                )
+        )
+        =>
+        (set-goal train-counter14 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+(defrule
+        (or
+                (goal train-counter6 YES)
+                (or
+                        (goal train-counter7 YES)
+                        (or
+                                (goal train-counter8 YES)
+                                (or
+                                        (goal train-counter9 YES)
+                                        (or
+                                                (goal train-counter12 YES)
+                                                (or
+                                                        (goal train-counter13 YES)
+                                                        (goal train-counter14 YES)
+                                                )
+                                        )
+                                )
+                        )
+                )
+        )
+        (or
+                (current-age >= tech-level-3)
+                (and
+                        (current-age == tech-level-2)
+                        (goal age-advancement NOTICE)
+                )
+        )
+        (building-type-count-total BLDG-TRAINMECH == 0)
+        (can-build BLDG-TRAINMECH)
+        =>
+        (build BLDG-TRAINMECH)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating POOR)
+        (not (civ-selected WOOKIEES))
+        (current-age >= tech-level-4)
+        (can-research ut-single-mech-2)
+=>
+        (research ut-single-mech-2)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating POOR)
+        (current-age >= tech-level-4)
+        (can-research ut-dual-mech-2)
+=>
+        (research ut-dual-mech-2)
+)
+
+(defrule        
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating POOR)
+        (not (civ-selected WOOKIEES))
+        (current-age >= tech-level-4)
+        (can-research ut-multi-mech-2)
+=>
+        (research ut-multi-mech-2)
+)
+
+#end-if
+#end-if
+#end-if

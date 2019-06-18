@@ -1,0 +1,1030 @@
+
+(defrule
+        (goal soldiers-available NO)
+        (unit-type-count UNIT-LASER-LINE > five-percent-pop)
+=>
+        (set-goal soldiers-available YES)
+)
+
+(defrule
+        (goal soldiers-available YES)
+        (unit-type-count UNIT-LASER-LINE < five-percent-pop)
+=>
+        (set-goal soldiers-available NO)
+)
+
+
+;************* TROOPERS *************
+
+(defrule
+        (unit-type-count UNIT-LASER-LINE < TL1-trooper)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (civ-selected GUNGANS)
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal combat-arm TROOP)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (unit-type-count UNIT-LASER-LINE < TL2-trooper-arm)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (civ-selected GUNGANS)
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal combat-supp TROOP)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (unit-type-count UNIT-LASER-LINE < TL2-trooper-supp)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+;training troopers for these civs are independent of map type
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (or
+                        (building-type-count-total BLDG-TRAINJEDI > 0)
+                        (building-type-count-total BLDG-TRAINMECH > 0)
+                )
+                (building-type-count-total BLDG-WARCTR > 0)
+        )
+        (unit-type-count UNIT-LASER-LINE < TL2-trooper)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age == tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL3-trooper-supp)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age == tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL3-trooper-arm)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age >= tech-level-4)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL4-trooper-supp)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age >= tech-level-4)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL4-trooper-arm)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+
+;training troopers for these civs are dependent on map type
+#load-if-not-defined REBEL
+#load-if-not-defined EMPIRE
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (not (civ-selected GUNGANS))
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (or
+                        (building-type-count-total BLDG-TRAINJEDI > 0)
+                        (building-type-count-total BLDG-TRAINMECH > 0)
+                )
+                (building-type-count-total BLDG-WARCTR > 0)
+        )
+        (unit-type-count UNIT-LASER-LINE < TL2-trooper)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age == tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL3-trooper-supp)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age == tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL3-trooper-arm)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age >= tech-level-4)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL4-trooper-supp)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age >= tech-level-4)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-LASER-LINE < TL4-trooper-arm)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (building-type-count BLDG-TRAINJEDI > 0)
+                (building-type-count-total BLDG-TRAINMECH > 0)
+        )
+        (unit-type-count UNIT-LASER-LINE < TL2-trooper-water)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-defined NABOO
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age == tech-level-3)
+        (unit-type-count UNIT-LASER-LINE < TL3-trooper-water)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal reduce-units1 NO)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-LASER-LINE < TL4-trooper-water)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+#end-if
+
+;emergency troopers
+(defrule
+        (soldier-count < ten-percent-pop)
+        (building-type-count-total BLDG-TRAINMECH == 0)
+        (building-type-count-total BLDG-TRAINAIR == 0)
+        (building-type-count-total BLDG-GOVTCTR == 0)
+        (players-military-population any-enemy >= ten-percent-pop)
+        (can-train UNIT-LASER-LINE)
+=>
+        (train UNIT-LASER-LINE)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal mech-rating POOR)
+        (unit-type-count UNIT-LASER-LINE < counter-units)
+        (or
+                (cc-players-unit-type-count any-enemy UNIT-BOUNTY >= enemy-units)
+                (or
+                        (cc-players-unit-type-count any-enemy UNIT-MOUNTED-LINE >= enemy-units)
+                        (or                             
+                                (cc-players-unit-type-count any-enemy UNIT-MISSILE-LINE >= enemy-units)
+                                (cc-players-unit-type-count any-enemy UNIT-GRENTRP >= enemy-units)
+                        )
+                )       
+        )
+        =>
+        (set-goal train-counter14 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)               
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter14 YES)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter14 YES)
+        (or             
+                (unit-type-count-total UNIT-LASER-LINE >= counter-units)
+                (and
+                        (cc-players-unit-type-count every-enemy UNIT-BOUNTY <= 1)
+                        (and
+                                (cc-players-unit-type-count every-enemy UNIT-MOUNTED-LINE <= 1)         
+                                (and
+                                        (cc-players-unit-type-count every-enemy UNIT-MISSILE-LINE <= 1)
+                                        (cc-players-unit-type-count every-enemy UNIT-GRENTRP <= 1)      
+                                )
+                        )
+                )
+        )
+        =>
+        (set-goal train-counter14 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)               
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 YES)
+        (current-age >= tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-LASER-LINE < trooper-supp-counter)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units1 YES)
+        (current-age >= tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-LASER-LINE < trooper-arm-counter)
+        (can-train UNIT-LASER-LINE)
+        =>
+        (train UNIT-LASER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+;********* MOUNTED TROOPERS **********
+
+(defrule
+        (civ-selected GUNGANS)
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal combat-arm TROOPS)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (unit-type-count UNIT-MOUNTED-LINE < TL2-mounted-arm)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (civ-selected GUNGANS)
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal combat-supp TROOPS)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (unit-type-count UNIT-MOUNTED-LINE < TL2-mounted-supp)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+;train mounted troopers independent of map type
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (or
+                        (building-type-count-total BLDG-TRAINJEDI > 0)
+                        (building-type-count-total BLDG-TRAINMECH > 0)
+                )
+                (building-type-count-total BLDG-WARCTR > 0)
+        )
+        (unit-type-count UNIT-MOUNTED-LINE < TL2-mounted)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age == tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL3-mounted-supp)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age == tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL3-mounted-arm)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age >= tech-level-4)
+        (goal combat-supp TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL4-mounted-supp)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age >= tech-level-4)
+        (goal combat-arm TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL4-mounted-arm)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+;training mounted troopers for these civs are dependent on map type
+#load-if-not-defined REBEL
+#load-if-not-defined EMPIRE
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (not (civ-selected GUNGANS))
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (or
+                        (building-type-count-total BLDG-TRAINJEDI > 0)
+                        (building-type-count-total BLDG-TRAINMECH > 0)
+                )
+                (building-type-count-total BLDG-WARCTR > 0)
+        )
+        (unit-type-count UNIT-MOUNTED-LINE < TL2-mounted)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age == tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL3-mounted-supp)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age == tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL3-mounted-arm)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age >= tech-level-4)
+        (goal combat-supp TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL4-mounted-supp)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age >= tech-level-4)
+        (goal combat-arm TROOP)
+        (unit-type-count-total UNIT-MOUNTED-LINE < TL4-mounted-arm)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (or
+                (building-type-count BLDG-TRAINJEDI > 0)
+                (building-type-count-total BLDG-TRAINMECH > 0)
+        )
+        (unit-type-count UNIT-MOUNTED-LINE < TL2-mounted-water)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-defined NABOO
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age == tech-level-3)
+        (unit-type-count UNIT-MOUNTED-LINE < TL3-mounted-water)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal reduce-units2 NO)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-MOUNTED-LINE < TL4-mounted-water)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal mech-rating POOR)
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        (or
+                (cc-players-unit-type-count any-enemy SIEGE-MISSILE-LINE >= enemy-units)
+                (cc-players-unit-type-count any-enemy UNIT-MECH3-LINE >= enemy-units)
+        )
+        =>
+        (set-goal train-counter8 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter8 YES)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter8 YES)
+        (or
+                (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                (and
+                        (cc-players-unit-type-count every-enemy SIEGE-RAM-LINE <= 1)
+                        (cc-players-unit-type-count every-enemy UNIT-MECH3-LINE <= 1)
+                )
+        )
+        =>
+        (set-goal train-counter8 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)       
+
+(defrule
+        (goal mech-rating POOR)
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        (cc-players-unit-type-count any-enemy UNIT-PACKED1 >= enemy-units)
+        =>
+        (set-goal train-counter9 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter9 YES)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal mech-rating POOR)
+        (goal train-counter9 YES)
+        (or
+                (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                (cc-players-unit-type-count every-enemy UNIT-PACKED1 <= 1)
+        )
+        =>
+        (set-goal train-counter9 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)       
+
+(defrule
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        (cc-players-unit-type-count any-enemy SIEGE-ARTILLERY-LINE >= enemy-units)
+        =>
+        (set-goal train-counter11 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (goal train-counter11 YES)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)       
+
+(defrule
+        (goal train-counter11 YES)
+        (current-age >= tech-level-3)
+        (or
+                (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                (cc-players-unit-type-count every-enemy SIEGE-ARTILLERY-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter11 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)       
+
+(defrule
+        (goal mech-rating POOR)
+        (current-age >= tech-level-3)
+        (unit-type-count-total UNIT-MOUNTED-LINE < counter-units)
+        (cc-players-unit-type-count any-enemy SIEGE-RAM-LINE >= enemy-units)
+        =>
+        (set-goal train-counter12 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (or
+                (goal mech-rating POOR)
+                (and 
+                        (goal mech-rating GOOD)
+                        (current-age < tech-level-4)
+                )
+        )
+        (goal train-counter12 YES)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (or
+                (goal mech-rating POOR)
+                (and 
+                        (goal mech-rating GOOD)
+                        (current-age < tech-level-4)
+                )
+        )
+        (goal train-counter12 YES)
+        (or
+                (unit-type-count-total UNIT-MOUNTED-LINE >= counter-units)
+                (cc-players-unit-type-count every-enemy SIEGE-RAM-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter12 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)       
+
+(defrule
+        (or
+                (goal train-counter8 YES)
+                (or
+                        (goal train-counter9 YES)
+                        (or
+                                (goal train-counter11 YES)
+                                (goal train-counter12 YES)
+                        )
+                )
+        )
+        (building-type-count-total BLDG-TRAINTROOPER == 0)
+        (goal start-military YES)
+        (can-build BLDG-TRAINTROOPER)
+        =>
+        (build BLDG-TRAINTROOPER)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 YES)
+        (current-age >= tech-level-3)
+        (goal combat-supp TROOP)
+        (unit-type-count UNIT-MOUNTED-LINE < mounted-supp-counter)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units2 YES)
+        (current-age >= tech-level-3)
+        (goal combat-arm TROOP)
+        (unit-type-count UNIT-MOUNTED-LINE < mounted-arm-counter)
+        (can-train UNIT-MOUNTED-LINE)
+        =>
+        (train UNIT-MOUNTED-LINE)
+)       
+
+#end-if
+#end-if
+#end-if
+
+;********* A-A TROOPERS **********
+
+(defrule
+        (goal start-military YES)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (players-current-age any-enemy >= tech-level-3)
+        (building-type-count-total BLDG-TRAINJEDI > 0)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (unit-type-count UNIT-MISSILE-LINE < aa-trooper)
+        (or
+                (cc-players-unit-type-count any-enemy UNIT-FIGHTER-LINE > 0)
+                (cc-players-unit-type-count any-enemy UNIT-BOMBER-LINE > 0)
+        )
+        (can-train UNIT-MISSILE-LINE)
+        =>
+        (train UNIT-MISSILE-LINE)
+)
+
+;****** GRENADE TROOPERS *****
+
+(defrule
+        (current-age >= tech-level-2)
+        (or
+                (goal combat-arm TROOPS)
+                (goal combat-supp TROOPS)
+        )
+        (unit-type-count UNIT-GRENTRP < grenade-trooper)
+        (can-train UNIT-GRENTRP)
+        =>
+        (train UNIT-GRENTRP)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+(defrule
+        (or
+                (and
+                        (goal mech-rating POOR)
+                        (current-age >= tech-level-2)
+                )
+                (and
+                        (goal mech-rating GOOD)
+                        (current-age == tech-level-2)
+                )
+        )
+        (unit-type-count-total UNIT-GRENTRP < counter-units)
+        (cc-players-unit-type-count any-enemy UNIT-MECH2-LINE >= enemy-units)
+        =>
+        (set-goal train-counter7 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage nova 50)
+)       
+
+(defrule
+        (or
+                (and
+                        (goal mech-rating POOR)
+                        (current-age >= tech-level-2)
+                )
+                (and
+                        (goal mech-rating GOOD)
+                        (current-age == tech-level-2)
+                )
+        )
+        (goal train-counter7 YES)
+        (can-train UNIT-GRENTRP)
+        =>
+        (train UNIT-GRENTRP)
+)
+
+(defrule
+        (or
+                (and
+                        (goal mech-rating POOR)
+                        (current-age >= tech-level-2)
+                )
+                (and
+                        (goal mech-rating GOOD)
+                        (current-age == tech-level-2)
+                )
+        )
+        (goal train-counter7 YES)
+        (or
+                (and
+                        (goal mech-rating POOR)
+                        (current-age >= tech-level-2)
+                )
+                (and
+                        (goal mech-rating GOOD)
+                        (current-age == tech-level-2)
+                )
+        )
+        (or
+                (unit-type-count-total UNIT-GRENTRP >= counter-units)
+                (cc-players-unit-type-count every-enemy UNIT-MECH2-LINE <= 1)
+        )
+        =>
+        (set-goal train-counter7 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage nova 0)
+)
+
+#end-if
+#end-if
+#end-if
+
+;************* UPGRADE CONFLICT *************
+;train some units before all the resource get sucked up by research
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+#load-if-not-defined WOOKIEES
+#load-if-not-defined FEDERATION
+
+(defrule
+        (not (goal special-map WATER))
+        (goal upgrade-conflict YES)
+        (current-age < tech-level-3)
+        (or
+                (unit-type-count-total UNIT-LASER-LINE >= five-percent-pop)
+                (unit-type-count-total UNIT-MOUNTED-LINE >= five-percent-pop)
+        )
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal upgrade-conflict NO)
+        (current-age < tech-level-3)
+        (or
+                (unit-type-count-total UNIT-LASER-LINE < five-percent-pop)
+                (unit-type-count-total UNIT-MOUNTED-LINE < five-percent-pop)
+        )
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+#end-if
+#end-if
+#end-if
+#end-if
+
+#load-if-defined NABOO
+
+(defrule
+        (goal special-map WATER)
+        (goal upgrade-conflict YES)
+        (current-age < tech-level-3)
+        (unit-type-count-total BOAT-LASER-LINE >= five-percent-pop)
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal upgrade-conflict NO)
+        (current-age < tech-level-3)
+        (unit-type-count-total BOAT-LASER-LINE < five-percent-pop)
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+#end-if
+
+;****** TROOP CENTER *******
+
+(defrule
+        (not (goal special-map WATER))
+        (building-type-count-total BLDG-TRAINTROOPER == 0)
+        (building-type-count-total BLDG-POWERCORE > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (can-build BLDG-TRAINTROOPER)
+=>
+        (build BLDG-TRAINTROOPER)
+)
+
+;build troop center after shipyard or after 10 min if water not found yet for shipyard
+(defrule
+        (goal special-map WATER)
+        (building-type-count-total BLDG-TRAINTROOPER == 0)
+        (or
+                (building-type-count-total BLDG-TRAINBOAT > 0)
+                (game-time > 600)                       
+        )
+        (can-build BLDG-TRAINTROOPER)
+=>
+        (build BLDG-TRAINTROOPER)
+)
+
+(defrule
+        (difficulty == moderate)
+        (goal combat-arm TROOP)
+        (building-type-count-total BLDG-TRAINTROOPER == 2)
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (current-age >= tech-level-3)
+        (can-build BLDG-TRAINTROOPER)
+=>
+        (build BLDG-TRAINTROOPER)
+)
+
+(defrule
+        (difficulty <= hard)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (building-type-count-total BLDG-TRAINTROOPER == 2)
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (current-age >= tech-level-3)
+        (can-build BLDG-TRAINTROOPER)
+=>
+        (build-forward BLDG-TRAINTROOPER)
+)
+
+;******** UPGRADES *********
+
+(defrule
+        (difficulty <= easy)
+        (current-age >= tech-level-2)
+        (nor 
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-research ut-laser-2)
+=>
+        (research ut-laser-2)
+)
+
+(defrule
+        (difficulty <= easy)
+        (current-age >= tech-level-3)
+        (not (goal rush-control IMPERIAL))
+        (can-research ut-laser-3)
+=>
+        (research ut-laser-3)
+)
+
+(defrule
+        (difficulty <= easy)
+        (current-age >= tech-level-4)
+        (can-research ut-laser-4)
+=>
+        (research ut-laser-4)
+)
+
+(defrule
+        (difficulty <= easy)
+        (or
+                (current-age >= tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+        (nor
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-research ut-mounted-2)
+=>
+        (research ut-mounted-2)
+)
+
+(defrule
+        (difficulty <= easy)
+        (or
+                (current-age >= tech-level-3)
+                (goal age-advancement NOTICE)
+        )
+        (not (goal rush-control IMPERIAL) )
+        (can-research ut-mounted-3)
+=>
+        (research ut-mounted-3)
+)
+
+(defrule
+        (difficulty <= easy)
+        (or
+                (current-age >= tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+        (nor
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-research ut-missile-troop-2)
+=>
+        (research ut-missile-troop-2)
+)

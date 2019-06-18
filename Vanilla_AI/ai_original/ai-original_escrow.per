@@ -1,0 +1,42 @@
+
+
+#load-if-defined DIFFICULTY-MODERATE
+;set escrow for research and age advancement
+(defrule
+        (current-age >= tech-level-3)
+        =>
+        (set-escrow-percentage food 20)
+        (set-escrow-percentage carbon 30)
+        (set-escrow-percentage nova 20)
+)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+;set escrow for research and age advancement
+(defrule
+        (current-age == tech-level-3)
+        =>
+        (set-escrow-percentage food 80)
+        (set-escrow-percentage carbon 35)
+        (set-escrow-percentage nova 25)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        =>
+        (set-escrow-percentage food 25)
+        (set-escrow-percentage carbon 35)
+        (set-escrow-percentage nova 25)
+)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+;set escrow for research and age advancement
+(defrule
+        (current-age >= tech-level-3)
+        =>
+        (set-escrow-percentage food 25)
+        (set-escrow-percentage carbon 35)
+        (set-escrow-percentage nova 25)
+)
+#end-if

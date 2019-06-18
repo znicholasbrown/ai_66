@@ -1,0 +1,627 @@
+
+;*********** CANNON ***********
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+
+;undeployed cannon
+(defrule
+        (goal start-military YES)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-PACKED1 < cannon)
+        (can-train UNIT-PACKED1)
+        =>
+        (train UNIT-PACKED1)
+)
+
+#end-if
+#end-if
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined REBEL
+#load-if-not-defined WOOKIEES
+#load-if-not-defined FEDERATION
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-PACKED1 < cannon)
+        (can-train UNIT-PACKED1)
+        =>
+        (train UNIT-PACKED1)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (or
+                (civ-selected GUNGANS)
+                (civ-selected NABOO)
+        )
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-PACKED1 < cannon-water)
+        (can-train UNIT-PACKED1)
+        =>
+        (train UNIT-PACKED1)
+)
+
+#end-if
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal train-counter-start YES)
+        (current-age >= tech-level-4)
+        (or
+                (unit-type-count-total UNIT-PACKED1 < counter-units)
+                (unit-type-count-total SIEGE-RAM-LINE < counter-units)
+        )
+        (or
+                (cc-players-building-type-count any-enemy BLDG-TURRET-LINE >= enemy-units)
+                (cc-players-building-type-count any-enemy BLDG-MISSILE-LINE >= enemy-units)
+        )
+        =>
+        (set-goal train-counter1 YES)
+;       (set-escrow-percentage carbon 50)
+;       (set-escrow-percentage nova 50)
+)
+
+(defrule
+        (goal train-counter1 YES)
+        (current-age >= tech-level-4)
+        (can-train UNIT-PACKED1)
+        =>
+        (train UNIT-PACKED1)
+)
+
+(defrule
+        (goal train-counter1 YES)
+        (current-age >= tech-level-4)
+        (or
+                (and
+                        (cc-players-building-type-count every-enemy BLDG-TURRET-LINE <= 1)
+                        (cc-players-building-type-count every-enemy BLDG-MISSILE-LINE <= 1)
+                )
+                (or
+                        (unit-type-count-total UNIT-PACKED1 >= counter-units)
+                        (unit-type-count-total SIEGE-RAM-LINE >= counter-units)
+                )
+        )
+        =>
+        (set-goal train-counter1 NO)
+;       (set-escrow-percentage carbon 0)
+;       (set-escrow-percentage nova 0)
+)
+
+#end-if
+#end-if
+#end-if
+
+;******* UNIQUE UNITS & UPGRADE *********
+
+#load-if-defined REBEL
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-AIRSPEEDER-LINE < TL3-unique-unit)
+        (can-train UNIT-AIRSPEEDER-LINE)
+        =>
+        (train UNIT-AIRSPEEDER-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-AIRSPEEDER-LINE < TL4-unique-unit)
+        (can-train UNIT-AIRSPEEDER-LINE)
+        =>
+        (train UNIT-AIRSPEEDER-LINE)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 YES)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-AIRSPEEDER-LINE < unique-unit-counter)
+        (can-train UNIT-AIRSPEEDER-LINE)
+        =>
+        (train UNIT-AIRSPEEDER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-airspeeder)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-airspeeder)
+)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-DARKTRP-LINE < TL3-unique-unit)
+        (can-train UNIT-DARKTRP-LINE)
+        =>
+        (train UNIT-DARKTRP-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-DARKTRP-LINE < TL4-unique-unit)
+        (can-train UNIT-DARKTRP-LINE)
+        =>
+        (train UNIT-DARKTRP-LINE)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-dark-trooper)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-dark-trooper)
+)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-KNIGHT-LINE < TL3-unique-unit)
+        (can-train UNIT-KNIGHT-LINE)
+        =>
+        (train UNIT-KNIGHT-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (not (goal special-map WATER))
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-KNIGHT-LINE < TL4-unique-unit)
+        (can-train UNIT-KNIGHT-LINE)
+        =>
+        (train UNIT-KNIGHT-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-KNIGHT-LINE < TL4-unique-unit-water)
+        (can-train UNIT-KNIGHT-LINE)
+        =>
+        (train UNIT-KNIGHT-LINE)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (not (goal special-map WATER))
+        (goal start-military YES)
+        (goal reduce-units6 YES)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-KNIGHT-LINE < unique-unit-counter)
+        (can-train UNIT-KNIGHT-LINE)
+        =>
+        (train UNIT-KNIGHT-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal start-military YES)
+        (goal reduce-units6 YES)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-KNIGHT-LINE < unique-unit-water-counter)
+        (can-train UNIT-KNIGHT-LINE)
+        =>
+        (train UNIT-KNIGHT-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-royal-knight)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-royal-knight)
+)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BERSERK-LINE < TL3-unique-unit)
+        (can-train UNIT-BERSERK-LINE)
+        =>
+        (train UNIT-BERSERK-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 NO)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BERSERK-LINE < TL4-unique-unit)
+        (can-train UNIT-BERSERK-LINE)
+        =>
+        (train UNIT-BERSERK-LINE)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal start-military YES)
+        (goal reduce-units6 YES)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BERSERK-LINE < unique-unit-counter)
+        (can-train UNIT-BERSERK-LINE)
+        =>
+        (train UNIT-BERSERK-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-berserker)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-berserker)
+)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-SHIELD-LINE < TL3-unique-unit)
+        (can-train UNIT-SHIELD-LINE)
+        =>
+        (train UNIT-SHIELD-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (not (goal special-map WATER))
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-SHIELD-LINE < TL4-unique-unit)
+        (can-train UNIT-SHIELD-LINE)
+        =>
+        (train UNIT-SHIELD-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-SHIELD-LINE < TL4-unique-unit-water)
+        (can-train UNIT-SHIELD-LINE)
+        =>
+        (train UNIT-SHIELD-LINE)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-faamba-shield-gen)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-faamba-shield-gen)
+)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-DESTDROID-LINE < TL3-unique-unit)
+        (can-train UNIT-DESTDROID-LINE)
+        =>
+        (train UNIT-DESTDROID-LINE)
+)
+
+(defrule
+        (goal start-military YES)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-DESTDROID-LINE < TL4-unique-unit)
+        (can-train UNIT-DESTDROID-LINE)
+        =>
+        (train UNIT-DESTDROID-LINE)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-destroyer-droid)
+        =>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-destroyer-droid)
+)
+
+#end-if
+
+
+;********** BOUNTY **********
+
+(defrule
+        (goal start-military YES)
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BOUNTY < TL3-bounty)
+        (can-train UNIT-BOUNTY)
+        =>
+        (train UNIT-BOUNTY)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (current-age >= tech-level-3)
+        (unit-type-count UNIT-BOUNTY < counter-units)
+        (cc-players-unit-type-count any-enemy UNIT-JEDI-LINE >= enemy-units)
+        =>
+        (set-goal train-counter2 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+)
+
+(defrule
+        (goal train-counter2 YES)
+        (can-train UNIT-BOUNTY)
+        =>
+        (train UNIT-BOUNTY)
+)
+
+(defrule
+        (goal train-counter2 YES)
+        (or             
+                (cc-players-unit-type-count every-enemy UNIT-JEDI-LINE <= 1)
+                (unit-type-count-total UNIT-BOUNTY >= counter-units)
+        )
+        =>
+        (set-goal train-counter2 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defrule
+        (goal start-military YES)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BOUNTY < TL4-bounty)
+        (can-train UNIT-BOUNTY)
+        =>
+        (train UNIT-BOUNTY)
+)
+
+#end-if
+#end-if
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined REBEL
+#load-if-not-defined WOOKIEES
+#load-if-not-defined FEDERATION
+
+(defrule
+        (goal start-military YES)
+        (not (goal special-map WATER))
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BOUNTY < TL4-bounty)
+        (can-train UNIT-BOUNTY)
+        =>
+        (train UNIT-BOUNTY)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (unit-type-count-total UNIT-BOUNTY < TL4-bounty-water)
+        (can-train UNIT-BOUNTY)
+        =>
+        (train UNIT-BOUNTY)
+)
+
+#end-if
+#end-if
+#end-if
+#end-if
+
+
+;*********** FORTRESS ***********
+
+(defrule
+        (not (goal castle-attempt YES))
+        (building-type-count-total BLDG-GOVTCTR == 0)
+        (current-age >= tech-level-3)
+        =>
+        (set-goal castle-attempt YES)
+)
+
+(defrule
+        (goal castle-attempt NO)
+        (current-age == tech-level-4)
+        (metal-amount > 500)
+        (nor 
+                (goal wonder-attempt POSSIBLE)
+                (goal wonder-attempt YES)
+        )
+=>
+        (set-goal castle-attempt YES)
+)
+
+(defrule
+        (goal castle-attempt NO)
+        (current-age == tech-level-3)
+        (military-population > 10)
+        (building-type-count-total BLDG-GOVTCTR == 0)
+=>
+        (set-goal castle-attempt YES)
+)
+
+(defrule
+        (goal castle-attempt YES)
+        (can-build BLDG-GOVTCTR)
+=>
+        (set-strategic-number sn-percent-civilian-builders 75)
+        (set-strategic-number sn-cap-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 25)
+        (build BLDG-GOVTCTR)
+        (set-goal castle-attempt ANOTHER)
+)
+
+(defrule
+        (goal castle-attempt ANOTHER)
+        (building-type-count-total BLDG-GOVTCTR < 2)
+        =>
+        (set-strategic-number sn-percent-civilian-builders 10)
+        (set-strategic-number sn-cap-civilian-builders 8)
+        (set-strategic-number sn-percent-civilian-gatherers 90)
+)
+
+(defrule
+        (building-type-count BLDG-GOVTCTR > 0)
+        (or
+                (not (goal castle-attempt ANOTHER) )
+                (strategic-number sn-cap-civilian-builders == 15)
+        )
+=>
+        (set-strategic-number sn-percent-civilian-builders 10)
+        (set-strategic-number sn-cap-civilian-builders 8)
+        (set-strategic-number sn-percent-civilian-gatherers 90)
+        (set-goal castle-attempt ANOTHER)
+)
+
+(defrule
+        (goal castle-attempt ANOTHER)
+        (building-type-count-total BLDG-GOVTCTR == 0)
+=>
+        (set-goal castle-attempt YES)
+)
+
+(defrule
+        (goal castle-attempt ANOTHER)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-WORKER > civ-dark-rush)
+        (building-type-count-total BLDG-GOVTCTR < 3)
+        (can-build BLDG-GOVTCTR)
+        (nor
+                (goal wonder-attempt POSSIBLE)
+                (goal rush-control RUSHING)
+        )
+=>
+        (build-forward BLDG-GOVTCTR)
+        (set-goal castle-attempt NO)
+)
+
+;*********************************
+#load-if-not-defined DEATH-MATCH
+
+;build superunits
+(defrule
+        (current-age == tech-level-4)
+=>
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 30)
+        (disable-self)
+)
+
+(defrule
+        (population < unit-max)
+        (timer-triggered t-ageup)
+        (can-train my-unique-unit-line)
+=>
+        (train my-unique-unit-line)
+        (set-goal secondary-build 0)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (timer-triggered t-ageup)
+=>
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 30)
+)
+
+#end-if

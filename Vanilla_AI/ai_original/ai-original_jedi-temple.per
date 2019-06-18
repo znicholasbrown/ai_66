@@ -1,0 +1,248 @@
+
+;********* JEDI **********
+
+(defrule
+        (difficulty >= easy)
+        (current-age == tech-level-2)
+        =>
+        (enable-timer t-easyjedi 1800)
+        (disable-self)
+)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+;       (goal jedi-rating GOOD)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (or
+                (current-age == tech-level-2)
+                (current-age == tech-level-3)
+        )
+        (unit-type-count UNIT-JEDI-LINE < padawan)
+        (can-train UNIT-JEDI-LINE)
+        =>
+        (train UNIT-JEDI-LINE)
+)
+
+(defrule
+        (goal jedi-rating GOOD)
+        (current-age >= tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (unit-type-count UNIT-JEDI4 < master)
+        =>
+        (set-escrow-percentage food 15)
+        (set-escrow-percentage nova 40)
+)
+
+(defrule
+        (goal reduce-units3 NO)
+        (goal jedi-rating GOOD)
+        (current-age >= tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (unit-type-count UNIT-JEDI4 < master)
+        (can-train-with-escrow UNIT-JEDI4)
+        =>
+        (release-escrow nova)
+        (release-escrow food)
+        (train UNIT-JEDI4)
+)
+
+(defrule
+        (goal reduce-units3 NO)
+        (goal jedi-rating POOR)
+        (current-age >= tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (unit-type-count UNIT-JEDI4 < master)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal reduce-units3 YES)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-JEDI4 < master-counter)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+#end-if
+#end-if
+#end-if
+
+#end-if
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined EMPIRE
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (not (goal special-map WATER))
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (or
+                (current-age == tech-level-2)
+                (current-age == tech-level-3)
+        )
+        (unit-type-count UNIT-JEDI-LINE < padawan)
+        (can-train UNIT-JEDI-LINE)
+        =>
+        (train UNIT-JEDI-LINE)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal reduce-units3 NO)
+        (current-age >= tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (unit-type-count UNIT-JEDI4 < master)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+(defrule
+        (goal special-map WATER)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (or
+                (current-age == tech-level-2)
+                (current-age == tech-level-3)
+        )
+        (unit-type-count UNIT-JEDI-LINE < padawan-water)
+        (can-train UNIT-JEDI-LINE)
+        =>
+        (train UNIT-JEDI-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal reduce-units3 NO)
+        (current-age >= tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (timer-triggered t-easyjedi)
+        )
+        (unit-type-count UNIT-JEDI4 < master-water)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (not (goal special-map WATER))
+        (goal reduce-units3 YES)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-JEDI4 < master-counter)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+
+(defrule
+        (goal special-map WATER)
+        (goal reduce-units3 YES)
+        (current-age >= tech-level-4)
+        (unit-type-count UNIT-JEDI4 < master-water-counter)
+        (can-train UNIT-JEDI4)
+        =>
+        (train UNIT-JEDI4)
+)
+
+#end-if
+#end-if
+#end-if
+
+#end-if
+#end-if
+#end-if
+#end-if
+
+;*********** TEMPLE ************
+
+(defrule
+        (goal start-military YES)
+        (goal jedi-rating GOOD)
+        (current-age >= tech-level-2)
+        (building-type-count-total BLDG-TRAINTROOPER > 0)
+        (building-type-count-total BLDG-TRAINJEDI == 0)
+        (can-build-with-escrow BLDG-TRAINJEDI)
+        =>
+        (release-escrow carbon)
+        (build BLDG-TRAINJEDI)
+)
+
+(defrule
+        (goal start-military YES)
+        (goal jedi-rating POOR)
+        (or
+                (current-age >= tech-level-3)
+                (and
+                        (current-age == tech-level-2)
+                        (or
+                                (carbon-amount > 500)
+                                (goal age-advancement NOTICE)
+                        )
+                )
+        )
+        (building-type-count-total BLDG-TRAINJEDI == 0)
+        (can-build BLDG-TRAINJEDI)
+        =>
+        (build BLDG-TRAINJEDI)
+)
+
+;*********** UPGRADES *************
+
+(defrule
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (can-research-with-escrow ut-jedi-2)
+        =>
+        (release-escrow nova)
+        (release-escrow food)
+        (research ut-jedi-2)
+)
+
+(defrule
+        (game-time > 3600)                                                      ;60 min
+        (goal jedi-rating POOR)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (can-research ut-jedi-2)
+        =>
+        (research ut-jedi-2)
+)
+

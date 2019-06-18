@@ -1,0 +1,372 @@
+
+;****** PREFAB SHELTER *******
+
+(defrule
+        (not (civ-selected FEDERATION))
+        (building-type-count BLDG-PREFAB == 0)
+        (building-type-count BLDG-MAIN > 0)
+        (can-build BLDG-PREFAB)
+        =>
+        (build BLDG-PREFAB)
+)
+
+(defrule
+        (not (civ-selected FEDERATION))
+        (building-type-count BLDG-MAIN > 0)
+        (difficulty <= moderate)
+        (housing-headroom < 5)
+        (population-headroom > 0)
+        (can-build BLDG-PREFAB)
+        =>
+        (build BLDG-PREFAB)
+)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defrule
+        (not (civ-selected FEDERATION))
+        (building-type-count BLDG-MAIN > 0)
+        (military-population < 10)
+        (housing-headroom < 5)
+        (population-headroom > 0)
+        (can-build BLDG-PREFAB)
+        =>
+        (build BLDG-PREFAB)
+)
+
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defrule
+        (not (civ-selected FEDERATION))
+        (building-type-count BLDG-MAIN > 0)
+        (military-population < civ-dark-rush)
+        (housing-headroom < 5)
+        (population-headroom > 0)
+        (can-build BLDG-PREFAB)
+        =>
+        (build BLDG-PREFAB)
+)
+
+#end-if
+
+;********* UNIT WORKER ***********
+
+#load-if-defined DIFFICULTY-EASIEST
+
+(defrule
+        (unit-type-count-total UNIT-WORKER <= worker-easiest)
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+
+(defrule
+        (unit-type-count-total UNIT-WORKER <= worker-easy)
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+
+(defrule
+        (current-age == tech-level-1)
+        (difficulty <= moderate)
+        (civilian-population < civ-dark-mod)            ; 15
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (current-age == tech-level-1)
+        (difficulty <= hard)
+        (unit-type-count-total UNIT-WORKER < civ-dark-rush)
+        (or
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (current-age == tech-level-1)
+        (difficulty <= hard)
+        (civilian-population < civ-dark)
+        (nor
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (goal halt-worker NO)
+        (or
+                (current-age == tech-level-2)
+                (current-age == tech-level-3)
+        )
+        (difficulty <= moderate)
+        (civilian-population < civ-feudal-mod)          ; 30
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (goal halt-worker NO)
+        (current-age == tech-level-2)
+        (difficulty <= hard)
+        (unit-type-count-total UNIT-WORKER < civ-feudal-rush)
+        (or
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (goal halt-worker NO)
+        (current-age == tech-level-2)
+        (difficulty <= hard)
+        (civilian-population < civ-feudal)
+        (nor
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (goal halt-worker NO)
+        (not (goal special-map WATER))
+        (current-age >= tech-level-4)
+        (difficulty <= moderate)
+        (civilian-population < civ-dark-mod)            ; 15
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (current-age >= tech-level-4)
+        (difficulty <= moderate)
+        (game-time > 3000)                                                      ; 50 min
+        (population >= pop-cap)
+        (civilian-population > civ-dark-mod)            ; 15
+        (not (goal rush-control BOOMING))
+        =>
+        (delete-unit UNIT-WORKER)
+)
+
+
+(defrule
+        (goal halt-worker NO)
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (difficulty <= moderate)
+        (civilian-population < 10)      
+        (can-train UNIT-WORKER)
+        =>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (difficulty <= moderate)
+        (game-time > 3000)                                                      ; 50 min
+        (population >= pop-cap)
+        (civilian-population > 10)      
+        (not (goal rush-control BOOMING))
+        =>
+        (delete-unit UNIT-WORKER)
+)
+
+#end-if
+#end-if
+
+;********* MEDICS *********
+
+(defrule
+        (current-age >= tech-level-2)
+        (goal start-military YES)
+        (difficulty <= easy)
+        (unit-type-count-total UNIT-MEDIC < medic)
+        (can-train UNIT-MEDIC)
+        =>
+        (train UNIT-MEDIC)
+)
+
+;********* FARM **********
+
+(defrule
+        (not (goal special-map NO-FOOD))
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-FARM < FARMCOUNT)
+        (idle-farm-count == 0)
+        (sheep-and-forage-too-far)
+        (can-build BLDG-FARM)
+        =>
+        (build BLDG-FARM)
+)
+
+; build more farms on maps without food
+(defrule
+        (goal special-map NO-FOOD)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-FARM < 25)
+        (idle-farm-count == 0)
+        (food-amount < 300)
+        (sheep-and-forage-too-far)
+        (can-build BLDG-FARM)
+        =>
+        (build BLDG-FARM)
+)
+
+;****** POWER CORE ****** 
+(defrule
+        (true)
+        =>
+        (enable-timer t-powerup 1)
+        (disable-self)
+)
+
+(defrule
+        (building-type-count BLDG-POWERCORE == 0)
+        (building-type-count BLDG-DROPANIM > 0)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-build BLDG-POWERCORE)
+        =>
+        (build BLDG-POWERCORE)
+)
+
+(defrule
+        (timer-triggered t-powerup)
+        (too-many-unpowered-buildings)
+        (can-build BLDG-POWERCORE)
+        =>
+        (build BLDG-POWERCORE)
+)
+
+(defrule
+        (timer-triggered t-powerup)
+        (too-many-unpowered-buildings)
+        (can-build BLDG-POWERCORE)
+        =>
+        (build-forward BLDG-POWERCORE)
+        (set-goal power-forward YES)
+)
+
+(defrule
+        (timer-triggered t-powerup)
+        =>
+        (disable-timer t-powerup)
+        (enable-timer t-powerup 60)
+)
+
+
+;******* SHIELD GENERATOR *******
+(defrule
+        (current-age >= tech-level-3)
+        (goal age-advancement NOTICE)
+        (not (goal castle-attempt YES))
+        (building-type-count-total BLDG-POWERCORE > 0)
+        (building-type-count-total BLDG-SHLDGEN == 0)
+        (can-build BLDG-SHLDGEN)
+        =>
+        (build BLDG-SHLDGEN)
+)
+
+(defrule
+        (current-age >= tech-level-3)
+        (not (goal castle-attempt YES))
+        (building-type-count-total BLDG-POWERCORE > 0)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (building-type-count-total BLDG-SHLDGEN < 5)
+        (can-build BLDG-SHLDGEN)
+        =>
+        (build BLDG-SHLDGEN)
+)
+
+(defrule
+        (goal power-forward YES)
+        (current-age >= tech-level-3)
+        (not (goal castle-attempt YES))
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (building-type-count-total BLDG-SHLDGEN < 5)
+        (can-build BLDG-SHLDGEN)
+        =>
+        (build-forward BLDG-SHLDGEN)
+)
+
+
+;******** COMMAND CENTER ********
+;maintain a town center
+(defrule
+        (not (map-type raiders) )
+        (building-type-count BLDG-MAIN < 1)
+        (can-build BLDG-MAIN)
+        =>
+        (build BLDG-MAIN)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (difficulty <= hard)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (building-type-count BLDG-MAIN < town-center-count)
+        (carbon-amount > 400)
+        (metal-amount > 100)
+        (can-build BLDG-MAIN)
+        =>
+        (build BLDG-MAIN)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (resource-found nova)
+        (dropsite-min-distance nova > 7)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPNOVA > 0)
+        (carbon-amount > 300)
+        (metal-amount > 10)
+        (can-build BLDG-MAIN)
+        =>
+        (build BLDG-MAIN)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (resource-found metal)
+        (dropsite-min-distance metal > 7)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPMETAL > 0)
+        (carbon-amount > 300)
+        (metal-amount > 10)
+        (can-build BLDG-MAIN)
+        =>
+        (build BLDG-MAIN)
+)

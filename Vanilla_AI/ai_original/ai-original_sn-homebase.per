@@ -1,0 +1,349 @@
+
+(defrule
+        (strategic-number sn-number-explore-groups != 1)
+=>
+        (set-strategic-number sn-number-explore-groups 1)
+        (set-strategic-number sn-minimum-explore-group-size 1)
+        (set-strategic-number sn-maximum-explore-group-size 1)
+        (disable-self)
+)
+
+;turn off exploration
+(defrule
+        (current-age >= tech-level-3)
+        (game-time > 1800)
+        (strategic-number sn-number-explore-groups == 1)
+        =>
+        (set-strategic-number sn-number-explore-groups 0)
+)
+
+(defrule
+        (goal wall-build YES)
+        (wall-invisible-percentage 2 > 0)
+=>
+        (set-strategic-number sn-blot-exploration-map 1)
+)
+
+;=======================TL1 RULES
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-maximum-town-size 15)
+        (set-strategic-number sn-zero-priority-distance 250)
+        (set-strategic-number sn-blot-exploration-map 0)
+
+        (set-strategic-number sn-maximum-gaia-attack-response 2)
+        (set-strategic-number sn-mill-max-distance 20)
+
+        (set-strategic-number sn-max-unpowered-buildings 2)
+
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-metal-dropsite-distance 3)
+        (set-strategic-number sn-nova-dropsite-distance 3)
+        (set-strategic-number sn-retask-gather-amount 20)
+        (set-strategic-number sn-camp-max-distance 20)
+
+        (set-strategic-number sn-allow-civilian-defense 1)
+        (set-strategic-number sn-garrison-rams 1)
+
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-town-defend-priority 1)
+        (set-strategic-number sn-nova-defend-priority 2)
+        (set-strategic-number sn-metal-defend-priority 3)
+
+        (set-strategic-number sn-forage-defend-priority 0)
+        (set-strategic-number sn-holocron-defend-priority 0)
+        (set-strategic-number sn-cap-civilian-builders 8)
+
+        (set-strategic-number sn-cap-civilian-gatherers 100)
+        (disable-self)
+)
+
+(defrule
+        (not (map-type raiders) )
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 0)
+        (set-strategic-number sn-cap-civilian-explorers 0)
+        (set-strategic-number sn-percent-civilian-explorers 0)
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-maximum-carbon-drop-distance 20)
+        (set-strategic-number sn-maximum-food-drop-distance 8)
+        (set-strategic-number sn-maximum-hunt-drop-distance 30)
+
+        (set-strategic-number sn-maximum-fish-boat-drop-distance 30)
+        (set-strategic-number sn-maximum-nova-drop-distance 20)
+        (set-strategic-number sn-maximum-metal-drop-distance 20)
+        (disable-self)
+)
+
+;start exploring
+(defrule
+        (not (map-type raiders) )
+        (or
+                (game-time > 600)
+                (and
+                        (starting-resources < high-resources)
+                        (difficulty > hardest)
+                )
+        )
+=>
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (disable-self)
+)
+
+(defrule
+        (not (map-type raiders) )
+        (or
+                (starting-resources == high-resources)
+                (difficulty == hardest)
+        )
+=>
+        (set-strategic-number sn-percent-civilian-builders 85)
+        (set-strategic-number sn-percent-civilian-gatherers 15)
+        (disable-self)
+)
+
+; explore a bit as need
+(defrule
+        (not (map-type raiders) )
+        (game-time < 600)
+        (military-population == 0)
+        (civilian-population < 15)
+        (or
+                (dropsite-min-distance food == -1)
+                (civilian-population > 10)
+        )
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 1)
+        (set-strategic-number sn-cap-civilian-explorers 1)
+        (set-strategic-number sn-percent-civilian-explorers 5)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 80)
+        (disable-self)
+)
+
+; Shut the explorers off when we get enough food
+(defrule
+        (not (map-type raiders) )
+        (strategic-number sn-percent-civilian-explorers > 0)
+        (or
+                (or
+                        (game-time > 900)
+                        (dropsite-min-distance food > -1)
+                )
+                (military-population > 0)
+        )
+=>
+        (set-strategic-number sn-percent-civilian-explorers 0)
+        (set-strategic-number sn-minimum-civilian-explorers 0)
+        (set-strategic-number sn-cap-civilian-explorers 0)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (disable-self)
+)
+
+(defrule
+        (or
+                (players-current-age any-enemy > tech-level-2)
+                (players-military-population any-enemy > 2)
+        )
+=>
+        (set-strategic-number sn-allow-civilian-defense 0)
+        (disable-self)
+)
+
+
+;=======================TL2 RULES
+(defrule
+        (current-age >= tech-level-2)
+=>
+        (set-strategic-number sn-maximum-town-size feudal-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+
+        (set-strategic-number sn-camp-max-distance 35)
+        (set-strategic-number sn-mill-max-distance 35)
+
+        (set-strategic-number sn-max-unpowered-buildings 2)
+
+        (disable-self)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+=>
+        (set-goal age-advancement NO)
+        (enable-timer t-production 1)
+        (enable-timer t-carbonctr 1)
+        (disable-timer t-ageup)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time < 600)
+        (carbon-amount > 500)
+=>
+        (set-strategic-number sn-percent-civilian-builders 50)
+        (set-strategic-number sn-percent-civilian-gatherers 50)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time >= 600)
+=>
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (disable-self)
+)
+
+;======================== TL3 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age >= tech-level-3)
+=>
+        (set-strategic-number sn-sentry-distance 4)
+        (set-strategic-number sn-maximum-town-size castle-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (set-strategic-number sn-blot-exploration-map 0)
+        (set-strategic-number sn-camp-max-distance 50)
+        (set-strategic-number sn-mill-max-distance 50)
+
+        (set-strategic-number sn-max-unpowered-buildings 1)
+
+        (set-goal age-advancement NO)
+        (disable-timer t-ageup)
+
+        (disable-self)
+)
+
+
+;=============================TL4 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-maximum-town-size imperial-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+
+        (set-strategic-number sn-camp-max-distance 50)
+        (set-strategic-number sn-mill-max-distance 50)
+
+        (set-strategic-number sn-max-unpowered-buildings 0)
+
+        (set-goal age-advancement NO)
+        (disable-self)
+)
+
+;****************
+;forward builders!
+; start the run-through for island maps
+(defrule
+        (goal 1 10)
+        (goal rush-control RUSHING)
+        (difficulty <= moderate)
+        (building-type-count BLDG-TRAINTROOPER == 1)
+        (building-type-count-total BLDG-WARCTR > 0)
+        (strategic-number sn-number-forward-builders == 0)
+        (unit-type-count UNIT-WORKER >= civ-dark-rush)
+        (or     (goal combat-arm TROOPS)
+                (goal combat-arm MOUNTED)
+        )
+=>
+        (set-strategic-number sn-number-forward-builders 1)
+)
+
+(defrule
+        (goal 1 10)
+        (goal rush-control RUSHING)
+        (difficulty <= moderate)
+        (building-type-count BLDG-TRAINMECH == 1)
+        (building-type-count-total BLDG-RESCTR > 0)
+        (strategic-number sn-number-forward-builders == 0)
+        (unit-type-count UNIT-WORKER >= civ-dark-rush)
+        (or
+                (or
+                        (goal combat-arm MECH1)
+                        (goal combat-arm MECH2)
+                )
+                (goal combat-arm MECH3)
+        )
+=>
+        (set-strategic-number sn-number-forward-builders 1)
+)
+
+(defrule
+        (goal 1 10)
+        (goal rush-control RUSHING)
+        (difficulty <= hard)
+        (building-type-count BLDG-TRAINHEAVY == 1)
+        (strategic-number sn-number-forward-builders == 0)
+        (unit-type-count UNIT-WORKER >= civ-dark-rush)
+        (or
+                (building-type-count-total BLDG-GOVTCTR > 1)
+                (or
+                        (building-type-count-total BLDG-TRAINTROOPER > 1)
+                        (building-type-count-total BLDG-TRAINMECH > 1)
+                )
+        )
+=>
+        (set-strategic-number sn-number-forward-builders 1)
+)
+
+(defrule
+        (goal 1 10)
+        (goal rush-control RUSHING)
+        (difficulty <= hard)
+        (goal castle-attempt ANOTHER)
+        (unit-type-count UNIT-WORKER > civ-dark-rush)
+        (building-type-count-total BLDG-GOVTCTR < 3)
+        (can-build-with-escrow BLDG-GOVTCTR)
+=>
+        (set-strategic-number sn-number-forward-builders 3)
+)
+
+(defrule
+        (goal 1 10)
+        (or
+                (or
+                        (and    (unit-type-count BOAT-TRANSPORT == 0)
+                                        (unit-type-count UNIT-AIRTRANS-LINE == 0)
+                        )
+                        (attack-soldier-count < ten-percent-pop)
+                )
+                (or
+                        (or
+                                (unit-type-count UNIT-WORKER < 10)
+                                (not (goal rush-control RUSHING) )
+                        )
+                        (or
+                                (goal military-parity NO)
+                                (town-under-attack)
+                        )
+                )
+        )
+        (strategic-number sn-number-forward-builders >= 1)
+=>
+        (set-strategic-number sn-number-forward-builders 0)
+)

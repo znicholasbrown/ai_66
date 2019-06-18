@@ -1,0 +1,182 @@
+
+#load-if-defined KING-OF-THE-HILL
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+(defrule
+        (current-age == tech-level-1)
+=>
+        (cc-add-resource carbon 100)
+        (cc-add-resource food 100)
+        (cc-add-resource nova 100)
+        (cc-add-resource metal 100)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-2)
+=>
+        (cc-add-resource carbon 200)
+        (cc-add-resource food 200)
+        (cc-add-resource nova 200)
+        (cc-add-resource metal 200)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-3)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-4)
+=>
+        (cc-add-resource carbon 1000)
+        (cc-add-resource food 1000)
+        (cc-add-resource nova 1000)
+        (cc-add-resource metal 1000)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 1800)
+        (disable-self)
+)       
+
+(defrule
+        (timer-triggered t-chatmore)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 1200)
+)
+
+
+#end-if
+#end-if
+#end-if
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+
+(defrule
+        (true)
+=>
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+        (disable-self)
+)
+
+(defrule
+        (timer-triggered t-chatmore)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+)
+
+#end-if
+
+
+;********************************
+#load-if-defined DIFFICULTY-HARDEST
+
+(defrule
+        (current-age == tech-level-1)
+=>
+        (cc-add-resource carbon 100)
+        (cc-add-resource food 100)
+        (cc-add-resource nova 100)
+        (cc-add-resource metal 100)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-2)
+=>
+        (cc-add-resource carbon 200)
+        (cc-add-resource food 200)
+        (cc-add-resource nova 200)
+        (cc-add-resource metal 200)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-3)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-self)
+)       
+
+(defrule
+        (current-age == tech-level-4)
+=>
+        (cc-add-resource carbon 1000)
+        (cc-add-resource food 1000)
+        (cc-add-resource nova 1000)
+        (cc-add-resource metal 1000)
+        (disable-self)
+)       
+
+(defrule
+        (true)
+=>
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time >= 420)
+        =>
+        (cc-add-resource food 800)
+        (cc-add-resource nova 200)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (current-age-time >= 420)
+        =>
+        (cc-add-resource food 1000)
+        (cc-add-resource nova 800)
+        (disable-self)
+)
+
+(defrule
+        (timer-triggered t-chatmore)
+        (current-age <= tech-level-3)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+)
+
+(defrule
+        (timer-triggered t-chatmore)
+        (current-age <= tech-level-4)
+=>
+        (cc-add-resource carbon 1000)
+        (cc-add-resource food 1000)
+        (cc-add-resource nova 1000)
+        (cc-add-resource metal 1000)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+)
+
+#end-if

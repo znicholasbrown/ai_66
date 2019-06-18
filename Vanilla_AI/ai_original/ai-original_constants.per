@@ -1,0 +1,331 @@
+; Common constants used in AI goals - other constants will follow the specific goals
+        ; Common.
+        (defconst NO 0)          ;Used to indicate not set or initial value (as Normal)
+        (defconst YES 1)                 ;Used to indicate set
+        (defconst NORMAL 0)      ;Used for default values
+        (defconst NOTICE 99)  ;Used for special highlight or initialization values that should be set
+
+        ; Constants used for ratings (i.e. monk-rating)
+        (defconst EXCELLENT 99); For any rating-type value highest to lowest
+        (defconst GOOD  70)             
+        (defconst MEDIUM 50)
+        (defconst FAIR 30)
+        (defconst POOR 10) 
+
+        ; Constants used for combat or defense strategy selection
+        ; Main combat types 
+        (defconst TROOP 1)
+        (defconst MECH/HW 2)
+        (defconst AIR 3)
+        (defconst SEA 4)
+        (defconst JEDI 5)
+
+        ; Units
+        (defconst TROOPS 6)             ; ***???*** change to troopers
+        (defconst MOUNTED 7)
+        (defconst MISSILE 8)
+        (defconst MECH1 9)
+        (defconst MECH2 10)
+        (defconst MECH3 11)
+        (defconst FIGHTER 12)
+        (defconst BOMBER 13)
+        (defconst RAM 14)
+        (defconst ARTILLERY 15) ;includes grenade troopers
+        (defconst BOUNTY 16)    ;JEDI already defined in the main combat type section
+        (defconst CANNON 17)
+        (defconst UNIQUE 18)
+
+        (defconst UNIT20 20) ;SP - wasn't sure what 20 was used for in combat-arm and combat-supp
+                                                 ;JH - UNIT20 used as flag to pick combat arm or supp; very similar to NOTICE
+
+;*** GOALS ***
+
+;NOTE: Goal 1 0 = no boats; Goal 1 1 = boats; Goal 1 10 = lotsa boats (island map)
+        (defconst boat-strategy 1)
+        (defconst SOMEBOATS 1)  ;this actually means we're on a water map
+        (defconst MANYBOATS 10) ; this actually means we're on an islands map
+
+;goal 2 0 okay on boats; 2 1 need warships! 2 2 we've won with ships
+        (defconst boats-needed 2)
+        (defconst WARSHIPS 1)   ;I don't think this is used any more
+        (defconst CONTROL 2)
+
+;Goal  3 0 = military parity; Goal  3 1 = an enemy outnumbers us!
+        (defconst military-parity 3)
+        ;uses NO, YES
+        (defconst SUPERIOR 2)
+
+;goal  4 = used to track attack group AI
+        (defconst attack-control 4)
+        ;SP - need doc for
+        ;0=   okay to launch an attack
+        ;1=     not okay - because we're outnumbered, building a wonder, or have no enemies
+        ;2=     not okay - because we lack siege
+        ;3=     not okay - because we're trying to rush to the next age and want to limit losses
+
+;goal  5 = controls gather rates - 5 0 = normal; 5 1 = wood; 5 2 = food; 5 3 = gold; 5 4 = stone
+        (defconst resource-needed 5)
+        (defconst CARBON 1)
+        (defconst FOOD 2)
+        (defconst NOVA 3)
+        (defconst METAL 4)
+        ;(defconst GOLD-STONE 5) this means you want both gold & stone
+
+;goal  6 = controls rushes!; also uses NOTICE
+        (defconst rush-control 6)
+        (defconst FEUDAL 2) ;we have just eliminated this as too puny
+        (defconst CASTLE 3)
+        (defconst IMPERIAL 4)
+        (defconst RUSHING 10)
+        (defconst BOOMING 18)
+        (defconst FEEDING 19)
+;goal 7 used for deathmatch to determine whether or not to build more units
+        (defconst need-deathmatch-villagers 7)
+        ;uses NO, YES
+;goal 8 secondary-build controls secondary builds (ensures there are already soldiers before doing a secondary build)
+        (defconst secondary-build 8)
+        ;0 = it's okay to build a secondary unit
+        ;1 = don't build a secondary unit
+;goal 9 resource-supp used in conjunction with resource-needed to determine what to gather
+        (defconst resource-supp 9)
+        (defconst FOOD-ONLY 2)
+        (defconst NOVA-ONLY 3)
+        (defconst CARBON-FOOD 12)
+        (defconst CARBON-NOVA 13)
+        (defconst CARBON-METAL 14)
+        (defconst FOOD-NOVA 23)
+        (defconst FOOD-METAL 24)
+;goal 10 used to keep from building siege if I have few or no other units
+        (defconst soldiers-available 10)
+;goal 11 = used to determine your main combat arm; in deathmatch, it determines your unique unit type
+        (defconst combat-arm  11)
+        ;--Converted to constant  combat-arm, uses common offense/defense unit line numbers.
+                ;repl   goal 11 1 = TROOP               goal  12 1
+                ;repl   goal 11 2 = MECH/HW             goal  12 2
+                ;repl   goal 11 3 = AIR                 goal  12 3
+                ;repl   goal 11 4 = SEA                 goal  12 4
+                ;repl   goal 11 5 = JEDI                goal  12 5
+
+;goal  12 = used to supplement goal 11. 
+        (defconst combat-supp 12)
+        ; Uses combat and defense strategy standard codes
+
+;goal  13 = used to keep CP from attacking if we the player don't want him to do so.
+        (defconst attack-enabled 13)
+        ; uses YES & NO. I.e., "No" means don't attack. 
+
+;goal  14 helps in age advancement 
+                        (defconst age-advancement 14) ; Uses NO, NOTICE
+                        ;--Converted 14 to constant  age-advancement  (was 0,99)
+                        ;SP - we should document our notice value -what does it indicate?
+                        ;NO = it's okay to start saving up for the next age advance, assuming all other criteria are met
+                        ;NOTICE - we are currently researching the next age. Keeps the CP from trying to "save up" for that age when it's already researching it
+
+;goal  15 controls warboat builds according to pop cap; 15 0 = build warships
+                        (defconst make-warboat 15) ; Uses NO, YES
+                        ;--Converted 15 to constant  make-warboat  Standard 0 = NO, 1 = YES
+;goal  16 helps control upgrade conflicts
+                        (defconst upgrade-conflict 16)
+                        ;NOTICE is  99 -- it means we're saving for age advancement or a wonder
+;goal  17 controls builds based on civ type before unique units are available
+                        (defconst pre-unique-arm 17)
+                        ;SP - need doc for
+                        ;1 = we're training troops (until our castle is finished)
+                        ;2= we're training mech2 (till our castle is finished)
+                        ;3= we're training mech1 (till our castle is finished)
+                        ;4 = we're training mech3 (till our castle is finished)
+                        ;5 = we're training fighters (till our castle is finished)
+                        ;note that these numbers correspond to the combat-arm and combat-supp goals above.
+;goal 18 = used to decide on personalities 
+;       goal 18 1 = feeder; 18 2 = boomer; 18 3 = bully; 18 4 = liar; 18 5 = "ally"
+                        (defconst personality 18)
+                        (defconst FEEDER 1)
+                        (defconst BOOMER 2)
+                        (defconst BULLY  3) ;m
+                        (defconst LIAR 4)  
+                        (defconst ALLY 5) ;m
+                        (defconst SENTTRIBUTE 10) ;SP - not sure about this one, check and correct
+                        ;SP: Document 11
+                        ;SP: Document 12
+                        ;SP: Document 13
+                        ;SP: Document 14
+                        ;SP: Document 15
+                        (defconst TRADENEUTRAL 50) ;SP - not sure about this one, check and correct
+
+;goal  19 = make-villagers ; used to have the CP build tons of military in diplomacy
+                        (defconst make-villagers 19)
+;goal  20 = helps control wonder-building
+                        (defconst wonder-attempt 20) ; Uses NO, YES, POSSIBLE, MAYBE, NOTICE
+                        (defconst POSSIBLE 10)
+                        (defconst MAYBE 90)               ;SP:Not sure on this one, took a guess.
+                        ;--Converted to constant  wonder-attempt  Standard 0 = NO, 1 = YES
+                        ;if you are playing kill the wonder, uses two different codes: 
+                        (defconst ATTACK 1)     ;kill the wonder
+                        (defconst DEFEND 0) ;save the wonder
+;goal 21 = helps control castle-building
+                        (defconst castle-attempt 21) ; Uses: NO, YES, ANOTHER
+                        ;--Converted to constant castle-attempt   Standard 0=NO, 1 = YES,  2 = ANOTHER
+                        ;sandy - is goal 21 2 the 'possible/attempt' state?  Can I change them to 10s?
+                        ;0 = not planning to build a castle. 
+                        ;1 = want to build a castle, but haven't succeeded yet.
+                        ;2 = have already built 1 castle. Will build more if convenient. 
+                        (defconst ANOTHER 2)
+;goal 22 = used to help in diplomacy
+;goal 23 = goal 23 2 we are the main ship builder. 
+                        (defconst sea-owner 23) ; Uses: NO, YES, NOTICE
+                        ;--Converted 23 to constant sea-owner
+                        ;SP: Note changed all '2' to YES, all 0 to NO, all 99 to NOTICE.   
+;goal 24 = used to control the CP stopping giving away tribute to the player when 
+                ;asked to do so
+                ;uses NO, YES
+;goal 25 = controls alliance & resource types 
+        ;uses CARBON, FOOD, NOVA, METAL, NOTICE, NO. also uses
+                        (defconst CASTLE-AGE-CARBON 11)
+                        (defconst CASTLE-AGE-FOOD 12)
+                        (defconst CASTLE-AGE-NOVA 13)
+                        (defconst CASTLE-AGE-METAL 14)
+                        (defconst IMPERIAL-AGE-CARBON 21)
+                        (defconst IMPERIAL-AGE-FOOD 22)
+                        (defconst IMPERIAL-AGE-NOVA 23)
+                        (defconst IMPERIAL-AGE-METAL 24)
+;goal 26 = checks to see how big the enemy military is in absolute terms. 
+                        (defconst enemy-soldiers 26) ;the number given is app the enemy's size
+                        (defconst siege-rating 26) ;uses GOOD, FAIR, POOR -- used only in wonder-kill
+;goal 27 = determines jedi prowess  
+                        (defconst jedi-rating 27)  ;Uses: GOOD, POOR, NO
+                        ;--Converted 27 to constant jedi-rating
+                        ; Changed to GOOD = good jedi   POOR = terrible jedi    NO = no jedi
+;goal 28 = helps keep alliances straight
+                        (defconst get-mad 28)
+                        ;SP-uses NO, YES, 
+                        (defconst ANGRY 2)
+                        (defconst ANGRIER 3)
+                        (defconst ANGRIEST 4)
+;goal 29 = controls tribute for feeder personalities
+;goal 30 = toggle to control boat-building
+                        (defconst make-fire-boat 30) ; Uses: NO, YES
+                        ;--Converted 30 to constant make-fire-boat
+;goal 31 1 = troops
+                        (defconst troop-upgrades 31)
+        ;SP: Need documentation
+        ;0 = not training troops
+        ;1 = training troops
+;goal 32 1 = fighters
+                        (defconst fighter-upgrades 32)
+        ;SP: Need documentation
+        ;0 = not training fighters
+        ;1 = training fighters
+;goal 33 1 = mech2
+                        (defconst mech2-upgrades 33)
+        ;SP: Need documentation
+        ;0 = not training mech2
+        ;1 = training mech2
+;goal 34 used to see if we are short on siege equipment
+                        (defconst siege-available 34)
+        ;0 = NO (we don't have enough siege)
+        ;1 = YES (we have some siege)
+;goal 35 = used for diplomacy on Easy & Easiest difficulty levels only. Also used to track
+;used to calculate enemy navy size on higher levels of difficulty
+;goal 36, 37, 38, 39 = carbon, food, nova, metal checks for script parts that require them. 
+        ;SP: Need documentation
+;goal 40 = wall-construction
+                        (defconst wall-build 40) ; Uses: NO, YES, NOTICE
+                        ;Converted 40 to constant wall-build  
+                        ;previously used 40 0 = walls off 40 1 = walls on, and 10 as initialized.
+                        ;Converted to NO, YES, NOTICE (was 10).
+                        ;uses POOR = 10, for not building walls at first, then switching. 
+;goal 41 = turret-control
+                        (defconst turret-control 41)
+                        (defconst TURRET-LASER 0)
+                        (defconst TURRET-MISSILE 1)
+                        (defconst CHANGE-TURRET-TO-MISSILE 2)
+                        (defconst CHANGE-TURRET-TO-LASER 3)
+
+;goal 42 = special map type
+                        ; uses NO(0), WATER, ASTEROID, NO-FOOD
+                        (defconst special-map 42)
+                        (defconst WATER 1)
+                        (defconst ASTEROID 2)
+                        (defconst NO-FOOD 3)    
+
+;goal 43 = start military 
+                        ; this is to ensure that the economy is stable first before booming the military
+                        ; must have animal nursery, food center, carbon center, and at least 5 workers
+                        ; uses NO(0), YES(1)
+                        (defconst start-military 43)
+
+;goal 44 = train counter units
+                        ; checks the enemy's unit type and determines whether or not the computer should train counter units
+                        ; for hard and hardest difficulty levels
+                        ; uses NO(0), YES(1)
+                        (defconst train-counter1 44)
+
+;goal 45 = reduce units
+                        ; reduce normal unit count to make room for counter units
+                        (defconst reduce-units1 45)
+
+;goal 46 = mech-rating
+                        ; used for choosing counter units
+                        ; uses GOOD (EMPIRE, GUNGANS, FEDERATION), POOR (REBEL, NABOO, WOOKIEES)
+                        (defconst mech-rating 46)
+
+                        (defconst train-counter2 47)
+                        (defconst train-counter3 48)
+                        (defconst train-counter4 49)
+                        (defconst train-counter5 50)
+                        (defconst train-counter6 51)
+                        (defconst train-counter7 52)
+                        (defconst train-counter8 53)
+                        (defconst train-counter9 54)
+                        (defconst train-counter10 55)
+                        (defconst train-counter11 56)
+                        (defconst train-counter12 57)
+                        (defconst train-counter13 58)
+                        (defconst train-counter14 59)
+
+                        (defconst reduce-units2 60)
+                        (defconst reduce-units3 61)
+                        (defconst reduce-units4 62)
+                        (defconst reduce-units5 63)
+                        (defconst reduce-units6 64)
+
+                        (defconst debug 65)
+                        (defconst train-counter-start 66)
+                        (defconst halt-worker 67)
+                        (defconst power-forward 68)
+                        (defconst train-air 69)
+                        (defconst have-been-attacked 70)
+
+;goal 71
+                        ;uses TROOPS and MOUNTED
+                        (defconst switch-laser-mounted 71)
+
+;timers
+;timer 0 = check to build farms
+;timer 1 = controls tribute
+;timer 2 = controls attack groups
+;timer 3 = checks on what we are currently producing
+;timer 5 = used to control chat messages
+;timer 6 = additional chat message help
+;timer 7 = wall-building timer
+;timer 8 = yet more chat-message help
+;timer 9 = the carbon-center timer
+;timer 10 = used to see if we've risen in age. Once we're imperial, used to build extraneous units
+;timer 11 = used to build power cores
+;timer 12 = jedi production timer for easy
+
+(defconst t-buildfarm 0)
+(defconst t-tribute 1)
+(defconst t-attackgroup 2)
+(defconst t-production 3)
+(defconst t-chat 5)
+(defconst t-chathelp 6)
+(defconst t-tower 7)
+(defconst t-chatmore 8)
+(defconst t-carbonctr 9)
+(defconst t-ageup 10)
+(defconst t-powerup 11)
+(defconst t-easyjedi 12)
+
+
+

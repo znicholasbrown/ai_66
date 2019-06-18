@@ -1,0 +1,51 @@
+
+(defrule
+        (or
+                (game-time > 60)
+                (resource-found food)
+        )
+        (building-type-count-total BLDG-DROPCHOW == 0)
+        (can-build BLDG-DROPCHOW)
+        =>
+        (build BLDG-DROPCHOW)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time > 300)
+        (sheep-and-forage-too-far)
+        (dropsite-min-distance food > 15)
+        (building-type-count-total BLDG-DROPCHOW < feudal-foodctr-count)
+        (carbon-amount > 300)
+        (can-build BLDG-DROPCHOW)
+        =>
+        (build BLDG-DROPCHOW)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (current-age-time > 300)
+        (sheep-and-forage-too-far)
+        (dropsite-min-distance food > 15)
+        (building-type-count-total BLDG-DROPCHOW < castle-foodctr-count)
+        (carbon-amount > 500)
+        (or
+                (difficulty < moderate)
+                (building-type-count-total BLDG-MAIN > 1)
+        )
+        (can-build BLDG-DROPCHOW)
+        =>
+        (build BLDG-DROPCHOW)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (difficulty <= hard)
+        (current-age-time > 300)
+        (dropsite-min-distance food > 15)
+        (building-type-count-total BLDG-DROPCHOW < imperial-foodctr-count)
+        (carbon-amount > 700)
+        (can-build BLDG-DROPCHOW)
+        =>
+        (build BLDG-DROPCHOW)
+)

@@ -1,0 +1,374 @@
+
+(load "military-population")
+
+; civ constants used for moderate, hard, and hardest
+
+;*************************************************************
+#load-if-defined POPULATION-CAP-25
+(defconst worker-easiest 4)
+(defconst worker-easy 6)
+(defconst civ-dark-rush 7)
+(defconst civ-dark 5)
+(defconst civ-dark-mod 5)
+(defconst civ-feudal-mod 10)
+(defconst civ-feudal-rush 12)   ; ***???***added
+(defconst civ-feudal 10)
+(defconst civ-castle 10)
+(defconst pop-cap 25)
+(defconst deathmatch-unit-max 13)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 25)
+(defconst imperial-town-size 25)
+(defconst town-center-count 2)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 19)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 19)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 21)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 23)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 23)
+#end-if
+
+(defconst five-percent-pop 1)
+(defconst ten-percent-pop 3)
+(defconst fifteen-percent-pop 4)
+(defconst twenty-percent-pop 5)
+(defconst thirty-percent-pop 8)
+(defconst fifty-percent-pop 12)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-50
+(defconst worker-easiest 7)
+(defconst worker-easy 10)
+(defconst civ-dark-rush 12)
+(defconst civ-dark 10)
+(defconst civ-dark-mod 10)
+(defconst civ-feudal-mod 20)
+(defconst civ-feudal-rush 20)   ; ***???***added
+(defconst civ-feudal 20)
+(defconst civ-castle 20)
+(defconst pop-cap 50)
+(defconst deathmatch-unit-max 25)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 25)
+(defconst imperial-town-size 30)
+(defconst town-center-count 3)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 35)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 35)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 40)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 45)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 45)
+#end-if
+
+(defconst five-percent-pop 2)
+(defconst ten-percent-pop 5)
+(defconst fifteen-percent-pop 7)
+(defconst twenty-percent-pop 10)
+(defconst thirty-percent-pop 15)
+(defconst fifty-percent-pop 25)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-75
+(defconst worker-easiest 10)
+(defconst worker-easy 15)
+(defconst civ-dark-rush 10)
+(defconst civ-dark 15)
+(defconst civ-dark-mod 15)
+(defconst civ-feudal-rush 25)   ; ***???***added
+(defconst civ-feudal-mod 30)
+(defconst civ-feudal 30)
+(defconst civ-castle 30)
+(defconst pop-cap 75)
+(defconst deathmatch-unit-max 55)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 30)
+(defconst imperial-town-size 30)
+(defconst town-center-count 4)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 56)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 56)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 63)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 70)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 70)
+#end-if
+
+(defconst five-percent-pop 3)
+(defconst ten-percent-pop 8)
+(defconst fifteen-percent-pop 10)
+(defconst twenty-percent-pop 15)
+(defconst thirty-percent-pop 23)
+(defconst fifty-percent-pop 37)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-100
+(defconst worker-easiest 13)
+(defconst worker-easy 20)
+(defconst civ-dark-rush 20)
+(defconst civ-dark 20)
+(defconst civ-dark-mod 20)
+(defconst civ-feudal-mod 40)
+(defconst civ-feudal-rush 40)   ; ***???***added
+(defconst civ-feudal 40)
+(defconst civ-castle 40)
+(defconst pop-cap 100)
+(defconst deathmatch-unit-max 70)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 30)
+(defconst imperial-town-size 35)
+(defconst town-center-count 5)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 70)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 70)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 80)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 90)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 90)
+#end-if
+
+(defconst five-percent-pop 5)
+(defconst ten-percent-pop 10)
+(defconst fifteen-percent-pop 15)
+(defconst twenty-percent-pop 20)
+(defconst thirty-percent-pop 30)
+(defconst fifty-percent-pop 50)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-125
+(defconst worker-easiest 17)
+(defconst worker-easy 25)
+(defconst civ-dark-rush 20)
+(defconst civ-dark 25)
+(defconst civ-dark-mod 25)
+(defconst civ-feudal-mod 50)
+(defconst civ-feudal-rush 50)   ; ***???***added
+(defconst civ-feudal 50)
+(defconst civ-castle 50)
+(defconst pop-cap 125)
+(defconst deathmatch-unit-max 95)
+(defconst town-center-count 6)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 35)
+(defconst imperial-town-size 40)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 90)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 90)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 103)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 115)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 115)
+#end-if
+
+(defconst five-percent-pop 6)
+(defconst ten-percent-pop 13)
+(defconst fifteen-percent-pop 18)
+(defconst twenty-percent-pop 25)
+(defconst thirty-percent-pop 38)
+(defconst fifty-percent-pop 62)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-150
+(defconst worker-easiest 20)
+(defconst worker-easy 30)
+(defconst civ-dark-rush 30)
+(defconst civ-dark 30)
+(defconst civ-dark-mod 30)
+(defconst civ-feudal-mod 60)
+(defconst civ-feudal-rush 60)   ; ***???***added
+(defconst civ-feudal 60)
+(defconst civ-castle 60)
+(defconst pop-cap 150)
+(defconst deathmatch-unit-max 120)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 35)
+(defconst imperial-town-size 40)
+(defconst town-center-count 7)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 110)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 110)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 125)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 140)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 140)
+#end-if
+
+(defconst five-percent-pop 7)
+(defconst ten-percent-pop 15)
+(defconst fifteen-percent-pop 22)
+(defconst twenty-percent-pop 30)
+(defconst thirty-percent-pop 45)
+(defconst fifty-percent-pop 75)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-175
+(defconst worker-easiest 23)
+(defconst worker-easy 35)
+(defconst civ-dark-rush 35)
+(defconst civ-dark 35)
+(defconst civ-dark-mod 35)
+(defconst civ-feudal-mod 70)
+(defconst civ-feudal-rush 70)   ; ***???***added
+(defconst civ-feudal 70)
+(defconst civ-castle 70)
+(defconst pop-cap 175)
+(defconst deathmatch-unit-max 145)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 35)
+(defconst imperial-town-size 40)
+(defconst town-center-count 8)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 125)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 125)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 145)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 165)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 165)
+#end-if
+
+(defconst five-percent-pop 8)
+(defconst ten-percent-pop 18)
+(defconst fifteen-percent-pop 27)
+(defconst twenty-percent-pop 35)
+(defconst thirty-percent-pop 53)
+(defconst fifty-percent-pop 87)
+#end-if
+;***************************
+#load-if-defined POPULATION-CAP-200
+(defconst worker-easiest 27)
+(defconst worker-easy 40)
+(defconst civ-dark-rush 40)
+(defconst civ-dark 40)
+(defconst civ-dark-mod 40)
+(defconst civ-feudal-mod 80)
+(defconst civ-feudal-rush 80)   ; ***???***added
+(defconst civ-feudal 80)
+(defconst civ-castle 80)
+(defconst pop-cap 200)
+(defconst deathmatch-unit-max 170)
+
+(defconst feudal-town-size 20)
+(defconst castle-town-size 35)
+(defconst imperial-town-size 40)
+(defconst town-center-count 9)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defconst unit-max 130)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defconst unit-max 130)
+#end-if
+
+#load-if-defined DIFFICULTY-MODERATE
+(defconst unit-max 160)
+#end-if
+
+#load-if-defined DIFFICULTY-HARD
+(defconst unit-max 190)
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defconst unit-max 190)
+#end-if
+
+(defconst five-percent-pop 10)
+(defconst ten-percent-pop 20)
+(defconst fifteen-percent-pop 30)
+(defconst twenty-percent-pop 40)
+(defconst thirty-percent-pop 60)
+(defconst fifty-percent-pop 100)
+#end-if
+;*************************************************************

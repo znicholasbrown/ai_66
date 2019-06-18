@@ -1,0 +1,4022 @@
+
+#load-if-defined POPULATION-CAP-25
+
+(defconst num-boat-worker 1)
+(defconst medic 1)
+
+(defconst TL1-trooper 2)
+(defconst aa-trooper 1)
+(defconst grenade-trooper 1)
+
+(defconst TL3-mech1-arm 1)
+(defconst TL3-mech2-arm 1)
+(defconst TL3-mech1-supp 1)
+(defconst TL3-mech2-supp 1)
+(defconst TL4-mech1-arm 1)
+(defconst TL4-mech2-arm 1)
+(defconst TL4-mech3-arm 1)
+(defconst TL4-mech1-supp 1)
+(defconst TL4-mech2-supp 1)
+(defconst TL4-mech3-supp 1)
+
+(defconst TL3-ram-arm 1)
+(defconst TL3-artillery-arm 1)
+(defconst TL3-ram-supp 1)
+(defconst TL3-artillery-supp 1)
+(defconst TL4-ram-arm 1)
+(defconst TL4-artillery-arm 1)
+(defconst TL4-ram-supp 1)
+(defconst TL4-artillery-supp 1)
+
+(defconst TL3-fighter-supp 2)
+(defconst TL3-bomber-supp 2)
+(defconst TL4-fighter-supp 2)
+(defconst TL4-bomber-supp 2)
+
+(defconst TL3-bounty 1)
+
+(defconst enemy-units 2)
+(defconst counter-units 2)
+(defconst air-counter-units 1)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 3)
+(defconst TL2-mounted 2)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 2)
+(defconst TL3-mounted-supp 2)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 2)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 1)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst master 2)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)            ;air speeder
+(defconst TL4-bounty 2)
+(defconst TL4-unique-unit 3)
+(defconst cannon 2)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 3)
+(defconst TL2-mounted 2)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 2)
+(defconst TL3-mounted-arm 1)
+(defconst TL3-trooper-supp 1)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 1)
+(defconst TL4-mounted-arm 1)
+(defconst TL4-trooper-supp 1)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 0)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 1)
+(defconst TL3-bomber-arm 1)
+(defconst TL4-fighter-arm 1)
+(defconst TL4-bomber-arm 1)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst master 2)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)            ;dark trooper
+(defconst TL4-bounty 1)
+(defconst TL4-unique-unit 2)
+(defconst cannon 1)
+(defconst unique-unit-counter 1)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 2)
+(defconst TL2-mounted 2)
+(defconst TL2-trooper-water 1)
+(defconst TL2-mounted-water 1)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 1)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 1)
+(defconst TL3-mounted-water 1)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 1)
+(defconst TL4-mounted-water 1)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 3)
+(defconst TL3-frigate-arm 2)
+(defconst TL3-destroyer-arm 2)
+(defconst TL3-frigate-supp 1)
+(defconst TL3-destroyer-supp 1)
+(defconst TL4-frigate-arm 2)
+(defconst TL4-destroyer-arm 2)
+(defconst TL4-cruiser-arm 2)
+(defconst TL4-frigate-supp 1)
+(defconst TL4-destroyer-supp 1)
+(defconst TL4-cruiser-supp 1)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL3-fighter-arm-water 3)
+(defconst TL3-bomber-arm-water 3)
+(defconst TL3-fighter-supp-water 2)
+(defconst TL3-bomber-supp-water 2)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst TL4-fighter-arm-water 4)
+(defconst TL4-bomber-arm-water 4)
+(defconst TL4-fighter-supp-water 2)
+(defconst TL4-bomber-supp-water 2)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst master 1)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 1)                    ;royal knight
+(defconst TL4-bounty 2)
+(defconst TL4-bounty-water 1)
+(defconst TL4-unique-unit 3)
+(defconst TL4-unique-unit-water 1)
+(defconst cannon 2)
+(defconst cannon-water 1)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 0)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 3)
+(defconst TL2-trooper-supp 2)
+(defconst TL2-mounted-arm 2)
+(defconst TL2-mounted-supp 2)
+(defconst TL2-trooper-water 3)
+(defconst TL2-mounted-water 3)
+(defconst TL3-trooper-arm 2)
+(defconst TL3-mounted-arm 1)
+(defconst TL3-trooper-supp 1)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 1)
+(defconst TL4-mounted-arm 1)
+(defconst TL4-trooper-supp 1)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 0)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 3)
+(defconst TL2-frigate-supp 2)
+(defconst TL3-frigate-arm 2)
+(defconst TL3-destroyer-arm 3)
+(defconst TL3-frigate-supp 2)
+(defconst TL3-destroyer-supp 2)
+(defconst TL4-frigate-arm 2)
+(defconst TL4-destroyer-arm 2)
+(defconst TL4-cruiser-arm 2)
+(defconst TL4-frigate-supp 1)
+(defconst TL4-destroyer-supp 1)
+(defconst TL4-cruiser-supp 2)
+
+(defconst TL3-mech1-arm-water 1)
+(defconst TL3-mech2-arm-water 1)
+(defconst TL3-mech1-supp-water 1)
+(defconst TL3-mech2-supp-water 1)
+(defconst TL4-mech1-arm-water 1)
+(defconst TL4-mech2-arm-water 1)
+(defconst TL4-mech3-arm-water 1)
+(defconst TL4-mech1-supp-water 1)
+(defconst TL4-mech2-supp-water 1)
+(defconst TL4-mech3-supp-water 1)
+
+(defconst TL3-ram-arm-water 1)
+(defconst TL3-ram-supp-water 1)
+(defconst TL3-artillery-arm-water 1)
+(defconst TL3-artillery-supp-water 1)
+(defconst TL4-ram-arm-water 1)
+(defconst TL4-ram-supp-water 1)
+(defconst TL4-artillery-arm-water 1)
+(defconst TL4-artillery-supp-water 1)
+
+(defconst TL3-fighter-arm 1)
+(defconst TL3-bomber-arm 1)
+(defconst TL4-fighter-arm 1)
+(defconst TL4-bomber-arm 1)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 1)
+(defconst master-water 0)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 1)                    ;fambaa
+(defconst TL4-bounty 1)
+(defconst TL4-bounty-water 1)
+(defconst TL4-unique-unit 1)
+(defconst TL4-unique-unit-water 1)
+(defconst cannon 1)
+(defconst cannon-water 1)
+(defconst unique-unit-counter 1)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 3)
+(defconst TL2-mounted 2)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 2)
+(defconst TL3-mounted-supp 2)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 2)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 1)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst master 1)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)                    ;berserker
+(defconst TL4-bounty 1)
+(defconst TL4-unique-unit 2)
+(defconst cannon 1)
+(defconst unique-unit-counter 1)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 3)
+(defconst TL2-mounted 3)
+(defconst TL2-trooper-water 1)
+(defconst TL2-mounted-water 1)
+(defconst TL3-trooper-arm 2)
+(defconst TL3-mounted-arm 1)
+(defconst TL3-trooper-supp 1)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 1)
+(defconst TL4-mounted-arm 1)
+(defconst TL4-trooper-supp 1)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 0)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 5)
+(defconst TL3-frigate-arm 1)
+(defconst TL3-destroyer-arm 2)
+(defconst TL3-frigate-supp 1)
+(defconst TL3-destroyer-supp 1)
+(defconst TL4-frigate-arm 2)
+(defconst TL4-destroyer-arm 2)
+(defconst TL4-cruiser-arm 2)
+(defconst TL4-frigate-supp 1)
+(defconst TL4-destroyer-supp 1)
+(defconst TL4-cruiser-supp 2)
+
+(defconst TL3-ram-arm-water 1)
+(defconst TL3-ram-supp-water 1)
+(defconst TL3-artillery-arm-water 1)
+(defconst TL3-artillery-supp-water 1)
+(defconst TL4-ram-arm-water 1)
+(defconst TL4-ram-supp-water 1)
+(defconst TL4-artillery-arm-water 1)
+(defconst TL4-artillery-supp-water 1)
+
+(defconst TL3-fighter-arm 1)
+(defconst TL3-bomber-arm 1)
+(defconst TL4-fighter-arm 1)
+(defconst TL4-bomber-arm 1)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 1)
+(defconst master-water 0)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)                    ;destroyer droid
+(defconst TL4-bounty 1)
+(defconst TL4-unique-unit 2)
+(defconst cannon 1)
+(defconst unique-unit-counter 1)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-50
+
+(defconst num-boat-worker 2)
+(defconst medic 1)
+
+(defconst TL1-trooper 3)
+(defconst aa-trooper 2)
+(defconst grenade-trooper 2)
+
+(defconst TL3-mech1-arm 3)
+(defconst TL3-mech2-arm 3)
+(defconst TL3-mech1-supp 2)
+(defconst TL3-mech2-supp 2)
+(defconst TL4-mech1-arm 3)
+(defconst TL4-mech2-arm 3)
+(defconst TL4-mech3-arm 3)
+(defconst TL4-mech1-supp 2)
+(defconst TL4-mech2-supp 2)
+(defconst TL4-mech3-supp 2)
+
+(defconst TL3-ram-arm 3)
+(defconst TL3-artillery-arm 3)
+(defconst TL3-ram-supp 2)
+(defconst TL3-artillery-supp 2)
+(defconst TL4-ram-arm 2)
+(defconst TL4-artillery-arm 2)
+(defconst TL4-ram-supp 2)
+(defconst TL4-artillery-supp 2)
+
+(defconst TL3-fighter-supp 3)
+(defconst TL3-bomber-supp 3)
+(defconst TL4-fighter-supp 3)
+(defconst TL4-bomber-supp 3)
+
+(defconst TL3-bounty 2)
+
+(defconst enemy-units 2)
+(defconst counter-units 3)
+(defconst air-counter-units 1)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 5)
+(defconst TL2-mounted 5)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 6)
+(defconst TL3-mounted-arm 5)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 6)
+(defconst TL4-mounted-arm 5)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 3)
+(defconst mounted-supp-counter 1)
+
+(defconst TL3-fighter-arm 6)
+(defconst TL3-bomber-arm 5)
+(defconst TL4-fighter-arm 6)
+(defconst TL4-bomber-arm 5)
+(defconst fighter-arm-counter 4)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 4)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst master 3)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)            ;air speeder
+(defconst TL4-bounty 3)
+(defconst TL4-unique-unit 5)
+(defconst cannon 3)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 5)
+(defconst TL2-mounted 5)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 2)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 2)
+(defconst TL3-bomber-arm 2)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst fighter-arm-counter 1)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 1)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst master 3)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)            ;dark trooper
+(defconst TL4-bounty 3)
+(defconst TL4-unique-unit 4)
+(defconst cannon 3)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 3)
+(defconst TL2-mounted 3)
+(defconst TL2-trooper-water 2)
+(defconst TL2-mounted-water 1)
+(defconst TL3-trooper-arm 6)
+(defconst TL3-mounted-arm 6)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 2)
+(defconst TL3-mounted-water 1)
+(defconst TL4-trooper-arm 6)
+(defconst TL4-mounted-arm 6)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 2)
+(defconst TL4-mounted-water 1)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 4)
+(defconst mounted-supp-counter 1)
+
+(defconst TL2-frigate 7)
+(defconst TL3-frigate-arm 5)
+(defconst TL3-destroyer-arm 4)
+(defconst TL3-frigate-supp 2)
+(defconst TL3-destroyer-supp 1)
+(defconst TL4-frigate-arm 5)
+(defconst TL4-destroyer-arm 5)
+(defconst TL4-cruiser-arm 4)
+(defconst TL4-frigate-supp 3)
+(defconst TL4-destroyer-supp 2)
+(defconst TL4-cruiser-supp 2)
+
+(defconst TL3-fighter-arm 7)
+(defconst TL3-bomber-arm 7)
+(defconst TL3-fighter-arm-water 6)
+(defconst TL3-bomber-arm-water 6)
+(defconst TL3-fighter-supp-water 3)
+(defconst TL3-bomber-supp-water 3)
+(defconst TL4-fighter-arm 7)
+(defconst TL4-bomber-arm 7)
+(defconst TL4-fighter-arm-water 7)
+(defconst TL4-bomber-arm-water 7)
+(defconst TL4-fighter-supp-water 4)
+(defconst TL4-bomber-supp-water 4)
+(defconst fighter-arm-counter 5)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 5)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst master 2)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)                    ;royal knight
+(defconst TL4-bounty 3)
+(defconst TL4-bounty-water 2)
+(defconst TL4-unique-unit 5)
+(defconst TL4-unique-unit-water 3)
+(defconst cannon 3)
+(defconst cannon-water 2)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 5)
+(defconst TL2-trooper-supp 3)
+(defconst TL2-mounted-arm 5)
+(defconst TL2-mounted-supp 3)
+(defconst TL2-trooper-water 7)
+(defconst TL2-mounted-water 7)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 2)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 7)
+(defconst TL2-frigate-supp 3)
+(defconst TL3-frigate-arm 5)
+(defconst TL3-destroyer-arm 5)
+(defconst TL3-frigate-supp 3)
+(defconst TL3-destroyer-supp 4)
+(defconst TL4-frigate-arm 4)
+(defconst TL4-destroyer-arm 4)
+(defconst TL4-cruiser-arm 4)
+(defconst TL4-frigate-supp 3)
+(defconst TL4-destroyer-supp 3)
+(defconst TL4-cruiser-supp 3)
+
+(defconst TL3-mech1-arm-water 2)
+(defconst TL3-mech2-arm-water 2)
+(defconst TL3-mech1-supp-water 3)
+(defconst TL3-mech2-supp-water 3)
+(defconst TL4-mech1-arm-water 2)
+(defconst TL4-mech2-arm-water 2)
+(defconst TL4-mech3-arm-water 2)
+(defconst TL4-mech1-supp-water 3)
+(defconst TL4-mech2-supp-water 3)
+(defconst TL4-mech3-supp-water 3)
+
+(defconst TL3-ram-arm-water 2)
+(defconst TL3-ram-supp-water 3)
+(defconst TL3-artillery-arm-water 2)
+(defconst TL3-artillery-supp-water 3)
+(defconst TL4-ram-arm-water 2)
+(defconst TL4-ram-supp-water 3)
+(defconst TL4-artillery-arm-water 2)
+(defconst TL4-artillery-supp-water 3)
+
+(defconst TL3-fighter-arm 2)
+(defconst TL3-bomber-arm 2)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 1)
+(defconst master-water 0)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 1)                    ;fambaa
+(defconst TL4-bounty 3)
+(defconst TL4-bounty-water 2)
+(defconst TL4-unique-unit 1)
+(defconst TL4-unique-unit-water 1)
+(defconst cannon 3)
+(defconst cannon-water 2)
+(defconst unique-unit-counter 1)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 5)
+(defconst TL2-mounted 5)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 6)
+(defconst TL3-mounted-arm 5)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 7)
+(defconst TL4-mounted-arm 7)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 4)
+(defconst mounted-supp-counter 1)
+
+(defconst TL3-fighter-arm 6)
+(defconst TL3-bomber-arm 5)
+(defconst TL4-fighter-arm 7)
+(defconst TL4-bomber-arm 7)
+(defconst fighter-arm-counter 5)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 5)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst master 1)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)                    ;berserker
+(defconst TL4-bounty 3)
+(defconst TL4-unique-unit 5)
+(defconst cannon 3)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 6)
+(defconst TL2-mounted 5)
+(defconst TL2-trooper-water 2)
+(defconst TL2-mounted-water 2)
+(defconst TL3-trooper-arm 3)
+(defconst TL3-mounted-arm 3)
+(defconst TL3-trooper-supp 2)
+(defconst TL3-mounted-supp 1)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 3)
+(defconst TL4-mounted-arm 3)
+(defconst TL4-trooper-supp 2)
+(defconst TL4-mounted-supp 1)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 1)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 10)
+(defconst TL3-frigate-arm 3)
+(defconst TL3-destroyer-arm 3)
+(defconst TL3-frigate-supp 1)
+(defconst TL3-destroyer-supp 2)
+(defconst TL4-frigate-arm 3)
+(defconst TL4-destroyer-arm 3)
+(defconst TL4-cruiser-arm 4)
+(defconst TL4-frigate-supp 3)
+(defconst TL4-destroyer-supp 3)
+(defconst TL4-cruiser-supp 3)
+
+(defconst TL3-ram-arm-water 3)
+(defconst TL3-ram-supp-water 2)
+(defconst TL3-artillery-arm-water 3)
+(defconst TL3-artillery-supp-water 2)
+(defconst TL4-ram-arm-water 1)
+(defconst TL4-ram-supp-water 1)
+(defconst TL4-artillery-arm-water 1)
+(defconst TL4-artillery-supp-water 1)
+
+(defconst TL3-fighter-arm 2)
+(defconst TL3-bomber-arm 2)
+(defconst TL4-fighter-arm 3)
+(defconst TL4-bomber-arm 3)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 1)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 1)
+
+(defconst padawan 1)
+(defconst knight 1)
+(defconst padawan-water 2)
+(defconst knight-water 2)
+(defconst master 1)
+(defconst master-water 0)
+(defconst master-counter 1)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)                    ;destroyer droid
+(defconst TL4-bounty 3)
+(defconst TL4-unique-unit 4)
+(defconst cannon 3)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-75
+
+(defconst num-boat-worker 3)
+(defconst medic 2)
+
+(defconst TL1-trooper 5)
+(defconst aa-trooper 3)
+(defconst grenade-trooper 3)
+
+(defconst TL3-mech1-arm 4)
+(defconst TL3-mech2-arm 4)
+(defconst TL3-mech1-supp 3)
+(defconst TL3-mech2-supp 3)
+(defconst TL4-mech1-arm 4)
+(defconst TL4-mech2-arm 4)
+(defconst TL4-mech3-arm 4)
+(defconst TL4-mech1-supp 3)
+(defconst TL4-mech2-supp 3)
+(defconst TL4-mech3-supp 3)
+
+(defconst TL3-ram-arm 4)
+(defconst TL3-artillery-arm 4)
+(defconst TL3-ram-supp 3)
+(defconst TL3-artillery-supp 3)
+(defconst TL4-ram-arm 3)
+(defconst TL4-artillery-arm 3)
+(defconst TL4-ram-supp 3)
+(defconst TL4-artillery-supp 3)
+
+(defconst TL3-fighter-supp 5)
+(defconst TL3-bomber-supp 5)
+(defconst TL4-fighter-supp 5)
+(defconst TL4-bomber-supp 5)
+
+(defconst TL3-bounty 3)
+
+(defconst enemy-units 3)
+(defconst counter-units 4)
+(defconst air-counter-units 2)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 8)
+(defconst TL2-mounted 7)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 9)
+(defconst TL3-mounted-arm 8)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 9)
+(defconst TL4-mounted-arm 8)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 6)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 5)
+(defconst mounted-supp-counter 2)
+
+(defconst TL3-fighter-arm 9)
+(defconst TL3-bomber-arm 8)
+(defconst TL4-fighter-arm 9)
+(defconst TL4-bomber-arm 8)
+(defconst fighter-arm-counter 6)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 6)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst master 5)
+(defconst master-counter 2)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)            ;air speeder
+(defconst TL4-bounty 5)
+(defconst TL4-unique-unit 8)
+(defconst cannon 5)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 8)
+(defconst TL2-mounted 7)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 5)
+(defconst TL3-mounted-arm 4)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 2)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 4)
+(defconst TL4-mounted-arm 4)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 2)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL4-fighter-arm 4)
+(defconst TL4-bomber-arm 4)
+(defconst fighter-arm-counter 1)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 1)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst master 5)
+(defconst master-counter 2)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)            ;dark trooper
+(defconst TL4-bounty 4)
+(defconst TL4-unique-unit 6)
+(defconst cannon 4)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 5)
+(defconst TL2-mounted 5)
+(defconst TL2-trooper-water 3)
+(defconst TL2-mounted-water 2)
+(defconst TL3-trooper-arm 9)
+(defconst TL3-mounted-arm 9)
+(defconst TL3-trooper-supp 4)
+(defconst TL3-mounted-supp 4)
+(defconst TL3-trooper-water 3)
+(defconst TL3-mounted-water 2)
+(defconst TL4-trooper-arm 9)
+(defconst TL4-mounted-arm 9)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 4)
+(defconst TL4-trooper-water 3)
+(defconst TL4-mounted-water 2)
+(defconst trooper-arm-counter 6)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 6)
+(defconst mounted-supp-counter 1)
+
+(defconst TL2-frigate 10)
+(defconst TL3-frigate-arm 7)
+(defconst TL3-destroyer-arm 6)
+(defconst TL3-frigate-supp 3)
+(defconst TL3-destroyer-supp 2)
+(defconst TL4-frigate-arm 7)
+(defconst TL4-destroyer-arm 7)
+(defconst TL4-cruiser-arm 6)
+(defconst TL4-frigate-supp 4)
+(defconst TL4-destroyer-supp 3)
+(defconst TL4-cruiser-supp 3)
+
+(defconst TL3-fighter-arm 10)
+(defconst TL3-bomber-arm 10)
+(defconst TL3-fighter-arm-water 9)
+(defconst TL3-bomber-arm-water 9)
+(defconst TL3-fighter-supp-water 5)
+(defconst TL3-bomber-supp-water 5)
+(defconst TL4-fighter-arm 10)
+(defconst TL4-bomber-arm 10)
+(defconst TL4-fighter-arm-water 11)
+(defconst TL4-bomber-arm-water 11)
+(defconst TL4-fighter-supp-water 6)
+(defconst TL4-bomber-supp-water 6)
+(defconst fighter-arm-counter 7)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 7)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst master 3)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 4)                    ;royal knight
+(defconst TL4-bounty 5)
+(defconst TL4-bounty-water 3)
+(defconst TL4-unique-unit 8)
+(defconst TL4-unique-unit-water 4)
+(defconst cannon 5)
+(defconst cannon-water 3)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 8)
+(defconst TL2-trooper-supp 5)
+(defconst TL2-mounted-arm 7)
+(defconst TL2-mounted-supp 5)
+(defconst TL2-trooper-water 10)
+(defconst TL2-mounted-water 10)
+(defconst TL3-trooper-arm 5)
+(defconst TL3-mounted-arm 4)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 2)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 4)
+(defconst TL4-mounted-arm 4)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 2)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 10)
+(defconst TL2-frigate-supp 5)
+(defconst TL3-frigate-arm 7)
+(defconst TL3-destroyer-arm 8)
+(defconst TL3-frigate-supp 5)
+(defconst TL3-destroyer-supp 6)
+(defconst TL4-frigate-arm 6)
+(defconst TL4-destroyer-arm 6)
+(defconst TL4-cruiser-arm 6)
+(defconst TL4-frigate-supp 4)
+(defconst TL4-destroyer-supp 4)
+(defconst TL4-cruiser-supp 5)
+
+(defconst TL3-mech1-arm-water 3)
+(defconst TL3-mech2-arm-water 3)
+(defconst TL3-mech1-supp-water 4)
+(defconst TL3-mech2-supp-water 4)
+(defconst TL4-mech1-arm-water 3)
+(defconst TL4-mech2-arm-water 3)
+(defconst TL4-mech3-arm-water 3)
+(defconst TL4-mech1-supp-water 4)
+(defconst TL4-mech2-supp-water 4)
+(defconst TL4-mech3-supp-water 4)
+
+(defconst TL3-ram-arm-water 3)
+(defconst TL3-ram-supp-water 4)
+(defconst TL3-artillery-arm-water 3)
+(defconst TL3-artillery-supp-water 4)
+(defconst TL4-ram-arm-water 3)
+(defconst TL4-ram-supp-water 4)
+(defconst TL4-artillery-arm-water 3)
+(defconst TL4-artillery-supp-water 4)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL4-fighter-arm 4)
+(defconst TL4-bomber-arm 4)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst padawan-water 2)
+(defconst knight-water 2)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 2)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)                    ;fambaa
+(defconst TL4-bounty 4)
+(defconst TL4-bounty-water 3)
+(defconst TL4-unique-unit 2)
+(defconst TL4-unique-unit-water 2)
+(defconst cannon 4)
+(defconst cannon-water 3)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 8)
+(defconst TL2-mounted 7)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 9)
+(defconst TL3-mounted-arm 8)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 10)
+(defconst TL4-mounted-arm 10)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 6)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 6)
+(defconst mounted-supp-counter 2)
+
+(defconst TL3-fighter-arm 9)
+(defconst TL3-bomber-arm 8)
+(defconst TL4-fighter-arm 10)
+(defconst TL4-bomber-arm 10)
+(defconst fighter-arm-counter 7)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 7)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst master 5)
+(defconst master-counter 2)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)                    ;berserker
+(defconst TL4-bounty 4)
+(defconst TL4-unique-unit 7)
+(defconst cannon 4)
+(defconst unique-unit-counter 4)
+(defconst unique-unit-water-counter 4)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 9)
+(defconst TL2-mounted 8)
+(defconst TL2-trooper-water 3)
+(defconst TL2-mounted-water 3)
+(defconst TL3-trooper-arm 5)
+(defconst TL3-mounted-arm 4)
+(defconst TL3-trooper-supp 3)
+(defconst TL3-mounted-supp 2)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 4)
+(defconst TL4-mounted-arm 4)
+(defconst TL4-trooper-supp 3)
+(defconst TL4-mounted-supp 2)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 2)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 15)
+(defconst TL3-frigate-arm 4)
+(defconst TL3-destroyer-arm 5)
+(defconst TL3-frigate-supp 2)
+(defconst TL3-destroyer-supp 3)
+(defconst TL4-frigate-arm 5)
+(defconst TL4-destroyer-arm 5)
+(defconst TL4-cruiser-arm 6)
+(defconst TL4-frigate-supp 4)
+(defconst TL4-destroyer-supp 4)
+(defconst TL4-cruiser-supp 5)
+
+(defconst TL3-ram-arm-water 4)
+(defconst TL3-ram-supp-water 3)
+(defconst TL3-artillery-arm-water 4)
+(defconst TL3-artillery-supp-water 3)
+(defconst TL4-ram-arm-water 2)
+(defconst TL4-ram-supp-water 2)
+(defconst TL4-artillery-arm-water 2)
+(defconst TL4-artillery-supp-water 2)
+
+(defconst TL3-fighter-arm 3)
+(defconst TL3-bomber-arm 3)
+(defconst TL4-fighter-arm 4)
+(defconst TL4-bomber-arm 4)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 2)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 2)
+
+(defconst padawan 2)
+(defconst knight 2)
+(defconst padawan-water 3)
+(defconst knight-water 3)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 2)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)                    ;destroyer droid
+(defconst TL4-bounty 4)
+(defconst TL4-unique-unit 6)
+(defconst cannon 4)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-100
+
+(defconst num-boat-worker 4)
+(defconst medic 3)
+
+(defconst TL1-trooper 7)
+(defconst aa-trooper 4)
+(defconst grenade-trooper 4)
+
+(defconst TL3-mech1-arm 5)
+(defconst TL3-mech2-arm 5)
+(defconst TL3-mech1-supp 4)
+(defconst TL3-mech2-supp 4)
+(defconst TL4-mech1-arm 5)
+(defconst TL4-mech2-arm 5)
+(defconst TL4-mech3-arm 5)
+(defconst TL4-mech1-supp 4)
+(defconst TL4-mech2-supp 4)
+(defconst TL4-mech3-supp 4)
+
+(defconst TL3-ram-arm 5)
+(defconst TL3-artillery-arm 5)
+(defconst TL3-ram-supp 4)
+(defconst TL3-artillery-supp 4)
+(defconst TL4-ram-arm 4)
+(defconst TL4-artillery-arm 4)
+(defconst TL4-ram-supp 4)
+(defconst TL4-artillery-supp 4)
+
+(defconst TL3-fighter-supp 7)
+(defconst TL3-bomber-supp 7)
+(defconst TL4-fighter-supp 7)
+(defconst TL4-bomber-supp 7)
+
+(defconst TL3-bounty 4)
+
+(defconst enemy-units 4)
+(defconst counter-units 5)
+(defconst air-counter-units 3)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 11)
+(defconst TL2-mounted 9)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 11)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 7)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 12)
+(defconst TL4-mounted-arm 11)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 7)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 8)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 7)
+(defconst mounted-supp-counter 3)
+
+(defconst TL3-fighter-arm 12)
+(defconst TL3-bomber-arm 11)
+(defconst TL4-fighter-arm 12)
+(defconst TL4-bomber-arm 11)
+(defconst fighter-arm-counter 8)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 8)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 7)
+(defconst knight 7)
+(defconst master 7)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 7)            ;air speeder
+(defconst TL4-bounty 7)
+(defconst TL4-unique-unit 11)
+(defconst cannon 7)
+(defconst unique-unit-counter 7)
+(defconst unique-unit-water-counter 7)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 11)
+(defconst TL2-mounted 9)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 7)
+(defconst TL3-mounted-arm 5)
+(defconst TL3-trooper-supp 4)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 5)
+(defconst TL4-mounted-arm 5)
+(defconst TL4-trooper-supp 4)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 4)
+(defconst TL3-bomber-arm 4)
+(defconst TL4-fighter-arm 5)
+(defconst TL4-bomber-arm 5)
+(defconst fighter-arm-counter 1)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 1)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 7)
+(defconst knight 7)
+(defconst master 7)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 7)            ;dark trooper
+(defconst TL4-bounty 5)
+(defconst TL4-unique-unit 8)
+(defconst cannon 5)
+(defconst unique-unit-counter 4)
+(defconst unique-unit-water-counter 4)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 7)
+(defconst TL2-mounted 7)
+(defconst TL2-trooper-water 4)
+(defconst TL2-mounted-water 3)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 12)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 4)
+(defconst TL3-mounted-water 3)
+(defconst TL4-trooper-arm 12)
+(defconst TL4-mounted-arm 12)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 4)
+(defconst TL4-mounted-water 3)
+(defconst trooper-arm-counter 8)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 8)
+(defconst mounted-supp-counter 1)
+
+(defconst TL2-frigate 13)
+(defconst TL3-frigate-arm 9)
+(defconst TL3-destroyer-arm 8)
+(defconst TL3-frigate-supp 4)
+(defconst TL3-destroyer-supp 3)
+(defconst TL4-frigate-arm 9)
+(defconst TL4-destroyer-arm 9)
+(defconst TL4-cruiser-arm 8)
+(defconst TL4-frigate-supp 5)
+(defconst TL4-destroyer-supp 4)
+(defconst TL4-cruiser-supp 4)
+
+(defconst TL3-fighter-arm 13)
+(defconst TL3-bomber-arm 13)
+(defconst TL3-fighter-arm-water 12)
+(defconst TL3-bomber-arm-water 12)
+(defconst TL3-fighter-supp-water 7)
+(defconst TL3-bomber-supp-water 7)
+(defconst TL4-fighter-arm 13)
+(defconst TL4-bomber-arm 13)
+(defconst TL4-fighter-arm-water 15)
+(defconst TL4-bomber-arm-water 15)
+(defconst TL4-fighter-supp-water 8)
+(defconst TL4-bomber-supp-water 8)
+(defconst fighter-arm-counter 9)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 9)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 7)
+(defconst knight 7)
+(defconst master 4)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)                    ;royal knight
+(defconst TL4-bounty 7)
+(defconst TL4-bounty-water 4)
+(defconst TL4-unique-unit 11)
+(defconst TL4-unique-unit-water 5)
+(defconst cannon 7)
+(defconst cannon-water 4)
+(defconst unique-unit-counter 7)
+(defconst unique-unit-water-counter 1)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 11)
+(defconst TL2-trooper-supp 7)
+(defconst TL2-mounted-arm 9)
+(defconst TL2-mounted-supp 7)
+(defconst TL2-trooper-water 13)
+(defconst TL2-mounted-water 13)
+(defconst TL3-trooper-arm 7)
+(defconst TL3-mounted-arm 5)
+(defconst TL3-trooper-supp 4)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 5)
+(defconst TL4-mounted-arm 5)
+(defconst TL4-trooper-supp 4)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 13)
+(defconst TL2-frigate-supp 7)
+(defconst TL3-frigate-arm 9)
+(defconst TL3-destroyer-arm 11)
+(defconst TL3-frigate-supp 7)
+(defconst TL3-destroyer-supp 8)
+(defconst TL4-frigate-arm 8)
+(defconst TL4-destroyer-arm 8)
+(defconst TL4-cruiser-arm 8)
+(defconst TL4-frigate-supp 5)
+(defconst TL4-destroyer-supp 5)
+(defconst TL4-cruiser-supp 7)
+
+(defconst TL3-mech1-arm-water 4)
+(defconst TL3-mech2-arm-water 4)
+(defconst TL3-mech1-supp-water 5)
+(defconst TL3-mech2-supp-water 5)
+(defconst TL4-mech1-arm-water 4)
+(defconst TL4-mech2-arm-water 4)
+(defconst TL4-mech3-arm-water 4)
+(defconst TL4-mech1-supp-water 5)
+(defconst TL4-mech2-supp-water 5)
+(defconst TL4-mech3-supp-water 5)
+
+(defconst TL3-ram-arm-water 4)
+(defconst TL3-ram-supp-water 5)
+(defconst TL3-artillery-arm-water 4)
+(defconst TL3-artillery-supp-water 5)
+(defconst TL4-ram-arm-water 4)
+(defconst TL4-ram-supp-water 5)
+(defconst TL4-artillery-arm-water 4)
+(defconst TL4-artillery-supp-water 5)
+
+(defconst TL3-fighter-arm 4)
+(defconst TL3-bomber-arm 4)
+(defconst TL4-fighter-arm 5)
+(defconst TL4-bomber-arm 5)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 3)
+(defconst master-water 0)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 2)                    ;fambaa
+(defconst TL4-bounty 5)
+(defconst TL4-bounty-water 4)
+(defconst TL4-unique-unit 8)
+(defconst TL4-unique-unit-water 2)
+(defconst cannon 5)
+(defconst cannon-water 4)
+(defconst unique-unit-counter 2)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 11)
+(defconst TL2-mounted 9)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 11)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 7)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 13)
+(defconst TL4-mounted-arm 13)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 7)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 8)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 8)
+(defconst mounted-supp-counter 3)
+
+(defconst TL3-fighter-arm 12)
+(defconst TL3-bomber-arm 11)
+(defconst TL4-fighter-arm 13)
+(defconst TL4-bomber-arm 13)
+(defconst fighter-arm-counter 9)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 9)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst master 3)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 7)                    ;berserker
+(defconst TL4-bounty 5)
+(defconst TL4-unique-unit 9)
+(defconst cannon 5)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 12)
+(defconst TL2-mounted 11)
+(defconst TL2-trooper-water 4)
+(defconst TL2-mounted-water 4)
+(defconst TL3-trooper-arm 7)
+(defconst TL3-mounted-arm 5)
+(defconst TL3-trooper-supp 4)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 5)
+(defconst TL4-mounted-arm 5)
+(defconst TL4-trooper-supp 4)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 1)
+(defconst mounted-arm-counter 1)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 20)
+(defconst TL3-frigate-arm 5)
+(defconst TL3-destroyer-arm 7)
+(defconst TL3-frigate-supp 3)
+(defconst TL3-destroyer-supp 4)
+(defconst TL4-frigate-arm 7)
+(defconst TL4-destroyer-arm 7)
+(defconst TL4-cruiser-arm 8)
+(defconst TL4-frigate-supp 5)
+(defconst TL4-destroyer-supp 5)
+(defconst TL4-cruiser-supp 7)
+
+(defconst TL3-ram-arm-water 5)
+(defconst TL3-ram-supp-water 4)
+(defconst TL3-artillery-arm-water 5)
+(defconst TL3-artillery-supp-water 4)
+(defconst TL4-ram-arm-water 3)
+(defconst TL4-ram-supp-water 3)
+(defconst TL4-artillery-arm-water 3)
+(defconst TL4-artillery-supp-water 3)
+
+(defconst TL3-fighter-arm 4)
+(defconst TL3-bomber-arm 4)
+(defconst TL4-fighter-arm 5)
+(defconst TL4-bomber-arm 5)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 3)
+(defconst master-water 0)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 7)                    ;destroyer droid
+(defconst TL4-bounty 5)
+(defconst TL4-unique-unit 8)
+(defconst cannon 5)
+(defconst unique-unit-counter 4)
+(defconst unique-unit-water-counter 4)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-125
+
+(defconst num-boat-worker 5)
+(defconst medic 3)
+
+(defconst TL1-trooper 8)
+(defconst aa-trooper 5)
+(defconst grenade-trooper 5)
+
+(defconst TL3-mech1-arm 7)
+(defconst TL3-mech2-arm 7)
+(defconst TL3-mech1-supp 5)
+(defconst TL3-mech2-supp 5)
+(defconst TL4-mech1-arm 7)
+(defconst TL4-mech2-arm 7)
+(defconst TL4-mech3-arm 7)
+(defconst TL4-mech1-supp 5)
+(defconst TL4-mech2-supp 5)
+(defconst TL4-mech3-supp 5)
+
+(defconst TL3-ram-arm 7)
+(defconst TL3-artillery-arm 7)
+(defconst TL3-ram-supp 5)
+(defconst TL3-artillery-supp 5)
+(defconst TL4-ram-arm 5)
+(defconst TL4-artillery-arm 5)
+(defconst TL4-ram-supp 5)
+(defconst TL4-artillery-supp 5)
+
+(defconst TL3-fighter-supp 8)
+(defconst TL3-bomber-supp 8)
+(defconst TL4-fighter-supp 8)
+(defconst TL4-bomber-supp 8)
+
+(defconst TL3-bounty 5)
+
+(defconst enemy-units 5)
+(defconst counter-units 7)
+(defconst air-counter-units 3)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 13)
+(defconst TL2-mounted 12)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 15)
+(defconst TL3-mounted-arm 13)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 8)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 15)
+(defconst TL4-mounted-arm 13)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 8)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 10)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 8)
+(defconst mounted-supp-counter 3)
+
+(defconst TL3-fighter-arm 15)
+(defconst TL3-bomber-arm 13)
+(defconst TL4-fighter-arm 15)
+(defconst TL4-bomber-arm 13)
+(defconst fighter-arm-counter 10)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 10)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 8)
+(defconst knight 8)
+(defconst master 8)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 8)            ;air speeder
+(defconst TL4-bounty 8)
+(defconst TL4-unique-unit 13)
+(defconst cannon 8)
+(defconst unique-unit-counter 8)
+(defconst unique-unit-water-counter 8)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 13)
+(defconst TL2-mounted 12)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 8)
+(defconst TL3-mounted-arm 7)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 7)
+(defconst TL4-mounted-arm 7)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 5)
+(defconst TL3-bomber-arm 5)
+(defconst TL4-fighter-arm 7)
+(defconst TL4-bomber-arm 7)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 8)
+(defconst knight 8)
+(defconst master 8)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 8)            ;dark trooper
+(defconst TL4-bounty 7)
+(defconst TL4-unique-unit 10)
+(defconst cannon 7)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 8)
+(defconst TL2-mounted 8)
+(defconst TL2-trooper-water 5)
+(defconst TL2-mounted-water 3)
+(defconst TL3-trooper-arm 15)
+(defconst TL3-mounted-arm 15)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 7)
+(defconst TL3-trooper-water 5)
+(defconst TL3-mounted-water 3)
+(defconst TL4-trooper-arm 15)
+(defconst TL4-mounted-arm 15)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 7)
+(defconst TL4-trooper-water 5)
+(defconst TL4-mounted-water 3)
+(defconst trooper-arm-counter 10)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 10)
+(defconst mounted-supp-counter 2)
+
+(defconst TL2-frigate 17)
+(defconst TL3-frigate-arm 12)
+(defconst TL3-destroyer-arm 10)
+(defconst TL3-frigate-supp 5)
+(defconst TL3-destroyer-supp 3)
+(defconst TL4-frigate-arm 12)
+(defconst TL4-destroyer-arm 12)
+(defconst TL4-cruiser-arm 10)
+(defconst TL4-frigate-supp 7)
+(defconst TL4-destroyer-supp 5)
+(defconst TL4-cruiser-supp 5)
+
+(defconst TL3-fighter-arm 17)
+(defconst TL3-bomber-arm 17)
+(defconst TL3-fighter-arm-water 15)
+(defconst TL3-bomber-arm-water 15)
+(defconst TL3-fighter-supp-water 8)
+(defconst TL3-bomber-supp-water 8)
+(defconst TL4-fighter-arm 17)
+(defconst TL4-bomber-arm 17)
+(defconst TL4-fighter-arm-water 18)
+(defconst TL4-bomber-arm-water 18)
+(defconst TL4-fighter-supp-water 10)
+(defconst TL4-bomber-supp-water 10)
+(defconst fighter-arm-counter 12)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 12)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 8)
+(defconst knight 8)
+(defconst master 5)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 7)                    ;royal knight
+(defconst TL4-bounty 8)
+(defconst TL4-bounty-water 5)
+(defconst TL4-unique-unit 13)
+(defconst TL4-unique-unit-water 7)
+(defconst cannon 8)
+(defconst cannon-water 5)
+(defconst unique-unit-counter 8)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 13)
+(defconst TL2-trooper-supp 8)
+(defconst TL2-mounted-arm 12)
+(defconst TL2-mounted-supp 8)
+(defconst TL2-trooper-water 17)
+(defconst TL2-mounted-water 17)
+(defconst TL3-trooper-arm 8)
+(defconst TL3-mounted-arm 7)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 7)
+(defconst TL4-mounted-arm 7)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 17)
+(defconst TL2-frigate-supp 8)
+(defconst TL3-frigate-arm 12)
+(defconst TL3-destroyer-arm 13)
+(defconst TL3-frigate-supp 8)
+(defconst TL3-destroyer-supp 10)
+(defconst TL4-frigate-arm 10)
+(defconst TL4-destroyer-arm 10)
+(defconst TL4-cruiser-arm 10)
+(defconst TL4-frigate-supp 7)
+(defconst TL4-destroyer-supp 7)
+(defconst TL4-cruiser-supp 8)
+
+(defconst TL3-mech1-arm-water 5)
+(defconst TL3-mech2-arm-water 5)
+(defconst TL3-mech1-supp-water 7)
+(defconst TL3-mech2-supp-water 7)
+(defconst TL4-mech1-arm-water 5)
+(defconst TL4-mech2-arm-water 5)
+(defconst TL4-mech3-arm-water 5)
+(defconst TL4-mech1-supp-water 7)
+(defconst TL4-mech2-supp-water 7)
+(defconst TL4-mech3-supp-water 7)
+
+(defconst TL3-ram-arm-water 5)
+(defconst TL3-ram-supp-water 7)
+(defconst TL3-artillery-arm-water 5)
+(defconst TL3-artillery-supp-water 7)
+(defconst TL4-ram-arm-water 5)
+(defconst TL4-ram-supp-water 7)
+(defconst TL4-artillery-arm-water 5)
+(defconst TL4-artillery-supp-water 7)
+
+(defconst TL3-fighter-arm 5)
+(defconst TL3-bomber-arm 5)
+(defconst TL4-fighter-arm 7)
+(defconst TL4-bomber-arm 7)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst padawan-water 1)
+(defconst knight-water 1)
+(defconst master 3)
+(defconst master-water 0)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 3)                    ;fambaa
+(defconst TL4-bounty 7)
+(defconst TL4-bounty-water 5)
+(defconst TL4-unique-unit 3)
+(defconst TL4-unique-unit-water 3)
+(defconst cannon 7)
+(defconst cannon-water 5)
+(defconst unique-unit-counter 3)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 13)
+(defconst TL2-mounted 12)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 15)
+(defconst TL3-mounted-arm 13)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 8)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 17)
+(defconst TL4-mounted-arm 17)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 8)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 10)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 10)
+(defconst mounted-supp-counter 3)
+
+(defconst TL3-fighter-arm 15)
+(defconst TL3-bomber-arm 13)
+(defconst TL4-fighter-arm 17)
+(defconst TL4-bomber-arm 17)
+(defconst fighter-arm-counter 12)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 12)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst master 3)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 8)                    ;berserker
+(defconst TL4-bounty 7)
+(defconst TL4-unique-unit 12)
+(defconst cannon 7)
+(defconst unique-unit-counter 7)
+(defconst unique-unit-water-counter 7)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 15)
+(defconst TL2-mounted 13)
+(defconst TL2-trooper-water 5)
+(defconst TL2-mounted-water 5)
+(defconst TL3-trooper-arm 8)
+(defconst TL3-mounted-arm 7)
+(defconst TL3-trooper-supp 5)
+(defconst TL3-mounted-supp 3)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 7)
+(defconst TL4-mounted-arm 7)
+(defconst TL4-trooper-supp 5)
+(defconst TL4-mounted-supp 3)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 3)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 25)
+(defconst TL3-frigate-arm 7)
+(defconst TL3-destroyer-arm 8)
+(defconst TL3-frigate-supp 3)
+(defconst TL3-destroyer-supp 5)
+(defconst TL4-frigate-arm 8)
+(defconst TL4-destroyer-arm 8)
+(defconst TL4-cruiser-arm 10)
+(defconst TL4-frigate-supp 7)
+(defconst TL4-destroyer-supp 7)
+(defconst TL4-cruiser-supp 8)
+
+(defconst TL3-ram-arm-water 7)
+(defconst TL3-ram-supp-water 5)
+(defconst TL3-artillery-arm-water 7)
+(defconst TL3-artillery-supp-water 5)
+(defconst TL4-ram-arm-water 3)
+(defconst TL4-ram-supp-water 3)
+(defconst TL4-artillery-arm-water 3)
+(defconst TL4-artillery-supp-water 3)
+
+(defconst TL3-fighter-arm 5)
+(defconst TL3-bomber-arm 5)
+(defconst TL4-fighter-arm 7)
+(defconst TL4-bomber-arm 7)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 3)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 3)
+
+(defconst padawan 3)
+(defconst knight 3)
+(defconst padawan-water 3)
+(defconst knight-water 3)
+(defconst master 3)
+(defconst master-water 0)
+(defconst master-counter 3)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 8)                    ;destroyer droid
+(defconst TL4-bounty 7)
+(defconst TL4-unique-unit 10)
+(defconst cannon 7)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-150
+
+(defconst num-boat-worker 6)
+(defconst medic 4)
+
+(defconst TL1-trooper 10)
+(defconst aa-trooper 6)
+(defconst grenade-trooper 6)
+
+(defconst TL3-mech1-arm 8)
+(defconst TL3-mech2-arm 8)
+(defconst TL3-mech1-supp 6)
+(defconst TL3-mech2-supp 6)
+(defconst TL4-mech1-arm 8)
+(defconst TL4-mech2-arm 8)
+(defconst TL4-mech3-arm 8)
+(defconst TL4-mech1-supp 6)
+(defconst TL4-mech2-supp 6)
+(defconst TL4-mech3-supp 6)
+
+(defconst TL3-ram-arm 8)
+(defconst TL3-artillery-arm 8)
+(defconst TL3-ram-supp 6)
+(defconst TL3-artillery-supp 6)
+(defconst TL4-ram-arm 6)
+(defconst TL4-artillery-arm 6)
+(defconst TL4-ram-supp 6)
+(defconst TL4-artillery-supp 6)
+
+(defconst TL3-fighter-supp 10)
+(defconst TL3-bomber-supp 10)
+(defconst TL4-fighter-supp 10)
+(defconst TL4-bomber-supp 10)
+
+(defconst TL3-bounty 6)
+
+(defconst enemy-units 5)
+(defconst counter-units 8)
+(defconst air-counter-units 4)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 16)
+(defconst TL2-mounted 14)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 18)
+(defconst TL3-mounted-arm 16)
+(defconst TL3-trooper-supp 10)
+(defconst TL3-mounted-supp 10)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 18)
+(defconst TL4-mounted-arm 16)
+(defconst TL4-trooper-supp 10)
+(defconst TL4-mounted-supp 10)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 12)
+(defconst trooper-supp-counter 4)
+(defconst mounted-arm-counter 10)
+(defconst mounted-supp-counter 4)
+
+(defconst TL3-fighter-arm 18)
+(defconst TL3-bomber-arm 16)
+(defconst TL4-fighter-arm 18)
+(defconst TL4-bomber-arm 16)
+(defconst fighter-arm-counter 12)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 12)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 10)
+(defconst knight 10)
+(defconst master 10)
+(defconst master-counter 4)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 10)           ;air speeder
+(defconst TL4-bounty 10)
+(defconst TL4-unique-unit 16)
+(defconst cannon 10)
+(defconst unique-unit-counter 10)
+(defconst unique-unit-water-counter 10)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 16)
+(defconst TL2-mounted 14)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 10)
+(defconst TL3-mounted-arm 8)
+(defconst TL3-trooper-supp 6)
+(defconst TL3-mounted-supp 4)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 8)
+(defconst TL4-mounted-arm 8)
+(defconst TL4-trooper-supp 6)
+(defconst TL4-mounted-supp 4)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 6)
+(defconst TL3-bomber-arm 6)
+(defconst TL4-fighter-arm 8)
+(defconst TL4-bomber-arm 8)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 10)
+(defconst knight 10)
+(defconst master 10)
+(defconst master-counter 4)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 10)           ;dark trooper
+(defconst TL4-bounty 8)
+(defconst TL4-unique-unit 12)
+(defconst cannon 8)
+(defconst unique-unit-counter 6)
+(defconst unique-unit-water-counter 6)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 10)
+(defconst TL2-mounted 10)
+(defconst TL2-trooper-water 6)
+(defconst TL2-mounted-water 4)
+(defconst TL3-trooper-arm 18)
+(defconst TL3-mounted-arm 18)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 8)
+(defconst TL3-trooper-water 6)
+(defconst TL3-mounted-water 4)
+(defconst TL4-trooper-arm 18)
+(defconst TL4-mounted-arm 18)
+(defconst TL4-trooper-supp 10)
+(defconst TL4-mounted-supp 8)
+(defconst TL4-trooper-water 6)
+(defconst TL4-mounted-water 4)
+(defconst trooper-arm-counter 12)
+(defconst trooper-supp-counter 4)
+(defconst mounted-arm-counter 12)
+(defconst mounted-supp-counter 2)
+
+(defconst TL2-frigate 20)
+(defconst TL3-frigate-arm 14)
+(defconst TL3-destroyer-arm 12)
+(defconst TL3-frigate-supp 6)
+(defconst TL3-destroyer-supp 4)
+(defconst TL4-frigate-arm 14)
+(defconst TL4-destroyer-arm 14)
+(defconst TL4-cruiser-arm 12)
+(defconst TL4-frigate-supp 8)
+(defconst TL4-destroyer-supp 6)
+(defconst TL4-cruiser-supp 6)
+
+(defconst TL3-fighter-arm 20)
+(defconst TL3-bomber-arm 20)
+(defconst TL3-fighter-arm-water 18)
+(defconst TL3-bomber-arm-water 18)
+(defconst TL3-fighter-supp-water 10)
+(defconst TL3-bomber-supp-water 10)
+(defconst TL4-fighter-arm 20)
+(defconst TL4-bomber-arm 20)
+(defconst TL4-fighter-arm-water 22)
+(defconst TL4-bomber-arm-water 22)
+(defconst TL4-fighter-supp-water 12)
+(defconst TL4-bomber-supp-water 12)
+(defconst fighter-arm-counter 14)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 14)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 10)
+(defconst knight 10)
+(defconst master 6)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 8)                    ;royal knight
+(defconst TL4-bounty 10)
+(defconst TL4-bounty-water 6)
+(defconst TL4-unique-unit 16)
+(defconst TL4-unique-unit-water 8)
+(defconst cannon 10)
+(defconst cannon-water 6)
+(defconst unique-unit-counter 10)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 16)
+(defconst TL2-trooper-supp 10)
+(defconst TL2-mounted-arm 14)
+(defconst TL2-mounted-supp 10)
+(defconst TL2-trooper-water 20)
+(defconst TL2-mounted-water 20)
+(defconst TL3-trooper-arm 10)
+(defconst TL3-mounted-arm 8)
+(defconst TL3-trooper-supp 6)
+(defconst TL3-mounted-supp 4)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 8)
+(defconst TL4-mounted-arm 8)
+(defconst TL4-trooper-supp 6)
+(defconst TL4-mounted-supp 4)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 20)
+(defconst TL2-frigate-supp 10)
+(defconst TL3-frigate-arm 14)
+(defconst TL3-destroyer-arm 16)
+(defconst TL3-frigate-supp 10)
+(defconst TL3-destroyer-supp 12)
+(defconst TL4-frigate-arm 12)
+(defconst TL4-destroyer-arm 12)
+(defconst TL4-cruiser-arm 12)
+(defconst TL4-frigate-supp 8)
+(defconst TL4-destroyer-supp 8)
+(defconst TL4-cruiser-supp 10)
+
+(defconst TL3-mech1-arm-water 6)
+(defconst TL3-mech2-arm-water 6)
+(defconst TL3-mech1-supp-water 8)
+(defconst TL3-mech2-supp-water 8)
+(defconst TL4-mech1-arm-water 6)
+(defconst TL4-mech2-arm-water 6)
+(defconst TL4-mech3-arm-water 6)
+(defconst TL4-mech1-supp-water 8)
+(defconst TL4-mech2-supp-water 8)
+(defconst TL4-mech3-supp-water 8)
+
+(defconst TL3-ram-arm-water 6)
+(defconst TL3-ram-supp-water 8)
+(defconst TL3-artillery-arm-water 6)
+(defconst TL3-artillery-supp-water 8)
+(defconst TL4-ram-arm-water 6)
+(defconst TL4-ram-supp-water 8)
+(defconst TL4-artillery-arm-water 6)
+(defconst TL4-artillery-supp-water 8)
+
+(defconst TL3-fighter-arm 6)
+(defconst TL3-bomber-arm 6)
+(defconst TL4-fighter-arm 8)
+(defconst TL4-bomber-arm 8)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 4)
+(defconst knight 4)
+(defconst padawan-water 2)
+(defconst knight-water 2)
+(defconst master 4)
+(defconst master-water 0)
+(defconst master-counter 4)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 4)                    ;fambaa
+(defconst TL4-bounty 8)
+(defconst TL4-bounty-water 6)
+(defconst TL4-unique-unit 4)
+(defconst TL4-unique-unit-water 4)
+(defconst cannon 8)
+(defconst cannon-water 6)
+(defconst unique-unit-counter 4)
+(defconst unique-unit-water-counter 4)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 16)
+(defconst TL2-mounted 14)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 18)
+(defconst TL3-mounted-arm 16)
+(defconst TL3-trooper-supp 10)
+(defconst TL3-mounted-supp 10)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 20)
+(defconst TL4-mounted-arm 20)
+(defconst TL4-trooper-supp 10)
+(defconst TL4-mounted-supp 10)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 12)
+(defconst trooper-supp-counter 4)
+(defconst mounted-arm-counter 12)
+(defconst mounted-supp-counter 4)
+
+(defconst TL3-fighter-arm 18)
+(defconst TL3-bomber-arm 16)
+(defconst TL4-fighter-arm 20)
+(defconst TL4-bomber-arm 20)
+(defconst fighter-arm-counter 14)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 14)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 4)
+(defconst knight 4)
+(defconst master 4)
+(defconst master-counter 4)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 10)                   ;berserker
+(defconst TL4-bounty 8)
+(defconst TL4-unique-unit 14)
+(defconst cannon 8)
+(defconst unique-unit-counter 8)
+(defconst unique-unit-water-counter 8)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 18)
+(defconst TL2-mounted 16)
+(defconst TL2-trooper-water 6)
+(defconst TL2-mounted-water 6)
+(defconst TL3-trooper-arm 10)
+(defconst TL3-mounted-arm 8)
+(defconst TL3-trooper-supp 6)
+(defconst TL3-mounted-supp 4)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 8)
+(defconst TL4-mounted-arm 8)
+(defconst TL4-trooper-supp 6)
+(defconst TL4-mounted-supp 4)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 4)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 30)
+(defconst TL3-frigate-arm 8)
+(defconst TL3-destroyer-arm 10)
+(defconst TL3-frigate-supp 4)
+(defconst TL3-destroyer-supp 6)
+(defconst TL4-frigate-arm 10)
+(defconst TL4-destroyer-arm 10)
+(defconst TL4-cruiser-arm 12)
+(defconst TL4-frigate-supp 8)
+(defconst TL4-destroyer-supp 8)
+(defconst TL4-cruiser-supp 10)
+
+(defconst TL3-ram-arm-water 8)
+(defconst TL3-ram-supp-water 6)
+(defconst TL3-artillery-arm-water 8)
+(defconst TL3-artillery-supp-water 6)
+(defconst TL4-ram-arm-water 4)
+(defconst TL4-ram-supp-water 4)
+(defconst TL4-artillery-arm-water 4)
+(defconst TL4-artillery-supp-water 4)
+
+(defconst TL3-fighter-arm 6)
+(defconst TL3-bomber-arm 6)
+(defconst TL4-fighter-arm 8)
+(defconst TL4-bomber-arm 8)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 4)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 4)
+
+(defconst padawan 4)
+(defconst knight 4)
+(defconst padawan-water 2)
+(defconst knight-water 2)
+(defconst master 4)
+(defconst master-water 0)
+(defconst master-counter 4)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 10)                   ;destroyer droid
+(defconst TL4-bounty 8)
+(defconst TL4-unique-unit 12)
+(defconst cannon 8)
+(defconst unique-unit-counter 6)
+(defconst unique-unit-water-counter 6)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-175
+
+(defconst num-boat-worker 7)
+(defconst medic 5)
+
+(defconst TL1-trooper 12)
+(defconst aa-trooper 7)
+(defconst grenade-trooper 7)
+
+(defconst TL3-mech1-arm 9)
+(defconst TL3-mech2-arm 9)
+(defconst TL3-mech1-supp 7)
+(defconst TL3-mech2-supp 7)
+(defconst TL4-mech1-arm 9)
+(defconst TL4-mech2-arm 9)
+(defconst TL4-mech3-arm 9)
+(defconst TL4-mech1-supp 7)
+(defconst TL4-mech2-supp 7)
+(defconst TL4-mech3-supp 7)
+
+(defconst TL3-ram-arm 9)
+(defconst TL3-artillery-arm 9)
+(defconst TL3-ram-supp 7)
+(defconst TL3-artillery-supp 7)
+(defconst TL4-ram-arm 7)
+(defconst TL4-artillery-arm 7)
+(defconst TL4-ram-supp 7)
+(defconst TL4-artillery-supp 7)
+
+(defconst TL3-fighter-supp 12)
+(defconst TL3-bomber-supp 12)
+(defconst TL4-fighter-supp 12)
+(defconst TL4-bomber-supp 12)
+
+(defconst TL3-bounty 7)
+
+(defconst enemy-units 5)
+(defconst counter-units 9)
+(defconst air-counter-units 5)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 19)
+(defconst TL2-mounted 16)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 21)
+(defconst TL3-mounted-arm 19)
+(defconst TL3-trooper-supp 12)
+(defconst TL3-mounted-supp 12)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 21)
+(defconst TL4-mounted-arm 19)
+(defconst TL4-trooper-supp 12)
+(defconst TL4-mounted-supp 12)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 14)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 12)
+(defconst mounted-supp-counter 5)
+
+(defconst TL3-fighter-arm 21)
+(defconst TL3-bomber-arm 19)
+(defconst TL4-fighter-arm 21)
+(defconst TL4-bomber-arm 19)
+(defconst fighter-arm-counter 14)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 14)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 12)
+(defconst knight 12)
+(defconst master 12)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 12)           ;air speeder
+(defconst TL4-bounty 12)
+(defconst TL4-unique-unit 19)
+(defconst cannon 12)
+(defconst unique-unit-counter 12)
+(defconst unique-unit-water-counter 12)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 19)
+(defconst TL2-mounted 16)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 9)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 9)
+(defconst TL4-mounted-arm 9)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 7)
+(defconst TL3-bomber-arm 7)
+(defconst TL4-fighter-arm 9)
+(defconst TL4-bomber-arm 9)
+(defconst fighter-arm-counter 2)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 2)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 12)
+(defconst knight 12)
+(defconst master 12)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 12)           ;dark trooper
+(defconst TL4-bounty 9)
+(defconst TL4-unique-unit 14)
+(defconst cannon 9)
+(defconst unique-unit-counter 7)
+(defconst unique-unit-water-counter 7)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 12)
+(defconst TL2-mounted 12)
+(defconst TL2-trooper-water 7)
+(defconst TL2-mounted-water 5)
+(defconst TL3-trooper-arm 21)
+(defconst TL3-mounted-arm 21)
+(defconst TL3-trooper-supp 9)
+(defconst TL3-mounted-supp 9)
+(defconst TL3-trooper-water 7)
+(defconst TL3-mounted-water 5)
+(defconst TL4-trooper-arm 21)
+(defconst TL4-mounted-arm 21)
+(defconst TL4-trooper-supp 12)
+(defconst TL4-mounted-supp 9)
+(defconst TL4-trooper-water 7)
+(defconst TL4-mounted-water 5)
+(defconst trooper-arm-counter 14)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 14)
+(defconst mounted-supp-counter 2)
+
+(defconst TL2-frigate 23)
+(defconst TL3-frigate-arm 16)
+(defconst TL3-destroyer-arm 14)
+(defconst TL3-frigate-supp 7)
+(defconst TL3-destroyer-supp 5)
+(defconst TL4-frigate-arm 16)
+(defconst TL4-destroyer-arm 16)
+(defconst TL4-cruiser-arm 14)
+(defconst TL4-frigate-supp 9)
+(defconst TL4-destroyer-supp 7)
+(defconst TL4-cruiser-supp 7)
+
+(defconst TL3-fighter-arm 23)
+(defconst TL3-bomber-arm 23)
+(defconst TL3-fighter-arm-water 21)
+(defconst TL3-bomber-arm-water 21)
+(defconst TL3-fighter-supp-water 12)
+(defconst TL3-bomber-supp-water 12)
+(defconst TL4-fighter-arm 23)
+(defconst TL4-bomber-arm 23)
+(defconst TL4-fighter-arm-water 26)
+(defconst TL4-bomber-arm-water 26)
+(defconst TL4-fighter-supp-water 14)
+(defconst TL4-bomber-supp-water 14)
+(defconst fighter-arm-counter 16)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 16)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 12)
+(defconst knight 12)
+(defconst master 7)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 9)                    ;royal knight
+(defconst TL4-bounty 12)
+(defconst TL4-bounty-water 7)
+(defconst TL4-unique-unit 19)
+(defconst TL4-unique-unit-water 9)
+(defconst cannon 12)
+(defconst cannon-water 7)
+(defconst unique-unit-counter 12)
+(defconst unique-unit-water-counter 2)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 19)
+(defconst TL2-trooper-supp 12)
+(defconst TL2-mounted-arm 16)
+(defconst TL2-mounted-supp 12)
+(defconst TL2-trooper-water 23)
+(defconst TL2-mounted-water 23)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 9)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 9)
+(defconst TL4-mounted-arm 9)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 23)
+(defconst TL2-frigate-supp 12)
+(defconst TL3-frigate-arm 16)
+(defconst TL3-destroyer-arm 19)
+(defconst TL3-frigate-supp 12)
+(defconst TL3-destroyer-supp 14)
+(defconst TL4-frigate-arm 14)
+(defconst TL4-destroyer-arm 14)
+(defconst TL4-cruiser-arm 14)
+(defconst TL4-frigate-supp 9)
+(defconst TL4-destroyer-supp 9)
+(defconst TL4-cruiser-supp 12)
+
+(defconst TL3-mech1-arm-water 7)
+(defconst TL3-mech2-arm-water 7)
+(defconst TL3-mech1-supp-water 9)
+(defconst TL3-mech2-supp-water 9)
+(defconst TL4-mech1-arm-water 7)
+(defconst TL4-mech2-arm-water 7)
+(defconst TL4-mech3-arm-water 7)
+(defconst TL4-mech1-supp-water 9)
+(defconst TL4-mech2-supp-water 9)
+(defconst TL4-mech3-supp-water 9)
+
+(defconst TL3-ram-arm-water 7)
+(defconst TL3-ram-supp-water 9)
+(defconst TL3-artillery-arm-water 7)
+(defconst TL3-artillery-supp-water 9)
+(defconst TL4-ram-arm-water 7)
+(defconst TL4-ram-supp-water 9)
+(defconst TL4-artillery-arm-water 7)
+(defconst TL4-artillery-supp-water 9)
+
+(defconst TL3-fighter-arm 7)
+(defconst TL3-bomber-arm 7)
+(defconst TL4-fighter-arm 9)
+(defconst TL4-bomber-arm 9)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst padawan-water 2)
+(defconst knight-water 2)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)                    ;fambaa
+(defconst TL4-bounty 9)
+(defconst TL4-bounty-water 7)
+(defconst TL4-unique-unit 5)
+(defconst TL4-unique-unit-water 5)
+(defconst cannon 9)
+(defconst cannon-water 7)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 19)
+(defconst TL2-mounted 16)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 21)
+(defconst TL3-mounted-arm 19)
+(defconst TL3-trooper-supp 12)
+(defconst TL3-mounted-supp 12)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 23)
+(defconst TL4-mounted-arm 23)
+(defconst TL4-trooper-supp 12)
+(defconst TL4-mounted-supp 12)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 14)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 14)
+(defconst mounted-supp-counter 5)
+
+(defconst TL3-fighter-arm 21)
+(defconst TL3-bomber-arm 19)
+(defconst TL4-fighter-arm 23)
+(defconst TL4-bomber-arm 23)
+(defconst fighter-arm-counter 16)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 16)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst master 5)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 12)                   ;berserker
+(defconst TL4-bounty 9)
+(defconst TL4-unique-unit 16)
+(defconst cannon 9)
+(defconst unique-unit-counter 9)
+(defconst unique-unit-water-counter 9)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 21)
+(defconst TL2-mounted 19)
+(defconst TL2-trooper-water 7)
+(defconst TL2-mounted-water 7)
+(defconst TL3-trooper-arm 12)
+(defconst TL3-mounted-arm 9)
+(defconst TL3-trooper-supp 7)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 9)
+(defconst TL4-mounted-arm 9)
+(defconst TL4-trooper-supp 7)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 2)
+(defconst mounted-arm-counter 2)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 35)
+(defconst TL3-frigate-arm 9)
+(defconst TL3-destroyer-arm 12)
+(defconst TL3-frigate-supp 5)
+(defconst TL3-destroyer-supp 7)
+(defconst TL4-frigate-arm 12)
+(defconst TL4-destroyer-arm 12)
+(defconst TL4-cruiser-arm 14)
+(defconst TL4-frigate-supp 9)
+(defconst TL4-destroyer-supp 9)
+(defconst TL4-cruiser-supp 12)
+
+(defconst TL3-ram-arm-water 9)
+(defconst TL3-ram-supp-water 7)
+(defconst TL3-artillery-arm-water 9)
+(defconst TL3-artillery-supp-water 7)
+(defconst TL4-ram-arm-water 5)
+(defconst TL4-ram-supp-water 5)
+(defconst TL4-artillery-arm-water 5)
+(defconst TL4-artillery-supp-water 5)
+
+(defconst TL3-fighter-arm 7)
+(defconst TL3-bomber-arm 7)
+(defconst TL4-fighter-arm 9)
+(defconst TL4-bomber-arm 9)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst padawan-water 3)
+(defconst knight-water 3)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 12)                   ;destroyer droid
+(defconst TL4-bounty 9)
+(defconst TL4-unique-unit 14)
+(defconst cannon 9)
+(defconst unique-unit-counter 7)
+(defconst unique-unit-water-counter 7)
+
+#end-if
+
+#end-if
+
+;**************************************************************
+
+#load-if-defined POPULATION-CAP-200
+
+(defconst num-boat-worker 8)
+(defconst medic 5)
+
+(defconst TL1-trooper 13)
+(defconst aa-trooper 8)
+(defconst grenade-trooper 8)
+
+(defconst TL3-mech1-arm 11)
+(defconst TL3-mech2-arm 11)
+(defconst TL3-mech1-supp 8)
+(defconst TL3-mech2-supp 8)
+(defconst TL4-mech1-arm 11)
+(defconst TL4-mech2-arm 11)
+(defconst TL4-mech3-arm 11)
+(defconst TL4-mech1-supp 8)
+(defconst TL4-mech2-supp 8)
+(defconst TL4-mech3-supp 8)
+
+(defconst TL3-ram-arm 11)
+(defconst TL3-artillery-arm 11)
+(defconst TL3-ram-supp 8)
+(defconst TL3-artillery-supp 8)
+(defconst TL4-ram-arm 8)
+(defconst TL4-artillery-arm 8)
+(defconst TL4-ram-supp 8)
+(defconst TL4-artillery-supp 8)
+
+(defconst TL3-fighter-supp 13)
+(defconst TL3-bomber-supp 13)
+(defconst TL4-fighter-supp 13)
+(defconst TL4-bomber-supp 13)
+
+(defconst TL3-bounty 8)
+
+(defconst enemy-units 5)
+(defconst counter-units 10)
+(defconst air-counter-units 5)
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined NABOO
+#load-if-not-defined FEDERATION
+
+(defconst TL2-frigate 0)
+(defconst TL3-frigate-arm 0)
+(defconst TL3-destroyer-arm 0)
+(defconst TL3-frigate-supp 0)
+(defconst TL3-destroyer-supp 0)
+(defconst TL4-frigate-arm 0)
+(defconst TL4-destroyer-arm 0)
+(defconst TL4-cruiser-arm 0)
+(defconst TL4-frigate-supp 0)
+(defconst TL4-destroyer-supp 0)
+(defconst TL4-cruiser-supp 0)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined GUNGANS
+
+(defconst TL2-trooper-arm 0)
+(defconst TL2-mounted-arm 0)
+(defconst TL2-trooper-supp 0)
+(defconst TL2-mounted-supp 0)
+
+(defconst TL2-frigate-arm 0)
+(defconst TL2-frigate-supp 0)
+
+(defconst TL3-mech1-arm-water 0)
+(defconst TL3-mech2-arm-water 0)
+(defconst TL3-mech1-supp-water 0)
+(defconst TL3-mech2-supp-water 0)
+(defconst TL4-mech1-arm-water 0)
+(defconst TL4-mech2-arm-water 0)
+(defconst TL4-mech3-arm-water 0)
+(defconst TL4-mech1-supp-water 0)
+(defconst TL4-mech2-supp-water 0)
+(defconst TL4-mech3-supp-water 0)
+
+#end-if
+
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defconst TL3-ram-arm-water 0)
+(defconst TL3-ram-supp-water 0)
+(defconst TL3-artillery-arm-water 0)
+(defconst TL3-artillery-supp-water 0)
+(defconst TL4-ram-arm-water 0)
+(defconst TL4-ram-supp-water 0)
+(defconst TL4-artillery-arm-water 0)
+(defconst TL4-artillery-supp-water 0)
+
+(defconst padawan-water 0)
+(defconst master-water 0)
+
+#end-if
+#end-if
+
+#load-if-not-defined NABOO
+
+(defconst TL3-fighter-arm-water 0)
+(defconst TL3-bomber-arm-water 0)
+(defconst TL3-fighter-supp-water 0)
+(defconst TL3-bomber-supp-water 0)
+(defconst TL4-fighter-arm-water 0)
+(defconst TL4-bomber-arm-water 0)
+(defconst TL4-fighter-supp-water 0)
+(defconst TL4-bomber-supp-water 0)
+
+#end-if
+
+#load-if-not-defined NABOO
+#load-if-not-defined GUNGANS
+
+(defconst TL4-unique-unit-water 0)
+(defconst TL4-bounty-water 0)
+(defconst cannon-water 0)
+
+#end-if
+#end-if
+
+;***************************************************
+
+#load-if-defined REBEL
+
+(defconst TL2-trooper 21)
+(defconst TL2-mounted 19)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 24)
+(defconst TL3-mounted-arm 21)
+(defconst TL3-trooper-supp 13)
+(defconst TL3-mounted-supp 13)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 24)
+(defconst TL4-mounted-arm 21)
+(defconst TL4-trooper-supp 13)
+(defconst TL4-mounted-supp 13)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 16)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 13)
+(defconst mounted-supp-counter 5)
+
+(defconst TL3-fighter-arm 24)
+(defconst TL3-bomber-arm 21)
+(defconst TL4-fighter-arm 24)
+(defconst TL4-bomber-arm 21)
+(defconst fighter-arm-counter 16)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 16)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 13)
+(defconst knight 13)
+(defconst master 13)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 13)           ;air speeder
+(defconst TL4-bounty 13)
+(defconst TL4-unique-unit 21)
+(defconst cannon 13)
+(defconst unique-unit-counter 13)
+(defconst unique-unit-water-counter 13)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defconst TL2-trooper 21)
+(defconst TL2-mounted 19)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 13)
+(defconst TL3-mounted-arm 11)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 11)
+(defconst TL4-mounted-arm 11)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 3)
+(defconst mounted-supp-counter 0)
+
+(defconst TL3-fighter-arm 8)
+(defconst TL3-bomber-arm 8)
+(defconst TL4-fighter-arm 11)
+(defconst TL4-bomber-arm 11)
+(defconst fighter-arm-counter 3)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 3)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 13)
+(defconst knight 13)
+(defconst master 13)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 13)           ;dark trooper
+(defconst TL4-bounty 11)
+(defconst TL4-unique-unit 16)
+(defconst cannon 11)
+(defconst unique-unit-counter 8)
+(defconst unique-unit-water-counter 8)
+
+#end-if
+
+#load-if-defined NABOO
+
+(defconst TL2-trooper 13)
+(defconst TL2-mounted 13)
+(defconst TL2-trooper-water 8)
+(defconst TL2-mounted-water 5)
+(defconst TL3-trooper-arm 24)
+(defconst TL3-mounted-arm 24)
+(defconst TL3-trooper-supp 11)
+(defconst TL3-mounted-supp 11)
+(defconst TL3-trooper-water 8)
+(defconst TL3-mounted-water 5)
+(defconst TL4-trooper-arm 24)
+(defconst TL4-mounted-arm 24)
+(defconst TL4-trooper-supp 13)
+(defconst TL4-mounted-supp 11)
+(defconst TL4-trooper-water 8)
+(defconst TL4-mounted-water 5)
+(defconst trooper-arm-counter 16)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 16)
+(defconst mounted-supp-counter 3)
+
+(defconst TL2-frigate 27)
+(defconst TL3-frigate-arm 19)
+(defconst TL3-destroyer-arm 16)
+(defconst TL3-frigate-supp 8)
+(defconst TL3-destroyer-supp 5)
+(defconst TL4-frigate-arm 19)
+(defconst TL4-destroyer-arm 19)
+(defconst TL4-cruiser-arm 16)
+(defconst TL4-frigate-supp 11)
+(defconst TL4-destroyer-supp 8)
+(defconst TL4-cruiser-supp 8)
+
+(defconst TL3-fighter-arm 27)
+(defconst TL3-bomber-arm 27)
+(defconst TL3-fighter-arm-water 24)
+(defconst TL3-bomber-arm-water 24)
+(defconst TL3-fighter-supp-water 13)
+(defconst TL3-bomber-supp-water 13)
+(defconst TL4-fighter-arm 27)
+(defconst TL4-bomber-arm 27)
+(defconst TL4-fighter-arm-water 29)
+(defconst TL4-bomber-arm-water 29)
+(defconst TL4-fighter-supp-water 16)
+(defconst TL4-bomber-supp-water 16)
+(defconst fighter-arm-counter 19)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 19)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 13)
+(defconst knight 13)
+(defconst master 8)
+(defconst master-counter 0)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 11)                   ;royal knight
+(defconst TL4-bounty 13)
+(defconst TL4-bounty-water 8)
+(defconst TL4-unique-unit 21)
+(defconst TL4-unique-unit-water 11)
+(defconst cannon 13)
+(defconst cannon-water 8)
+(defconst unique-unit-counter 13)
+(defconst unique-unit-water-counter 3)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defconst TL2-trooper 0)
+(defconst TL2-mounted 0)
+(defconst TL2-trooper-arm 21)
+(defconst TL2-trooper-supp 13)
+(defconst TL2-mounted-arm 19)
+(defconst TL2-mounted-supp 13)
+(defconst TL2-trooper-water 27)
+(defconst TL2-mounted-water 27)
+(defconst TL3-trooper-arm 13)
+(defconst TL3-mounted-arm 11)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 11)
+(defconst TL4-mounted-arm 11)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 0)
+(defconst mounted-arm-counter 3)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 0)
+(defconst TL2-frigate-arm 27)
+(defconst TL2-frigate-supp 13)
+(defconst TL3-frigate-arm 19)
+(defconst TL3-destroyer-arm 21)
+(defconst TL3-frigate-supp 13)
+(defconst TL3-destroyer-supp 16)
+(defconst TL4-frigate-arm 16)
+(defconst TL4-destroyer-arm 16)
+(defconst TL4-cruiser-arm 16)
+(defconst TL4-frigate-supp 11)
+(defconst TL4-destroyer-supp 11)
+(defconst TL4-cruiser-supp 13)
+
+(defconst TL3-mech1-arm-water 8)
+(defconst TL3-mech2-arm-water 8)
+(defconst TL3-mech1-supp-water 11)
+(defconst TL3-mech2-supp-water 11)
+(defconst TL4-mech1-arm-water 8)
+(defconst TL4-mech2-arm-water 8)
+(defconst TL4-mech3-arm-water 8)
+(defconst TL4-mech1-supp-water 11)
+(defconst TL4-mech2-supp-water 11)
+(defconst TL4-mech3-supp-water 11)
+
+(defconst TL3-ram-arm-water 8)
+(defconst TL3-ram-supp-water 11)
+(defconst TL3-artillery-arm-water 8)
+(defconst TL3-artillery-supp-water 11)
+(defconst TL4-ram-arm-water 8)
+(defconst TL4-ram-supp-water 11)
+(defconst TL4-artillery-arm-water 8)
+(defconst TL4-artillery-supp-water 11)
+
+(defconst TL3-fighter-arm 8)
+(defconst TL3-bomber-arm 8)
+(defconst TL4-fighter-arm 11)
+(defconst TL4-bomber-arm 11)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst padawan-water 5)
+(defconst knight-water 5)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 5)                    ;fambaa
+(defconst TL4-bounty 11)
+(defconst TL4-bounty-water 8)
+(defconst TL4-unique-unit 16)
+(defconst TL4-unique-unit-water 5)
+(defconst cannon 11)
+(defconst cannon-water 8)
+(defconst unique-unit-counter 5)
+(defconst unique-unit-water-counter 5)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defconst TL2-trooper 21)
+(defconst TL2-mounted 19)
+(defconst TL2-trooper-water 0)
+(defconst TL2-mounted-water 0)
+(defconst TL3-trooper-arm 24)
+(defconst TL3-mounted-arm 21)
+(defconst TL3-trooper-supp 13)
+(defconst TL3-mounted-supp 13)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 27)
+(defconst TL4-mounted-arm 27)
+(defconst TL4-trooper-supp 13)
+(defconst TL4-mounted-supp 13)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 16)
+(defconst trooper-supp-counter 5)
+(defconst mounted-arm-counter 16)
+(defconst mounted-supp-counter 5)
+
+(defconst TL3-fighter-arm 24)
+(defconst TL3-bomber-arm 21)
+(defconst TL4-fighter-arm 27)
+(defconst TL4-bomber-arm 27)
+(defconst fighter-arm-counter 19)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 19)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst master 5)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 13)                   ;berserker
+(defconst TL4-bounty 11)
+(defconst TL4-unique-unit 19)
+(defconst cannon 11)
+(defconst unique-unit-counter 11)
+(defconst unique-unit-water-counter 11)
+
+#end-if
+
+#load-if-defined FEDERATION
+
+(defconst TL2-trooper 24)
+(defconst TL2-mounted 21)
+(defconst TL2-trooper-water 8)
+(defconst TL2-mounted-water 8)
+(defconst TL3-trooper-arm 13)
+(defconst TL3-mounted-arm 11)
+(defconst TL3-trooper-supp 8)
+(defconst TL3-mounted-supp 5)
+(defconst TL3-trooper-water 0)
+(defconst TL3-mounted-water 0)
+(defconst TL4-trooper-arm 11)
+(defconst TL4-mounted-arm 11)
+(defconst TL4-trooper-supp 8)
+(defconst TL4-mounted-supp 5)
+(defconst TL4-trooper-water 0)
+(defconst TL4-mounted-water 0)
+(defconst trooper-arm-counter 5)
+(defconst trooper-supp-counter 3)
+(defconst mounted-arm-counter 3)
+(defconst mounted-supp-counter 0)
+
+(defconst TL2-frigate 40)
+(defconst TL3-frigate-arm 11)
+(defconst TL3-destroyer-arm 13)
+(defconst TL3-frigate-supp 5)
+(defconst TL3-destroyer-supp 8)
+(defconst TL4-frigate-arm 13)
+(defconst TL4-destroyer-arm 13)
+(defconst TL4-cruiser-arm 16)
+(defconst TL4-frigate-supp 11)
+(defconst TL4-destroyer-supp 11)
+(defconst TL4-cruiser-supp 13)
+
+(defconst TL3-ram-arm-water 11)
+(defconst TL3-ram-supp-water 8)
+(defconst TL3-artillery-arm-water 11)
+(defconst TL3-artillery-supp-water 8)
+(defconst TL4-ram-arm-water 5)
+(defconst TL4-ram-supp-water 5)
+(defconst TL4-artillery-arm-water 5)
+(defconst TL4-artillery-supp-water 5)
+
+(defconst TL3-fighter-arm 8)
+(defconst TL3-bomber-arm 8)
+(defconst TL4-fighter-arm 11)
+(defconst TL4-bomber-arm 11)
+(defconst fighter-arm-counter 0)
+(defconst fighter-supp-counter 5)
+(defconst bomber-arm-counter 0)
+(defconst bomber-supp-counter 5)
+
+(defconst padawan 5)
+(defconst knight 5)
+(defconst padawan-water 5)
+(defconst knight-water 5)
+(defconst master 5)
+(defconst master-water 0)
+(defconst master-counter 5)
+(defconst master-water-counter 0)
+
+(defconst TL3-unique-unit 13)                   ;destroyer droid
+(defconst TL4-bounty 11)
+(defconst TL4-unique-unit 16)
+(defconst cannon 11)
+(defconst unique-unit-counter 8)
+(defconst unique-unit-water-counter 8)
+
+#end-if
+
+#end-if

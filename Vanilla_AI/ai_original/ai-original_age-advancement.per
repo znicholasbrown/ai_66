@@ -1,0 +1,209 @@
+; *****   age-advancement  *****    ldt 
+;********************************
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-1)
+        (game-time >= 600)
+        (or
+                (players-current-age any-enemy > tech-level-1)
+                (civilian-population >= civ-dark-rush)
+        )
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-2)
+        (current-age-time > 450)
+        (or
+                (players-current-age any-enemy > tech-level-2)
+                (civilian-population >= civ-dark)
+        )
+        (not (goal personality 1) )
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-3)
+        (current-age-time > 300)
+        (or
+                (players-current-age any-enemy == tech-level-4)
+                (civilian-population >= civ-feudal)
+        )
+        (not (goal personality 1) )
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (difficulty >= moderate)
+        (building-type-count BLDG-TRAINTROOPER > 0)
+        (unit-type-count UNIT-LASER-LINE >= TL1-trooper)
+        (can-research-with-escrow tech-level-2)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-2)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 140)
+)
+
+(defrule
+        (difficulty <= hard)
+        (can-research-with-escrow tech-level-2)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-2)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 140)
+)
+
+;advance to castle age
+(defrule
+        (can-research-with-escrow tech-level-3)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-3)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 170)
+)
+
+(defrule
+        (can-research-with-escrow tech-level-4)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-4)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 200)
+)
+
+;if we've failed to rise in age, reset goal age-advancement
+(defrule
+        (current-age < tech-level-4)
+        (timer-triggered  t-ageup)
+        (goal age-advancement NOTICE)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+)
+
+#end-if
+#end-if
+
+;********************************
+#load-if-defined DIFFICULTY-EASIEST
+
+;crude age advancement rules
+(defrule
+        (goal age-advancement NO)
+        (players-current-age every-human >= tech-level-2)
+        (building-type-count BLDG-TRAINTROOPER > 0)
+        (unit-type-count UNIT-LASER-LINE >= TL1-trooper)
+        (can-research tech-level-2)
+=>
+        (research tech-level-2)
+        (set-goal age-advancement NOTICE)
+        (enable-timer t-ageup 300)
+)
+
+(defrule
+        (current-age == tech-level-2)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+        (disable-self)
+)
+#end-if
+
+
+;********************************
+#load-if-defined DIFFICULTY-EASY
+
+;crude age advancement rules
+(defrule
+        (goal age-advancement NO)
+        (players-current-age any-human >= tech-level-2)
+        (building-type-count BLDG-TRAINTROOPER > 0)
+        (unit-type-count UNIT-LASER-LINE >= TL1-trooper)
+        (can-research tech-level-2)
+=>
+        (research tech-level-2)
+        (set-goal age-advancement NOTICE)
+        (enable-timer t-ageup 300)
+)
+
+(defrule
+        (current-age == tech-level-2)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+        (disable-self)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (players-current-age any-human >= tech-level-3)
+        (can-research tech-level-3)
+=>
+        (research tech-level-3)
+        (set-goal age-advancement NOTICE)
+        (enable-timer t-ageup 300)
+)
+
+(defrule
+        (current-age == tech-level-3)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+        (disable-self)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (players-current-age any-human == tech-level-4)
+        (can-research tech-level-4)
+=>
+        (research tech-level-4)
+        (set-goal age-advancement NOTICE)
+        (enable-timer t-ageup 300)
+)
+
+(defrule
+        (current-age == tech-level-4)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+        (disable-self)
+)
+
+(defrule
+        (goal age-advancement NOTICE)
+        (current-age < tech-level-4)
+        (timer-triggered t-ageup)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+)
+
+#end-if

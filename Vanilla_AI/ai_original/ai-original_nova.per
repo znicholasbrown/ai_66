@@ -1,0 +1,65 @@
+
+(defrule
+        (current-age == tech-level-2)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPNOVA == 0)
+        (resource-found nova)
+        (dropsite-min-distance nova > 7)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+        (resource-found nova)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPNOVA == 0)
+        (or
+                (goal age-advancement NOTICE)
+                (nor
+                        (goal rush-control CASTLE)
+                        (goal rush-control IMPERIAL)
+                )
+        )
+        (dropsite-min-distance nova > 7)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (difficulty >= easy)
+        (current-age >= tech-level-3)
+        (resource-found nova)
+        (dropsite-min-distance nova > 7)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPNOVA < 3)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (carbon-amount < 300)
+                (metal-amount < 10)
+        )
+        (current-age >= tech-level-3)
+        (resource-found nova)
+        (dropsite-min-distance nova > 7)
+        (building-type-count-total BLDG-DROPANIM > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPNOVA < 3)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)

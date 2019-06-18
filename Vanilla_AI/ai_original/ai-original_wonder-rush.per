@@ -1,0 +1,1901 @@
+
+;***************** MONUMENT *************************
+
+(defrule
+        (current-age == tech-level-4)
+        (carbon-amount >= 3000)
+        (nova-amount >= 3000)
+        (metal-amount >= 3000)
+=>
+        (set-goal upgrade-conflict NOTICE)
+        (disable-self)
+)
+
+(defrule
+        (can-build-with-escrow BLDG-MONUMENT)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (release-escrow metal)
+        (set-strategic-number sn-maximum-town-size 10)
+        (set-strategic-number sn-percent-civilian-builders 90)
+        (set-strategic-number sn-cap-civilian-builders 50)
+        (set-strategic-number sn-percent-civilian-gatherers 10)
+        (build BLDG-MONUMENT)
+        (disable-self)
+)
+
+;************** AGE ADVANCEMENT ****************
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-1)
+        (game-time >= 600)
+        (or
+                (players-current-age any-enemy > tech-level-1)
+                (civilian-population >= civ-dark-rush)
+        )
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-2)
+        (current-age-time > 450)
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (goal age-advancement NO)
+        (current-age == tech-level-3)
+        (current-age-time > 300)
+=>
+        (set-goal upgrade-conflict NOTICE)
+)
+
+(defrule
+        (can-research-with-escrow tech-level-2)
+        (or
+                (players-current-age every-human >= tech-level-2)
+                (difficulty <= moderate)
+        )
+=>
+        (release-escrow food)
+        (research tech-level-2)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 140)
+)
+
+(defrule
+        (can-research-with-escrow tech-level-3)
+        (or
+                (difficulty <= moderate)
+                (and
+                        (players-current-age every-human == tech-level-3)
+                        (difficulty == easy)
+                )
+        )
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-3)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 170)
+)
+
+(defrule
+        (can-research-with-escrow tech-level-4)
+        (or
+                (difficulty <= moderate)
+                (and
+                        (players-current-age every-human == tech-level-4)
+                        (difficulty == easy)
+                )
+        )
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research tech-level-4)
+        (set-goal resource-needed 0)
+        (set-goal age-advancement NOTICE)
+        (set-goal upgrade-conflict NO)
+        (disable-timer t-ageup)
+        (enable-timer t-ageup 200)
+)
+
+;if we've failed to rise in age, reset goal age-advancement
+(defrule
+        (current-age < tech-level-4)
+        (timer-triggered  t-ageup)
+        (goal age-advancement NOTICE)
+=>
+        (disable-timer t-ageup)
+        (set-goal age-advancement NO)
+)
+
+;****************** MAP LOADS ******************************
+(defrule
+        (not (map-type precipice) )
+=>
+        (set-strategic-number sn-minimum-water-body-size-for-dock 3000)
+        (disable-self)
+)
+;*******************************
+#load-if-defined WATER-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined LAND-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SPACE-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined PLANETS-AND-MOONS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SEARCH-AND-DESTROY-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined TEAM-LAND-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined TEAM-SPACE-SATELLITES-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+
+#end-if
+;*******************************
+#load-if-defined SEA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined SHORELINE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined LAND-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined SPACE-MASS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined NOVA-LAKE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined LARGE-SEA-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined RIVERS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 1)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined DESERT-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined FOREST-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined FORTRESS-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+#end-if
+;*******************************
+#load-if-defined NOVA-ASSAULT-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+        (not (strategic-number sn-maximum-town-size == 40) )
+=>
+        (set-strategic-number sn-maximum-town-size 40)
+)
+#end-if
+;*******************************
+#load-if-defined PRECIPICE-MAP
+
+(defrule
+        (true)
+=>
+        (set-goal 1 0)
+        (disable-self)
+)
+
+#end-if
+
+;************************ BOATS ***************************
+(defrule
+        (goal 1 1)
+=>
+        (set-strategic-number sn-number-boat-explore-groups 1)
+        (disable-self)
+)
+
+;make docks
+(defrule
+        (goal 1 1)
+        (building-type-count-total BLDG-TRAINBOAT == 0)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (can-build BLDG-TRAINBOAT)
+=>
+        (build BLDG-TRAINBOAT)
+)
+
+(defrule
+        (goal 1 1)
+        (current-age >= tech-level-2)
+        (carbon-amount > 400)
+        (building-type-count-total BLDG-TRAINBOAT < 2)
+        (can-build-with-escrow BLDG-TRAINBOAT)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINBOAT)
+)
+
+(defrule
+        (goal 1 1)
+        (current-age >= tech-level-3)
+        (carbon-amount > 1000)
+        (building-type-count-total BLDG-TRAINBOAT < 2)
+        (can-build-with-escrow BLDG-TRAINBOAT)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINBOAT)
+)
+
+;build fishing ships in dark age
+(defrule
+        (goal 1 1)
+        (current-age == tech-level-1)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (civilian-population < 25)
+        (unit-type-count-total BOAT-WORKER < ten-percent-pop)
+        (can-train BOAT-WORKER)
+=>
+        (train BOAT-WORKER)
+)
+
+;feudal boats
+(defrule
+        (goal 1 1)
+        (current-age == tech-level-2)
+        (civilian-population < civ-feudal)
+        (unit-type-count-total BOAT-WORKER < ten-percent-pop)
+        (can-train BOAT-WORKER)
+=>
+        (train BOAT-WORKER)
+)
+
+;castle boats
+(defrule
+        (goal 1 1)
+        (civilian-population < civ-castle)
+        (unit-type-count-total BOAT-WORKER < ten-percent-pop)
+        (current-age >= tech-level-3)
+        (carbon-amount > 1100)
+        (can-train BOAT-WORKER)
+=>
+        (train BOAT-WORKER)
+)
+
+;*********************************************
+;starting goals
+(defrule
+        (true)
+=>
+        (set-goal resource-needed NO)   ;goal 5
+        (set-goal age-advancement NO)   ;goal 14
+        (set-goal upgrade-conflict NO)  ;goal 16
+        (disable-self)
+)
+
+#load-if-defined DIFFICULTY-HARD
+(defrule
+        (true)
+=>
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+        (disable-self)
+)
+
+(defrule
+        (timer-triggered t-chatmore)
+=>
+        (cc-add-resource carbon 500)
+        (cc-add-resource food 500)
+        (cc-add-resource nova 500)
+        (cc-add-resource metal 500)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+)
+
+#end-if
+
+#load-if-defined DIFFICULTY-HARDEST
+(defrule
+        (true)
+=>
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+        (disable-self)
+)
+
+(defrule
+        (timer-triggered t-chatmore)
+=>
+        (cc-add-resource carbon 1000)
+        (cc-add-resource food 1000)
+        (cc-add-resource nova 1000)
+        (cc-add-resource metal 1000)
+        (disable-timer t-chatmore)
+        (enable-timer t-chatmore 600)
+)
+
+#end-if
+
+;**************************************
+;TL-2 SPACEPORT
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-2)
+        (nova-amount > 400)
+        (can-buy-commodity carbon)
+        (commodity-buying-price carbon < 150)
+=>
+        (release-escrow nova)
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-2)
+        (nova-amount > 400)
+        (can-buy-commodity food)
+        (commodity-buying-price food < 150)
+=>
+        (release-escrow nova)
+        (buy-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (carbon-amount > 300)
+        (can-sell-commodity carbon)
+=>
+        (release-escrow carbon)
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (food-amount > 900)
+        (can-sell-commodity food)
+=>
+        (release-escrow food)
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (metal-amount > 500)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 75)
+=>
+        (release-escrow metal)
+        (sell-commodity metal)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (current-age == tech-level-2)
+        (nova-amount > 450)
+        (can-buy-commodity metal)
+        (commodity-buying-price metal < 200)
+=>
+        (release-escrow nova)
+        (buy-commodity metal)
+)
+
+;****************************
+;TL-3 SPACEPORT
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-3)
+        (nova-amount > 1000)
+        (can-buy-commodity carbon)
+        (commodity-buying-price carbon < 150)
+=>
+        (release-escrow nova)
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-3)
+        (nova-amount > 1000)
+        (can-buy-commodity food)
+        (commodity-buying-price food < 150)
+=>
+        (release-escrow nova)
+        (buy-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (carbon-amount > 1100)
+        (can-sell-commodity carbon)
+=>
+        (release-escrow carbon)
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (food-amount > 1100)
+        (can-sell-commodity food)
+=>
+        (release-escrow food)
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (metal-amount > 1100)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 75)
+=>
+        (release-escrow metal)
+        (sell-commodity metal)
+        (set-goal resource-needed 0)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (current-age == tech-level-3)
+        (nova-amount > 1000)
+        (can-buy-commodity metal)
+        (commodity-buying-price metal < 200)
+=>
+        (release-escrow nova)
+        (buy-commodity metal)
+        (set-goal resource-needed 0)
+)
+
+;****************************
+;TL-4 SPACEPORT
+(defrule
+        (goal resource-needed CARBON)
+        (research-completed rt-galactic-trade-comm)
+        (can-buy-commodity carbon)
+        (nova-amount > 3500)
+=>
+        (release-escrow nova)
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (can-sell-commodity carbon)
+        (carbon-amount > 3500)
+=>
+        (release-escrow carbon)
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (food-amount > 0)
+        (can-sell-commodity food)
+=>
+        (release-escrow food)
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (metal-amount > 3500)
+        (can-sell-commodity metal)
+=>
+        (release-escrow metal)
+        (sell-commodity metal)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (research-completed rt-galactic-trade-comm)
+        (can-buy-commodity metal)
+        (nova-amount > 3500)
+=>
+        (release-escrow nova)
+        (buy-commodity metal)
+)
+
+;****************** GATHERING PERCENTAGE ***************
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 10)
+        (set-strategic-number sn-food-gatherer-percentage 90)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-1)
+        (carbon-amount < 100)
+        (or
+                (building-type-count-total BLDG-DROPCHOW == 0)
+                (building-type-count-total BLDG-DROPCARBON == 0)
+        )
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal upgrade-conflict NOTICE)
+        (current-age == tech-level-1)
+        (food-amount < 500)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-needed NO)
+        (current-age == tech-level-1)
+        (civilian-population < 10)
+        (not (strategic-number sn-carbon-gatherer-percentage == 10) )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 10)
+        (set-strategic-number sn-food-gatherer-percentage 90)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-1)
+        (civilian-population < 10)
+        (not (strategic-number sn-carbon-gatherer-percentage == 20) )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 70)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+(defrule
+        (goal resource-needed NO)
+        (current-age == tech-level-1)
+        (civilian-population >= 10)
+        (not (strategic-number sn-carbon-gatherer-percentage == 30) )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 60)
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-1)
+        (civilian-population >= 10)
+        (not (strategic-number sn-carbon-gatherer-percentage == 40) )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 50)
+        (set-strategic-number sn-food-gatherer-percentage 50)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-1)
+        (civilian-population >= 10)
+        (not (strategic-number sn-carbon-gatherer-percentage == 20) )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 70)
+)
+
+;***********************************************
+;TL-2 AGE
+(defrule
+        (current-age == tech-level-2)
+=>
+        (set-goal resource-needed NO)
+)
+
+(defrule
+        (goal resource-supp FOOD-ONLY)
+        (current-age == tech-level-2)
+        (food-amount < 150)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-supp CARBON-FOOD)
+        (current-age == tech-level-2)
+        (carbon-amount < 75)
+        (food-amount > 100)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal resource-supp CARBON-FOOD)
+        (current-age == tech-level-2)
+        (carbon-amount > 75)
+        (food-amount < 100)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-supp FOOD-NOVA)
+        (current-age == tech-level-2)
+        (food-amount > 100)
+        (nova-amount < 50)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal resource-supp FOOD-NOVA)
+        (current-age == tech-level-2)
+        (food-amount < 100)
+        (nova-amount > 50)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (carbon-amount < 175)
+        (building-type-count-total BLDG-SPACEPORT == 0)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal upgrade-conflict NOTICE)
+        (current-age == tech-level-2)
+        (food-amount < 800)
+        (nova-amount > 200)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict NOTICE)
+        (current-age == tech-level-2)
+        (food-amount > 800)
+        (nova-amount < 200)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal resource-needed NO)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 45)
+        (set-strategic-number sn-food-gatherer-percentage 40)
+        (set-strategic-number sn-nova-gatherer-percentage 10)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 55)
+        (set-strategic-number sn-food-gatherer-percentage 30)
+        (set-strategic-number sn-nova-gatherer-percentage 10)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-nova-gatherer-percentage 10)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+)
+
+;***********************************************
+;TL3
+
+(defrule
+        (current-age == tech-level-3)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 25)
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+;***************************************************************
+;TL-4
+
+#load-if-not-defined EASIEST
+#load-if-not-defined EASY
+
+;need carbon
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount > 3000)
+        (metal-amount < 3000)
+        (carbon-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 70)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 30)
+)
+
+;need carbon
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount < 3000)
+        (metal-amount > 3000)
+        (carbon-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 70)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+;need carbon
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount > 3000)
+        (metal-amount > 3000)
+        (carbon-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 100)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+;need nova
+(defrule
+        (current-age >= tech-level-4)
+        (carbon-amount > 3000)
+        (metal-amount < 3000)
+        (nova-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 0)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 70)
+        (set-strategic-number sn-metal-gatherer-percentage 30)
+)
+
+;need nova
+(defrule
+        (current-age >= tech-level-4)
+        (carbon-amount < 3000)
+        (metal-amount > 3000)
+        (nova-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 70)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+;need nova
+(defrule
+        (current-age >= tech-level-4)
+        (carbon-amount > 3000)
+        (metal-amount > 3000)
+        (nova-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 0)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 100)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+)
+
+;need metal
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount > 3000)
+        (carbon-amount < 3000)
+        (metal-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 70)
+)
+
+;need metal
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount < 3000)
+        (carbon-amount > 3000)
+        (metal-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 0)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 70)
+)
+
+;need metal
+(defrule
+        (current-age >= tech-level-4)
+        (nova-amount > 3000)
+        (carbon-amount > 3000)
+        (metal-amount < 3000)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 0)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 100)
+)
+
+#end-if
+#end-if
+
+(defrule
+        (difficulty >= moderate)
+        (or
+                (current-age == tech-level-4)
+                (and
+                        (current-age == tech-level-3)
+                        (and
+                                (current-age-time > 60)
+                                (goal age-advancement NOTICE)
+                        )
+                )
+        )
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 0)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 40)
+)
+
+;***************** ESCROW *************************
+(defrule
+        (or
+                (current-age >= tech-level-2)
+                (goal upgrade-conflict NOTICE)
+        )
+=>
+        (set-escrow-percentage carbon 50)
+        (set-escrow-percentage food 50)
+        (set-escrow-percentage nova 50)
+        (set-escrow-percentage metal 50)
+)
+
+;*********************** RESEARCH *********************
+(defrule
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-2)
+=>
+        (generate-random-number 47)
+)
+
+;*************
+;COMMAND CENTER RESEARCH
+
+(defrule        ;50 carbon, 175 food
+        (difficulty <= moderate)
+        (can-research-with-escrow rt-upgraded-motivator)
+        (nor
+                (goal upgrade-conflict NOTICE)
+                (can-research rt-upgraded-motivator)
+        )
+        (or
+                (current-age > tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-upgraded-motivator)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (can-research rt-upgraded-motivator)
+        (not (goal upgrade-conflict NOTICE) )
+        (or
+                (current-age > tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+=>
+        (research rt-upgraded-motivator)
+)
+
+(defrule        ;200 carbon, 300 food
+        (civilian-population >= civ-castle)
+        (difficulty <= hard)
+        (can-research-with-escrow rt-optimized-motivator)
+        (nor
+                (goal upgrade-conflict NOTICE)
+                (can-research rt-optimized-motivator)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-optimized-motivator)
+)
+
+(defrule
+        (civilian-population >= civ-castle)
+        (difficulty <= hard)
+        (can-research rt-optimized-motivator)
+        (not (goal upgrade-conflict NOTICE) )
+=>
+        (research rt-optimized-motivator)
+)
+
+;*************
+;NOVA
+(defrule        ;75 carbon, 100 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 3)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 1)
+        (research-completed rt-beamdrill-nova-mining)
+=>
+        (set-goal upgrade-conflict 3)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;150 carbon, 200 food
+        (goal upgrade-conflict NO)
+        (goal resource-needed METAL)
+        (difficulty <= hard)
+        (random-number <= 3)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 0)
+        (research-completed rt-hvy-beamdrill-nova)
+=>
+        (set-goal upgrade-conflict 3)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 3)
+        (or
+                (can-research-with-escrow rt-beamdrill-nova-mining)
+                (can-research-with-escrow rt-hvy-beamdrill-nova)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-beamdrill-nova-mining)
+        (research rt-hvy-beamdrill-nova)
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule        ;75 carbon, 100 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age > tech-level-2)
+        (random-number <= 4)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 0)
+        (research-available rt-beamdrill-nova-mining)
+=>
+        (set-goal upgrade-conflict 4)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;150 carbon, 200 food
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (random-number <= 4)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 0)
+        (research-available rt-hvy-beamdrill-nova)
+=>
+        (set-goal upgrade-conflict 4)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 4)
+        (or
+                (can-research-with-escrow rt-beamdrill-nova-mining)
+                (can-research-with-escrow rt-hvy-beamdrill-nova)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-beamdrill-nova-mining)
+        (research rt-hvy-beamdrill-nova)
+        (set-goal upgrade-conflict NO)
+)
+
+;*************
+;ORE
+(defrule        ;75 carbon, 100 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 3)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPMETAL > 1)
+        (research-available rt-beamdrill-metal)
+=>
+        (set-goal upgrade-conflict 3)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;150 carbon, 200 food
+        (goal upgrade-conflict NO)
+        (goal resource-needed METAL)
+        (difficulty <= hard)
+        (random-number <= 3)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPMETAL > 0)
+        (research-available rt-heavy-beamdrill-metal)
+=>
+        (set-goal upgrade-conflict 3)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 3)
+        (or
+                (can-research-with-escrow rt-beamdrill-metal)
+                (can-research-with-escrow rt-heavy-beamdrill-metal)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-beamdrill-metal)
+        (research rt-heavy-beamdrill-metal)
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule        ;75 carbon, 100 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age > tech-level-2)
+        (random-number <= 4)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPMETAL > 0)
+        (research-available rt-beamdrill-metal)
+=>
+        (set-goal upgrade-conflict 4)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;150 carbon, 200 food
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (random-number <= 4)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPMETAL > 0)
+        (research-available rt-heavy-beamdrill-metal)
+=>
+        (set-goal upgrade-conflict 4)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 4)
+        (or
+                (can-research-with-escrow rt-beamdrill-metal)
+                (can-research-with-escrow rt-heavy-beamdrill-metal)
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-beamdrill-metal)
+        (research rt-heavy-beamdrill-metal)
+        (set-goal upgrade-conflict NO)
+)
+
+;*************
+;CARBON
+(defrule        ;50 carbon, 100 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 5)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (research-available rt-fusion-cutter)
+        (or
+                (current-age > tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+=>
+        (set-goal upgrade-conflict 5)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;100 carbon, 150 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 5)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (research-available rt-enh-fusion-cutter)
+=>
+        (set-goal upgrade-conflict 5)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;200 carbon, 300 food
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (random-number <= 5)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (research-available rt-heavy-fusion-cutter)
+=>
+        (set-goal upgrade-conflict 5)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 5)
+        (or
+                (can-research-with-escrow rt-fusion-cutter)
+                (or
+                        (can-research-with-escrow rt-enh-fusion-cutter)
+                        (can-research-with-escrow rt-heavy-fusion-cutter)
+                )
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-fusion-cutter)
+        (research rt-enh-fusion-cutter)
+        (research rt-heavy-fusion-cutter)
+        (set-goal upgrade-conflict NO)
+)
+
+;*************
+;FOOD PROC CENTER
+(defrule        ;75 carbon, 75 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 6)
+        (building-type-count-total BLDG-FARM >= 8)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (research-available rt-irrigation)
+        (or
+                (current-age > tech-level-2)
+                (goal age-advancement NOTICE)
+        )
+=>
+        (set-goal upgrade-conflict 6)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;125 carbon, 125 food
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (random-number <= 6)
+        (building-type-count-total BLDG-FARM >= 10)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (research-available rt-harvesting)
+=>
+        (set-goal upgrade-conflict 6)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule        ;250 carbon, 250 food
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (random-number <= 6)
+        (building-type-count-total BLDG-FARM >= 12)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (research-available rt-adv-harvesting)
+=>
+        (set-goal upgrade-conflict 6)
+        (set-goal resource-supp CARBON-FOOD)
+)
+
+(defrule
+        (goal upgrade-conflict 6)
+        (or
+                (can-research-with-escrow rt-irrigation)
+                (or
+                        (can-research-with-escrow rt-harvesting)
+                        (can-research-with-escrow rt-adv-harvesting)
+                )
+        )
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (research rt-irrigation)
+        (research rt-harvesting)
+        (research rt-adv-harvesting)
+        (set-goal upgrade-conflict NO)
+)
+
+;*************
+;SPACEPORT
+
+(defrule        ;300 food, 200 nova
+        (can-research-with-escrow rt-galactic-trade-comm)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research rt-galactic-trade-comm)
+)
+
+;*************
+;RESEARCH CENTER
+(defrule        ;200 carbon, 300 metal
+        (goal upgrade-conflict NO)
+        (random-number <= 8)
+        (building-type-count BLDG-RESCTR > 0)
+        (research-available rt-power-calibrator)
+=>
+        (set-goal upgrade-conflict 8)
+        (set-goal resource-supp CARBON-METAL)
+)
+
+(defrule
+        (goal upgrade-conflict 8)
+        (can-research-with-escrow rt-power-calibrator)
+=>
+        (release-escrow carbon)
+        (release-escrow metal)
+        (research rt-power-calibrator)
+        (set-goal upgrade-conflict NO)
+)
+
+;***************************************
+;========================TL1 RULES
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-coop-share-information 1)
+        (set-strategic-number sn-maximum-town-size 15)
+        (set-strategic-number sn-zero-priority-distance 250)
+
+        (set-strategic-number sn-maximum-gaia-attack-response 2)
+        (set-strategic-number sn-minimum-boar-hunt-group-size 5)
+
+        (set-strategic-number sn-metal-dropsite-distance 3)
+        (set-strategic-number sn-nova-dropsite-distance 3)
+        (set-strategic-number sn-retask-gather-amount 20)
+
+        (set-strategic-number sn-camp-max-distance 20)
+        (set-strategic-number sn-mill-max-distance 20)
+        (set-strategic-number sn-group-form-distance 10)
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-allow-civilian-defense 1)
+        (set-strategic-number sn-town-defend-priority 1)
+        (set-strategic-number sn-nova-defend-priority 2)
+
+        (set-strategic-number sn-metal-defend-priority 3)
+        (set-strategic-number sn-forage-defend-priority 0)
+        (set-strategic-number sn-holocron-defend-priority 0)
+
+        (set-strategic-number sn-cap-civilian-builders 8)
+        (set-strategic-number sn-cap-civilian-gatherers 100)
+        (set-strategic-number sn-minimum-civilian-explorers 0)
+
+        (set-strategic-number sn-cap-civilian-explorers 0)
+        (set-strategic-number sn-percent-civilian-explorers 0)
+        (disable-self)
+)
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-maximum-carbon-drop-distance 20)
+        (set-strategic-number sn-maximum-food-drop-distance 20)
+        (set-strategic-number sn-maximum-hunt-drop-distance 30)
+
+        (set-strategic-number sn-maximum-fish-boat-drop-distance 30)
+        (set-strategic-number sn-maximum-nova-drop-distance 20)
+        (set-strategic-number sn-maximum-metal-drop-distance 20)
+        (disable-self)
+)
+
+(defrule
+        (difficulty <= hard)
+=>
+        (set-strategic-number sn-maximum-fish-boat-drop-distance 7)
+        (disable-self)
+)
+
+;start exploring
+(defrule
+        (or
+                (game-time > 600)
+                (and
+                        (starting-resources < high-resources)
+                        (difficulty > hardest)
+                )
+        )
+=>
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (disable-self)
+)
+
+(defrule
+        (or
+                (starting-resources == high-resources)
+                (difficulty == hardest)
+        )
+=>
+        (set-strategic-number sn-percent-civilian-builders 85)
+        (set-strategic-number sn-percent-civilian-gatherers 15)
+        (disable-self)
+)
+
+; explore a bit at need
+(defrule
+        (game-time < 600)
+        (military-population == 0)
+        (civilian-population < 15)
+        (or
+                (dropsite-min-distance food == -1)
+                (civilian-population > 10)
+        )
+=>
+        (set-strategic-number sn-minimum-civilian-explorers 1)
+        (set-strategic-number sn-cap-civilian-explorers 1)
+        (set-strategic-number sn-percent-civilian-explorers 5)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 80)
+)
+
+; Shut the explorers off when we get enough food
+(defrule
+        (strategic-number sn-percent-civilian-explorers > 0)
+        (or
+                (or
+                        (game-time > 900)
+                        (dropsite-min-distance food > -1)
+                )
+                (military-population > 0)
+        )
+=>
+        (set-strategic-number sn-percent-civilian-explorers 0)
+        (set-strategic-number sn-minimum-civilian-explorers 0)
+        (set-strategic-number sn-cap-civilian-explorers 0)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+)
+
+(defrule
+        (strategic-number sn-number-explore-groups != 1)
+=>
+        (set-strategic-number sn-number-explore-groups 1)
+)
+
+(defrule
+        (building-type-count BLDG-MAIN < 1)
+        (can-build BLDG-MAIN)
+=>
+        (build BLDG-MAIN)
+        (disable-self)
+)
+
+; worker count
+(defrule
+        (current-age == tech-level-1)
+        (difficulty <= moderate)
+        (civilian-population < civ-feudal)
+        (civilian-population < 40)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+
+;maintain housing
+(defrule
+        (housing-headroom < 5)
+        (population-headroom > 0)
+        (can-build BLDG-PREFAB)
+=>
+        (build BLDG-PREFAB)
+)
+
+#load-if-defined DIFFICULTY-EASIEST
+(defrule
+        (unit-type-count-total UNIT-WORKER <= 5)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+#end-if
+
+#load-if-defined DIFFICULTY-EASY
+(defrule
+        (unit-type-count-total UNIT-WORKER <= 10)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+#end-if
+
+;maintain a command center
+(defrule
+        (difficulty <= moderate)
+        (game-time > 45)
+        (building-type-count BLDG-MAIN < 1)
+        (can-build BLDG-MAIN)
+=>
+        (build BLDG-MAIN)
+)
+
+; Build a mill when we find food
+(defrule
+        (building-type-count-total BLDG-DROPCHOW == 0)
+        (or
+                (building-type-count-total BLDG-PREFAB > 0)
+                (or
+                        (civ-selected FEDERATION)
+                        (building-type-count BLDG-GOVTCTR > 0)
+                )
+        )
+        (or
+                (resource-found food)
+                (game-time > 60)
+        )
+        (can-build BLDG-DROPCHOW)
+=>
+        (build BLDG-DROPCHOW)
+)
+
+(defrule
+        (game-time > 90)
+        (resource-found carbon)
+        (or
+                (building-type-count-total BLDG-PREFAB > 0)
+                (or
+                        (civ-selected FEDERATION)
+                        (building-type-count BLDG-GOVTCTR > 0)
+                )
+        )
+        (building-type-count-total BLDG-DROPCARBON == 0)
+        (can-build BLDG-DROPCARBON)
+=>
+        (build BLDG-DROPCARBON)
+)
+
+;build farms
+(defrule
+        (current-age < tech-level-3)
+        (difficulty <= moderate)
+        (building-type-count-total BLDG-DROPCARBON > 0)
+        (building-type-count-total BLDG-DROPCHOW > 0)
+        (building-type-count-total BLDG-FARM < 10)
+        (can-build BLDG-FARM)
+=>
+        (build BLDG-FARM)
+)
+
+(defrule
+        (current-age == tech-level-1)
+        (building-type-count-total BLDG-DROPNOVA == 0)
+        (goal resource-needed NOVA)
+        (resource-found nova)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (current-age >= tech-level-1)
+        (goal age-advancement NOTICE)
+        (building-type-count-total BLDG-POWERCORE == 0)
+        (can-build BLDG-POWERCORE)
+=>
+        (build BLDG-POWERCORE)
+)
+
+(defrule
+        (current-age >= tech-level-1)
+        (building-type-count-total BLDG-DROPANIM == 0)
+        (can-build BLDG-DROPANIM)
+=>
+        (build BLDG-DROPANIM)
+)
+
+;=======================TL-2 RULES
+(defrule
+        (current-age >= tech-level-2)
+=>
+        (set-strategic-number sn-maximum-town-size feudal-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+
+        (set-strategic-number sn-camp-max-distance 35)
+        (set-strategic-number sn-mill-max-distance 35)
+        (set-strategic-number sn-group-form-distance 20)
+        (disable-self)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+=>
+        (set-goal age-advancement NO)
+        (enable-timer t-carbonctr 1)
+        (disable-timer t-ageup)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time < 600)
+        (carbon-amount > 500)
+=>
+        (set-strategic-number sn-percent-civilian-builders 50)
+        (set-strategic-number sn-percent-civilian-gatherers 50)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time >= 600)
+=>
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (disable-self)
+)
+
+; worker count
+(defrule
+        (current-age == tech-level-2)
+        (difficulty <= moderate)
+        (civilian-population < civ-castle)
+        (civilian-population < 40)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+
+; Build proc centers as needed
+(defrule
+        (timer-triggered t-carbonctr)
+        (current-age >= tech-level-2)
+        (resource-found carbon)
+        (dropsite-min-distance carbon > 5)
+        (can-build BLDG-DROPCARBON)
+=>
+        (build BLDG-DROPCARBON)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+        (resource-found nova)
+        (building-type-count-total BLDG-DROPNOVA == 0)
+        (can-build-with-escrow BLDG-DROPNOVA)
+=>
+        (release-escrow carbon)
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+        (resource-found metal)
+        (building-type-count-total BLDG-DROPMETAL == 0)
+        (can-build-with-escrow BLDG-DROPMETAL)
+=>
+        (release-escrow carbon)
+        (build BLDG-DROPMETAL)
+)
+
+(defrule
+        (timer-triggered t-carbonctr)
+        (current-age >= tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-WARCTR > 0)
+        (building-type-count-total BLDG-DROPNOVA >= 1)
+        (building-type-count-total BLDG-DROPNOVA < mining-count)
+        (resource-found nova)
+        (dropsite-min-distance nova > 7)
+        (can-build BLDG-DROPNOVA)
+=>
+        (build BLDG-DROPNOVA)
+)
+
+(defrule
+        (timer-triggered t-carbonctr)
+        (current-age >= tech-level-2)
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-WARCTR > 0)
+        (building-type-count-total BLDG-DROPMETAL >= 1)
+        (building-type-count-total BLDG-DROPMETAL < mining-count)
+        (resource-found metal)
+        (dropsite-min-distance metal > 7)
+        (can-build BLDG-DROPMETAL)
+=>
+        (build BLDG-DROPMETAL)
+)
+
+(defrule
+        (timer-triggered t-carbonctr)
+=>
+        (disable-timer t-carbonctr)
+        (enable-timer t-carbonctr 30)
+)
+
+;feudal age BLDG-SPACEPORT -- always keep a BLDG-SPACEPORT handy!
+(defrule
+        (building-type-count-total BLDG-SPACEPORT == 0)
+        (can-build-with-escrow BLDG-SPACEPORT)
+=>
+        (release-escrow carbon)
+        (build BLDG-SPACEPORT)
+)
+
+(defrule
+        (building-type-count-total BLDG-SPACEPORT > 0)
+        (building-type-count-total BLDG-WARCTR == 0)
+        (can-build-with-escrow BLDG-WARCTR)
+=>
+        (release-escrow carbon)
+        (build BLDG-WARCTR)
+)
+
+(defrule
+        (current-age == tech-level-2)
+        (current-age-time > 300)
+        (building-type-count-total BLDG-DROPCHOW < feudal-foodctr-count)
+        (carbon-amount > 400)
+        (dropsite-min-distance food > 7)
+        (can-build BLDG-DROPCHOW)
+=>
+        (build BLDG-DROPCHOW)
+)
+
+;======================== TL3 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age >= tech-level-3)
+=>
+        (set-strategic-number sn-maximum-town-size castle-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+        (set-strategic-number sn-blot-exploration-map 0)
+        (set-strategic-number sn-camp-max-distance 50)
+
+        (set-strategic-number sn-mill-max-distance 50)
+        (set-strategic-number sn-group-form-distance 30)
+        (set-goal age-advancement NO)
+
+        (disable-timer t-ageup)
+        (disable-self)
+)
+
+; worker count
+(defrule
+        (current-age == tech-level-3)
+        (difficulty <= moderate)
+        (civilian-population < deathmatch-unit-max)
+        (civilian-population < 40)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+
+(defrule
+        (current-age >= tech-level-2)
+        (building-type-count-total BLDG-POWERCORE <= 1)
+        (can-build BLDG-POWERCORE)
+=>
+        (build BLDG-POWERCORE)
+)
+
+;University & maintain it
+(defrule
+        (building-type-count-total BLDG-RESCTR == 0)
+        (carbon-amount > 500)
+        (can-build-with-escrow BLDG-RESCTR)
+=>
+        (release-escrow carbon)
+        (build BLDG-RESCTR)
+)
+
+(defrule
+        (building-type-count-total BLDG-TRAINAIR == 0)
+        (carbon-amount > 500)
+        (can-build-with-escrow BLDG-TRAINAIR)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINAIR)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (current-age-time > 300)
+        (building-type-count-total BLDG-DROPCHOW < castle-foodctr-count)
+        (carbon-amount > 500)
+        (dropsite-min-distance food > 7)
+        (can-build BLDG-DROPCHOW)
+=>
+        (build BLDG-DROPCHOW)
+)
+
+;=============================TL-4 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-maximum-town-size imperial-town-size)
+        (set-strategic-number sn-percent-civilian-builders 15)
+        (set-strategic-number sn-percent-civilian-gatherers 85)
+
+        (set-strategic-number sn-camp-max-distance 100)
+        (set-strategic-number sn-mill-max-distance 50)
+        (set-goal age-advancement NO)
+
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (difficulty <= moderate)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+

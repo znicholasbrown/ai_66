@@ -1,0 +1,214 @@
+
+(defrule
+        (strategic-number sn-task-ungrouped-soldiers == 1)
+        =>
+        (set-strategic-number sn-task-ungrouped-soldiers 0)
+)
+
+
+#load-if-defined EMPEROR
+
+(defrule
+        (hold-koh-ruin)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 1)
+)
+
+(defrule
+        (not (hold-koh-ruin) )
+        (current-age <= tech-level-2)
+        (military-population < TL1-trooper)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 0)
+)
+
+(defrule
+        (not (hold-koh-ruin) )
+        (current-age <= tech-level-2)
+        (military-population > TL1-trooper)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 1)
+)
+
+(defrule
+        (difficulty >= easy)
+        (not (hold-koh-ruin) )
+        (current-age >= tech-level-3)
+        (military-population < fifteen-percent-pop)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 0)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (not (hold-koh-ruin) )
+        (current-age >= tech-level-3)
+        (military-population < twenty-percent-pop)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 0)
+)
+
+(defrule
+        (difficulty >= easy)
+        (not (hold-koh-ruin) )
+        (current-age >= tech-level-3)
+        (military-population > fifteen-percent-pop)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 1)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (not (hold-koh-ruin) )
+        (current-age >= tech-level-3)
+        (military-population > twenty-percent-pop)
+=>
+        (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-gather-idle-soldiers-at-center 1)
+)
+
+#end-if
+
+;********************************
+#load-if-defined DIFFICULTY-EASIEST
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-percent-enemy-sighted-response 10)
+        (set-strategic-number sn-easiest-reaction-percentage 20)
+        (set-difficulty-parameter ability-to-maintain-distance 100)
+        (set-difficulty-parameter ability-to-dodge-missiles 100)
+        (disable-self)
+)
+#end-if
+
+;********************************
+#load-if-defined DIFFICULTY-EASY
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-desired-number-transport-escorts 1)
+        (set-strategic-number sn-percent-enemy-sighted-response 25)
+        (set-strategic-number sn-easier-reaction-percentage 20)
+        (set-strategic-number sn-hits-before-alliance-change 50)
+        (set-difficulty-parameter ability-to-maintain-distance 75)
+        (set-difficulty-parameter ability-to-dodge-missiles 75)
+        (disable-self)
+)
+#end-if
+
+
+;********************************
+#load-if-defined DIFFICULTY-MODERATE
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-desired-number-transport-escorts 2)
+        (set-strategic-number sn-percent-enemy-sighted-response 75)
+        (set-strategic-number sn-hits-before-alliance-change 25)
+        (set-difficulty-parameter ability-to-maintain-distance 50)
+        (set-difficulty-parameter ability-to-dodge-missiles 50)
+        (disable-self)
+)
+#end-if
+
+
+;********************************
+#load-if-defined DIFFICULTY-HARD
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-desired-number-transport-escorts 3)
+        (set-strategic-number sn-attack-winning-player 0)
+        (set-strategic-number sn-attack-winning-player-factor 30)
+        (set-strategic-number sn-percent-enemy-sighted-response 99)
+        (set-strategic-number sn-hits-before-alliance-change 10)
+        (set-difficulty-parameter ability-to-maintain-distance 25)
+        (set-difficulty-parameter ability-to-dodge-missiles 25)
+        (disable-self)
+)
+
+#end-if
+
+
+;********************************
+#load-if-defined DIFFICULTY-HARDEST
+
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-desired-number-transport-escorts 4)
+        (set-strategic-number sn-attack-winning-player 0)
+        (set-strategic-number sn-attack-winning-player-factor 20)
+        (set-strategic-number sn-percent-enemy-sighted-response 99)
+        (set-strategic-number sn-hits-before-alliance-change 10)
+        (set-difficulty-parameter ability-to-maintain-distance 0)
+        (set-difficulty-parameter ability-to-dodge-missiles 0)
+        (disable-self)
+)
+
+
+#end-if
+
+;======================== TL1 RULES
+(defrule
+        (true)
+=>
+        (set-strategic-number sn-coop-share-information 1)
+        (set-strategic-number sn-coop-share-attacking 1)
+        (set-strategic-number sn-task-ungrouped-soldiers 0)
+
+        (set-strategic-number sn-attack-intelligence 1)
+;       (set-strategic-number sn-gather-defense-units 1)
+        (set-strategic-number sn-defense-distance 2)
+
+        (set-strategic-number sn-ignore-attack-group-under-attack 0)
+        (set-strategic-number sn-enemy-sighted-response-distance 10)
+        (set-strategic-number sn-group-form-distance 10)
+
+        (disable-self)
+)
+
+;======================= TL2 RULES
+(defrule
+        (current-age >= tech-level-2)
+=>
+        (set-strategic-number sn-group-form-distance 20)
+        (set-strategic-number sn-enemy-sighted-response-distance 10)
+        (set-strategic-number sn-ignore-attack-group-under-attack 1)
+
+        (disable-self)
+)
+
+
+;======================== TL3 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age >= tech-level-3)
+=>
+        (set-strategic-number sn-group-form-distance 30)
+        (set-strategic-number sn-enemy-sighted-response-distance 15)
+
+        (disable-self)
+)
+
+
+;============================= TL4 RULES
+;see age advancement rules for strategic number-settings
+(defrule
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-enemy-sighted-response-distance 15)
+
+        (disable-self)
+)

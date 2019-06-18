@@ -1,0 +1,221 @@
+
+(defrule
+        (true)
+        =>
+        (generate-random-number 10)
+        (disable-self)
+)
+
+#load-if-defined REBEL
+
+; 70% Air combat-arm, Troop combat-supp
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm AIR)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp AIR)
+        (disable-self)
+)
+
+#end-if
+
+
+#load-if-defined EMPIRE
+
+; 70% Mech/HW combat-arm, Troop combat-supp
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm MECH/HW)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp MECH/HW)
+        (disable-self)
+)
+
+#end-if
+
+
+#load-if-defined NABOO
+
+; Water map: 70% Air combat-arm, Sea combat-supp
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm AIR)
+        (set-goal combat-supp SEA)
+        (disable-self)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm SEA)
+        (set-goal combat-supp AIR)
+        (disable-self)
+)
+
+; Not water map: 70% Air combat-arm, Troop combat-supp
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm AIR)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp AIR)
+        (disable-self)
+)
+
+#end-if
+
+
+#load-if-defined GUNGANS
+
+; Water map: 70% Sea combat-arm, Mech/HW combat-supp
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm SEA)
+        (set-goal combat-supp MECH/HW)
+        (disable-self)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm MECH/HW)
+        (set-goal combat-supp SEA)
+        (disable-self)
+)
+
+; Not water map: 70% Mech/HW combat-arm, Troop combat-supp
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm MECH/HW)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp MECH/HW)
+        (disable-self)
+)
+
+#end-if
+
+
+#load-if-defined WOOKIEES
+
+; 70% Troop combat-arm, Air combat-supp
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp AIR)
+        (disable-self)
+)
+
+(defrule
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm AIR)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+#end-if
+
+
+#load-if-defined FEDERATION
+
+; Water map: 70% Mech/HW combat-arm, Sea combat-supp
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm MECH/HW)
+        (set-goal combat-supp SEA)
+        (disable-self)
+)
+
+(defrule
+        (goal special-map WATER)
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm SEA)
+        (set-goal combat-supp MECH/HW)
+        (disable-self)
+)
+
+; Not water map: 70% Mech/HW combat-arm, Troop combat-supp
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number > 3)
+        =>
+        (set-goal combat-arm MECH/HW)
+        (set-goal combat-supp TROOP)
+        (disable-self)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (goal combat-arm NOTICE)
+        (random-number <= 3)
+        =>
+        (set-goal combat-arm TROOP)
+        (set-goal combat-supp MECH/HW)
+        (disable-self)
+)
+
+#end-if
+
+

@@ -1,0 +1,134 @@
+(defrule
+        (difficulty >= easy)
+        (game-time > 600)
+        (soldier-count < five-percent-pop)
+        (unit-type-count-total UNIT-WORKER <= 4)
+        (nor 
+                (hold-holocrons)
+                (hold-koh-ruin)
+        )
+=>
+        (set-goal 1 19)
+        (disable-self)
+)
+
+(defrule
+        (difficulty == moderate)
+        (game-time > 600)
+        (building-type-count BLDG-MONUMENT < 1)
+        (soldier-count < five-percent-pop)
+        (unit-type-count-total UNIT-WORKER <= 2)
+        (nor 
+                (hold-holocrons)
+                (hold-koh-ruin)
+        )
+=>
+        (set-goal 1 19)
+        (disable-self)
+)
+
+(defrule
+        (difficulty <= hard)
+        (game-time > 600)
+        (building-type-count BLDG-MONUMENT < 1)
+        (soldier-count <= 3)
+        (unit-type-count BOAT-ARTILLERY-LINE == 0)
+        (unit-type-count-total UNIT-WORKER == 0)
+        (nor 
+                (hold-holocrons)
+                (hold-koh-ruin)
+        )
+=>
+        (set-goal 1 19)
+        (disable-self)
+)
+
+(defrule
+        (goal 1 19)
+        (stance-toward any-human ally)
+        (difficulty <= moderate)
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (release-escrow nova)
+        (release-escrow metal)
+        (tribute-to-player this-any-human carbon 10000)
+        (tribute-to-player this-any-human food 10000)
+        (tribute-to-player this-any-human nova 10000)
+        (tribute-to-player this-any-human metal 10000)
+        (disable-self)
+)
+
+(defrule
+        (goal 1 19)
+        (players-population any-ally > 10)
+        (difficulty <= moderate)
+=>
+        (release-escrow carbon)
+        (release-escrow food)
+        (release-escrow nova)
+        (release-escrow metal)
+        (tribute-to-player this-any-ally carbon 10000)
+        (tribute-to-player this-any-ally food 10000)
+        (tribute-to-player this-any-ally nova 10000)
+        (tribute-to-player this-any-ally metal 10000)
+        (disable-self)
+)
+
+;*****************************
+;delete all buildings
+(defrule
+        (goal 1 19)
+=>
+        (delete-unit UNIT-WORKER)
+)
+
+(defrule
+        (goal 1 19)
+=>
+        (delete-building BLDG-TRAINBOAT)
+        (delete-building BLDG-MAIN)
+        (delete-building BLDG-TRAINJEDI)
+
+        (delete-building BLDG-TRAINTROOPER)
+        (delete-building BLDG-TRAINAIR)
+        (delete-building BLDG-TRAINMECH)
+
+        (delete-building BLDG-TRAINHEAVY)
+)
+
+(defrule
+        (goal 1 19)
+        (not (stance-toward any-human ally) )
+=>
+        (delete-building BLDG-TURRET1)
+        (delete-building BLDG-TURRET2)
+        (delete-building BLDG-TURRET3)
+
+        (delete-building BLDG-MISSILE1)
+        (delete-building BLDG-MISSILE2)
+        (delete-building BLDG-GOVTCTR)
+)
+
+(defrule
+        (goal 1 19)
+        (building-type-count BLDG-TRAINTROOPER == 0)
+        (building-type-count BLDG-TRAINAIR == 0)
+        (building-type-count BLDG-TRAINMECH == 0)
+        (building-type-count BLDG-TRAINHEAVY == 0)
+=>
+        (set-goal 1 9)
+        (disable-self)
+)
+
+;*****************************
+;** All random taunts moved to aiexpert.txt 
+(defrule
+        (goal 1 9)
+=>
+        (chat-to-all-using-range 22300  22)
+        (chat-to-all-using-id 22322)
+                ;"No wonder thou wert victorious! I shalt abdicate."
+        (resign)
+        (disable-self)
+)

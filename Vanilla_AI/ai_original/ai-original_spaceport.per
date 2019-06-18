@@ -1,0 +1,866 @@
+#load-if-not-defined EMPIRE
+
+(defrule
+        (current-age >= tech-level-2)
+        (goal start-military YES)
+        (building-type-count-total BLDG-SPACEPORT == 0)
+        (can-build-with-escrow BLDG-SPACEPORT)
+=>
+        (release-escrow carbon)
+        (build BLDG-SPACEPORT)
+)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defrule
+        (current-age >= tech-level-2)
+        (goal start-military YES)
+        (or
+                (goal age-advancement NOTICE)
+                (carbon-amount > 1000)
+        )
+        (building-type-count-total BLDG-SPACEPORT == 0)
+        (can-build-with-escrow BLDG-SPACEPORT)
+=>
+        (release-escrow carbon)
+        (build BLDG-SPACEPORT)
+)
+
+#end-if
+
+(defrule
+        (cc-players-building-type-count any-ally BLDG-SPACEPORT > 0)
+        (unit-type-count-total UNIT-CARGOSP == 0)
+        (not (town-under-attack))
+        (can-train-with-escrow UNIT-CARGOSP)
+=>
+        (train UNIT-CARGOSP)
+)
+
+
+;********** EXCESS **************
+
+;sell carbon for nova
+(defrule
+        (current-age == tech-level-2)
+        (carbon-amount > 800)
+        (nova-amount < 300)
+        (can-sell-commodity carbon)
+        (commodity-selling-price carbon > 80)
+        =>
+        (sell-commodity carbon)
+)
+
+;buy food with nova
+(defrule
+        (current-age == tech-level-2)
+        (nova-amount > 400)
+        (food-amount < 800)
+        (can-buy-commodity food)
+        (commodity-selling-price food > 80)
+        =>
+        (buy-commodity food)
+)
+
+;sell carbon for nova
+(defrule
+        (carbon-amount > 1200)
+        (nova-amount < 800)
+        (can-sell-commodity carbon)
+        (commodity-selling-price carbon > 30)
+=>
+        (sell-commodity carbon)
+)
+
+;sell food for nova
+(defrule
+        (food-amount > 1200)
+        (nova-amount < 800)
+        (can-sell-commodity food)
+        (commodity-selling-price food > 30)
+=>
+        (sell-commodity food)
+)
+
+;sell ore for nova
+(defrule
+        (metal-amount > 700)
+        (nova-amount < 800)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 50)
+=>
+        (sell-commodity metal)
+)
+
+;buy carbon with nova
+(defrule
+        (nova-amount > 1250)
+        (can-buy-commodity carbon)
+        (carbon-amount < 1100)
+        =>
+        (buy-commodity carbon)
+)
+
+;buy food with nova
+(defrule
+        (nova-amount > 1250)
+        (food-amount < 1600)
+        (can-buy-commodity food)
+=>
+        (buy-commodity food)
+)
+
+;buy metal with nova
+(defrule
+        (nova-amount > 1400)
+        (metal-amount < 650)
+        (can-buy-commodity metal)
+=>
+        (buy-commodity metal)
+)
+
+;***************************************
+;TECH-LEVEL-2
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-2)
+        (nova-amount > 400)
+        (carbon-amount < 500)
+        (can-buy-commodity carbon)
+        (commodity-buying-price carbon < 150)
+=>
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-2)
+        (nova-amount > 400)
+        (food-amount < 800)
+        (can-buy-commodity food)
+        (commodity-buying-price food < 150)
+=>
+        (buy-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (carbon-amount > 500)
+        (nova-amount < 200)
+        (not (goal sea-owner YES) )
+        (can-sell-commodity carbon)
+        (commodity-selling-price carbon > 30)
+=>
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (food-amount > 900)
+        (nova-amount < 200)
+        (can-sell-commodity food)
+        (commodity-selling-price food > 30)
+=>
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-2)
+        (metal-amount > 400)
+        (nova-amount < 200)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 50)
+        (nor
+                (goal wall-build YES)
+                (goal castle-attempt YES)
+        )
+=>
+        (sell-commodity metal)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (current-age == tech-level-2)
+        (nova-amount > 450)
+        (metal-amount < 200)
+        (can-buy-commodity metal)
+        (commodity-buying-price metal < 200)
+=>
+        (buy-commodity metal)
+)
+
+;****************************
+;TECH-LEVEL-3
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-3)
+        (nova-amount > 950)
+        (can-buy-commodity carbon)
+        (commodity-buying-price carbon < 150)
+=>
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-3)
+        (nova-amount > 950)
+        (can-buy-commodity food)
+        (commodity-buying-price food < 150)
+=>
+        (buy-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (carbon-amount > 450)
+        (not (goal sea-owner YES) )
+        (can-sell-commodity carbon)
+        (commodity-selling-price carbon > 30)
+=>
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (food-amount > 1100)
+        (can-sell-commodity food)
+        (commodity-selling-price food > 30)
+=>
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-3)
+        (metal-amount > 400)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 50)
+        (nor
+                (goal wall-build YES)
+                (goal castle-attempt YES)
+        )
+=>
+        (sell-commodity metal)
+        (set-goal resource-needed 0)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (current-age == tech-level-3)
+        (nova-amount > 1000)
+        (can-buy-commodity metal)
+        (commodity-buying-price metal < 200)
+=>
+        (buy-commodity metal)
+        (set-goal resource-needed 0)
+)
+
+;****************************
+;IMPERIAL MARKET
+(defrule
+        (goal resource-needed CARBON)
+        (research-completed rt-galactic-trade-comm)
+        (can-buy-commodity carbon)
+        (commodity-buying-price carbon < 150)
+        (nova-amount > 1400)
+=>
+        (buy-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (research-completed rt-galactic-trade-comm)
+        (can-buy-commodity food)
+        (commodity-buying-price food < 150)
+        (nova-amount > 1400)
+=>
+        (buy-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (not (goal sea-owner YES) )
+        (can-sell-commodity carbon)
+        (commodity-selling-price carbon > 30)
+        (or
+                (carbon-amount > 1200)
+                (and
+                        (nor 
+                                (goal wonder-attempt POSSIBLE)
+                                (goal upgrade-conflict 33)
+                        )
+                        (carbon-amount > 625)
+                )
+        )
+=>
+        (sell-commodity carbon)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (food-amount > 1500)
+        (can-sell-commodity food)
+        (commodity-selling-price food > 30)
+=>
+        (sell-commodity food)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (research-completed rt-galactic-trade-comm)
+        (metal-amount > 500)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal > 50)
+        (nor
+                (goal wall-build YES)
+                (or
+                        (goal castle-attempt YES)
+                        (goal wonder-attempt POSSIBLE)
+                )
+        )
+=>
+        (sell-commodity metal)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (research-completed rt-galactic-trade-comm)
+        (can-buy-commodity metal)
+        (commodity-buying-price metal < 200)
+        (nova-amount > 1400)
+=>
+        (buy-commodity metal)
+)
+
+;************************************************
+;TIMER ONE
+(defrule
+        (timer-triggered t-tribute)
+        (not (player-in-game any-human-ally) )
+=>
+        (disable-timer t-tribute)
+        (enable-timer t-tribute 120)
+)
+
+;don't bug human allies too often
+(defrule
+        (timer-triggered t-tribute)
+        (player-in-game any-human-ally)
+=>
+        (disable-timer t-tribute)
+        (enable-timer t-tribute 300)
+)
+
+
+(defrule
+        (current-age == tech-level-2)
+        (nova-amount < 200)
+        (can-sell-commodity metal)
+        (commodity-selling-price metal >= 50)
+        (or
+                (goal rush-control CASTLE)
+                (goal rush-control IMPERIAL)
+        )
+=>
+        (sell-commodity metal)
+)
+
+
+;********** TRADE & TRIBUTE *********
+;; diplomacy ;;
+;TRIBUTE TO ONE ANOTHER
+(defrule
+        (carbon-amount > 350)
+        (taunt-detected any-computer-ally 4)
+        (not (goal resource-needed CARBON) )
+=>
+        (tribute-to-player this-any-ally carbon 100)
+        (acknowledge-taunt this-any-ally 4)
+)
+
+(defrule
+        (carbon-amount > 100)
+        (taunt-detected any-human-ally 4)
+=>
+        (tribute-to-player this-any-ally carbon 100)
+        (acknowledge-taunt this-any-ally 4)
+)
+
+(defrule
+        (taunt-detected any-ally 4)
+=>
+        (acknowledge-taunt any-ally 4)
+)
+
+(defrule
+        (food-amount > 200)
+        (taunt-detected any-computer-ally 3)
+        (not (goal resource-needed FOOD) )
+=>
+        (tribute-to-player this-any-ally food 100)
+        (acknowledge-taunt this-any-ally 3)
+)
+
+(defrule
+        (food-amount > 200)
+        (taunt-detected any-human-ally 3)
+=>
+        (tribute-to-player this-any-ally food 100)
+        (acknowledge-taunt this-any-ally 3)
+)
+
+(defrule
+        (taunt-detected any-ally 3)
+=>
+        (acknowledge-taunt any-ally 3)
+)
+
+(defrule
+        (nova-amount > 350)
+        (taunt-detected any-computer-ally 5)
+        (not (goal resource-needed NOVA) )
+=>
+        (tribute-to-player this-any-ally nova 100)
+        (acknowledge-taunt this-any-ally 5)
+)
+
+(defrule
+        (nova-amount > 200)
+        (taunt-detected any-human-ally 5)
+=>
+        (tribute-to-player this-any-ally nova 100)
+        (acknowledge-taunt this-any-ally 5)
+)
+
+(defrule
+        (taunt-detected any-ally 5)
+=>
+        (acknowledge-taunt any-ally 5)
+)
+
+(defrule
+        (metal-amount > 350)
+        (taunt-detected any-computer-ally 6)
+        (not (goal resource-needed METAL) )
+=>
+        (tribute-to-player this-any-ally metal 100)
+        (acknowledge-taunt this-any-ally 6)
+)
+
+(defrule
+        (metal-amount > 200)
+        (taunt-detected any-human-ally 6)
+=>
+        (tribute-to-player this-any-ally metal 100)
+        (acknowledge-taunt this-any-ally 6)
+)
+
+(defrule
+        (taunt-detected any-ally 6)
+=>
+        (acknowledge-taunt any-ally 6)
+)
+
+;**************************************
+;GIVE ME YOUR SPARE STUFF
+
+(defrule
+        (true)
+=>
+        (set-goal 24 NO)
+)
+
+;if it's impossible
+(defrule
+        (taunt-detected any-ally 38)
+        (building-type-count BLDG-SPACEPORT < 1)
+=>
+        (acknowledge-taunt this-any-ally 38)
+        (chat-to-player-using-id this-any-ally 22164)
+                ;"39 Commander, I have no spaceport."
+)
+
+;tribute away our carbon
+(defrule
+        (taunt-detected any-ally 38)
+        (nor 
+                (goal resource-supp CARBON-FOOD)
+                (or
+                        (goal resource-supp CARBON-NOVA)
+                        (goal resource-supp CARBON-METAL)
+                )
+        )
+        (carbon-amount > 700)
+=>
+        (tribute-to-player this-any-ally carbon 500)
+        (set-goal 24 YES)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (or
+                (and
+                        (goal resource-supp CARBON-FOOD)
+                        (carbon-amount > 1600)
+                )
+                (or
+                        (and
+                                (goal resource-supp CARBON-NOVA)
+                                (carbon-amount > 1025)
+                        )
+                        (and
+                                (goal resource-supp CARBON-METAL)
+                                (carbon-amount > 900)
+                        )
+                )
+        )
+=>
+        (tribute-to-player this-any-ally carbon 500)
+        (set-goal 24 YES)
+)
+
+;tribute away our food
+
+(defrule
+        (taunt-detected any-ally 38)
+        (nor 
+                (or
+                        (goal resource-supp FOOD-ONLY)
+                        (goal resource-supp CARBON-FOOD)
+                )
+                (or
+                        (goal resource-supp FOOD-NOVA)
+                        (goal resource-supp FOOD-METAL)
+                )
+        )
+        (food-amount > 700)
+=>
+        (tribute-to-player this-any-ally food 500)
+        (set-goal 24 YES)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (or
+                (and
+                        (goal resource-supp FOOD-ONLY)
+                        (food-amount > 750)
+                )
+                (and
+                        (goal resource-supp CARBON-FOOD)
+                        (food-amount > 1500)
+                )
+        )
+=>
+        (tribute-to-player this-any-ally food 500)
+        (set-goal 24 YES)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (or
+                (and
+                        (goal resource-supp FOOD-NOVA)
+                        (food-amount > 2100)
+                )
+                (and
+                        (goal resource-supp FOOD-METAL)
+                        (food-amount > 1000)
+                )
+        )
+=>
+        (tribute-to-player this-any-ally food 500)
+        (set-goal 24 YES)
+)
+
+;give away the nova
+(defrule
+        (taunt-detected any-ally 38)
+        (nor 
+                (goal resource-supp NOVA-ONLY)
+                (or
+                        (goal resource-supp CARBON-NOVA)
+                        (goal resource-supp FOOD-NOVA)
+                )
+        )
+        (nova-amount > 700)
+=>
+        (tribute-to-player this-any-ally nova 500)
+        (set-goal 24 YES)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (or
+                (and
+                        (goal resource-supp NOVA-ONLY)
+                        (nova-amount > 975)
+                )
+                (or
+                        (and
+                                (goal resource-supp CARBON-NOVA)
+                                (nova-amount > 1000)
+                        )
+                        (and
+                                (goal resource-supp FOOD-NOVA)
+                                (nova-amount > 1700)
+                        )
+                )
+        )
+=>
+        (tribute-to-player this-any-ally nova 500)
+        (set-goal 24 YES)
+)
+
+;give away the metal
+(defrule
+        (taunt-detected any-ally 38)
+        (nor 
+                (goal resource-supp CARBON-METAL)
+                (goal resource-supp FOOD-METAL) 
+        )
+        (metal-amount > 700)
+=>
+        (tribute-to-player this-any-ally metal 500)
+        (set-goal 24 YES)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (or
+                (and
+                        (goal resource-supp CARBON-METAL)
+                        (nova-amount > 900)
+                )
+                (and
+                        (goal resource-supp FOOD-METAL)
+                        (nova-amount > 850)
+                )
+        )
+=>
+        (tribute-to-player this-any-ally metal 500)
+        (set-goal 24 YES)
+)
+
+;finish it off
+(defrule
+        (taunt-detected any-ally 38)
+        (goal 24 NO)
+=>
+        (set-goal 24 NO)
+        (acknowledge-taunt this-any-ally 38)
+        (chat-to-player-using-id this-any-ally 22163)
+                ;"39 I'm sorry - our storehouses are depleted."
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (goal 24 YES)
+=>
+        (set-goal 24 NOTICE)
+)
+
+(defrule
+        (taunt-detected any-ally 38)
+        (goal 24 NOTICE)
+=>
+        (acknowledge-taunt this-any-ally 38)
+        (set-goal 24 NO)
+)
+
+;if I'm short on resources, ask allies for some before using the BLDG-SPACEPORT
+(defrule
+        (player-in-game any-ally)
+        (players-building-type-count any-ally BLDG-SPACEPORT > 0)
+=>
+        (enable-timer 1 60)
+        (disable-self)
+)
+
+;****************************************
+(defrule
+        (goal resource-needed CARBON)
+        (timer-triggered t-tribute)
+        (not (stance-toward any-human ally) )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22123)      ;4
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (timer-triggered t-tribute)
+        (not (stance-toward any-human ally) )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22122)      ;3
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (timer-triggered t-tribute)
+        (not (stance-toward any-human ally) )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22124)      ;5
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (timer-triggered t-tribute)
+        (not (stance-toward any-human ally) )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22125)      ;6
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (not (goal wonder-attempt POSSIBLE) )
+        (or
+                (carbon-amount > 250)
+                (and
+                        (current-age < tech-level-4)
+                        (carbon-amount > 150)
+                )
+        )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22123)      ;4
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (or
+                (food-amount > 950)
+                (or
+                        (and
+                                (current-age == tech-level-2)
+                                (food-amount > 750)
+                        )
+                        (and
+                                (current-age == tech-level-4)
+                                (food-amount > 250)
+                        )
+                )
+        )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22122)      ;3
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (not (goal wonder-attempt POSSIBLE) )
+        (or
+                (nova-amount > 750)
+                (and
+                        (current-age != tech-level-2)
+                        (nova-amount > 150)
+                )
+        )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22124)      ;5
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (not (goal wonder-attempt POSSIBLE) )
+        (or
+                (metal-amount > 600)
+                (and
+                        (not (goal castle-attempt YES) )
+                        (metal-amount > 150)
+                )
+        )
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22125)      ;6
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (goal wonder-attempt POSSIBLE)
+        (carbon-amount > 950)
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22123)      ;4
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (goal wonder-attempt POSSIBLE)
+        (nova-amount > 950)
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22123)      ;4
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (timer-triggered t-tribute)
+        (stance-toward any-human ally)
+        (goal wonder-attempt POSSIBLE)
+        (metal-amount > 950)
+        (nand 
+                (goal personality 1)
+                (current-age-time < 300)
+        )
+=>
+        (chat-to-player-using-id every-ally 22123)      ;4
+)
+
+

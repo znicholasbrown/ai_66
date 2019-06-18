@@ -1,0 +1,86 @@
+ai-original_random-game
+
+These files are a functioning version of the ai script files shipped with Star Wars:Galactic Battlegrounds.  They were extracted from file gamedata.drs shipped with SW:GB version 1.0.  (File gamedata.drs did not change in version 1.1)   The extracted scripts themselves are the copyrighted property of Lucas Arts and are used here within the terms of the SW:GB license. 
+
+There are 55 ai script files in gamedata.drs, with file ids from 60001 to 60055.  Internally, the files refer to each other by name, rather than by file id.  However, the names are not specified in gamedata.drs, but only by reference in the scripts themselves.  File 60037 is the root script, and calls all the other scripts.  Files 60012 (deathmatch) and 60018 (diplomacy) also call other scripts.
+
+Many script files shipped in gamedata.drs are not used by the computer player. They and appear to have been used during development for testing the game.   Any feedback as to what these files are doing in the game currently will be appreciated.
+
+All the shipped file names have had "ai-original_" prefixed to the original file name to avoid file name conflicts with the computer player.  In the scripts themselves, I have prefixed "ai-original\ai-original_" to the module names.  Again, this was done to keep the names distinct from the file names used by the computer player, and to keep the AI folder relatively clean.  All script files are placed in directory ai-original, except for the root script file and the ai suffix file.  
+
+To add this computer player to your installed copy of SW:GB, unzip the downloaded file into directory AI in the GAME directory of Star Wars Galactic Battlegrounds, or copy the files named ai-original_random-game.per, ai-original_random-game.ai, and directory ai-original and its contents to folder AI as above.  When running the game, you should see another player named 'ai-original_random-game" added to the list of Other Players available to play Standard Games in Single Player mode.
+
+This computer player has been tested only in Random Map game mode.  It "should" perform identically to the shipped computer player.  With all scripts available, one can now modify the shipped computer player 'til one's heart is content.  :-)
+
+Any errors or omissions in the scripts provided here are solely my responsibility.  Please send feedback to IdLe_WorkeR at tucpchom@gte.net  
+
+
+Bin file-to-named file relationships:
+
+File ID		Name of script file
+
+60001         	age-advancement
+60003			airbase  
+60004			animal   
+60005			attack   
+60006			building-count 
+60007			carbon
+60008			cheats  
+60010			combat-arm   
+60011			constants    
+60012			deathmatch    
+60015			dip-boomer  
+60016			dip-bully
+60017			dip-feeder  
+60018			diplomacy   
+60020			food	
+60021			fortress
+60024			heavy-weapons
+60025			homebase
+60026			init-goals
+60027			jedi-temple
+60028			map-loads
+60030			mech-factory
+60031			military-population
+60032			monument
+60034			nova
+60035			ore
+60036			population
+60037			random-game     -- this is the root script
+60038			research-center
+60039			research
+60040			rush
+60041			shipyard 
+60042			sn-gather
+60043			sn-homebase
+60044			sn-soldiers
+60045			spaceport
+60047			tower
+60048			troop-center
+60049			war-center
+60052			wonder-kill
+60053			wonder-rush
+60054			resign  
+60055			escrow  
+
+The following bin files are not used by the computer player:
+
+60002			aggressive-script  -- root script -- attacks in a "standard" way
+	               no cheat, no escrow, no resign, no diplomacy -- this script will load.
+60009			?  ?  fossil and maybe for testing  ?  ? -    
+				-- was AoC combat-arm module --
+60013			defensive-script -- ** GE7-population does not exist ** this one won't load.
+60014			?  ?  testing  ?  ?  --  loads based on difficulty five scripts, 
+				age-advancement, sn-soldiers, tower, monument, spaceport, monument
+60019			?  ?  fish-boat  ?  ?   has been rewritten in shipyard.
+60022			ground -- root script --this one won't load.     
+			        ** troop-center-no-air and tower-no-air do not exist **
+60023			?  ?  teeny-weeny root script  -- just mech and homebase, attack control  ?  ?
+60029			?  ?  map-specific  ?  ?   a bit more of map rules  - unknown use
+				  map names tested are defined, but not those used in map-loads
+60033			not-advanced  -- root script -- t2 limited -- this script will load
+60046			?  ?  fossil counterunits   ?  ?   unless is funny root script, not used.
+60050			?  ?  warboat-island  ?  ?  has been rewritten in shipyard.
+60051			?  ?  warboat  ?  ?  has been rewritten in shipyard.
+
+

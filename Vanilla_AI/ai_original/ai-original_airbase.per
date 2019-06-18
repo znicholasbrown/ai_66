@@ -1,0 +1,604 @@
+
+;************ FIGHTER *************
+
+(defrule
+        (current-age == tech-level-3)
+        (goal train-air NO)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (or 
+                (town-under-attack)
+                (and
+                        (not (research-available rt-flight-school))
+                        (not (research-available rt-enlarged-bomb-hold))
+                )
+        )
+        =>
+        (set-goal train-air YES)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal train-air YES)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (not (town-under-attack))
+        (nor
+                (research-completed rt-flight-school)
+                (research-completed rt-enlarged-bomb-hold)
+        )
+        =>
+        (set-goal train-air NO)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (goal train-air NO)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (or 
+                (town-under-attack)
+                (not (research-available rt-shield-mods))
+        )
+        =>
+        (set-goal train-air YES)
+)
+
+(defrule
+        (current-age == tech-level-4)
+        (goal train-air YES)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (not (town-under-attack))
+        (research-available rt-shield-mods)
+        =>
+        (set-goal train-air NO)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal reduce-units4 NO)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-FIGHTER-LINE < TL3-fighter-arm)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal reduce-units4 NO)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-FIGHTER-LINE < TL3-fighter-supp)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        (goal reduce-units4 NO)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-FIGHTER-LINE < TL4-fighter-arm)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        (goal reduce-units4 NO)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-FIGHTER-LINE < TL4-fighter-supp)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+#load-if-defined NABOO
+
+(defrule
+        (goal special-map WATER)
+        (current-age == tech-level-3)
+        (goal train-air YES)
+        (goal reduce-units4 NO)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-FIGHTER-LINE < TL3-fighter-arm-water)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age == tech-level-3)
+        (goal train-air YES)
+        (goal reduce-units4 NO)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-FIGHTER-LINE < TL3-fighter-supp-water)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (goal train-air YES)
+        (goal reduce-units4 NO)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-FIGHTER-LINE < TL4-fighter-arm-water)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (goal train-air YES)
+        (goal reduce-units4 NO)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-FIGHTER-LINE < TL4-fighter-supp-water)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal reduce-units4 YES)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-FIGHTER-LINE < fighter-arm-counter)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (goal reduce-units4 YES)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-FIGHTER-LINE < fighter-supp-counter)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+
+;********** BOMBER **********
+
+(defrule
+        (current-age == tech-level-3)
+        (goal reduce-units5 NO)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-BOMBER-LINE < TL3-bomber-arm)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal reduce-units5 NO)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-BOMBER-LINE < TL3-bomber-supp)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        (goal reduce-units5 NO)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-BOMBER-LINE < TL4-bomber-arm)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        (goal reduce-units5 NO)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-BOMBER-LINE < TL4-bomber-supp)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+#load-if-defined NABOO
+
+(defrule
+        (goal special-map WATER)
+        (current-age == tech-level-3)
+        (goal train-air YES)
+        (goal reduce-units5 NO)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-BOMBER-LINE < TL3-bomber-arm-water)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age == tech-level-3)
+        (goal train-air YES)
+        (goal reduce-units5 NO)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-BOMBER-LINE < TL3-bomber-supp-water)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (goal train-air YES)
+        (goal reduce-units5 NO)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-BOMBER-LINE < TL4-bomber-arm-water)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (goal special-map WATER)
+        (current-age >= tech-level-4)
+        (goal train-air YES)
+        (goal reduce-units5 NO)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-BOMBER-LINE < TL4-bomber-supp-water)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+#end-if
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal reduce-units5 YES)
+        (goal train-air YES)
+        (not (goal combat-supp AIR))
+        (unit-type-count UNIT-BOMBER-LINE < bomber-arm-counter)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+(defrule
+        (goal reduce-units5 YES)
+        (goal train-air YES)
+        (goal combat-supp AIR)
+        (unit-type-count UNIT-BOMBER-LINE < bomber-supp-counter)
+        (can-train UNIT-BOMBER-LINE)
+        =>
+        (train UNIT-BOMBER-LINE)
+)
+
+#end-if
+#end-if
+#end-if
+
+;*********** AIR TRANSPORT ***********
+
+(defrule
+        (current-age == tech-level-3)
+        (goal start-military YES)
+        (military-population > 10)
+        (unit-type-count UNIT-FIGHTER-LINE > five-percent-pop)
+        (unit-type-count UNIT-BOMBER-LINE > five-percent-pop)
+        (unit-type-count-total UNIT-AIRTRANS-LINE == 0)
+        (can-train UNIT-AIRTRANS-LINE)
+        =>
+        (train UNIT-AIRTRANS-LINE)
+)
+
+(defrule
+        (goal special-map ASTEROID)
+        (current-age == tech-level-3)
+        (goal start-military YES)
+        (military-population > 10)
+        (unit-type-count-total UNIT-AIRTRANS-LINE < 2)
+        (can-train UNIT-AIRTRANS-LINE)
+        =>
+        (train UNIT-AIRTRANS-LINE)
+)
+
+;************ UPGRADE CONFLICT ************
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (not (goal upgrade-conflict NO))
+        (current-age == tech-level-3)
+        (or
+                (unit-type-count UNIT-FIGHTER-LINE >= five-percent-pop)
+                (unit-type-count UNIT-BOMBER-LINE >= five-percent-pop)
+        )
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (not (goal upgrade-conflict YES))
+        (current-age == tech-level-3)
+        (or
+                (unit-type-count UNIT-FIGHTER-LINE < five-percent-pop)
+                (unit-type-count UNIT-BOMBER-LINE < five-percent-pop)
+        )
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+(defrule
+        (not (goal upgrade-conflict NO))
+        (current-age >= tech-level-4)
+        (not (town-under-attack))
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (not (goal upgrade-conflict YES))
+        (current-age >= tech-level-4)
+        (town-under-attack)
+        =>
+        (set-goal upgrade-conflict YES)
+)
+
+#end-if
+#end-if
+#end-if
+
+;************* AIRBASE ***********
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (current-age == tech-level-3)
+        (building-type-count-total BLDG-TRAINAIR == 0)
+        (can-build-with-escrow BLDG-TRAINAIR)
+=>
+        (release-escrow carbon)
+        (build BLDG-TRAINAIR)
+)
+
+(defrule
+        (current-age >= tech-level-3)
+        (building-type-count-total BLDG-TRAINAIR < 2)
+        (or
+                (building-type-count-total BLDG-RESCTR > 0)
+                (goal age-advancement NOTICE)
+        )               
+        (can-build BLDG-TRAINAIR)
+        =>
+        (build BLDG-TRAINAIR)
+)
+
+(defrule
+        (current-age >= tech-level-4)
+        (building-type-count-total BLDG-TRAINAIR < 3)
+        (can-build BLDG-TRAINAIR)
+        =>
+        (build-forward BLDG-TRAINAIR)
+)
+
+(defrule
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (not (goal castle-attempt YES))
+        =>
+        (set-goal castle-attempt YES)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIEES
+
+(defrule
+        (current-age == tech-level-3)
+        (goal start-military YES)
+        (building-type-count-total BLDG-TRAINAIR == 0)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (building-type-count-total BLDG-TRAINMECH > 0)
+        (building-type-count-total BLDG-TRAINTROOPER > 0)
+        (building-type-count-total BLDG-RESCTR > 0)
+        (can-build BLDG-TRAINAIR)
+=>
+        (build BLDG-TRAINAIR)
+)
+
+#end-if
+#end-if
+#end-if
+
+;********** UPGRADES ************
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-fighter-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-fighter-2)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-fighter-3)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-fighter-3)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-bomber-2)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-bomber-2)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (current-age >= tech-level-4)
+        (can-research-with-escrow ut-bomber-3)
+=>
+        (release-escrow carbon)
+        (release-escrow nova)
+        (research ut-bomber-3)
+)
+
+(defrule
+        (difficulty <= hard)
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating GOOD)                                         ;these civs are bad in air
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-TRAINAIR > 0)
+        (or
+                (can-research ut-fighter-2)
+                (can-research ut-fighter-3)
+        )
+=>
+        (research ut-fighter-2)
+        (research ut-fighter-3)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (game-time > 3600)                                                      ;60 min
+        (goal mech-rating GOOD)                                         ;these civs are bad in air
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-TRAINAIR > 0)
+        (or
+                (can-research ut-bomber-2)
+                (can-research ut-bomber-3)
+        )
+=>
+        (research ut-bomber-2)
+        (research ut-bomber-3)
+)
+
+;********* COUNTER UNITS **************
+
+#load-if-not-defined DIFFICULTY-EASIEST
+#load-if-not-defined DIFFICULTY-EASY
+#load-if-not-defined DIFFICULTY-MODERATE
+
+(defrule
+        (goal mech-rating POOR)                         ;these also happen to be good in air
+        (current-age >= tech-level-3)
+        (cc-players-unit-type-count any-enemy UNIT-BOMBER-LINE >= enemy-units)
+        (unit-type-count-total UNIT-FIGHTER-LINE < counter-units)
+        =>
+        (set-goal train-counter3 YES)
+;       (set-escrow-percentage food 50)
+;       (set-escrow-percentage carbon 50)
+;       (set-escrow-percentage nova 50)
+)
+
+;(defrule
+;       (goal mech-rating POOR) 
+;       (goal train-counter3 YES)
+;       (building-type-count-total BLDG-TRAINAIR > 0)
+;       =>
+;       (set-escrow-percentage carbon 0)
+;)
+
+(defrule
+        (goal mech-rating POOR) 
+        (goal train-counter3 YES)
+        (building-type-count-total BLDG-TRAINAIR == 0)
+        (can-build BLDG-TRAINAIR)
+        =>
+        (train BLDG-TRAINAIR)
+)
+
+(defrule
+        (goal mech-rating POOR) 
+        (goal train-counter3 YES)
+        (can-train UNIT-FIGHTER-LINE)
+        =>
+        (train UNIT-FIGHTER-LINE)
+)
+
+(defrule
+        (goal mech-rating POOR) 
+        (goal train-counter3 YES)
+        (or
+                (cc-players-unit-type-count every-enemy UNIT-BOMBER-LINE <= 1)
+                (unit-type-count-total UNIT-FIGHTER-LINE >= counter-units)
+        )
+        =>
+        (set-goal train-counter3 NO)
+;       (set-escrow-percentage food 0)
+;       (set-escrow-percentage carbon 0)
+;       (set-escrow-percentage nova 0)
+)
+
+#end-if
+#end-if
+#end-if

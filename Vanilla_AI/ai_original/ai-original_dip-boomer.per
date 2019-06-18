@@ -1,0 +1,30 @@
+;; no changes ;;
+
+;all this file really does for now is ensure more villagers than a "normal" CP
+
+(defrule
+        (game-time > 10)
+=>
+        (set-goal personality 2)
+        (disable-self)
+)
+
+;don't rush
+(defrule
+        (goal personality 2)
+        (current-age < tech-level-4)
+        (not (goal rush-control BOOMING) )
+=>
+        (set-goal rush-control BOOMING)
+        (disable-self)
+)
+
+(defrule
+        (current-age >= tech-level-3)
+        (civilian-population < fifty-percent-pop)
+        (can-train UNIT-WORKER)
+=>
+        (train UNIT-WORKER)
+)
+
+

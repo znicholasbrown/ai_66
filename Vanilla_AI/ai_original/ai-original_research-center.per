@@ -1,0 +1,51 @@
+
+#load-if-defined GUNGANS
+
+(defrule
+        (building-type-count-total BLDG-RESCTR == 0)
+        (or
+                (building-type-count-total BLDG-TRAINHEAVY > 0)
+                (carbon-amount > 500)
+        )
+        (can-build BLDG-RESCTR)
+=>
+        (build BLDG-RESCTR)
+)
+
+#end-if
+
+#load-if-not-defined EMPIRE
+#load-if-not-defined GUNGANS
+#load-if-not-defined FEDERATION
+
+(defrule
+        (current-age >= tech-level-3)
+        (building-type-count-total BLDG-TRAINAIR > 0)
+        (building-type-count-total BLDG-RESCTR == 0)
+        (can-build BLDG-RESCTR)
+=>
+        (build BLDG-RESCTR)
+)
+
+#end-if
+#end-if
+#end-if
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+#load-if-not-defined WOOKIEES
+#load-if-not-defined GUNGANS
+
+(defrule
+        (current-age >= tech-level-3)
+        (building-type-count-total BLDG-TRAINHEAVY > 0)
+        (building-type-count-total BLDG-RESCTR == 0)
+        (can-build BLDG-RESCTR)
+=>
+        (build BLDG-RESCTR)
+)
+
+#end-if
+#end-if
+#end-if
+#end-if

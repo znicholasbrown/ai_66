@@ -1,0 +1,1753 @@
+
+#load-if-not-defined EASIEST
+
+(defrule
+        (goal upgrade-conflict NOTICE)
+        (not (goal age-advancement NOTICE))
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+(defrule
+        (goal upgrade-conflict YES)
+        (current-age-time > 600)
+        =>
+        (set-goal upgrade-conflict NO)
+)
+
+;********* COMMAND CENTER RESEARCH *********
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (can-research rt-upgraded-motivator)
+=>
+        (research rt-upgraded-motivator)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (can-research-with-escrow rt-upgraded-motivator)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-upgraded-motivator)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (can-research rt-optimized-motivator)
+=>
+        (research rt-optimized-motivator)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (can-research-with-escrow rt-optimized-motivator)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-optimized-motivator)
+)
+
+(defrule        
+        (can-research rt-basic-training)
+        (or
+                (not (can-train UNIT-WORKER) )
+                (civilian-population > 7)
+        )
+=>
+        (research rt-basic-training)
+)
+
+(defrule        
+        (current-age >= tech-level-2)
+        (goal upgrade-conflict NO)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-sensor-beacon)
+        (or
+                (goal age-advancement NOTICE)
+                (food-amount > 700)
+        )
+=>
+        (research rt-sensor-beacon)
+)
+
+(defrule        
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-sensor-array)
+=>
+        (research rt-sensor-array)
+)
+
+(defrule        
+        (not (civ-selected WOOKIEES))
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-bacta-tank)
+=>
+        (research rt-bacta-tank)
+)
+
+(defrule        
+        (civ-selected GUNGANS)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-self-regeneration)
+=>
+        (research rt-self-regeneration)
+)
+
+
+;******** CARBON PROCESSING CENTER *******
+
+(defrule
+        (difficulty <= moderate)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (current-age >= tech-level-2)
+        (can-research rt-fusion-cutter)
+=>
+        (research rt-fusion-cutter)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (can-research-with-escrow rt-fusion-cutter)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-fusion-cutter)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (can-research rt-enh-fusion-cutter)
+=>
+        (research rt-enh-fusion-cutter)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (can-research-with-escrow rt-enh-fusion-cutter)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-enh-fusion-cutter)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (can-research rt-heavy-fusion-cutter)
+=>
+        (research rt-heavy-fusion-cutter)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-DROPCARBON > 0)
+        (can-research-with-escrow rt-heavy-fusion-cutter)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-heavy-fusion-cutter)
+)
+
+
+;********* FOOD PROCESSING CENTER **********
+
+(defrule        
+        (difficulty <= moderate)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research rt-irrigation)
+=>
+        (research rt-irrigation)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research-with-escrow rt-irrigation)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-irrigation)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research rt-harvesting)
+=>
+        (research rt-harvesting)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research-with-escrow rt-harvesting)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-harvesting)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research rt-adv-harvesting)
+=>
+        (research rt-adv-harvesting)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (building-type-count BLDG-DROPCHOW > 0)
+        (can-research-with-escrow rt-adv-harvesting)
+=>
+        (release-escrow food)
+        (release-escrow carbon)
+        (research rt-adv-harvesting)
+)
+
+
+;********** AIRBASE ***********
+
+(defrule
+        (difficulty <= moderate)
+        (current-age == tech-level-3)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (nor 
+                (research-completed rt-flight-school)
+                (research-completed rt-enlarged-bomb-hold)
+        )
+        =>
+        (set-goal resource-needed FOOD)
+        (set-escrow-percentage food 70)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age == tech-level-3)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (research-completed rt-flight-school)
+        (research-completed rt-enlarged-bomb-hold)
+        =>
+        (set-goal resource-needed NOVA)
+        (set-escrow-percentage food 0)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research-with-escrow rt-flight-school)
+=>
+        (release-escrow food)
+        (research rt-flight-school)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (game-time > 3600)
+        (nor
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research-with-escrow rt-flight-school)
+=>
+        (release-escrow food)
+        (research rt-flight-school)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research-with-escrow rt-enlarged-bomb-hold)
+=>
+        (release-escrow food)
+        (research rt-enlarged-bomb-hold)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (game-time > 3600)
+        (can-research-with-escrow rt-enlarged-bomb-hold)
+=>
+        (release-escrow food)
+        (research rt-enlarged-bomb-hold)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age == tech-level-4)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (not (research-completed rt-shield-mods))
+        =>
+        (set-goal resource-needed NOVA)
+        (set-escrow-percentage food 70)
+        (set-escrow-percentage nova 80)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age == tech-level-4)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (research-completed rt-shield-mods)
+        =>
+        (set-goal resource-needed NOVA)
+        (set-escrow-percentage food 0)
+        (set-escrow-percentage nova 0)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research-with-escrow rt-shield-mods)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research rt-shield-mods)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (research-completed rt-shield-mods)
+        (can-research-with-escrow rt-drafted-labor)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research rt-drafted-labor)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (game-time > 3600)
+        (nor
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (research-completed rt-shield-mods)
+        (can-research-with-escrow rt-drafted-labor)
+=>
+        (release-escrow food)
+        (release-escrow nova)
+        (research rt-drafted-labor)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research rt-adv-flight-school)
+=>
+        (research rt-adv-flight-school)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (game-time > 3600)
+        (nor
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research rt-adv-flight-school)
+=>
+        (research rt-adv-flight-school)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research rt-armor-plating)
+=>
+        (research rt-armor-plating)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (game-time > 3600)
+        (nor
+                (goal combat-arm AIR)
+                (goal combat-supp AIR)
+        )
+        (can-research rt-armor-plating)
+=>
+        (research rt-armor-plating)
+)
+
+
+;********** ANIMAL NURSERY **********
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-stimulants)
+=>
+        (research rt-stimulants)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-genetics)
+=>
+        (research rt-genetics)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-cloning)
+=>
+        (research rt-cloning)
+)
+
+
+;********** GOVERNMENT CENTER ***********
+
+#load-if-defined NABOO
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-battle-armor)
+=>
+        (research rt-battle-armor)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-taxation)
+=>
+        (research rt-taxation)
+)
+
+(defrule
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-shielding)
+=>
+        (research rt-shielding)
+)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-jetpacks)
+=>
+        (research rt-jetpacks)
+)
+
+#end-if
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (player-in-game any-enemy)
+        (can-research rt-bothan-spies)
+=>
+        (research rt-bothan-spies)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-attack-programming)
+=>
+        (research rt-attack-programming)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-automated-processes)
+=>
+        (research rt-automated-processes)
+)
+
+(defrule        
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-presidium)
+=>
+        (research rt-presidium)
+)
+
+
+;********* HEAVY WEAPONS FACTORY **********
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-strengthened-frames)
+=>
+        (research rt-strengthened-frames)
+)
+
+#load-if-defined GUNGANS
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-creature-training)
+=>
+        (research rt-creature-training)
+)
+
+#end-if
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-reinforced-frames)
+=>
+        (research rt-reinforced-frames)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-reinforced-frames)
+=>
+        (research rt-reinforced-frames)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-rebel-mechanics)
+=>
+        (research rt-rebel-mechanics)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-rebel-mechanics)
+=>
+        (research rt-rebel-mechanics)
+)
+
+#load-if-defined WOOKIEES
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-forest-vision)
+=>
+        (research rt-forest-vision)
+)
+
+#end-if
+
+
+;******** NOVA PROCESSING CENTER **********
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 0)
+        (can-research rt-beamdrill-nova-mining)
+=>
+        (research rt-beamdrill-nova-mining)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (civilian-population >= civ-castle)
+        (building-type-count BLDG-DROPNOVA > 0)
+        (can-research rt-hvy-beamdrill-nova)
+=>
+        (research rt-hvy-beamdrill-nova)
+)
+
+
+;********** TEMPLE      **********
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (research-completed rt-optimized-motivator)
+        (current-age >= tech-level-3)
+        (can-research rt-jedi-agility)
+=>
+        (research rt-jedi-agility)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (research-completed rt-optimized-motivator)
+        (current-age >= tech-level-3)
+        (can-research rt-jedi-stamina)
+=>
+        (research rt-jedi-stamina)
+)
+
+;jedi purge
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (research-completed rt-optimized-motivator)
+        (current-age >= tech-level-3)
+        (can-research rt-jedi-strength)
+=>
+        (research rt-jedi-strength)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-jedi-concentration)
+=>
+        (research rt-jedi-concentration)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-force-strong)
+=>
+        (research rt-force-strong)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-jedi-perception)
+=>
+        (research rt-jedi-perception)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (goal jedi-rating GOOD)
+        (not (civ-selected EMPIRE))
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-jedi-mind-trick)
+=>
+        (research rt-jedi-mind-trick)
+)
+
+
+(defrule
+        (civ-selected REBEL)
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-faith-in-the-force)
+=>
+        (research rt-faith-in-the-force)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (civ-selected EMPIRE)
+                (civ-selected NABOO)
+        )
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-force-influence)
+=>
+        (research rt-force-influence)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (or
+                (civ-selected REBEL)
+                (civ-selected NABOO)
+        )
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-jedi-meditation)
+        =>
+        (research rt-jedi-meditation)
+)
+
+
+;********* MECH FACTORY **********
+
+(defrule        
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-upgraded-generators)
+=>
+        (research rt-upgraded-generators)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-upgraded-generators)
+=>
+        (research rt-upgraded-generators)
+)
+
+#load-if-defined EMPIRE
+
+;walker research
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-transport-capability)
+=>
+        (research rt-transport-capability)
+)
+
+#end-if
+
+#load-if-defined GUNGANS
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-goonga-armor)
+=>
+        (research rt-goonga-armor)
+)
+
+#end-if
+
+#load-if-defined WOOKIEES
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-wookiee-ingenuity)
+=>
+        (research rt-wookiee-ingenuity)
+)
+
+#end-if
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-4)
+        (can-research rt-adv-generator)
+=>
+        (research rt-adv-generator)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-adv-generator)
+=>
+        (research rt-adv-generator)
+)
+
+(defrule
+        (or
+                (not (civ-selected WOOKIEES))
+                (not (civ-selected REBEL))
+        )
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-4)
+        (can-research rt-adv-redesign)
+=>
+        (research rt-adv-redesign)
+)
+
+(defrule
+        (or
+                (not (civ-selected WOOKIEES))
+                (not (civ-selected REBEL))
+        )
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-adv-redesign)
+=>
+        (research rt-adv-redesign)
+)
+
+;technicians
+(defrule        
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (current-age >= tech-level-4)
+        (can-research rt-wookiee-mechanics)
+=>
+        (research rt-wookiee-mechanics)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-wookiee-mechanics)
+=>
+        (research rt-wookiee-mechanics)
+)
+
+
+;********* METAL PROCESSING CENTER **********
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-beamdrill-metal)
+=>
+        (research rt-beamdrill-metal)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-heavy-beamdrill-metal)
+=>
+        (research rt-heavy-beamdrill-metal)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-fusion-extractor)
+=>
+        (research rt-fusion-extractor)
+)
+
+
+;********* RESEARCH CENTER *********
+
+;HEAVY WEAPONS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-rotation-bearings)
+=>
+        (research rt-rotation-bearings)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (not (civ-selected REBEL))
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research rt-hvy-weapons-engineers)
+=>
+        (research rt-hvy-weapons-engineers)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (not (civ-selected REBEL))
+        (difficulty <= hard)
+        (building-type-count BLDG-TRAINHEAVY > 0)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-hvy-weapons-engineers)
+=>
+        (research rt-hvy-weapons-engineers)
+)
+
+;A-A UNITS
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-ion-accelerator)
+=>
+        (research rt-ion-accelerator)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (can-research rt-homing-sensors)
+=>
+        (research rt-homing-sensors)
+)
+
+;BUILDINGS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-durasteel)
+=>
+        (research rt-durasteel)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-permacite-plating)
+=>
+        (research rt-permacite-plating)
+)
+
+;WORKERS, SHIELDS, WALLS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-power-calibrator)
+=>
+        (research rt-power-calibrator)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-tracking-computer)
+=>
+        (research rt-tracking-computer)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-amplify-shield-proj)
+=>
+        (research rt-amplify-shield-proj)
+)
+
+;********** SHIPYARD ***********
+;research items in the war center
+
+
+;********* SPACEPORT *********
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (player-in-game any-ally)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-holonet)
+=>
+        (research rt-holonet)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (unit-type-count-total UNIT-CARGOSP > 0)
+        (can-research rt-hutt-endorsement)
+=>
+        (research rt-hutt-endorsement)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-galactic-banking)
+=>
+        (research rt-galactic-banking)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (player-in-game any-ally)
+        (can-research rt-galactic-trade-comm)
+=>      
+        (research rt-galactic-trade-comm)
+)
+
+#load-if-defined FEDERATION
+
+(defrule
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-neimoidian-endorse)
+=>
+        (research rt-neimoidian-endorse)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (player-in-game any-ally)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-insider-trading)
+=>
+        (research rt-insider-trading)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (player-in-game any-ally)
+        (can-research rt-market-control)
+=>
+        (research rt-market-control)
+)
+
+#end-if
+
+#load-if-defined EMPIRE
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (player-in-game any-ally)
+        (can-research rt-altered-bargains)
+=>
+        (research rt-altered-bargains)
+)
+
+#end-if
+
+
+;********** TROOP CENTER **********
+
+(defrule
+        (civ-selected GUNGANS)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-farseein-binoculars)
+=>
+        (research rt-farseein-binoculars)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-macrobinoculars)
+=>
+        (research rt-macrobinoculars)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-lighter-armor)
+=>
+        (research rt-lighter-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-lighter-armor)
+=>
+        (research rt-lighter-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )       
+        (research-completed rt-optimized-motivator)
+        (can-research rt-portable-scanners)
+=>
+        (research rt-portable-scanners)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-portable-scanners)
+=>
+        (research rt-portable-scanners)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )       
+        (can-research rt-integrated-rgefinder)
+=>
+        (research rt-integrated-rgefinder)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-integrated-rgefinder)
+=>
+        (research rt-integrated-rgefinder)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-assembly-droids)
+=>
+        (research rt-assembly-droids)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-assembly-droids)
+=>
+        (research rt-assembly-droids)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-explosive-yields-inc)
+=>
+        (research rt-explosive-yields-inc)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-explosive-yields-inc)
+=>
+        (research rt-explosive-yields-inc)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-dexterity)
+=>
+        (research rt-dexterity)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-dexterity)
+=>
+        (research rt-dexterity)
+)
+
+;********* WAR CENTER ********
+
+;TROOPERS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (civ-selected REBEL)
+        (current-age >= tech-level-4)
+        (difficulty <= moderate)
+        (can-research rt-tougher-armor)
+=>
+        (research rt-tougher-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-basic-armor)
+=>
+        (research rt-basic-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-light-armor)
+=>
+        (research rt-light-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-light-armor)
+=>
+        (research rt-light-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm TROOP)
+                (goal combat-supp TROOP)
+        )
+        (can-research rt-heavy-armor)
+=>
+        (research rt-heavy-armor)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-heavy-armor)
+=>
+        (research rt-heavy-armor)
+)
+
+;TROOPERS/MECHS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm TROOP)
+                                (goal combat-supp TROOP)
+                        )
+                )
+        )
+        (can-research rt-primary-focus-coils)
+=>
+        (research rt-primary-focus-coils)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-primary-focus-coils)
+=>
+        (research rt-primary-focus-coils)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm TROOP)
+                                (goal combat-supp TROOP)
+                        )
+                )
+        )
+        (can-research rt-cooling-sleeves)
+=>
+        (research rt-cooling-sleeves)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-cooling-sleeves)
+=>
+        (research rt-cooling-sleeves)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm TROOP)
+                                (goal combat-supp TROOP)
+                        )
+                )
+        )
+        (can-research rt-adv-power-pack)
+=>
+        (research rt-adv-power-pack)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-4)
+        (can-research rt-adv-power-pack)
+=>
+        (research rt-adv-power-pack)
+)
+
+;MECHS/SHIPS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm SEA)
+                                (goal combat-supp SEA)
+                        )
+                )
+        )
+        (can-research rt-elevation-tracking)
+=>
+        (research rt-elevation-tracking)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-elevation-tracking)
+=>
+        (research rt-elevation-tracking)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm SEA)
+                                (goal combat-supp SEA)
+                        )
+                )
+        )
+        (can-research rt-external-sensor-pod)
+=>
+        (research rt-external-sensor-pod)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-external-sensor-pod)
+=>
+        (research rt-external-sensor-pod)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (or
+                        (goal combat-supp MECH/HW)
+                        (or
+                                (goal combat-arm SEA)
+                                (goal combat-supp SEA)
+                        )
+                )
+        )
+        (can-research rt-targetting-sensors)
+=>
+        (research rt-targetting-sensors)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-targetting-sensors)
+=>
+        (research rt-targetting-sensors)
+)
+
+(defrule        
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm SEA)
+                (goal combat-supp SEA)
+        )
+        (building-type-count BLDG-TRAINBOAT > 0)
+        (can-research rt-redesigned-specs)
+        =>
+        (research rt-redesigned-specs)
+)
+
+(defrule        
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (building-type-count BLDG-TRAINBOAT > 0)
+        (can-research rt-redesigned-specs)
+        =>
+        (research rt-redesigned-specs)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm SEA)
+                (goal combat-supp SEA)
+        )
+        (can-research rt-adv-propulsion)
+        =>
+        (research rt-adv-propulsion)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-adv-propulsion)
+        =>
+        (research rt-adv-propulsion)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm SEA)
+                (goal combat-supp SEA)
+        )
+        (can-research rt-redoubled-efforts)
+        =>
+        (research rt-redoubled-efforts)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-redoubled-efforts)
+        =>
+        (research rt-redoubled-efforts)
+)
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm SEA)
+                (goal combat-supp SEA)
+        )
+        (can-research rt-adv-scanners)
+        =>
+        (research rt-adv-scanners)
+)
+
+(defrule
+        (difficulty <= hard)
+        (goal upgrade-conflict NO)
+        (game-time > 3600)
+        (current-age >= tech-level-4)
+        (can-research rt-adv-scanners)
+        =>
+        (research rt-adv-scanners)
+)
+
+#load-if-defined GUNGANS
+
+(defrule
+        (difficulty <= moderate)
+        (goal upgrade-conflict NO)
+        (current-age >= tech-level-4)
+        (can-research rt-fast-growth-chambers)
+        =>
+        (research rt-fast-growth-chambers)
+)
+
+#end-if
+
+
+;MECHS
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research rt-light-plating)
+=>
+        (research rt-light-plating)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-2)
+        (research-completed rt-upgraded-motivator)
+        (can-research rt-light-plating)
+=>
+        (research rt-light-plating)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research rt-medium-plating)
+=>
+        (research rt-medium-plating)
+)
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= hard)
+        (current-age >= tech-level-3)
+        (research-completed rt-optimized-motivator)
+        (can-research rt-medium-plating)
+=>
+        (research rt-medium-plating)
+)
+
+#load-if-not-defined REBEL
+#load-if-not-defined NABOO
+
+(defrule
+        (goal upgrade-conflict NO)
+        (difficulty <= moderate)
+        (current-age >= tech-level-4)
+        (or
+                (goal combat-arm MECH/HW)
+                (goal combat-supp MECH/HW)
+        )
+        (can-research rt-heavy-plating)
+=>
+        (research rt-heavy-plating)
+)
+
+#end-if
+#end-if
+
+
+#end-if
+
+
+;

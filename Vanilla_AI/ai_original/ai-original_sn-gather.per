@@ -1,0 +1,512 @@
+(defrule
+        (not (goal special-map WATER))
+        (current-age == tech-level-1)
+        (civilian-population < 9)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 10)
+        (set-strategic-number sn-food-gatherer-percentage 90)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (current-age == tech-level-1)
+        (building-type-count BLDG-PREFAB < 1)
+        (not (can-build BLDG-PREFAB))
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 50)
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+(defrule
+        (not (goal special-map WATER))
+        (current-age == tech-level-1)
+        (civilian-population >= 10)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 60)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+;collect some nova for trawlers if nova resources low
+(defrule
+        (goal special-map WATER)
+        (current-age == tech-level-1)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 65)
+        (set-strategic-number sn-nova-gatherer-percentage 5)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-1)
+        (civilian-population >= 10)
+        (food-amount > 500)
+        (carbon-amount < 100)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 90)
+        (set-strategic-number sn-food-gatherer-percentage 10)
+        (set-strategic-number sn-nova-gatherer-percentage 0)
+        (set-strategic-number sn-metal-gatherer-percentage 0)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-2)
+=>
+        (set-goal resource-needed NO)
+)
+
+(defrule
+        (goal jedi-rating POOR)
+        (not (goal special-map WATER))
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 40)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (goal jedi-rating POOR)
+        (goal special-map WATER)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (goal jedi-rating GOOD)
+        (not (goal special-map WATER))
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 45)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (goal jedi-rating GOOD)
+        (goal special-map WATER)
+        (current-age == tech-level-2)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 40)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal castle-attempt YES)
+        (goal mech-rating POOR)
+        (not (goal special-map WATER))
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 25)
+        (set-strategic-number sn-food-gatherer-percentage 30)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 25)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal castle-attempt YES)
+        (goal mech-rating GOOD)
+        (not (goal special-map WATER))
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 30)
+        (set-strategic-number sn-nova-gatherer-percentage 10)
+        (set-strategic-number sn-metal-gatherer-percentage 30)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal castle-attempt YES)
+        (goal mech-rating POOR)
+        (goal special-map WATER)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 25)
+        (set-strategic-number sn-food-gatherer-percentage 15)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 30)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal castle-attempt YES)
+        (goal mech-rating GOOD)
+        (goal special-map WATER)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 15)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 30)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal mech-rating POOR)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (not (goal special-map WATER))
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 25)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (nor
+                (civ-selected EMPIRE)
+                (civ-selected GUNGANS)
+        )
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (not (goal special-map WATER))
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (civ-selected FEDERATION)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (not (goal special-map WATER))
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 40)
+        (set-strategic-number sn-nova-gatherer-percentage 20)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (goal mech-rating POOR)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (goal special-map WATER)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 25)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (nor
+                (civ-selected EMPIRE)
+                (civ-selected GUNGANS)
+        )
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (goal special-map WATER)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 25)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (civ-selected FEDERATION)
+        (building-type-count-total BLDG-GOVTCTR > 0)
+        (goal special-map WATER)
+        =>
+        (set-strategic-number sn-carbon-gatherer-percentage 45)
+        (set-strategic-number sn-food-gatherer-percentage 25)
+        (set-strategic-number sn-nova-gatherer-percentage 25)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (current-age == tech-level-3)
+        (or
+                (carbon-amount > 500)
+                (nova-amount > 800)
+        )
+        (food-amount < 200)
+        (goal castle-attempt NO)
+        =>
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-nova-gatherer-percentage 10)
+        (set-strategic-number sn-metal-gatherer-percentage 10)
+)
+
+(defrule
+        (current-age == tech-level-4)
+=>
+        (set-goal resource-needed NO)
+)
+
+(defrule
+        (goal resource-supp FOOD-ONLY)
+        (current-age == tech-level-4)
+        (food-amount < 250)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-supp NOVA-ONLY)
+        (current-age == tech-level-4)
+        (nova-amount < 475)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal resource-supp CARBON-FOOD)
+        (current-age == tech-level-4) 
+        (carbon-amount < 600)
+        (food-amount > 500)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal resource-supp CARBON-FOOD)
+        (current-age == tech-level-4) 
+        (carbon-amount > 600)
+        (food-amount < 500)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-supp CARBON-NOVA)
+        (current-age == tech-level-4) 
+        (carbon-amount > 525)
+        (nova-amount < 500)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal resource-supp CARBON-NOVA)
+        (current-age == tech-level-4) 
+        (carbon-amount < 525)
+        (nova-amount > 500)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal resource-supp CARBON-METAL)
+        (current-age == tech-level-4) 
+        (carbon-amount > 400)
+        (metal-amount < 400)
+=>
+        (set-goal resource-needed METAL)
+)
+
+(defrule
+        (goal resource-supp CARBON-METAL)
+        (current-age == tech-level-4) 
+        (carbon-amount < 400)
+        (metal-amount > 400)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal resource-supp FOOD-NOVA)
+        (current-age == tech-level-4) 
+        (food-amount > 1600)
+        (nova-amount < 1200)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal resource-supp FOOD-NOVA)
+        (current-age == tech-level-4) 
+        (food-amount < 1600)
+        (nova-amount > 1200)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal resource-supp FOOD-METAL)
+        (current-age == tech-level-4) 
+        (food-amount > 500)
+        (metal-amount < 350)
+=>
+        (set-goal resource-needed METAL)
+)
+
+(defrule
+        (goal resource-supp FOOD-METAL)
+        (current-age == tech-level-4) 
+        (food-amount < 500)
+        (metal-amount > 350)
+=>
+        (set-goal resource-needed FOOD)
+)
+
+(defrule
+        (goal castle-attempt YES)
+        (current-age == tech-level-4)
+        (metal-amount < 650)
+=>
+        (set-goal resource-needed METAL)
+)
+
+(defrule
+        (goal sea-owner YES)
+        (current-age == tech-level-4)
+        (warboat-count < twenty-percent-pop)
+        (carbon-amount < 200)
+        (nova-amount > 150)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal sea-owner YES)
+        (current-age == tech-level-4)
+        (warboat-count < twenty-percent-pop)
+        (carbon-amount > 200)
+        (nova-amount < 150)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal mech-rating GOOD)
+        (or
+                (goal resource-needed NO)
+                (current-age == tech-level-4)
+        )
+        (carbon-amount < 1000)
+        =>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal mech-rating POOR)                                 ;good in air
+        (or
+                (goal resource-needed NO)
+                (current-age == tech-level-4)
+        )
+        (nova-amount < 1000)
+        =>
+        (set-goal resource-needed NOVA)
+)
+
+;***********************************************
+;MONUMENT
+(defrule
+        (goal wonder-attempt POSSIBLE)
+        (carbon-amount < 1000)
+        (nova-amount > 1000)
+        (metal-amount > 1000)
+=>
+        (set-goal resource-needed CARBON)
+)
+
+(defrule
+        (goal wonder-attempt POSSIBLE)
+        (carbon-amount > 1000)
+        (nova-amount < 1000)
+        (metal-amount > 1000)
+=>
+        (set-goal resource-needed NOVA)
+)
+
+(defrule
+        (goal wonder-attempt POSSIBLE)
+        (carbon-amount > 1000)
+        (nova-amount > 1000)
+        (metal-amount < 1000)
+=>
+        (set-goal resource-needed METAL)
+)
+
+(defrule
+        (goal resource-needed NO)
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 40)
+        (set-strategic-number sn-food-gatherer-percentage 40)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (goal resource-needed CARBON)
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 50)
+        (set-strategic-number sn-food-gatherer-percentage 30)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (goal resource-needed FOOD)
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (goal resource-needed NOVA)
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 30)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 30)
+        (set-strategic-number sn-metal-gatherer-percentage 5)
+        (disable-self)
+)
+
+(defrule
+        (goal resource-needed METAL)
+        (current-age == tech-level-4)
+=>
+        (set-strategic-number sn-carbon-gatherer-percentage 35)
+        (set-strategic-number sn-food-gatherer-percentage 35)
+        (set-strategic-number sn-nova-gatherer-percentage 15)
+        (set-strategic-number sn-metal-gatherer-percentage 15)
+        (disable-self)
+)
