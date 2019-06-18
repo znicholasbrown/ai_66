@@ -634,6 +634,7 @@ Player's Civ
 
 ## Examples
 
+```cpp
 #load-if-defined REBEL
 
         (defrule
@@ -649,7 +650,9 @@ Player's Civ
         )
 
 #end-if
+```
 
+```cpp
 #load-if-defined EMPIRE
 
         (defrule
@@ -665,7 +668,9 @@ Player's Civ
         )
 
 #end-if
+```
 
+```cpp
 #load-if-defined NABOO
 
         (defrule
@@ -681,6 +686,7 @@ Player's Civ
         )
 
 #end-if
+```
 
 ## Conditional Loading and User-Defined Constants
 
