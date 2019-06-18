@@ -126,7 +126,7 @@ See: Rules
 
 ### Testing Facts
 
-You will see <rel-op> associated with a lot of facts, this is a relative operator and allows you to test the relationship of the fact to another value, an example might be if you wanted the rule to be enabled when a certain amount of carbon had been collected:
+You will see `rel-op` associated with a lot of facts, this is a relative operator and allows you to test the relationship of the fact to another value, an example might be if you wanted the rule to be enabled when a certain amount of carbon had been collected:
 
 (defrule
 
@@ -154,7 +154,7 @@ Some facts can be tested just by checking them directly. If you want to see if c
 
 )
 
-Other facts are more complex and require you to supply additional data that is used by the fact – information like the civilization <civ> or the map size <map-size> is required. Any fact that lists parameters <example> requires those parameters in order to work correctly.
+Other facts are more complex and require you to supply additional data that is used by the fact – information like the civilization `civ` or the map size `map-size` is required. Any fact that lists parameters `example` requires those parameters in order to work correctly.
 
 ## Actions
 
@@ -184,13 +184,13 @@ This command creates auser-defined constant. For more information on defconst, s
 
 Syntax:
 
-(defconst <constant-name> <value>)
+(defconst `constant-name` `value`)
 
-<constant-name>is a user selected name. Use of the same format that the rest of the system
+`constant-name`is a user selected name. Use of the same format that the rest of the system
 
 uses is recommended but not required (for example, words-separated-with-dashes).
 
-<value>is a valid integer value that will fit in a C++ type **short**. (For non-programmers, this means that the value can not be less than -32768 or greater than 32767.)
+`value`is a valid integer value that will fit in a C++ type **short**. (For non-programmers, this means that the value can not be less than -32768 or greater than 32767.)
 
 The following example defines a decided number of workers in tech level 1:
 
@@ -198,17 +198,17 @@ The following example defines a decided number of workers in tech level 1:
 
 The following rule then uses it:
 
-(defrule
+        (defrule
 
-        (civilian-population < num-tech-1-workers)
+                (civilian-population < num-tech-1-workers)
 
-        (can-train UNIT-WORKER)
+                (can-train UNIT-WORKER)
 
-=>
+        =>
 
-        (train UNIT-WORKER)
+                (train UNIT-WORKER)
 
-)
+        )
 
 Constants are very handy for naming of goals, goal values, timers, taunts, etc.
 
@@ -224,17 +224,17 @@ The following example defines ANIMAL-REEK:
 
 The following rule then trains up to 5 of them:
 
-(defrule
+        (defrule
 
-        (unit-type-count-total ANIMAL-REEK < 5)
+                (unit-type-count-total ANIMAL-REEK < 5)
 
-        (can-train ANIMAL-REEK)
+                (can-train ANIMAL-REEK)
 
-=>
+        =>
 
-        (train ANIMAL-REEK)
+                (train ANIMAL-REEK)
 
-)
+        )
 
 # Load Command
 
@@ -268,7 +268,7 @@ A variation of the load command that allows for random loading of files. This co
 
 Syntax:
 
-(load-random  20 "filename1"
+        (load-random  20 "filename1"
 
                      10 "filename2"
 
@@ -282,21 +282,21 @@ Since all files share the same random number, one load-random command can load a
 
 Special Case 1:
 
-(load-random
+        (load-random
 
-    20 "filename1"
+        20 "filename1"
 
-    10 "filename2"
+        10 "filename2"
 
-    40 "filename3"
+        40 "filename3"
 
-)
+        )
 
 No default file given. This is a valid syntax. There is a 30% chance that no file will be loaded.
 
 Special Case 2:
 
-(load-random "filename")
+        (load-random "filename")
 
 Only the default file is given. This is a valid syntax. The file is always loaded. This command is a slower version of the load command so its use is not recommended.
 
@@ -321,9 +321,9 @@ Conditional loading provides three major benefits:
 
 Conditional loading recognizes four directives:
 
-   #load-if-defined  <system-defined-symbol>
+   #load-if-defined  `system-defined-symbol`
 
-   #load-if-not-defined <system-defined-symbol>
+   #load-if-not-defined `system-defined-symbol`
 
    #else,
 
@@ -333,7 +333,7 @@ Together they are used to form the following constructs:
 
 Construct #1:
 
-#load-if-defined <system-defined-symbol>
+#load-if-defined `system-defined-symbol`
 
 ...... define rules here
 
@@ -341,7 +341,7 @@ Construct #1:
 
 Construct #2:
 
-#load-if-not-defined <system-defined-symbol>
+#load-if-not-defined `system-defined-symbol`
 
 ...... define rules here
 
@@ -349,7 +349,7 @@ Construct #2:
 
 Construct #3:
 
-#load-if-defined <system-defined-symbol>
+#load-if-defined `system-defined-symbol`
 
 ...... define rules here
 
@@ -361,7 +361,7 @@ Construct #3:
 
 Construct #4:
 
-#load-if-not-defined <system-defined-symbol>
+#load-if-not-defined `system-defined-symbol`
 
 ...... define rules here
 
@@ -379,17 +379,17 @@ game difficulty setting:
 
 #load-if-defined DIFFICULTY-EASIEST
 
-(defrule
+        (defrule
 
-   (true)
+        (true)
 
-   =>
+        =>
 
-   (chat-to-all "Easiest")
+        (chat-to-all "Easiest")
 
-   (disable-self)
+        (disable-self)
 
-)
+        )
 
 #end-if
 
@@ -410,275 +410,275 @@ System symbols available:
 
 ##### **Game Type**
 
-(global, type 2)
+        (global, type 2)
 
-  DEATH-MATCH
+        DEATH-MATCH
 
-  TERMINATE
+        TERMINATE
 
-  KING-OF-THE-HILL
+        KING-OF-THE-HILL
 
-  MONUMENT-RACE
+        MONUMENT-RACE
 
-  DEFEND-MONUMENT
+        DEFEND-MONUMENT
 
 ##### Starting Resources
 
-(global, type 1)
+        (global, type 1)
 
-  LOW-RESOURCES-START
+        LOW-RESOURCES-START
 
-  MEDIUM-RESOURCES-START
+        MEDIUM-RESOURCES-START
 
-  HIGH-RESOURCES-START
+        HIGH-RESOURCES-START
 
 ##### **Map Size**
 
-(global, type 1)
+        (global, type 1)
 
-  TINY-MAP
+        TINY-MAP
 
-  SMALL-MAP
+        SMALL-MAP
 
-  MEDIUM-MAP
+        MEDIUM-MAP
 
-  NORMAL-MAP
+        NORMAL-MAP
 
-  LARGE-MAP
+        LARGE-MAP
 
-  GIANT-MAP
+        GIANT-MAP
 
 Map Type
 
-(global, type 1)
+        (global, type 1)
 
-  WATER-MASS-MAP
+        WATER-MASS-MAP
 
-  LAND-SATELLITES-MAP
+        LAND-SATELLITES-MAP
 
-  SPACE-SATELLITES-MAP
+        SPACE-SATELLITES-MAP
 
-  PLANETS-AND-MOONS-MAP
+        PLANETS-AND-MOONS-MAP
 
-  SEARCH-AND-DESTROY-MAP
+        SEARCH-AND-DESTROY-MAP
 
-  TEAM-LAND-SATELLITES-MAP
+        TEAM-LAND-SATELLITES-MAP
 
-  TEAM-SPACE-SATELLITES-MAP
+        TEAM-SPACE-SATELLITES-MAP
 
-  STAR-WARS-WORLD-KASHYYYK-MAP
+        STAR-WARS-WORLD-KASHYYYK-MAP
 
-  STAR-WARS-WORLD-ENDOR-MAP
+        STAR-WARS-WORLD-ENDOR-MAP
 
-  STAR-WARS-WORLD-GEDDES-MAP
+        STAR-WARS-WORLD-GEDDES-MAP
 
-  STAR-WARS-WORLD-AEREEN-MAP
+        STAR-WARS-WORLD-AEREEN-MAP
 
-  STAR-WARS-WORLD-KESSEL-MAP
+        STAR-WARS-WORLD-KESSEL-MAP
 
-  STAR-WARS-WORLD-TATOOINE-MAP
+        STAR-WARS-WORLD-TATOOINE-MAP
 
-  STAR-WARS-WORLD-TATOOINE-NEW-MAP
+        STAR-WARS-WORLD-TATOOINE-NEW-MAP
 
-  STAR-WARS-WORLD-YAVIN-MAP
+        STAR-WARS-WORLD-YAVIN-MAP
 
-  SEA-MAP
+        SEA-MAP
 
-  SHORELINE-MAP
+        SHORELINE-MAP
 
-  LAND-MASS-MAP
+        LAND-MASS-MAP
 
-  SPACE-MASS-MAP
+        SPACE-MASS-MAP
 
-  NOVA-LAKE-MAP
+        NOVA-LAKE-MAP
 
-  LARGE-SEA-MAP
+        LARGE-SEA-MAP
 
-  STAR-WARS-WORLD-KRANT-MAP
+        STAR-WARS-WORLD-KRANT-MAP
 
-  STAR-WARS-WORLD-HOTH-MAP
+        STAR-WARS-WORLD-HOTH-MAP
 
-  STAR-WARS-WORLD-HANOON-MAP
+        STAR-WARS-WORLD-HANOON-MAP
 
-  STAR-WARS-WORLD-REYTHA-MAP
+        STAR-WARS-WORLD-REYTHA-MAP
 
-  STAR-WARS-WORLD-DAGOBAH-MAP
+        STAR-WARS-WORLD-DAGOBAH-MAP
 
-  STAR-WARS-WORLD-ZALORIIS-MAP
+        STAR-WARS-WORLD-ZALORIIS-MAP
 
-  STAR-WARS-WORLD-NABOO-MAP
+        STAR-WARS-WORLD-NABOO-MAP
 
-  STAR-WARS-WORLD-SARAPIN-MAP
+        STAR-WARS-WORLD-SARAPIN-MAP
 
-  STAR-WARS-WORLD-EREDENN-MAP
+        STAR-WARS-WORLD-EREDENN-MAP
 
-  STAR-WARS-WORLD-GEONOSIS-MAP
+        STAR-WARS-WORLD-GEONOSIS-MAP
 
-  STAR-WARS-WORLD-MOSESPA-MAP
+        STAR-WARS-WORLD-MOSESPA-MAP
 
-  CUSTOM-MAP
+        CUSTOM-MAP
 
-  RAIDERS-MAP
+        RAIDERS-MAP
 
-  RIVERS-MAP
+        RIVERS-MAP
 
-  SWAMP-MAP
+        SWAMP-MAP
 
-  TUNDRA-MAP
+        TUNDRA-MAP
 
-  DESERT-MAP
+        DESERT-MAP
 
-  ARENA-MAP
+        ARENA-MAP
 
-  FOREST-MAP
+        FOREST-MAP
 
-  FORTRESS-MAP
+        FORTRESS-MAP
 
-  ICE-LAKE-MAP
+        ICE-LAKE-MAP
 
-  NOVA-ASSAULT-MAP
+        NOVA-ASSAULT-MAP
 
-  PRECIPICE-MAP
+        PRECIPICE-MAP
 
-  FLATS-MAP
+        FLATS-MAP
 
-  MOTHERLODE-MAP
+        MOTHERLODE-MAP
 
-  SAVANNAH-MAP
+        SAVANNAH-MAP
 
 Victory Type
 
-(global, type 1)
+        (global, type 1)
 
-  VICTORY-STANDARD
+        VICTORY-STANDARD
 
-  VICTORY-CONQUEST
+        VICTORY-CONQUEST
 
-  VICTORY-TIME-LIMIT
+        VICTORY-TIME-LIMIT
 
-  VICTORY-SCORE
+        VICTORY-SCORE
 
-  VICTORY-CUSTOM
+        VICTORY-CUSTOM
 
 Difficulty
 
-(global, type 1)
+        (global, type 1)
 
-  DIFFICULTY-EASIEST
+        DIFFICULTY-EASIEST
 
-  DIFFICULTY-EASY
+        DIFFICULTY-EASY
 
-  DIFFICULTY-MODERATE
+        DIFFICULTY-MODERATE
 
-  DIFFICULTY-HARD
+        DIFFICULTY-HARD
 
-  DIFFICULTY-HARDEST
+        DIFFICULTY-HARDEST
 
 Population Cap
 
-(global, type 1)
+        (global, type 1)
 
-  POPULATION-CAP-25
+        POPULATION-CAP-25
 
-  POPULATION-CAP-50
+        POPULATION-CAP-50
 
-  POPULATION-CAP-75
+        POPULATION-CAP-75
 
-  POPULATION-CAP-100
+        POPULATION-CAP-100
 
-  POPULATION-CAP-125
+        POPULATION-CAP-125
 
-  POPULATION-CAP-150
+        POPULATION-CAP-150
 
-  POPULATION-CAP-175
+        POPULATION-CAP-175
 
-  POPULATION-CAP-200
+        POPULATION-CAP-200
 
-  POPULATION-CAP-225
+        POPULATION-CAP-225
 
-  POPULATION-CAP-250
+        POPULATION-CAP-250
 
 Game Speed Lock
 
-(global, type 2)
+        (global, type 2)
 
-  GAME-SPEED-LOCKED
+        GAME-SPEED-LOCKED
 
 Team Lock
 
-(global, type 2)
+        (global, type 2)
 
-  TEAMS-LOCKED
+        TEAMS-LOCKED
 
 Player's Civ
 
-(local, type 1)
+        (local, type 1)
 
-  GAIA  <--- or player# 0 (zero)
+        GAIA  <--- or player# 0 (zero)
 
-  REBEL
+        REBEL
 
-  EMPIRE
+        EMPIRE
 
-  NABOO
+        NABOO
 
-  GUNGANS
+        GUNGANS
 
-  WOOKIEES
+        WOOKIEES
 
-  FEDERATION
+        FEDERATION
 
-  REPUBLIC
+        REPUBLIC
 
-  CONFEDERACY
+        CONFEDERACY
 
 ## Examples
 
 #load-if-defined REBEL
 
-(defrule
+        (defrule
 
-  (true)
+        (true)
 
-  =>
+        =>
 
-  (chat-to-all "I am Rebels")
+        (chat-to-all "I am Rebels")
 
-  (disable-self)
+        (disable-self)
 
-)
+        )
 
 #end-if
 
 #load-if-defined EMPIRE
 
-(defrule
+        (defrule
 
-  (true)
+        (true)
 
-  =>
+        =>
 
-  (chat-to-all "I am Empire")
+        (chat-to-all "I am Empire")
 
-  (disable-self)
+        (disable-self)
 
-)
+        )
 
 #end-if
 
 #load-if-defined NABOO
 
-(defrule
+        (defrule
 
-  (true)
+        (true)
 
-  =>
+        =>
 
-  (chat-to-all "I am Naboo")
+        (chat-to-all "I am Naboo")
 
-  (disable-self)
+        (disable-self)
 
-)
+        )
 
 #end-if
 
@@ -690,11 +690,11 @@ Example:
 
 #load-if-defined DEATH-MATCH
 
-  (defconst tech-1-workers 6)
+        (defconst tech-1-workers 6)
 
 #else
 
-  (defconst tech-1-workers 22)
+        (defconst tech-1-workers 22)
 
 #end-if
 
@@ -702,9 +702,9 @@ In Death Match games the code sets the tech-1-workers constant to 6. In other ga
 
 Note that constants can not be redefined. The code
 
-(defconst my-constant 1)
+        (defconst my-constant 1)
 
-(defconst my-constant 2)
+        (defconst my-constant 2)
 
 will cause the following error
 
@@ -712,9 +712,9 @@ ERR2012: Constant Already Defined: my-constant
 
 The error will not appear if the constant is defined more than once with the same value:
 
-(defconst my-constant 1)
+        (defconst my-constant 1)
 
-(defconst my-constant 1)
+        (defconst my-constant 1)
 
 # System Defined Constants
 
@@ -722,59 +722,59 @@ For every computer player the system defines a set of constants that make rule-w
 
 my-player-number
 
-(type <player-number>)
+        (type `player-number`)
 
 my-civ
 
-(type <civ>)
+        (type `civ`)
 
 my-unique-unit
 
-(type <unit>)
+        (type `unit`)
 
 I couldn't get this to work properly in SWGB and it's not in the original ai scripts either.
 
 my-unique-unit-upgrade
 
-(type <research-item>)
+        (type `research-item`)
 
 I couldn't get this to work properly in SWGB and it's not in the original ai scripts either.  As a workaround, I just define my own constant and assign the appropriate civ specific unique unit upgrade to it in a civ load file.
 
 #load-if-defined WOOKIEES
 
- (defconst my-unique-unit-tech  ut-berserker)
+        (defconst my-unique-unit-tech  ut-berserker)
 
 #end-if
 
 Then, to use the newly defined upgrade just research like any other upgrade.
 
-(defrule
+        (defrule
 
- (can-research my-unique-unit-tech)
+        (can-research my-unique-unit-tech)
 
-=>
+        =>
 
- (research my-unique-unit-tech)
+        (research my-unique-unit-tech)
 
-)
+        )
 
 
 
 my-elite-unique-unit
 
-(type <unit>)
+        (type `unit`)
 
 Since the above didn't work, I assume this doesn't, and it's not in the original ai scripts either.
 
 my-unique-unit-line
 
-(type <unit>)
+        (type `unit`)
 
 Verified that this is in the original ai script, Fortress.per, and should work fine.
 
 my-unique-research
 
-(type <research-item>)
+        (type `research-item`)
 
 Only worked for Wookies and Trade Federation on 1 tech each.  BROKEN!  In Age of Kings, each civilization only had one unique technology.  In SWGB each civ can have several, so this is no longer a valid or useful constant.  The workaround is to just reference the civ specific technologies by their rt names and research as you would any other tech or upgrade.
 
@@ -785,378 +785,378 @@ Only worked for Wookies and Trade Federation on 1 tech each.  BROKEN!  In Age of
 | true        |
 | --- |
 | false        |
-| attack-soldier-count  <rel-op>  <value>        |
-| attack-warboat-count  <rel-op>  <value>        |
-| building-available  <building>        |
-| building-count  <rel-op>  <value>        |
-| building-count-total  <rel-op>  <value>        |
-| building-type-count  <building> <rel-op>  <value>        |
-| building-type-count-total  <building> <rel-op>  <value>        |
-| can-afford-building <building>        |
-| can-afford-complete-wall <perimeter> <wall-type>        |
-| can-afford-research <research-item>        |
-| can-afford-unit <unit>        |
-| can-build <building>        |
-| can-build-gate  <perimeter>        |
-| can-build-gate-with-escrow  <perimeter>        |
-| can-build-wall  <perimeter> <wall-type>        |
-| can-build-wall-with-escrow <perimeter> <wall-type>        |
-| can-build-with-escrow <building>        |
-| can-buy-commodity <commodity>        |
-| can-research        <research-item>        |
-| can-research-with-escrow <research-item>        |
-| can-sell-commodity <commodity>        |
+| attack-soldier-count  `rel-op`  `value`        |
+| attack-warboat-count  `rel-op`  `value`        |
+| building-available  `building`        |
+| building-count  `rel-op`  `value`        |
+| building-count-total  `rel-op`  `value`        |
+| building-type-count  `building` `rel-op`  `value`        |
+| building-type-count-total  `building` `rel-op`  `value`        |
+| can-afford-building `building`        |
+| can-afford-complete-wall `perimeter` `wall-type`        |
+| can-afford-research `research-item`        |
+| can-afford-unit `unit`        |
+| can-build `building`        |
+| can-build-gate  `perimeter`        |
+| can-build-gate-with-escrow  `perimeter`        |
+| can-build-wall  `perimeter` `wall-type`        |
+| can-build-wall-with-escrow `perimeter` `wall-type`        |
+| can-build-with-escrow `building`        |
+| can-buy-commodity `commodity`        |
+| can-research        `research-item`        |
+| can-research-with-escrow `research-item`        |
+| can-sell-commodity `commodity`        |
 | can-spy        |
 | can-spy-with-escrow        |
-| can-train <unit>        |
-| can-train-with-escrow <unit>        |
-| cc-players-building-count  <player-number>  <rel-op>  <value>        |
-| cc-players-building-type-count  <player-number>  <building> <rel-op>  <value>        |
-| cc-players-unit-count  <player-number>  <rel-op>  <value>        |
-| cc-players-unit-type-count  <player-number>  <unit>  <rel-op>  <value>        |
+| can-train `unit`        |
+| can-train-with-escrow `unit`        |
+| cc-players-building-count  `player-number`  `rel-op`  `value`        |
+| cc-players-building-type-count  `player-number`  `building` `rel-op`  `value`        |
+| cc-players-unit-count  `player-number`  `rel-op`  `value`        |
+| cc-players-unit-type-count  `player-number`  `unit`  `rel-op`  `value`        |
 | cheats-enabled        |
-| civ-selected  <civ>        |
-| civilian-population  <rel-op>  <value>        |
-| commodity-buying-price  <commodity>  <rel-op>  <value>        |
-| commodity-selling-price  <commodity>  <rel-op>  <value>        |
-| current-age  <rel-op> <tech-level>        |
-| current-age-time  <rel-op> <value>        |
-| current-score  <rel-op> <value>        |
+| civ-selected  `civ`        |
+| civilian-population  `rel-op`  `value`        |
+| commodity-buying-price  `commodity`  `rel-op`  `value`        |
+| commodity-selling-price  `commodity`  `rel-op`  `value`        |
+| current-age  `rel-op` `tech-level`        |
+| current-age-time  `rel-op` `value`        |
+| current-score  `rel-op` `value`        |
 | death-match-game        |
-| defend-soldier-count  <rel-op> <value>        |
-| defend-warboat-count  <rel-op> <value>        |
-| difficulty  <rel-op> <difficulty>        |
-| doctrine <value>        |
-| dropsite-min-distance  <resource-type> <rel-op>  <value>        |
+| defend-soldier-count  `rel-op` `value`        |
+| defend-warboat-count  `rel-op` `value`        |
+| difficulty  `rel-op` `difficulty`        |
+| doctrine `value`        |
+| dropsite-min-distance  `resource-type` `rel-op`  `value`        |
 | enemy-buildings-in-town        |
 | enemy-captured-holocrons        |
-| escrow-amount  <resource-type>  <rel-op>  <value>        |
-| event-detected  <event-type> <event-id>        |
-| food-amount <rel-op>  <value>        |
-| game-time  <rel-op>  <value>        |
-| goal <goal-id> <value>        |
-| nova-amount  <rel-op>  <value>        |
-| housing-headroom  <rel-op>  <value>        |
-| idle-farm-count  <rel-op>  <value>        |
-| map-size <map-size>        |
-| map-type <map-type>        |
-| military-population  <rel-op>  <value>        |
-| player-computer <player-number>        |
-| player-human <player-number>        |
-| player-in-game  <player-number>        |
-| player-number  <player-number>        |
-| player-resigned <player-number>        |
-| player-valid  <player-number>        |
-| players-building-count  <player-number>  <rel-op>  <value>        |
-| players-building-type-count  <player-number>  <building> <rel-op>  <value>        |
-| players-civ  <player-number> <civ>        |
-| players-civilian-population  <player-number> <rel-op>  <value>        |
-| players-current-age  <player-number> <rel-op> <tech-level>        |
-| players-current-age-time  <player-number> <rel-op> <value>        |
-| players-military-population  <player-number> <rel-op>  <value>        |
-| players-population  <player-number> <rel-op>  <value>        |
-| players-score  <player-number> <rel-op> <score>        |
-| players-stance  <player-number> <diplomatic-stance>        |
-| players-tribute  <player-number> <resource-type> <rel-op> <value>        |
-| players-tribute-memory  <player-number> <resource-type> <rel-op> <value>        |
-| players-unit-count  <player-number>  <rel-op>  <value>        |
-| players-unit-type-count  <player-number>  <unit>  <rel-op>  <value>        |
-| population  <rel-op>  <value>        |
-| population-cap  <rel-op>  <value>        |
-| population-headroom  <rel-op>  <value>        |
+| escrow-amount  `resource-type`  `rel-op`  `value`        |
+| event-detected  `event-type` `event-id`        |
+| food-amount `rel-op`  `value`        |
+| game-time  `rel-op`  `value`        |
+| goal `goal-id` `value`        |
+| nova-amount  `rel-op`  `value`        |
+| housing-headroom  `rel-op`  `value`        |
+| idle-farm-count  `rel-op`  `value`        |
+| map-size `map-size`        |
+| map-type `map-type`        |
+| military-population  `rel-op`  `value`        |
+| player-computer `player-number`        |
+| player-human `player-number`        |
+| player-in-game  `player-number`        |
+| player-number  `player-number`        |
+| player-resigned `player-number`        |
+| player-valid  `player-number`        |
+| players-building-count  `player-number`  `rel-op`  `value`        |
+| players-building-type-count  `player-number`  `building` `rel-op`  `value`        |
+| players-civ  `player-number` `civ`        |
+| players-civilian-population  `player-number` `rel-op`  `value`        |
+| players-current-age  `player-number` `rel-op` `tech-level`        |
+| players-current-age-time  `player-number` `rel-op` `value`        |
+| players-military-population  `player-number` `rel-op`  `value`        |
+| players-population  `player-number` `rel-op`  `value`        |
+| players-score  `player-number` `rel-op` `score`        |
+| players-stance  `player-number` `diplomatic-stance`        |
+| players-tribute  `player-number` `resource-type` `rel-op` `value`        |
+| players-tribute-memory  `player-number` `resource-type` `rel-op` `value`        |
+| players-unit-count  `player-number`  `rel-op`  `value`        |
+| players-unit-type-count  `player-number`  `unit`  `rel-op`  `value`        |
+| population  `rel-op`  `value`        |
+| population-cap  `rel-op`  `value`        |
+| population-headroom  `rel-op`  `value`        |
 | |
-| **nursery-headroom  <rel-op>  <value>\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** |
-| random-number  <rel-op>  <value>        |
+| **nursery-headroom  `rel-op`  `value`\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_** |
+| random-number  `rel-op`  `value`        |
 | regicide-game        |
-| research-available  <research-item>        |
-| research-completed  <research-item>        |
-| resource-found  <resource-type>        |
-| shared-goal <shared-goal-id> <value>        |
+| research-available  `research-item`        |
+| research-completed  `research-item`        |
+| resource-found  `resource-type`        |
+| shared-goal `shared-goal-id` `value`        |
 | sheep-and-forage-too-far        |
-| soldier-count  <rel-op>  <value>        |
-| stance-toward <player-number> <diplomatic-stance>        |
-| starting-age <rel-op> <tech-level>        |
-| starting-resources <rel-op> <starting-resources>        |
-| metal-amount  <rel-op>  <value>        |
-| strategic-number  <strategic-number>  <rel-op>  <value>        |
-| taunt-detected <player-number> <taunt-id>        |
-| timer-triggered <timer-id>        |
+| soldier-count  `rel-op`  `value`        |
+| stance-toward `player-number` `diplomatic-stance`        |
+| starting-age `rel-op` `tech-level`        |
+| starting-resources `rel-op` `starting-resources`        |
+| metal-amount  `rel-op`  `value`        |
+| strategic-number  `strategic-number`  `rel-op`  `value`        |
+| taunt-detected `player-number` `taunt-id`        |
+| timer-triggered `timer-id`        |
 | too-many-unpowered-buildings\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 | town-under-attack        |
-| unit-available <unit>        |
-| unit-count  <rel-op>  <value>        |
-| unit-count-total  <rel-op>  <value>        |
-| unit-type-count  <unit> <rel-op>  <value>        |
-| unit-type-count-total  <unit> <rel-op>  <value>        |
-| victory-condition  <victory-condition>        |
-| wall-completed-percentage  <perimeter> <rel-op>  <value>        |
-| wall-invisible-percentage  <perimeter> <rel-op>  <value>        |
-| warboat-count  <rel-op>  <value>        |
-| carbon-amount  <rel-op>  <value>        |
+| unit-available `unit`        |
+| unit-count  `rel-op`  `value`        |
+| unit-count-total  `rel-op`  `value`        |
+| unit-type-count  `unit` `rel-op`  `value`        |
+| unit-type-count-total  `unit` `rel-op`  `value`        |
+| victory-condition  `victory-condition`        |
+| wall-completed-percentage  `perimeter` `rel-op`  `value`        |
+| wall-invisible-percentage  `perimeter` `rel-op`  `value`        |
+| warboat-count  `rel-op`  `value`        |
+| carbon-amount  `rel-op`  `value`        |
 
 ## Constant Facts
 
-true
+        true
 
-false
+        false
 
 ## Event Detection Facts
 
-event-detected
+        event-detected
 
-taunt-detected
+        taunt-detected
 
-timer-triggered
+        timer-triggered
 
 ## Game Facts
 
-cheats-enabled
+        cheats-enabled
 
-death-match-game
+        death-match-game
 
-difficulty
+        difficulty
 
-game-time
+        game-time
 
-map-size
+        map-size
 
-map-type
+        map-type
 
-player-computer
+        player-computer
 
-player-human
+        player-human
 
-player-in-game
+        player-in-game
 
-player-resigned
+        player-resigned
 
-player-valid
+        player-valid
 
-population-cap
+        population-cap
 
-regicide-game
+        regicide-game
 
-starting-age
+        starting-age
 
-starting-resources
+        starting-resources
 
-victory-condition
+        victory-condition
 
 ## Commodity Trade Facts
 
-can-buy-commodity
+        can-buy-commodity
 
-can-sell-commodity
+        can-sell-commodity
 
-commodity-buying-price
+        commodity-buying-price
 
-commodity-selling-price
+        commodity-selling-price
 
 ## Tribute Detection Facts
 
-players-tribute
+        players-tribute
 
-     players-tribute-memory
+                players-tribute-memory
 
 ## Escrow Facts
 
-can-build-gate-with-escrow
+        can-build-gate-with-escrow
 
-can-build-wall-with-escrow
+        can-build-wall-with-escrow
 
-can-build-with-escrow
+        can-build-with-escrow
 
-     can-research-with-escrow
+                can-research-with-escrow
 
-     can-spy-with-escrow
+                can-spy-with-escrow
 
-     can-train-with-escrow
+                can-train-with-escrow
 
-     escrow-amount
+                escrow-amount
 
 ## Computer Player Object Count Facts
 
-attack-soldier-count
+        attack-soldier-count
 
-attack-boat-count
+        attack-boat-count
 
-building-count
+        building-count
 
-building-count-total
+        building-count-total
 
-building-type-count
+        building-type-count
 
-building-type-count-total
+        building-type-count-total
 
-civilian-population
+        civilian-population
 
-defend-soldier-count
+        defend-soldier-count
 
-defend-warboat-count
+        defend-warboat-count
 
-housing-headroom
+        housing-headroom
 
-idle-farm-count
+        idle-farm-count
 
-military-population
+        military-population
 
-population
+        population
 
-population-headroom
+        population-headroom
 
-nursery-headroom
+        nursery-headroom
 
-soldier-count
+        soldier-count
 
-unit-count
+        unit-count
 
-unit-count-total
+        unit-count-total
 
-unit-type-count
+        unit-type-count
 
-unit-type-count-total
+        unit-type-count-total
 
-warboat-count
+        warboat-count
 
 ## Computer Player Resource Facts
 
-dropsite-min-distance
+        dropsite-min-distance
 
-food-amount
+        food-amount
 
-nova-amount
+        nova-amount
 
-resource-found
+        resource-found
 
-sheep-and-forage-too-far
+        sheep-and-forage-too-far
 
-metal-amount
+        metal-amount
 
-carbon-amount
+        carbon-amount
 
 ## Regicide Facts
 
-can-spy
+        can-spy
 
 ## Computer Player Availability Facts
 
-building-available
+        building-available
 
-can-afford-building
+        can-afford-building
 
-can-afford-complete-wall
+        can-afford-complete-wall
 
-can-afford-research
+        can-afford-research
 
-can-afford-unit
+        can-afford-unit
 
-can-build
+        can-build
 
-can-build-gate
+        can-build-gate
 
-can-build-wall
+        can-build-wall
 
-can-research
+        can-research
 
-can-train
+        can-train
 
-research-available
+        research-available
 
-research-completed
+        research-completed
 
-     unit-available
+                unit-available
 
-     wall-completed-percentage
+                wall-completed-percentage
 
-     wall-invisible-percentage
+                wall-invisible-percentage
 
 ## Computer Player Miscellaneous Facts
 
-civ-selected
+        civ-selected
 
-current-age
+        current-age
 
-current-age-time
+        current-age-time
 
-current-score
+        current-score
 
-doctrine
+        doctrine
 
-enemy-buildings-in-town
+        enemy-buildings-in-town
 
-enemy-captured-holocrons
+        enemy-captured-holocrons
 
-goal
+        goal
 
-player-number
+        player-number
 
-random-number
+        random-number
 
-shared-goal
+        shared-goal
 
-stance-toward
+        stance-toward
 
-strategic-number
+        strategic-number
 
-town-under-attack
+        town-under-attack
 
-too-many-unpowered-buildings
+        too-many-unpowered-buildings
 
 ## Opponent Facts
 
-players-building-count
+        players-building-count
 
-players-building-type-count
+        players-building-type-count
 
-players-civ
+        players-civ
 
-players-civilian-population
+        players-civilian-population
 
-players-current-age
+        players-current-age
 
-players-current-age-time
+        players-current-age-time
 
-players-military-population
+        players-military-population
 
-players-population
+        players-population
 
-players-score
+        players-score
 
-players-stance
+        players-stance
 
-players-unit-count
+        players-unit-count
 
-players-unit-type-count
+        players-unit-type-count
 
 ## Cheating Facts
 
-cc-players-building-count
+        cc-players-building-count
 
-     cc-players-building-type-count
+                cc-players-building-type-count
 
-cc-players-unit-count
+        cc-players-unit-count
 
-     cc-players-unit-type-count
+                cc-players-unit-type-count
 
 ## Fact Details
 
-true
+        true
 
 This fact is always true. It is used for testing purposes.
 
-false
+        false
 
 This fact is always false. It is used for testing purposes.
 
-attack-soldier-count  <rel-op>  <value>
+        attack-soldier-count  `rel-op`  `value`
 
 The fact checks the computer player's attack soldier count. An attack soldier is a land-based military unit currently assigned to attack groups.
 
-attack-warboat-count  <rel-op>  <value>
+        attack-warboat-count  `rel-op`  `value`
 
 The fact checks the computer player's attack warboat count. An attack warboat is a boat capable of attacking and currently assigned to attack groups.
 
-building-available  <building>
+        building-available  `building`
 
 The fact checks that the building is available to the computer player's civ, and that the tech tree
 
@@ -1164,37 +1164,37 @@ prerequisites are met.
 
 The fact does not check that there are enough resources to build the building.
 
-The fact allows the use of building line wildcard parameters for the <building>.
+The fact allows the use of building line wildcard parameters for the `building`.
 
-building-count  <rel-op>  <value>
+        building-count  `rel-op`  `value`
 
 This fact checks the computer player's building count. Only existing buildings are included.
 
-building-count-total  <rel-op>  <value>
+        building-count-total  `rel-op`  `value`
 
 This fact checks the computer player's total building count. The total includes existing and queued buildings.
 
-building-type-count  <building> <rel-op>  <value>
+        building-type-count  `building` `rel-op`  `value`
 
 This fact checks the computer player's building count. Only existing buildings of the given type are included.
 
-The fact allows the use of building line wildcard parameters for the <building>.
+The fact allows the use of building line wildcard parameters for the `building`.
 
-building-type-count-total  <building> <rel-op>  <value>
+        building-type-count-total  `building` `rel-op`  `value`
 
 This fact checks the computer player's total building count. The total includes existing and queued buildings of the given type.
 
-The fact allows the use of building line wildcard parameters for the <building>.
+The fact allows the use of building line wildcard parameters for the `building`.
 
-can-afford-building <building>
+        can-afford-building `building`
 
 This fact checks whether the computer player has enough resources to build the given building.
 
 The fact does not take into account escrowed resources.
 
-The fact allows the use of building line wildcard parameters for the <building>.
+The fact allows the use of building line wildcard parameters for the `building`.
 
-can-afford-complete-wall <perimeter> <wall-type>
+        can-afford-complete-wall `perimeter` `wall-type`
 
 This fact checks whether the computer player has enough resources to finish the given wall at the given perimeter. The fact does not take into account escrowed resources.
 
@@ -1202,49 +1202,49 @@ In particular it checks:
 
 - ··That the wall type is available to the computer player's civilization.
 - ··That the tech tree prerequisites for using that wall type are met.
-- ··That the resources needed for completing a wall line are available, not counting escrow amounts.  can-afford-research <research-item> This fact checks whether the computer player has enough resources to perform the given research. The fact does not take into account escrowed resources. can-afford-unit <unit> This fact checks whether the computer player has enough resources to train given unit. The fact does not take into account escrowed resources. The fact allows the use of unit line wildcard parameters for the <unit>. can-build <building>                                                                 This fact checks whether the computer player can build the given building. In particular it checks:
+- ··That the resources needed for completing a wall line are available, not counting escrow amounts.  can-afford-research `research-item` This fact checks whether the computer player has enough resources to perform the given research. The fact does not take into account escrowed resources. can-afford-unit `unit` This fact checks whether the computer player has enough resources to train given unit. The fact does not take into account escrowed resources. The fact allows the use of unit line wildcard parameters for the `unit`. can-build `building`                                                                 This fact checks whether the computer player can build the given building. In particular it checks:
 - ··That the building is available to the computer player's civilization.
 - ··That the tech tree prerequisites for building are met.
-- ··That the resources needed for the building are available, not counting escrow amounts.   The fact allows the use of building line wildcard parameters for the <building>. can-build-gate  <perimeter>                                                         This fact checks whether construction of a gate as part of the given perimeter wall can start. The fact does not take into account escrow resources. In particular it checks:
+- ··That the resources needed for the building are available, not counting escrow amounts.   The fact allows the use of building line wildcard parameters for the `building`. can-build-gate  `perimeter`                                                         This fact checks whether construction of a gate as part of the given perimeter wall can start. The fact does not take into account escrow resources. In particular it checks:
 - ··That the gate is available to the computer player's civilization.
 - ··That the tech tree prerequisites for building a gate are met.
 - ··That the resources needed for building a gate are available, not counting escrow amounts.
-- ··That there is a location to build a gate. can-build-gate-with-escrow  <perimeter>                         This fact checks whether construction of a gate as part of the given perimeter wall can start. The fact takes into account escrow resources. In particular it checks:
+- ··That there is a location to build a gate. can-build-gate-with-escrow  `perimeter`                         This fact checks whether construction of a gate as part of the given perimeter wall can start. The fact takes into account escrow resources. In particular it checks:
 - ··That the gate is available to the computer player's civilization.
 - ··That the tech tree prerequisites for building a gate are met.
 - ··That the resources needed for building a gate are available when using escrow amounts.
-- ··That there is a location to build a gate. can-build-wall  <perimeter> <wall-type>                                                         This fact checks whether a wall line of the given wall type can be built at the given perimeter. The fact does not take into account escrow resources. In particular it checks:
+- ··That there is a location to build a gate. can-build-wall  `perimeter` `wall-type`                                                         This fact checks whether a wall line of the given wall type can be built at the given perimeter. The fact does not take into account escrow resources. In particular it checks:
 - ··That the wall type is available to the computer player's civilization.
 - ··That the tech tree prerequisites for using that wall type are met.
 - ··That the resources needed for building a wall line are available, not counting escrow amounts.
-- ··That there is a location to build a wall line.  The fact allows the use of wall line wildcard parameters for the <wall-type>. can-build-wall-with-escrow <perimeter> <wall-type>                         This fact checks whether a wall line of the given wall type can be built at the given perimeter. The fact takes into account escrow resources. In particular it checks:
+- ··That there is a location to build a wall line.  The fact allows the use of wall line wildcard parameters for the `wall-type`. can-build-wall-with-escrow `perimeter` `wall-type`                         This fact checks whether a wall line of the given wall type can be built at the given perimeter. The fact takes into account escrow resources. In particular it checks:
 - ··That the wall type is available to the computer player's civilization.
 - ··That the tech tree prerequisites for using that wall type are met.
 - ··That the resources needed for building a wall line are available when using escrow amounts.
-- ··That there is a location to build a wall line.  The fact allows the use of wall line wildcard parameters for the <wall-type>. can-build-with-escrow <building>                                                                 This fact checks whether the computer player can build the given building. In particular it checks:
+- ··That there is a location to build a wall line.  The fact allows the use of wall line wildcard parameters for the `wall-type`. can-build-with-escrow `building`                                                                 This fact checks whether the computer player can build the given building. In particular it checks:
 - ··That the building is available to the computer player's civilization.
 - ··That the tech tree prerequisites for building are met.
-- ··That the resources needed for building are available when using escrow amounts.  The fact allows the use of building line wildcard parameters for the <building>. can-buy-commodity <commodity>                                                         This fact checks whether the computer player can buy one lot of the given commodity. The fact does not take into account escrowed resources. can-research        <research-item> This fact checks if the given research can start. In particular it checks:
+- ··That the resources needed for building are available when using escrow amounts.  The fact allows the use of building line wildcard parameters for the `building`. can-buy-commodity `commodity`                                                         This fact checks whether the computer player can buy one lot of the given commodity. The fact does not take into account escrowed resources. can-research        `research-item` This fact checks if the given research can start. In particular it checks:
 - ··That the research item is available to the computer player's civilization.
 - ··That the tech tree prerequisites for research are met.
 - ··That resources needed for research are available, not counting escrow amounts.
-- ··That there is a building that is not busy and is ready to start research. can-research-with-escrow <research-item> This fact checks if the given research can start. In particular it checks:
+- ··That there is a building that is not busy and is ready to start research. can-research-with-escrow `research-item` This fact checks if the given research can start. In particular it checks:
 - ··That the research item is available to the computer player's civilization.
 - ··That the tech tree prerequisites for research are met.
 - ··That resources needed for research are available when using escrow amounts.
-- ··That there is a building that is not busy and is ready to start research. can-sell-commodity <commodity>                                                                 This fact checks whether the computer player can sell one lot of the given commodity. The fact does not take into account escrowed resources. can-spy                                                         This fact checks if the spy command can be executed. The fact takes into account escrowed resources. can-spy-with-escrow                                                         This fact checks if spy command can be executed. The fact does not take into account escrowed resources. can-train <unit>                                                         This fact checks if the training of the given unit can start. In particular it checks:
+- ··That there is a building that is not busy and is ready to start research. can-sell-commodity `commodity`                                                                 This fact checks whether the computer player can sell one lot of the given commodity. The fact does not take into account escrowed resources. can-spy                                                         This fact checks if the spy command can be executed. The fact takes into account escrowed resources. can-spy-with-escrow                                                         This fact checks if spy command can be executed. The fact does not take into account escrowed resources. can-train `unit`                                                         This fact checks if the training of the given unit can start. In particular it checks:
 - ··That the unit is available to the computer player's civilization.
 - ··That the tech tree prerequisites for training the unit are met.
 - ··That resources needed for training the unit are available, not counting escrow amounts.
 - ··That there is enough housing headroom for the unit.
-- ··That there is a building that is not busy and is ready to start training the unit.  The fact allows the use of unit line wildcard parameters for the <unit>. can-train-with-escrow <unit>                                                         This fact checks if the training of the given unit can start. In particular it checks:
+- ··That there is a building that is not busy and is ready to start training the unit.  The fact allows the use of unit line wildcard parameters for the `unit`. can-train-with-escrow `unit`                                                         This fact checks if the training of the given unit can start. In particular it checks:
 - ··That the unit is available to the computer player's civilization.
 - ··That the tech tree prerequisites for training the unit are met.
 - ··That resources needed for training the unit are available when using escrow amounts.
 - ··That there is enough housing headroom for the unit.
-- ··That there is a building that is not busy and is ready to start training the unit.  The fact allows the use of unit line wildcard parameters for the <unit>. cc-players-building-count  <player-number>  <rel-op>  <value> A cheating version of players-building-count. For use in scenarios only. (Used by ai in SWGB.) The fact checks the given player's building count. Both existing buildings and buildings under construction are included regardless of whether they have been seen – fog is ignored. The fact allows "any"/"every" wildcard parameters for the <player-number> and the use of building line wildcard parameters for the <building>. cc-players-building-type-count  <player-number>  <building> <rel-op>  <value> A cheating version of players-building-type-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's building count. Both existing buildings and buildings under construction of the given type are included regardless of whether they have been seen – fog is ignored. The fact allows "any"/"every" wildcard parameters for the <player-number> and the use of building line wildcard parameters for the <building>. cc-players-unit-count  <player-number>  <rel-op>  <value> A cheating version of players-unit-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's unit count. Only trained units are included and fog is ignored. The fact allows "any"/"every" wildcard parameters for the <player-number>. cc-players-unit-type-count  <player-number>  <unit>  <rel-op>  <value> A cheating version of players-unit-type-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's unit count. Only trained units of the given type are included and fog is ignored. The fact allows "any"/"every" wildcard parameters for the <player-number>. cheats-enabled                                                                  This fact checks whether the cheats have been enabled. civ-selected  <civ>                                                                  This fact checks the computer player's civ. civilian-population  <rel-op>  <value>                                                                    This fact checks the computer player's civilian population. The civilian population is workers, trade hovercraft, fishing boats, etc. commodity-buying-price  <commodity>  <rel-op>  <value>                                                            This fact checks the current buying price for the given commodity. commodity-selling-price  <commodity>  <rel-op>  <value>                                                            This fact checks the current selling price for the given commodity. current-age  <rel-op> <tech-level>                                                 This fact checks computer player's current tech level. current-age-time  <rel-op> <value>                                                 This fact checks the computer player's current tech level time -- time spent in the current tech level. current-score  <rel-op> <value>                                                 This fact checks the computer player's current score. death-match-game                                                                          This fact checks if the game is a Death Match game. defend-soldier-count  <rel-op> <value>                                                 This fact checks the computer player's defend soldier count. A defend soldier is a land-based military unit not assigned to attack groups. defend-warboat-count  <rel-op> <value>                                                 This fact checks the computer player's defend warboat count. A defend warboat is a boat capable of attacking and not assigned to attack groups. difficulty  <rel-op> <difficulty>                                                                          This fact checks difficulty setting. doctrine <value>                                                                          This fact checks what the current doctrine is. dropsite-min-distance  <resource-type> <rel-op>  <value>                                 This fact checks computer player's minimum dropsite walking distance for a given resource type. Long walking distances indicate a need for a new dropsite. It is not recommended to use this fact for building of first dropsites necessary for tech level advancement. If, at the beginning, the resources happen to be close enough to the Town Center, building of the first dropsites will be delayed, resulting in slower tech level progression. enemy-buildings-in-town                                                                          The fact checks for enemy buildings in a computer player's town.  enemy-captured-holocrons                                                                          This fact checks if the enemy has captured all holocrons. When this happens, tactical AI automatically starts targeting Temples and Jedi. Use this fact to intensify attacks and combine it with the attack-now action to force attacks. escrow-amount  <resource-type>  <rel-op>  <value>                                                                          This fact checks a computer player's escrow amount for a given resource type. event-detected  <event-type> <event-id>                                                                          This fact checks if the given event has been detected. The fact stays true until the event is explicitly disabled by the acknowledge-event action. food-amount <rel-op>  <value>                                                                          This fact checks a computer player's food amount. game-time  <rel-op>  <value>                                                 This fact checks the game time. The game time is given in seconds. The fact can be used to make rules time-specific. For example, the computer can become more aggressive after 15 minutes of game time. goal <goal-id> <value>                                                                          This fact checks what the given goal is. nova-amount  <rel-op>  <value>                                                 This fact checks a computer player's nova amount. housing-headroom  <rel-op>  <value>                                                 This fact checks computer player's housing headroom. Housing headroom is the difference between current housing capacity and trained unit capacity. For example, a computer player has a Command Center (capacity 5), a Prefab Shelter (capacity 5) and 6 workers. In this case, housing headroom is 4. idle-farm-count  <rel-op>  <value>                                                 This fact checks a computer player's idle farm count – the number of farms with no farmers. It should be used before a new farm is built to make sure it is needed. map-size <map-size>                                                                                         This fact checks map size. map-type <map-type>                                                                                        This fact checks map type. military-population  <rel-op>  <value>                                                                    This fact checks computer player's military population. player-computer <player-number> This fact checks if the given player is a computer player. The fact allows "any"/"every" wildcard parameters for the <player-number>. player-human <player-number> This fact checks if the given player is a human. The fact allows "any"/"every" wildcard parameters for the <player-number>. player-in-game  <player-number> This fact checks if the given player is a valid player and still playing. The fact allows "any"/"every" wildcard parameters for the <player-number>.  player-number  <player-number> This fact checks computer player's player number. player-resigned <player-number> This fact checks if the given player has lost by resigning. Note that a player can lose without resigning, so this fact should not be used to check whether a player has lost a game. To check whether a player has lost a game use (not (player-in-game <player-number)). The fact allows "any"/"every" wildcard parameters for the <player-number>. player-valid  <player-number> This fact checks if the given player is a valid player. In games with more than 2 players, players that lost before the game is over are considered to be valid players. This is because although the player is not in the game, their units/buildings can still be in the game. To check whether the given player is still in the game use the player-in-game fact. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-building-count  <player-number>  <rel-op>  <value> This fact checks the given player's building count. Both existing buildings and buildings under construction are included. The computer player relies only on what it has seen – no cheating. The fact allows "any"/"every" wildcard parameters for the <player-number> and the use of building line wildcard parameters for the <building>. players-building-type-count  <player-number>  <building> <rel-op>  <value> This fact checks the given player's building count. Both existing buildings and buildings under construction of the given type are included. The computer player relies only on what it has seen – no cheating. (Doesn't seem to work very well in SWGB. Very inconsistent.) The fact allows "any"/"every" wildcard parameters for the <player-number> and the use of building line wildcard parameters for the <building>. players-civ  <player-number> <civ>                                         This fact checks the given player's civ. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-civilian-population  <player-number> <rel-op>  <value>                         This fact checks a given player's civilian population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-current-age  <player-number> <rel-op> <tech-level>                         This fact checks the given player's current tech level. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-current-age-time  <player-number> <rel-op> <value>                         This fact checks the given player's current tech level time -- time spent in the current tech level. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-military-population  <player-number> <rel-op>  <value>                         This fact checks the given player's military population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-population  <player-number> <rel-op>  <value>                                       This fact checks the given player's population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-score  <player-number> <rel-op> <score>                                 This fact checks the given player's current score. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-stance  <player-number> <diplomatic-stance>                         This fact checks the given player's diplomatic stance. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-tribute  <player-number> <resource-type> <rel-op> <value>                         This facts checks the player's tribute given throughout the game.  Only tribute for the given resource type is checked. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-tribute-memory  <player-number> <resource-type> <rel-op> <value>         This facts checks a player's tribute given since the player's tribute memory was cleared.  Only tribute memory for the given resource type is checked. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-unit-count  <player-number>  <rel-op>  <value> This fact checks the given player's unit count. The computer player relies only on what it has seen – no cheating.  For allies and self only trained units are included. The fact allows "any"/"every" wildcard parameters for the <player-number>. players-unit-type-count  <player-number>  <unit>  <rel-op>  <value> This fact checks the given player's unit count. The computer player relies only on what it has seen – no cheating. For allies and self only trained units of the given type are included. ** (Doesn't seem to work very well in SWGB. Very inconsistent.)** The fact allows "any"/"every" wildcard parameters for the <player-number>. population  <rel-op>  <value>                                                                              This fact checks the computer player's population. population-cap  <rel-op>  <value>                                                                        This fact checks population cap setting. population-headroom  <rel-op>  <value>                                                 This fact checks the computer player's population headroom. Population headroom is the difference between the game's population cap and current housing capacity. For example, in a game with a population cap of 75, the computer player has a command center (capacity 5) and a prefab shelter (capacity 5). In this case population headroom is 65. nursery-headroom  <rel-op>  <value> This fact checks the nursery's headroom.  The nursery headroom is the difference between the number of  captured banthas &/or nerfs and the current number of available slots in built nurserys. For example, if you have 6 captured banthas in a nursery and have only 1 nursery (capacity 10), then your nursery headroom is 4. random **-** number  <rel-op>  <value>                                                                        This fact checks random number value. regicide-game This fact checks if the game is a regicide game. research-available  <research-item> The fact checks that the given research is available to the computer player's civ, and that the research is available at this time (tech tree prerequisites are met). The fact does not check that there are enough resources to start researching. research-completed  <research-item> This fact checks that the given research is completed. resource-found  <resource-type> This fact checks whether the computer player has found the given resource. The facts should be used at the beginning of the game. Once it becomes true for a certain resource it stays true for that resource. In this context, food refers to a forage site and carbon refers to forest trees (not lone trees) or grouped rock carbon. shared-goal <shared-goal-id> <value> This fact checks a given shared goal -- a goal that is shared among computer players.  It is to be used only when all computer players are on the same team. sheep-and-forage-too-far This fact checks whether the computer player has any forage site(s) and/or banthas/nerfs within 8 tiles of the drop-off location (Food Processing Center or Command Center). soldier-count  <rel-op>  <value> This fact checks the computer player's soldier count. An attack soldier is a land-based military unit. stance-toward <player-number> <diplomatic-stance>                         This fact checks the computer player's stance toward a given player. The fact allows "any"/"every" wildcard parameters for the <player-number>. starting-age <rel-op> <tech-level>                         This fact checks the game's starting tech level. starting-resources <rel-op> <starting-resources>                         This fact checks starting resources (low, medium, or high). metal-amount  <rel-op>  <value>                                                 This fact checks the computer player's ore amount. strategic-number  <strategic-number>  <rel-op>  <value>                         This fact checks a strategic number's value. taunt-detected <player-number> <taunt-id> This fact detects a given taunt. The check can be performed any number of times until the taunt is explicitly acknowledged.  The fact allows "any"/"every" wildcard parameters for the <player-number>. The following example detects a request for food by an enemy player, computer or human:  (defrule    (taunt-detected any-enemy 3)    =>    (acknowledge-taunt this-any-enemy 3)    (chat-to-player this-any-enemy "No food for you") ) timer-triggered <timer-id>                                                         This fact checks whether a given timer has triggered. For disabled timers this fact is always false.  The check can be performed any number of times until the timer is explicitly disabled. too-many-unpowered-buildings This fact is set to true when the number of unpowered buildings exceeds the number set by (sn-max-unpowered-buildings). town-under-attack                                                         This fact is set to true when a computer player's town is under attack. unit-available <unit>                                                         The fact checks that the unit is available to the computer player's civ, and that the tech tree prerequisites for training the unit are met. The fact does not check whether the unit training can start. This depends on resource availability, housing headroom, and whether the building needed for training is currently used for research/training of another unit. The fact allows the use of unit line wildcard parameters for the <unit>. unit-count  <rel-op>  <value> This fact checks the computer player's unit count. Only trained units are included. unit-count-total  <rel-op>  <value> This fact checks the computer player's total unit count. The total includes trained and queued units. unit-type-count  <unit> <rel-op>  <value> This fact checks the computer player's unit count. Only trained units of the given type are included. The fact allows the use of unit line wildcard parameters for the <unit>. unit-type-count-total  <unit> <rel-op>  <value> This fact checks the computer player's total unit count. The total includes trained and queued units of the given type. The fact allows the use of unit line wildcard parameters for the <unit>. victory-condition  <victory-condition>                                                                 This fact checks the game victory condition. wall-completed-percentage  <perimeter> <rel-op>  <value> This fact checks the completion percentage for a given perimeter wall. Trees and other destructible natural barriers are included and count as completed. wall-invisible-percentage  <perimeter> <rel-op>  <value> This fact checks what percentage of the potential wall placement is covered with fog. Example:  (defrule         (wall-completed-percentage 1 < 100)          ; Not all of it finished         (wall-invisible-percentage 1 == 0)        ; And we can see it all       =>         (chat-local "Found hole in the wall.") )  Notice that if the invisible percentage is not equal to 0 we do not know if there is a hole or not. This is because the hidden tile(s) might have a tree(s). warboat-count  <rel-op>  <value> The fact checks the computer player's warboat count. A warboat is a boat capable of attacking. carbon-amount  <rel-op>  <value>                                                 This fact checks the computer player's carbon amount.  Actions Action List
+- ··That there is a building that is not busy and is ready to start training the unit.  The fact allows the use of unit line wildcard parameters for the `unit`. cc-players-building-count  `player-number`  `rel-op`  `value` A cheating version of players-building-count. For use in scenarios only. (Used by ai in SWGB.) The fact checks the given player's building count. Both existing buildings and buildings under construction are included regardless of whether they have been seen – fog is ignored. The fact allows "any"/"every" wildcard parameters for the `player-number` and the use of building line wildcard parameters for the `building`. cc-players-building-type-count  `player-number`  `building` `rel-op`  `value` A cheating version of players-building-type-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's building count. Both existing buildings and buildings under construction of the given type are included regardless of whether they have been seen – fog is ignored. The fact allows "any"/"every" wildcard parameters for the `player-number` and the use of building line wildcard parameters for the `building`. cc-players-unit-count  `player-number`  `rel-op`  `value` A cheating version of players-unit-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's unit count. Only trained units are included and fog is ignored. The fact allows "any"/"every" wildcard parameters for the `player-number`. cc-players-unit-type-count  `player-number`  `unit`  `rel-op`  `value` A cheating version of players-unit-type-count. For use in scenarios only. (Used by ai in SWGB.) This fact checks the given player's unit count. Only trained units of the given type are included and fog is ignored. The fact allows "any"/"every" wildcard parameters for the `player-number`. cheats-enabled                                                                  This fact checks whether the cheats have been enabled. civ-selected  `civ`                                                                  This fact checks the computer player's civ. civilian-population  `rel-op`  `value`                                                                    This fact checks the computer player's civilian population. The civilian population is workers, trade hovercraft, fishing boats, etc. commodity-buying-price  `commodity`  `rel-op`  `value`                                                            This fact checks the current buying price for the given commodity. commodity-selling-price  `commodity`  `rel-op`  `value`                                                            This fact checks the current selling price for the given commodity. current-age  `rel-op` `tech-level`                                                 This fact checks computer player's current tech level. current-age-time  `rel-op` `value`                                                 This fact checks the computer player's current tech level time -- time spent in the current tech level. current-score  `rel-op` `value`                                                 This fact checks the computer player's current score. death-match-game                                                                          This fact checks if the game is a Death Match game. defend-soldier-count  `rel-op` `value`                                                 This fact checks the computer player's defend soldier count. A defend soldier is a land-based military unit not assigned to attack groups. defend-warboat-count  `rel-op` `value`                                                 This fact checks the computer player's defend warboat count. A defend warboat is a boat capable of attacking and not assigned to attack groups. difficulty  `rel-op` `difficulty`                                                                          This fact checks difficulty setting. doctrine `value`                                                                          This fact checks what the current doctrine is. dropsite-min-distance  `resource-type` `rel-op`  `value`                                 This fact checks computer player's minimum dropsite walking distance for a given resource type. Long walking distances indicate a need for a new dropsite. It is not recommended to use this fact for building of first dropsites necessary for tech level advancement. If, at the beginning, the resources happen to be close enough to the Town Center, building of the first dropsites will be delayed, resulting in slower tech level progression. enemy-buildings-in-town                                                                          The fact checks for enemy buildings in a computer player's town.  enemy-captured-holocrons                                                                          This fact checks if the enemy has captured all holocrons. When this happens, tactical AI automatically starts targeting Temples and Jedi. Use this fact to intensify attacks and combine it with the attack-now action to force attacks. escrow-amount  `resource-type`  `rel-op`  `value`                                                                          This fact checks a computer player's escrow amount for a given resource type. event-detected  `event-type` `event-id`                                                                          This fact checks if the given event has been detected. The fact stays true until the event is explicitly disabled by the acknowledge-event action. food-amount `rel-op`  `value`                                                                          This fact checks a computer player's food amount. game-time  `rel-op`  `value`                                                 This fact checks the game time. The game time is given in seconds. The fact can be used to make rules time-specific. For example, the computer can become more aggressive after 15 minutes of game time. goal `goal-id` `value`                                                                          This fact checks what the given goal is. nova-amount  `rel-op`  `value`                                                 This fact checks a computer player's nova amount. housing-headroom  `rel-op`  `value`                                                 This fact checks computer player's housing headroom. Housing headroom is the difference between current housing capacity and trained unit capacity. For example, a computer player has a Command Center (capacity 5), a Prefab Shelter (capacity 5) and 6 workers. In this case, housing headroom is 4. idle-farm-count  `rel-op`  `value`                                                 This fact checks a computer player's idle farm count – the number of farms with no farmers. It should be used before a new farm is built to make sure it is needed. map-size `map-size`                                                                                         This fact checks map size. map-type `map-type`                                                                                        This fact checks map type. military-population  `rel-op`  `value`                                                                    This fact checks computer player's military population. player-computer `player-number` This fact checks if the given player is a computer player. The fact allows "any"/"every" wildcard parameters for the `player-number`. player-human `player-number` This fact checks if the given player is a human. The fact allows "any"/"every" wildcard parameters for the `player-number`. player-in-game  `player-number` This fact checks if the given player is a valid player and still playing. The fact allows "any"/"every" wildcard parameters for the `player-number`.  player-number  `player-number` This fact checks computer player's player number. player-resigned `player-number` This fact checks if the given player has lost by resigning. Note that a player can lose without resigning, so this fact should not be used to check whether a player has lost a game. To check whether a player has lost a game use (not (player-in-game <player-number)). The fact allows "any"/"every" wildcard parameters for the `player-number`. player-valid  `player-number` This fact checks if the given player is a valid player. In games with more than 2 players, players that lost before the game is over are considered to be valid players. This is because although the player is not in the game, their units/buildings can still be in the game. To check whether the given player is still in the game use the player-in-game fact. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-building-count  `player-number`  `rel-op`  `value` This fact checks the given player's building count. Both existing buildings and buildings under construction are included. The computer player relies only on what it has seen – no cheating. The fact allows "any"/"every" wildcard parameters for the `player-number` and the use of building line wildcard parameters for the `building`. players-building-type-count  `player-number`  `building` `rel-op`  `value` This fact checks the given player's building count. Both existing buildings and buildings under construction of the given type are included. The computer player relies only on what it has seen – no cheating. (Doesn't seem to work very well in SWGB. Very inconsistent.) The fact allows "any"/"every" wildcard parameters for the `player-number` and the use of building line wildcard parameters for the `building`. players-civ  `player-number` `civ`                                         This fact checks the given player's civ. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-civilian-population  `player-number` `rel-op`  `value`                         This fact checks a given player's civilian population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-current-age  `player-number` `rel-op` `tech-level`                         This fact checks the given player's current tech level. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-current-age-time  `player-number` `rel-op` `value`                         This fact checks the given player's current tech level time -- time spent in the current tech level. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-military-population  `player-number` `rel-op`  `value`                         This fact checks the given player's military population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-population  `player-number` `rel-op`  `value`                                       This fact checks the given player's population. This is equivalent to a human player checking the timeline. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-score  `player-number` `rel-op` `score`                                 This fact checks the given player's current score. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-stance  `player-number` `diplomatic-stance`                         This fact checks the given player's diplomatic stance. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-tribute  `player-number` `resource-type` `rel-op` `value`                         This facts checks the player's tribute given throughout the game.  Only tribute for the given resource type is checked. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-tribute-memory  `player-number` `resource-type` `rel-op` `value`         This facts checks a player's tribute given since the player's tribute memory was cleared.  Only tribute memory for the given resource type is checked. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-unit-count  `player-number`  `rel-op`  `value` This fact checks the given player's unit count. The computer player relies only on what it has seen – no cheating.  For allies and self only trained units are included. The fact allows "any"/"every" wildcard parameters for the `player-number`. players-unit-type-count  `player-number`  `unit`  `rel-op`  `value` This fact checks the given player's unit count. The computer player relies only on what it has seen – no cheating. For allies and self only trained units of the given type are included. ** (Doesn't seem to work very well in SWGB. Very inconsistent.)** The fact allows "any"/"every" wildcard parameters for the `player-number`. population  `rel-op`  `value`                                                                              This fact checks the computer player's population. population-cap  `rel-op`  `value`                                                                        This fact checks population cap setting. population-headroom  `rel-op`  `value`                                                 This fact checks the computer player's population headroom. Population headroom is the difference between the game's population cap and current housing capacity. For example, in a game with a population cap of 75, the computer player has a command center (capacity 5) and a prefab shelter (capacity 5). In this case population headroom is 65. nursery-headroom  `rel-op`  `value` This fact checks the nursery's headroom.  The nursery headroom is the difference between the number of  captured banthas &/or nerfs and the current number of available slots in built nurserys. For example, if you have 6 captured banthas in a nursery and have only 1 nursery (capacity 10), then your nursery headroom is 4. random **-** number  `rel-op`  `value`                                                                        This fact checks random number value. regicide-game This fact checks if the game is a regicide game. research-available  `research-item` The fact checks that the given research is available to the computer player's civ, and that the research is available at this time (tech tree prerequisites are met). The fact does not check that there are enough resources to start researching. research-completed  `research-item` This fact checks that the given research is completed. resource-found  `resource-type` This fact checks whether the computer player has found the given resource. The facts should be used at the beginning of the game. Once it becomes true for a certain resource it stays true for that resource. In this context, food refers to a forage site and carbon refers to forest trees (not lone trees) or grouped rock carbon. shared-goal `shared-goal-id` `value` This fact checks a given shared goal -- a goal that is shared among computer players.  It is to be used only when all computer players are on the same team. sheep-and-forage-too-far This fact checks whether the computer player has any forage site(s) and/or banthas/nerfs within 8 tiles of the drop-off location (Food Processing Center or Command Center). soldier-count  `rel-op`  `value` This fact checks the computer player's soldier count. An attack soldier is a land-based military unit. stance-toward `player-number` `diplomatic-stance`                         This fact checks the computer player's stance toward a given player. The fact allows "any"/"every" wildcard parameters for the `player-number`. starting-age `rel-op` `tech-level`                         This fact checks the game's starting tech level. starting-resources `rel-op` `starting-resources`                         This fact checks starting resources (low, medium, or high). metal-amount  `rel-op`  `value`                                                 This fact checks the computer player's ore amount. strategic-number  `strategic-number`  `rel-op`  `value`                         This fact checks a strategic number's value. taunt-detected `player-number` `taunt-id` This fact detects a given taunt. The check can be performed any number of times until the taunt is explicitly acknowledged.  The fact allows "any"/"every" wildcard parameters for the `player-number`. The following example detects a request for food by an enemy player, computer or human:  (defrule    (taunt-detected any-enemy 3)    =>    (acknowledge-taunt this-any-enemy 3)    (chat-to-player this-any-enemy "No food for you") ) timer-triggered `timer-id`                                                         This fact checks whether a given timer has triggered. For disabled timers this fact is always false.  The check can be performed any number of times until the timer is explicitly disabled. too-many-unpowered-buildings This fact is set to true when the number of unpowered buildings exceeds the number set by (sn-max-unpowered-buildings). town-under-attack                                                         This fact is set to true when a computer player's town is under attack. unit-available `unit`                                                         The fact checks that the unit is available to the computer player's civ, and that the tech tree prerequisites for training the unit are met. The fact does not check whether the unit training can start. This depends on resource availability, housing headroom, and whether the building needed for training is currently used for research/training of another unit. The fact allows the use of unit line wildcard parameters for the `unit`. unit-count  `rel-op`  `value` This fact checks the computer player's unit count. Only trained units are included. unit-count-total  `rel-op`  `value` This fact checks the computer player's total unit count. The total includes trained and queued units. unit-type-count  `unit` `rel-op`  `value` This fact checks the computer player's unit count. Only trained units of the given type are included. The fact allows the use of unit line wildcard parameters for the `unit`. unit-type-count-total  `unit` `rel-op`  `value` This fact checks the computer player's total unit count. The total includes trained and queued units of the given type. The fact allows the use of unit line wildcard parameters for the `unit`. victory-condition  `victory-condition`                                                                 This fact checks the game victory condition. wall-completed-percentage  `perimeter` `rel-op`  `value` This fact checks the completion percentage for a given perimeter wall. Trees and other destructible natural barriers are included and count as completed. wall-invisible-percentage  `perimeter` `rel-op`  `value` This fact checks what percentage of the potential wall placement is covered with fog. Example:  (defrule         (wall-completed-percentage 1 < 100)          ; Not all of it finished         (wall-invisible-percentage 1 == 0)        ; And we can see it all       =>         (chat-local "Found hole in the wall.") )  Notice that if the invisible percentage is not equal to 0 we do not know if there is a hole or not. This is because the hidden tile(s) might have a tree(s). warboat-count  `rel-op`  `value` The fact checks the computer player's warboat count. A warboat is a boat capable of attacking. carbon-amount  `rel-op`  `value`                                                 This fact checks the computer player's carbon amount.  Actions Action List
 
-- do-nothing        44acknowledge-event  <event-type> <event-id>        44acknowledge-taunt  <player-number> <taunt-id>        44attack-now        44build  <building>        45build-forward  <building>        45build-gate  <perimeter>        45build-wall  <perimeter> <wall-type>        45buy-commodity  <commodity>        45cc-add-resource <resource-type> <amount>        45chat-local <string>        45chat-local-using-id <string-id>        45chat-local-using-range <string-id-start> <string-id-range>        45chat-local-to-self <string>        45chat-to-all <string>        45chat-to-all-using-id <string-id>        46chat-to-all-using-range <string-id-start> <string-id-range>        46chat-to-allies <string>        46chat-to-allies-using-id <string-id>        46chat-to-allies-using-range <string-id-start> <string-id-range>        46chat-to-enemies <string>        46chat-to-enemies-using-id <string-id>        46chat-to-enemies-using-range <string-id-start> <string-id-range>        46chat-to-player <player-number> <string>        47chat-to-player-using-id <player-number> <string-id>        47chat-to-player-using-range <player-number> <string-id-start> <string-id-range>        47chat-trace  <value>        47clear-tribute-memory  <player-number> <resource-type>        47delete-building  <building>        47delete-unit  <unit>        47disable-self        47disable-timer  <timer-id>        48enable-timer  <timer-id>        48enable-wall-placement  <perimeter>        48generate-random-number <value>        49log <string>        49log-trace  <value>        49release-escrow  <resource-type>        49research  <research-item>        49research  <tech-level>        49resign        49sell-commodity  <commodity>        50set-difficulty-parameter <difficulty-parameter> <value>        50set-doctrine <value>        50set-escrow-percentage  <resource-type>  <value>        50set-goal <goal-id> <value>        50set-shared-goal <shared-goal-id> <value>        50set-signal <signal-id>        50set-stance <player-number> <diplomatic-stance>        50set-strategic-number <strategic-number>  <value>        50spy        50taunt  <value>        50taunt-using-range  <taunt-start>  <taunt-range>        51train <unit>        51tribute-to-player <player-number>  <resource-type>  <value>        51
+- do-nothing        44acknowledge-event  `event-type` `event-id`        44acknowledge-taunt  `player-number` `taunt-id`        44attack-now        44build  `building`        45build-forward  `building`        45build-gate  `perimeter`        45build-wall  `perimeter` `wall-type`        45buy-commodity  `commodity`        45cc-add-resource `resource-type` `amount`        45chat-local `string`        45chat-local-using-id `string-id`        45chat-local-using-range `string-id-start` `string-id-range`        45chat-local-to-self `string`        45chat-to-all `string`        45chat-to-all-using-id `string-id`        46chat-to-all-using-range `string-id-start` `string-id-range`        46chat-to-allies `string`        46chat-to-allies-using-id `string-id`        46chat-to-allies-using-range `string-id-start` `string-id-range`        46chat-to-enemies `string`        46chat-to-enemies-using-id `string-id`        46chat-to-enemies-using-range `string-id-start` `string-id-range`        46chat-to-player `player-number` `string`        47chat-to-player-using-id `player-number` `string-id`        47chat-to-player-using-range `player-number` `string-id-start` `string-id-range`        47chat-trace  `value`        47clear-tribute-memory  `player-number` `resource-type`        47delete-building  `building`        47delete-unit  `unit`        47disable-self        47disable-timer  `timer-id`        48enable-timer  `timer-id`        48enable-wall-placement  `perimeter`        48generate-random-number `value`        49log `string`        49log-trace  `value`        49release-escrow  `resource-type`        49research  `research-item`        49research  `tech-level`        49resign        49sell-commodity  `commodity`        50set-difficulty-parameter `difficulty-parameter` `value`        50set-doctrine `value`        50set-escrow-percentage  `resource-type`  `value`        50set-goal `goal-id` `value`        50set-shared-goal `shared-goal-id` `value`        50set-signal `signal-id`        50set-stance `player-number` `diplomatic-stance`        50set-strategic-number `strategic-number`  `value`        50spy        50taunt  `value`        50taunt-using-range  `taunt-start`  `taunt-range`        51train `unit`        51tribute-to-player `player-number`  `resource-type`  `value`        51
 
 -
 ## Input / Output Actions
@@ -1266,58 +1266,58 @@ cc-add-resource
 ## Other Actions
 do-nothingattack-nowbuild build-forwardbuild-gatebuild-walldelete-buildingdelete-unitenable-wall-placementgenerate-random-number **research**  resignset-difficulty-parameterset-doctrineset-goalset-shared-goalset-stance set-strategic-number train
 ## Action Details
-do-nothingThis action does nothing at all. It is primarily used as a stub for testing purposes. Note that every rule needs at least one action.acknowledge-event  <event-type> <event-id>This action acknowledges a received event by resetting the associated flag.acknowledge-taunt  <player-number> <taunt-id>This action acknowledges the taunt (resets the flag). Like other event systems in the AI, taunt detection requests explicit acknowledgement.The action allows "any"/"every" wildcard parameters for the <player-number>. It also allows the use of rule variables for the <player-number>.attack-nowThis action forces attack with currently available attack units.  Units are designated as attack units by using sn-percent-attack-soldiers or sn-percent-attack-boats or sn-percent-attack-air.build  <building>This action builds the given building.The action allows the use of building line wildcard parameters for the <building>.build-forward  <building>This action builds given building close to enemy.The action allows the use of building line wildcard parameters for the <building>.build-gate  <perimeter>This action builds a gate as part of the given perimeter wall.build-wall  <perimeter> <wall-type>This action builds a wall line of the given wall type at the given perimeter. The action allows the use of wall line wildcard parameters for the <wall-type>.buy-commodity  <commodity>This action buys one lot of the given commodity.cc-add-resource <resource-type> <amount>This is a cheating action that adds the given resource amount to the computer player.It is to be used in scenarios to avoid late game oddities such as computer player workers going all over the map while looking for the last pile of nova, (but has also been used by the ai at hard & hardest difficulty levels as well as deathmatch games).chat-local <string>This action displays the given string as a local chat message.chat-local-using-id <string-id>This action displays a string, defined by a string id, as a local chat message. Ensemble Studios use only, (but has been used by other designers).chat-local-using-range <string-id-start> <string-id-range>This action displays a random string as a local chat message. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but has been used by other designers). chat-local-to-self <string>This action displays a given string as local chat message. The message is displayed only if the user is the same player as the computer player sending the message. For debugging purposes only.  (VERY helpful, but don't do like me and forget to comment them out before you release your ai!  Can cause the "string table full" error when running many instances of the ai simultaneously.)chat-to-all <string>This action sends a given string as a chat message to all players. chat-to-all-using-id <string-id>This action sends a string, defined by a string id, as a chat message to all players.Ensemble Studios use only, (but also used by other designers).chat-to-all-using-range <string-id-start> <string-id-range>This action sends a random string as chat message to all players. The random string is defined by a string id randomly picked out of a given string id range. Ensemble Studios use only, (but also used by other designers). Example:(chat-to-all-using-range 5020 5) will send a random localized message with a string id between 5020 and 5024.chat-to-allies <string>This action sends a given string as a chat message to allies.chat-to-allies-using-id <string-id>This action sends a string, defined by a string id, as a chat message to allied players.Ensemble Studios use only, (but also used by other designers).chat-to-allies-using-range <string-id-start> <string-id-range>This action sends a random string as a chat message to allied players. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but also used by other designers). chat-to-enemies <string>This action sends a given string as a chat message to enemies and neutral players.chat-to-enemies-using-id <string-id>This action sends a string, defined by a string id, as a chat message to enemies and neutral players.Ensemble Studios use only, (but also used by other designers).chat-to-enemies-using-range <string-id-start> <string-id-range>This action sends a random string as a chat message to enemies and neutral players. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but also used by other designers). chat-to-player <player-number> <string>This action sends a given string as a chat message to a given player.The action allows "any"/"every" wildcard parameters for the <player-number>. It also allows the use of rule variables for the <player-number>.chat-to-player-using-id <player-number> <string-id>This action sends a string, defined by a string id, as a chat message to a given player.The action allows "any"/"every" wildcard parameters for the <player-number>. It also allows the use of rule variables for the <player-number>.Ensemble Studios use only, (but also used by other designers).chat-to-player-using-range <player-number> <string-id-start> <string-id-range>This action sends a random string as a chat message to enemies and neutral players. The random string is defined by a string id randomly picked out of a given string id range.The action allows "any"/"every" wildcard parameters for the <player-number>. It also allows the use of rule variables for the <player-number>.Ensemble Studios use only, (but also used by other designers).chat-trace  <value>This action displays the given value as a chat message. Used purely for testing to check when a rule gets executed.clear-tribute-memory  <player-number> <resource-type>This action clears the given player's tribute memory. Only tribute memory for the given resource type is cleared.The action allows "any"/"every" wildcard parameters for the <player-number>.It also allows the use of rule variables for the <player-number>.delete-building  <building>This action deletes exactly one building of a given type.delete-unit  <unit>This action deletes exactly one unit of a given type.disable-selfThis action disables the rule that it is part of. Since disabling takes effect in the next execution pass, other actions in the same rule are still executed one last time.Example: (defrule   (game-time greater-than 30)    =>   (disable-self) )disable-timer  <timer-id>This action disables the given timer.enable-timer  <timer-id>This action enables the given timer and sets it to the given time interval.enable-wall-placement  <perimeter>This action enables wall placement for the given perimeter. Enabled wall placement causes the rest of the placement code to do some planning and place all structures at least one tile away from the future wall lines.If you are planning to build a wall, you have to explicitly define which perimeter wall you plan to use when the game starts. This is a one-time action and should be used during the initial setup.Example:(defrule  (enable-wall-placement 2)   =>  (disable-self))generate-random-number <value>This action generates a player-specific integer random number within given range (1 to <value>). The number is stored and its value can be tested. Subsequent executions of this action generate new random numbers that replace existing ones. Example: ; For readability reasons define the constants (defconst tech-2-rush 1)(defconst tech-3-rush 2) ; First roll the dice. This will generate number between 1 and 100 inclusive (defrule    (true)   =>   (generate-random-number 100)   (disable-self)) ; Based on the outcome we pick the strategy:; 20% chance of tech 2 rush ; 80% chance of tech 3 rush (defrule   (random-number > 80)   =>   (set-goal 1 tech-2-rush)   (disable-self)) (defrule   (random-number < 81)   =>   (set-goal 1 tech-3-rush)   (disable-self)) log <string>This action writes the given string to a log file. Used purely for testing purposes. Works only if logging is enabled.log-trace  <value>This action writes the given value to a log file. Used purely for testing to check when a rule gets executed. Works only if logging is enabled.release-escrow  <resource-type>This action releases the computer player's escrow for a given resource type.research  <research-item>This action researches the given item. To prevent cheating, this action uses the same criteria as the **can-research** fact to make sure the item can be researched.research  <tech-level>This action researches the next tech level.resignThis action causes the computer player to resign.(defrule   (game-time equal 6000)     =>   (resign)   )sell-commodity  <commodity>This action sells one lot of a given commodity.set-difficulty-parameter <difficulty-parameter> <value>This action sets a given difficulty parameter to a given value.set-doctrine <value>This action sets the doctrine to the given value.set-escrow-percentage  <resource-type>  <value>This action sets the computer player's escrow percentage for a given resource type.Given values have to be in the range 0-100.set-goal <goal-id> <value>This action sets a given goal to a given value.set-shared-goal <shared-goal-id> <value>This action sets a given shared goal (a goal that is shared among computer players) to a given value. To be used only when all computer players are on the same team.set-signal <signal-id>This action sets a given signal that can be checked by the trigger system.set-stance <player-number> <diplomatic-stance>This action sets the stance toward a given player.The action allows "any"/"every" wildcard parameters for the <player-number>.It also allows the use of rule variables for the <player-number>.set-strategic-number <strategic-number>  <value> This action sets a given strategic number to a given value. See Appendix A for information on strategic numbers.spyThis action executes a spy command.taunt  <value>This action triggers the taunt associated with the given value.(defrule   (game-time equal 6000)     =>  (taunt 10)  (disable-self))taunt-using-range  <taunt-start>  <taunt-range>This action triggers a random taunt that is picked from a given taunt range. Example:(taunt-using-range 50 10) will use a random taunt between 50 and 59.train <unit>This action trains the given unit. To prevent cheating, this action uses the same criteria as the **can-train** fact to make sure the unit can be trained.The fact allows the use of unit line wildcard parameters for the <unit>. (defrule  (food-amount greater-than 100)     =>  (train UNIT-WORKER)  (train UNIT-LASER-LINE))tribute-to-player <player-number>  <resource-type>  <value>This action tributes the given amount of the given resource type to the player defined by the player-number parameter. Implementation specifics:
+do-nothingThis action does nothing at all. It is primarily used as a stub for testing purposes. Note that every rule needs at least one action.acknowledge-event  `event-type` `event-id`This action acknowledges a received event by resetting the associated flag.acknowledge-taunt  `player-number` `taunt-id`This action acknowledges the taunt (resets the flag). Like other event systems in the AI, taunt detection requests explicit acknowledgement.The action allows "any"/"every" wildcard parameters for the `player-number`. It also allows the use of rule variables for the `player-number`.attack-nowThis action forces attack with currently available attack units.  Units are designated as attack units by using sn-percent-attack-soldiers or sn-percent-attack-boats or sn-percent-attack-air.build  `building`This action builds the given building.The action allows the use of building line wildcard parameters for the `building`.build-forward  `building`This action builds given building close to enemy.The action allows the use of building line wildcard parameters for the `building`.build-gate  `perimeter`This action builds a gate as part of the given perimeter wall.build-wall  `perimeter` `wall-type`This action builds a wall line of the given wall type at the given perimeter. The action allows the use of wall line wildcard parameters for the `wall-type`.buy-commodity  `commodity`This action buys one lot of the given commodity.cc-add-resource `resource-type` `amount`This is a cheating action that adds the given resource amount to the computer player.It is to be used in scenarios to avoid late game oddities such as computer player workers going all over the map while looking for the last pile of nova, (but has also been used by the ai at hard & hardest difficulty levels as well as deathmatch games).chat-local `string`This action displays the given string as a local chat message.chat-local-using-id `string-id`This action displays a string, defined by a string id, as a local chat message. Ensemble Studios use only, (but has been used by other designers).chat-local-using-range `string-id-start` `string-id-range`This action displays a random string as a local chat message. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but has been used by other designers). chat-local-to-self `string`This action displays a given string as local chat message. The message is displayed only if the user is the same player as the computer player sending the message. For debugging purposes only.  (VERY helpful, but don't do like me and forget to comment them out before you release your ai!  Can cause the "string table full" error when running many instances of the ai simultaneously.)chat-to-all `string`This action sends a given string as a chat message to all players. chat-to-all-using-id `string-id`This action sends a string, defined by a string id, as a chat message to all players.Ensemble Studios use only, (but also used by other designers).chat-to-all-using-range `string-id-start` `string-id-range`This action sends a random string as chat message to all players. The random string is defined by a string id randomly picked out of a given string id range. Ensemble Studios use only, (but also used by other designers). Example:(chat-to-all-using-range 5020 5) will send a random localized message with a string id between 5020 and 5024.chat-to-allies `string`This action sends a given string as a chat message to allies.chat-to-allies-using-id `string-id`This action sends a string, defined by a string id, as a chat message to allied players.Ensemble Studios use only, (but also used by other designers).chat-to-allies-using-range `string-id-start` `string-id-range`This action sends a random string as a chat message to allied players. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but also used by other designers). chat-to-enemies `string`This action sends a given string as a chat message to enemies and neutral players.chat-to-enemies-using-id `string-id`This action sends a string, defined by a string id, as a chat message to enemies and neutral players.Ensemble Studios use only, (but also used by other designers).chat-to-enemies-using-range `string-id-start` `string-id-range`This action sends a random string as a chat message to enemies and neutral players. The random string is defined by a string id randomly picked out of a given string id range.Ensemble Studios use only, (but also used by other designers). chat-to-player `player-number` `string`This action sends a given string as a chat message to a given player.The action allows "any"/"every" wildcard parameters for the `player-number`. It also allows the use of rule variables for the `player-number`.chat-to-player-using-id `player-number` `string-id`This action sends a string, defined by a string id, as a chat message to a given player.The action allows "any"/"every" wildcard parameters for the `player-number`. It also allows the use of rule variables for the `player-number`.Ensemble Studios use only, (but also used by other designers).chat-to-player-using-range `player-number` `string-id-start` `string-id-range`This action sends a random string as a chat message to enemies and neutral players. The random string is defined by a string id randomly picked out of a given string id range.The action allows "any"/"every" wildcard parameters for the `player-number`. It also allows the use of rule variables for the `player-number`.Ensemble Studios use only, (but also used by other designers).chat-trace  `value`This action displays the given value as a chat message. Used purely for testing to check when a rule gets executed.clear-tribute-memory  `player-number` `resource-type`This action clears the given player's tribute memory. Only tribute memory for the given resource type is cleared.The action allows "any"/"every" wildcard parameters for the `player-number`.It also allows the use of rule variables for the `player-number`.delete-building  `building`This action deletes exactly one building of a given type.delete-unit  `unit`This action deletes exactly one unit of a given type.disable-selfThis action disables the rule that it is part of. Since disabling takes effect in the next execution pass, other actions in the same rule are still executed one last time.Example: (defrule   (game-time greater-than 30)    =>   (disable-self) )disable-timer  `timer-id`This action disables the given timer.enable-timer  `timer-id`This action enables the given timer and sets it to the given time interval.enable-wall-placement  `perimeter`This action enables wall placement for the given perimeter. Enabled wall placement causes the rest of the placement code to do some planning and place all structures at least one tile away from the future wall lines.If you are planning to build a wall, you have to explicitly define which perimeter wall you plan to use when the game starts. This is a one-time action and should be used during the initial setup.Example:(defrule  (enable-wall-placement 2)   =>  (disable-self))generate-random-number `value`This action generates a player-specific integer random number within given range (1 to `value`). The number is stored and its value can be tested. Subsequent executions of this action generate new random numbers that replace existing ones. Example: ; For readability reasons define the constants (defconst tech-2-rush 1)(defconst tech-3-rush 2) ; First roll the dice. This will generate number between 1 and 100 inclusive (defrule    (true)   =>   (generate-random-number 100)   (disable-self)) ; Based on the outcome we pick the strategy:; 20% chance of tech 2 rush ; 80% chance of tech 3 rush (defrule   (random-number > 80)   =>   (set-goal 1 tech-2-rush)   (disable-self)) (defrule   (random-number < 81)   =>   (set-goal 1 tech-3-rush)   (disable-self)) log `string`This action writes the given string to a log file. Used purely for testing purposes. Works only if logging is enabled.log-trace  `value`This action writes the given value to a log file. Used purely for testing to check when a rule gets executed. Works only if logging is enabled.release-escrow  `resource-type`This action releases the computer player's escrow for a given resource type.research  `research-item`This action researches the given item. To prevent cheating, this action uses the same criteria as the **can-research** fact to make sure the item can be researched.research  `tech-level`This action researches the next tech level.resignThis action causes the computer player to resign.(defrule   (game-time equal 6000)     =>   (resign)   )sell-commodity  `commodity`This action sells one lot of a given commodity.set-difficulty-parameter `difficulty-parameter` `value`This action sets a given difficulty parameter to a given value.set-doctrine `value`This action sets the doctrine to the given value.set-escrow-percentage  `resource-type`  `value`This action sets the computer player's escrow percentage for a given resource type.Given values have to be in the range 0-100.set-goal `goal-id` `value`This action sets a given goal to a given value.set-shared-goal `shared-goal-id` `value`This action sets a given shared goal (a goal that is shared among computer players) to a given value. To be used only when all computer players are on the same team.set-signal `signal-id`This action sets a given signal that can be checked by the trigger system.set-stance `player-number` `diplomatic-stance`This action sets the stance toward a given player.The action allows "any"/"every" wildcard parameters for the `player-number`.It also allows the use of rule variables for the `player-number`.set-strategic-number `strategic-number`  `value` This action sets a given strategic number to a given value. See Appendix A for information on strategic numbers.spyThis action executes a spy command.taunt  `value`This action triggers the taunt associated with the given value.(defrule   (game-time equal 6000)     =>  (taunt 10)  (disable-self))taunt-using-range  `taunt-start`  `taunt-range`This action triggers a random taunt that is picked from a given taunt range. Example:(taunt-using-range 50 10) will use a random taunt between 50 and 59.train `unit`This action trains the given unit. To prevent cheating, this action uses the same criteria as the **can-train** fact to make sure the unit can be trained.The fact allows the use of unit line wildcard parameters for the `unit`. (defrule  (food-amount greater-than 100)     =>  (train UNIT-WORKER)  (train UNIT-LASER-LINE))tribute-to-player `player-number`  `resource-type`  `value`This action tributes the given amount of the given resource type to the player defined by the player-number parameter. Implementation specifics:
 - ··If the computer player does not have a Spaceport no tribute is given.
 - ··In the case when the value parameter specifies an amount larger than available, only the available resources of the given type are tributed. If, for example, there is only 60 food and the tribute action specifies 100 food, only 60 food will be tributed.
 - ··The tribute action is ignored when there are no resources of the given type.
 - ··Tribute fees are paid and deducted from the tribute amount (if applicable).
 
-The action allows "any"/"every" wildcard parameters for the <player-number>.
+The action allows "any"/"every" wildcard parameters for the `player-number`.
 
-It also allows the use of rule variables for the <player-number>.
+It also allows the use of rule variables for the `player-number`.
 
 # Parameters
 
 ## Parameter List
 
-| <tech level>        |
+| `tech level`        |
 | --- |
-| <building>        |
-| <civ>        |
-| <commodity>        |
-| <difficulty>        |
-| <difficulty-parameter>        |
-| <diplomatic-stance>        |
-| <event-id>        |
-| <event-type>        |
-| <goal-id>        |
-| <map-size>        |
-| <map-type>        |
-| <perimeter>        |
-| <player-number>        |
-| <rel-op>        |
-| <research-item >        |
-| <resource-type>        |
-| <shared-goal-id>        |
-| <signal-id>        |
-| <starting-resources>        |
-| <strategic-number>        |
-| <string>        |
-| <string-id>        |
-| <string-id-range>        |
-| <string-id-start>        |
-| <taunt-id>        |
-| <taunt-range>        |
-| <taunt-start>        |
-| <timer-id>        |
-| <unit>        |
-| <value>        |
-| <victory-condition>        |
-| <wall>        |
+| `building`        |
+| `civ`        |
+| `commodity`        |
+| `difficulty`        |
+| `difficulty-parameter`        |
+| `diplomatic-stance`        |
+| `event-id`        |
+| `event-type`        |
+| `goal-id`        |
+| `map-size`        |
+| `map-type`        |
+| `perimeter`        |
+| `player-number`        |
+| `rel-op`        |
+| `research-item `        |
+| `resource-type`        |
+| `shared-goal-id`        |
+| `signal-id`        |
+| `starting-resources`        |
+| `strategic-number`        |
+| `string`        |
+| `string-id`        |
+| `string-id-range`        |
+| `string-id-start`        |
+| `taunt-id`        |
+| `taunt-range`        |
+| `taunt-start`        |
+| `timer-id`        |
+| `unit`        |
+| `value`        |
+| `victory-condition`        |
+| `wall`        |
 
 ## Parameter Details
 
-<tech-level>
+`tech-level`
 
  is one of the following:
 
@@ -1329,7 +1329,7 @@ It also allows the use of rule variables for the <player-number>.
 
       tech-level-4
 
-<building>
+`building`
 
  is one of the following:
 
@@ -1387,17 +1387,17 @@ BLDG-SHLDGEN                   ;Shield Generator
 
 Undefined buildings:
 
-(defconst BLDG-UWATERPREFAB  1001)     ;Underwater Prefab Shelter (Gungans)
+        (defconst BLDG-UWATERPREFAB  1001)     ;Underwater Prefab Shelter (Gungans)
 
-(defconst BLDG-SEAFOOD              199)     ;Aqua Harvester
+        (defconst BLDG-SEAFOOD              199)     ;Aqua Harvester
 
-(defconst BLDG-LOOKOUT              598)     ;Sentry Post
+        (defconst BLDG-LOOKOUT              598)     ;Sentry Post
 
-(defconst LIGHT-WALL                        72)     ;Light Wall
+        (defconst LIGHT-WALL                        72)     ;Light Wall
 
-For a description of the wildcard parameters accepted as <building> parameters, see the "Wildcard Parameters" section later in this document.
+For a description of the wildcard parameters accepted as `building` parameters, see the "Wildcard Parameters" section later in this document.
 
-<civ>
+`civ`
 
 is one of the following:
 
@@ -1419,7 +1419,7 @@ is one of the following:
 
       CONFEDERACY
 
-<commodity>
+`commodity`
 
 is one of the following:
 
@@ -1431,7 +1431,7 @@ is one of the following:
 
       nova
 
-<difficulty>
+`difficulty`
 
  is one of the following:
 
@@ -1451,7 +1451,7 @@ Make sure that this is taken in account when using facts to compare difficulties
 
 easiest > easy > moderate > hard > hardest
 
-<difficulty-parameter>
+`difficulty-parameter`
 
 is one of the following:
 
@@ -1469,7 +1469,7 @@ ability-to-maintain-distance
 
   Chance that a computer player's ranged unit will maintain the distance. Valid range 0-100. Default value is 100.
 
-<diplomatic-stance>
+`diplomatic-stance`
 
  is one of the following:
 
@@ -1479,23 +1479,23 @@ ability-to-maintain-distance
 
       enemy
 
-<event-id>
+`event-id`
 
 is a valid event id. Event ids have a range that depends on the event type.
 
 For trigger events the id is in the range from 0 to 255.
 
-<event-type>
+`event-type`
 
 is a one of the following:
 
 trigger
 
-<goal-id>
+`goal-id`
 
  is a valid goal id. Goal ids have a range from 1 to 40.
 
-<map-size>
+`map-size`
 
  is one of the following:
 
@@ -1511,7 +1511,7 @@ trigger
 
       giant
 
-<map-type>
+`map-type`
 
  is one of the following:
 
@@ -1609,7 +1609,7 @@ trigger
 
       SAVANNAH-MAP
 
-<perimeter>
+`perimeter`
 
 is a valid wall perimeter. Allowed values are 1 and 2, with 1 being closer to the Command Center than 2.
 
@@ -1617,7 +1617,7 @@ Perimeter 1 is usually between 10 and 20 tiles from the starting Command Center.
 
 Perimeter 2 is usually between 18 and 30 tiles from the starting Command Center.
 
-<player-number>
+`player-number`
 
  is a valid player number or one of the wildcard parameters (if explicitly allowed by the fact/action):
 
@@ -1657,7 +1657,7 @@ For a detailed description of wildcard parameters, see the "Wildcard Parameters"
 
 Note: Wildcard parameters applying to allies do not apply to self.
 
-<rel-op>
+`rel-op`
 
  is one of the following (two versions, either can be used):
 
@@ -1689,7 +1689,7 @@ Note: Wildcard parameters applying to allies do not apply to self.
 
       !=
 
-<research-item >
+`research-item `
 
 is one of the following (grouped by building and research techs / unit upgrade):
 
@@ -2067,7 +2067,7 @@ ut-jedi-2
 
 Note: The reason for having a "rt-" or "ut-"  prefix is to avoid duplicate symbols. Without the prefix, the current parser cannot distinguish between some research items and associated units/buildings.
 
-<resource-type>
+`resource-type`
 
 is one of the following:
 
@@ -2079,15 +2079,15 @@ is one of the following:
 
       carbon
 
-<shared-goal-id>
+`shared-goal-id`
 
 is a valid shared goal id. Shared goal ids have a range from 0 to 255.
 
-<signal-id>
+`signal-id`
 
 is a valid signal id. Signal ids have a range from 0 to 255.
 
-<starting-resources>
+`starting-resources`
 
 is one of the following:
 
@@ -2097,7 +2097,7 @@ is one of the following:
 
       high-resources
 
-<strategic-number>
+`strategic-number`
 
  is one of the following:
 
@@ -2385,45 +2385,45 @@ is one of the following:
 
       sn-max-unpowered-buildings
 
-<string>
+`string`
 
  is a sequence of characters in double quotes.
 
-<string-id>
+`string-id`
 
 is a valid string id from a localized string table.
 
 Ensemble Studios use only.
 
-<string-id-range>
+`string-id-range`
 
 is the size of a string id range.
 
 Ensemble Studios use only.
 
-<string-id-start>
+`string-id-start`
 
 is a valid string id (from a localized string table) that defined beginning of a string id range.
 
 Ensemble Studios use only.
 
-<taunt-id>
+`taunt-id`
 
 is a valid taunt id.
 
-<taunt-range>
+`taunt-range`
 
 is the size of a taunt range.
 
-<taunt-start>
+`taunt-start`
 
 is a taunt that defines a beginning of a taunt range.
 
-<timer-id>
+`timer-id`
 
 is a valid timer id (range 1-10).
 
-<unit>
+`unit`
 
 is one of the following (grouped by building):
 
@@ -2525,21 +2525,21 @@ BOAT-TRANSPORT     <--- Transport
 
 Note:  not used by the shipped AI
 
-(defconst ANIMAL-NEXU 860)
+        (defconst ANIMAL-NEXU 860)
 
-(defconst ANIMAL-REEK 921)
+        (defconst ANIMAL-REEK 921)
 
-(defconst ANIMAL-ACKLAY 481)
+        (defconst ANIMAL-ACKLAY 481)
 
 
 
-For a description of the wildcard parameters accepted as <unit> parameters see the "Wildcard Parameters" section later in this document.
+For a description of the wildcard parameters accepted as `unit` parameters see the "Wildcard Parameters" section later in this document.
 
-<value>
+`value`
 
 is a signed 16-bit integer.
 
-<victory-condition>
+`victory-condition`
 
  is one of the following:
 
@@ -2553,7 +2553,7 @@ is a signed 16-bit integer.
 
       custom
 
-<wall>
+`wall`
 
  is one of the following:
 
@@ -2571,7 +2571,7 @@ or the following wildcard character:
 
 ## Wildcard Parameters
 
-### <player-number> wildcard parameters:
+### `player-number` wildcard parameters:
 
 any-ally
 
@@ -2605,7 +2605,7 @@ every-human
 
 every-neutral
 
-Usage of <player-number> wildcard parameters:
+Usage of `player-number` wildcard parameters:
 
 1. Wildcard parameters of the form "any-..." used in facts
 
@@ -2681,19 +2681,19 @@ Usage of <player-number> wildcard parameters:
 
 Note: Wildcard parameters applying to allies do not apply to self.
 
-### <building> wildcard parameters example:
+### `building` wildcard parameters example:
 
 BLDG-TURRET-LINE
 
-<unit> wildcard parameters example:
+`unit` wildcard parameters example:
 
 UNIT-LASER-LINE
 
 These parameters are sometimes referred to as **unit line** or **line parameters**.
 
-For the use of <unit> wildcard parameters, see the "Usage of line parameters" section below.
+For the use of `unit` wildcard parameters, see the "Usage of line parameters" section below.
 
-### <wall> wildcard parameters:
+### `wall` wildcard parameters:
 
 BLDG-BARRIER-LINE
 
@@ -3042,7 +3042,7 @@ this-any-human-neutral
 
 this-any-neutral
 
-The variables have to be used as <player-number> argument in one of the following actions:
+The variables have to be used as `player-number` argument in one of the following actions:
 
 chat-to-player
 
@@ -3060,17 +3060,17 @@ _any-enemy_ wildcard that is successful will store its result in _this-any-enemy
 
 Here is an example of how variables can be used in rules:
 
-(defrule
+        (defrule
 
-   (players-civ any-enemy REBEL)
+                (players-civ any-enemy REBEL)
 
-   =>
+                =>
 
-   (chat-to-player this-any-enemy "I know you are a Rebels")
+                (chat-to-player this-any-enemy "I know you are a Rebels")
 
-   (disable-self)
+                (disable-self)
 
-)
+        )
 
 In this example the fact _players-civ_ looks for an enemy player that is a Rebel. If the enemy with that civilization is found, the fact is true causing the rule to trigger. At the same time, the result of the wildcard search is stored in _this-any-enemy._ The action _chat-to-player_ is executed and uses _this-any-enemy_ variable to send a message to the appropriate enemy that has chosen to be a Rebel.
 
@@ -3078,17 +3078,17 @@ It is important to remember that the variables have a rule scope. This means tha
 
 For example, if the following rule followed the one above, the message "Hi, my Rebel enemy" would not be sent.
 
-(defrule
+        (defrule
 
-   (true)
+                (true)
 
-   =>
+                =>
 
-   (chat-to-player this-any-enemy "Hi, my Rebel enemy") ; this is never sent
+                (chat-to-player this-any-enemy "Hi, my Rebel enemy") ; this is never sent
 
-   (disable-self)
+                (disable-self)
 
-)
+        )
 
 # Timers
 
@@ -3114,51 +3114,54 @@ Here is an example of how tribute demand can be handled using timers. After 10 m
 
 ; After 10 minutes of playing ask for tribute, start 5 minute timer
 
-(defrule
+        (defrule
 
-  (game-time greater-than 600)
+                (game-time greater-than 600)
 
-  =>
+                =>
 
-  (chat-to-player 1 "Give me 500 nova in the next 5 minutes")
+                (chat-to-player 1 "Give me 500 nova in the next 5 minutes")
 
-  (clear-tribute-memory 1 nova)
+                (clear-tribute-memory 1 nova)
 
-  (enable-timer 1 300)
+                (enable-timer 1 300)
 
-  (disable-self))
+                (disable-self)
+        )
 
-; Tribute not received in time, declare player 1 to be an enemy
+                ; Tribute not received in time, declare player 1 to be an enemy
 
-; Note that explicit disabling of timer is necessary even after it
+                ; Note that explicit disabling of timer is necessary even after it
 
-;  triggers
+                ;  triggers
+                
+        (defrule
 
-(defrule
+                (timer-triggered 1)
 
-  (timer-triggered 1)
+                =>
 
-  =>
+                (disable-timer 1)
 
-  (disable-timer 1)
+                (chat-to-player 1 "Time is up. We are enemies now")
 
-  (chat-to-player 1 "Time is up. We are enemies now")
+                (set-stance 1 enemy)
+        )
 
-  (set-stance 1 enemy))
+                ; Tribute received in time. Disable the timer
 
-; Tribute received in time. Disable the timer
+        (defrule
 
-(defrule
+                (players-tribute-memory 1 nova greater-or-equal 500)
 
-  (players-tribute-memory 1 nova greater-or-equal 500)
+                =>
 
-  =>
+                (disable-timer 1)
 
-  (disable-timer 1)
+                (clear-tribute-memory 1 nova)
 
-  (clear-tribute-memory 1 nova)
-
-  (chat-to-player 1 "Thanks"))
+                (chat-to-player 1 "Thanks")
+        )
 
 Example 2
 
@@ -3166,67 +3169,71 @@ Here is even better example that uses two timers. Every 15 minutes throughout th
 
 ; Schedule 15 minute timer for the first time
 
-(defrule
+        (defrule
 
-  (true)
+                (true)
 
-  =>
+                =>
 
-  (enable-timer 2 900)
+                (enable-timer 2 900)
 
-  (disable-self))
+                (disable-self)
+        )
 
 ; Every 15 minutes ask for tribute and wait 5 minutes to get it.
 
 ; Restart 15 minute timer.
 
-(defrule
+        (defrule
 
-  (timer-triggered 2)
+                (timer-triggered 2)
 
-  =>
+                =>
 
-  (disable-timer 2)
+                (disable-timer 2)
 
-  (enable-timer 2 900)
+                (enable-timer 2 900)
 
-  (chat-to-player 1 "Give me 500 nova in the next 5 minutes.")
+                (chat-to-player 1 "Give me 500 nova in the next 5 minutes.")
 
-  (clear-tribute-memory 1 nova)
+                (clear-tribute-memory 1 nova)
 
-  (enable-timer 1 300))
+                (enable-timer 1 300)
+        )
 
 ; Tribute not received in time, declare player 1 to be an enemy.
 
 ; No need to ask for tribute again - disable both timers.
 
-(defrule
+        (defrule
 
-  (timer-triggered 1)
+                (timer-triggered 1)
 
-  =>
+                =>
 
-  (disable-timer 1)
+                (disable-timer 1)
 
-  (disable-timer 2)
+                (disable-timer 2)
 
-  (chat-to-player 1 "Time is up. We are enemies now")
+                (chat-to-player 1 "Time is up. We are enemies now")
 
-  (set-stance 1 enemy))
+                (set-stance 1 enemy)
+        )
 
 ; Tribute received in time. Disable the 5 minute timer
 
-(defrule
+        (defrule
 
-  (players-tribute-memory 1 nova greater-or-equal 500)
+                (players-tribute-memory 1 nova greater-or-equal 500)
 
-  =>
+                =>
 
-  (disable-timer 1)
+                (disable-timer 1)
 
-  (clear-tribute-memory 1 nova)
+                (clear-tribute-memory 1 nova)
 
-  (chat-to-player 1 "Thanks"))
+                (chat-to-player 1 "Thanks")
+        )
 
 # Error Messages
 
@@ -4278,199 +4285,199 @@ By setting the parameters to the appropriate value it is possible to avoid havin
 | true        |
 | --- |
 | false        |
-| attack-soldier-count  <rel-op>  <value>        |
-| attack-warboat-count  <rel-op>  <value>        |
-| building-available  <building>        |
-| building-count  <rel-op>  <value>        |
-| building-count-total  <rel-op>  <value>        |
-| building-type-count  <building> <rel-op>  <value>        |
-| building-type-count-total  <building> <rel-op>  <value>        |
-| can-afford-building <building>        |
-| can-afford-complete-wall <perimeter> <wall-type>        |
-| can-afford-research <research-item>        |
-| can-afford-unit <unit>        |
-| can-build <building>        |
-| can-build-gate  <perimeter>        |
-| can-build-gate-with-escrow  <perimeter>        |
-| can-build-wall  <perimeter> <wall-type>        |
-| can-build-wall-with-escrow <perimeter> <wall-type>        |
-| can-build-with-escrow <building>        |
-| can-buy-commodity <commodity>        |
-| can-research        <research-item>        |
-| can-research-with-escrow <research-item>        |
-| can-sell-commodity <commodity>        |
+| attack-soldier-count  `rel-op`  `value`        |
+| attack-warboat-count  `rel-op`  `value`        |
+| building-available  `building`        |
+| building-count  `rel-op`  `value`        |
+| building-count-total  `rel-op`  `value`        |
+| building-type-count  `building` `rel-op`  `value`        |
+| building-type-count-total  `building` `rel-op`  `value`        |
+| can-afford-building `building`        |
+| can-afford-complete-wall `perimeter` `wall-type`        |
+| can-afford-research `research-item`        |
+| can-afford-unit `unit`        |
+| can-build `building`        |
+| can-build-gate  `perimeter`        |
+| can-build-gate-with-escrow  `perimeter`        |
+| can-build-wall  `perimeter` `wall-type`        |
+| can-build-wall-with-escrow `perimeter` `wall-type`        |
+| can-build-with-escrow `building`        |
+| can-buy-commodity `commodity`        |
+| can-research        `research-item`        |
+| can-research-with-escrow `research-item`        |
+| can-sell-commodity `commodity`        |
 | can-spy        |
 | can-spy-with-escrow        |
-| can-train <unit>        |
-| can-train-with-escrow <unit>        |
-| cc-players-building-count  <player-number>  <rel-op>  <value>        |
-| cc-players-building-type-count  <player-number>  <building> <rel-op>  <value>        |
-| cc-players-unit-count  <player-number>  <rel-op>  <value>        |
-| cc-players-unit-type-count  <player-number>  <unit>  <rel-op>  <value>        |
+| can-train `unit`        |
+| can-train-with-escrow `unit`        |
+| cc-players-building-count  `player-number`  `rel-op`  `value`        |
+| cc-players-building-type-count  `player-number`  `building` `rel-op`  `value`        |
+| cc-players-unit-count  `player-number`  `rel-op`  `value`        |
+| cc-players-unit-type-count  `player-number`  `unit`  `rel-op`  `value`        |
 | cheats-enabled        |
-| civ-selected  <civ>        |
-| civilian-population  <rel-op>  <value>        |
-| commodity-buying-price  <commodity>  <rel-op>  <value>        |
-| commodity-selling-price  <commodity>  <rel-op>  <value>        |
-| current-age  <rel-op> <tech-level>        |
-| current-age-time  <rel-op> <value>        |
-| current-score  <rel-op> <value>        |
+| civ-selected  `civ`        |
+| civilian-population  `rel-op`  `value`        |
+| commodity-buying-price  `commodity`  `rel-op`  `value`        |
+| commodity-selling-price  `commodity`  `rel-op`  `value`        |
+| current-age  `rel-op` `tech-level`        |
+| current-age-time  `rel-op` `value`        |
+| current-score  `rel-op` `value`        |
 | death-match-game        |
-| defend-soldier-count  <rel-op> <value>        |
-| defend-warboat-count  <rel-op> <value>        |
-| difficulty  <rel-op> <difficulty>        |
-| doctrine <value>        |
-| dropsite-min-distance  <resource-type> <rel-op>  <value>        |
+| defend-soldier-count  `rel-op` `value`        |
+| defend-warboat-count  `rel-op` `value`        |
+| difficulty  `rel-op` `difficulty`        |
+| doctrine `value`        |
+| dropsite-min-distance  `resource-type` `rel-op`  `value`        |
 | enemy-buildings-in-town        |
 | enemy-captured-holocrons        |
-| escrow-amount  <resource-type>  <rel-op>  <value>        |
-| event-detected  <event-type> <event-id>        |
-| food-amount <rel-op>  <value>        |
-| game-time  <rel-op>  <value>        |
-| goal <goal-id> <value>        |
-| nova-amount  <rel-op>  <value>        |
-| housing-headroom  <rel-op>  <value>        |
-| idle-farm-count  <rel-op>  <value>        |
-| map-size <map-size>        |
-| map-type <map-type>        |
-| military-population  <rel-op>  <value>        |
-| player-computer <player-number>        |
-| player-human <player-number>        |
-| player-in-game  <player-number>        |
-| player-number  <player-number>        |
-| player-resigned <player-number>        |
-| player-valid  <player-number>        |
-| players-building-count  <player-number>  <rel-op>  <value>        |
-| players-building-type-count  <player-number>  <building> <rel-op>  <value>        |
-| players-civ  <player-number> <civ>        |
-| players-civilian-population  <player-number> <rel-op>  <value>        |
-| players-current-age  <player-number> <rel-op> <tech-level>        |
-| players-current-age-time  <player-number> <rel-op> <value>        |
-| players-military-population  <player-number> <rel-op>  <value>        |
-| players-population  <player-number> <rel-op>  <value>        |
-| players-score  <player-number> <rel-op> <score>        |
-| players-stance  <player-number> <diplomatic-stance>        |
-| players-tribute  <player-number> <resource-type> <rel-op> <value>        |
-| players-tribute-memory  <player-number> <resource-type> <rel-op> <value>        |
-| players-unit-count  <player-number>  <rel-op>  <value>        |
-| players-unit-type-count  <player-number>  <unit>  <rel-op>  <value>        |
-| population  <rel-op>  <value>        |
-| population-cap  <rel-op>  <value>        |
-| population-headroom  <rel-op>  <value>        |
-| random **-** number  <rel-op>  <value>        |
+| escrow-amount  `resource-type`  `rel-op`  `value`        |
+| event-detected  `event-type` `event-id`        |
+| food-amount `rel-op`  `value`        |
+| game-time  `rel-op`  `value`        |
+| goal `goal-id` `value`        |
+| nova-amount  `rel-op`  `value`        |
+| housing-headroom  `rel-op`  `value`        |
+| idle-farm-count  `rel-op`  `value`        |
+| map-size `map-size`        |
+| map-type `map-type`        |
+| military-population  `rel-op`  `value`        |
+| player-computer `player-number`        |
+| player-human `player-number`        |
+| player-in-game  `player-number`        |
+| player-number  `player-number`        |
+| player-resigned `player-number`        |
+| player-valid  `player-number`        |
+| players-building-count  `player-number`  `rel-op`  `value`        |
+| players-building-type-count  `player-number`  `building` `rel-op`  `value`        |
+| players-civ  `player-number` `civ`        |
+| players-civilian-population  `player-number` `rel-op`  `value`        |
+| players-current-age  `player-number` `rel-op` `tech-level`        |
+| players-current-age-time  `player-number` `rel-op` `value`        |
+| players-military-population  `player-number` `rel-op`  `value`        |
+| players-population  `player-number` `rel-op`  `value`        |
+| players-score  `player-number` `rel-op` `score`        |
+| players-stance  `player-number` `diplomatic-stance`        |
+| players-tribute  `player-number` `resource-type` `rel-op` `value`        |
+| players-tribute-memory  `player-number` `resource-type` `rel-op` `value`        |
+| players-unit-count  `player-number`  `rel-op`  `value`        |
+| players-unit-type-count  `player-number`  `unit`  `rel-op`  `value`        |
+| population  `rel-op`  `value`        |
+| population-cap  `rel-op`  `value`        |
+| population-headroom  `rel-op`  `value`        |
+| random **-** number  `rel-op`  `value`        |
 | regicide-game        |
-| research-available  <research-item>        |
-| research-completed  <research-item>        |
-| resource-found  <resource-type>        |
-| shared-goal <shared-goal-id> <value>        |
+| research-available  `research-item`        |
+| research-completed  `research-item`        |
+| resource-found  `resource-type`        |
+| shared-goal `shared-goal-id` `value`        |
 | sheep-and-forage-too-far        |
-| soldier-count  <rel-op>  <value>        |
-| stance-toward <player-number> <diplomatic-stance>        |
-| starting-age <rel-op> <tech-level>        |
-| starting-resources <rel-op> <starting-resources>        |
-| metal-amount  <rel-op>  <value>        |
-| strategic-number  <strategic-number>  <rel-op>  <value>        |
-| taunt-detected <player-number> <taunt-id>        |
-| timer-triggered <timer-id>        |
+| soldier-count  `rel-op`  `value`        |
+| stance-toward `player-number` `diplomatic-stance`        |
+| starting-age `rel-op` `tech-level`        |
+| starting-resources `rel-op` `starting-resources`        |
+| metal-amount  `rel-op`  `value`        |
+| strategic-number  `strategic-number`  `rel-op`  `value`        |
+| taunt-detected `player-number` `taunt-id`        |
+| timer-triggered `timer-id`        |
 | town-under-attack        |
-| unit-available <unit>        |
-| unit-count  <rel-op>  <value>        |
-| unit-count-total  <rel-op>  <value>        |
-| unit-type-count  <unit> <rel-op>  <value>        |
-| unit-type-count-total  <unit> <rel-op>  <value>        |
-| victory-condition  <victory-condition>        |
-| wall-completed-percentage  <perimeter> <rel-op>  <value>        |
-| wall-invisible-percentage  <perimeter> <rel-op>  <value>        |
-| warboat-count  <rel-op>  <value>        |
-| carbon-amount  <rel-op>  <value>        |
+| unit-available `unit`        |
+| unit-count  `rel-op`  `value`        |
+| unit-count-total  `rel-op`  `value`        |
+| unit-type-count  `unit` `rel-op`  `value`        |
+| unit-type-count-total  `unit` `rel-op`  `value`        |
+| victory-condition  `victory-condition`        |
+| wall-completed-percentage  `perimeter` `rel-op`  `value`        |
+| wall-invisible-percentage  `perimeter` `rel-op`  `value`        |
+| warboat-count  `rel-op`  `value`        |
+| carbon-amount  `rel-op`  `value`        |
 | do-nothing        |
-| acknowledge-event  <event-type> <event-id>        |
-| acknowledge-taunt  <player-number> <taunt-id>        |
+| acknowledge-event  `event-type` `event-id`        |
+| acknowledge-taunt  `player-number` `taunt-id`        |
 | attack-now        |
-| build  <building>        |
-| build-forward  <building>        |
-| build-gate  <perimeter>        |
-| build-wall  <perimeter> <wall-type>        |
-| buy-commodity  <commodity>        |
-| cc-add-resource <resource-type> <amount>        |
-| chat-local <string>        |
-| chat-local-using-id <string-id>        |
-| chat-local-using-range <string-id-start> <string-id-range>        |
-| chat-local-to-self <string>        |
-| chat-to-all <string>        |
-| chat-to-all-using-id <string-id>        |
-| chat-to-all-using-range <string-id-start> <string-id-range>        |
-| chat-to-allies <string>        |
-| chat-to-allies-using-id <string-id>        |
-| chat-to-allies-using-range <string-id-start> <string-id-range>        |
-| chat-to-enemies <string>        |
-| chat-to-enemies-using-id <string-id>        |
-| chat-to-enemies-using-range <string-id-start> <string-id-range>        |
-| chat-to-player <player-number> <string>        |
-| chat-to-player-using-id <player-number> <string-id>        |
-| chat-to-player-using-range <player-number> <string-id-start> <string-id-range>        |
-| chat-trace  <value>        |
-| clear-tribute-memory  <player-number> <resource-type>        |
-| delete-building  <building>        |
-| delete-unit  <unit>        |
+| build  `building`        |
+| build-forward  `building`        |
+| build-gate  `perimeter`        |
+| build-wall  `perimeter` `wall-type`        |
+| buy-commodity  `commodity`        |
+| cc-add-resource `resource-type` `amount`        |
+| chat-local `string`        |
+| chat-local-using-id `string-id`        |
+| chat-local-using-range `string-id-start` `string-id-range`        |
+| chat-local-to-self `string`        |
+| chat-to-all `string`        |
+| chat-to-all-using-id `string-id`        |
+| chat-to-all-using-range `string-id-start` `string-id-range`        |
+| chat-to-allies `string`        |
+| chat-to-allies-using-id `string-id`        |
+| chat-to-allies-using-range `string-id-start` `string-id-range`        |
+| chat-to-enemies `string`        |
+| chat-to-enemies-using-id `string-id`        |
+| chat-to-enemies-using-range `string-id-start` `string-id-range`        |
+| chat-to-player `player-number` `string`        |
+| chat-to-player-using-id `player-number` `string-id`        |
+| chat-to-player-using-range `player-number` `string-id-start` `string-id-range`        |
+| chat-trace  `value`        |
+| clear-tribute-memory  `player-number` `resource-type`        |
+| delete-building  `building`        |
+| delete-unit  `unit`        |
 | disable-self        |
-| disable-timer  <timer-id>        |
-| enable-timer  <timer-id>        |
-| enable-wall-placement  <perimeter>        |
-| generate-random-number <value>        |
-| log <string>        |
-| log-trace  <value>        |
-| release-escrow  <resource-type>        |
-| research  <research-item>        |
-| research  <tech-level>        |
+| disable-timer  `timer-id`        |
+| enable-timer  `timer-id`        |
+| enable-wall-placement  `perimeter`        |
+| generate-random-number `value`        |
+| log `string`        |
+| log-trace  `value`        |
+| release-escrow  `resource-type`        |
+| research  `research-item`        |
+| research  `tech-level`        |
 | resign        |
-| sell-commodity  <commodity>        |
-| set-difficulty-parameter <difficulty-parameter> <value>        |
-| set-doctrine <value>        |
-| set-escrow-percentage  <resource-type>  <value>        |
-| set-goal <goal-id> <value>        |
-| set-shared-goal <shared-goal-id> <value>        |
-| set-signal <signal-id>        |
-| set-stance <player-number> <diplomatic-stance>        |
-| set-strategic-number <strategic-number>  <value>        |
+| sell-commodity  `commodity`        |
+| set-difficulty-parameter `difficulty-parameter` `value`        |
+| set-doctrine `value`        |
+| set-escrow-percentage  `resource-type`  `value`        |
+| set-goal `goal-id` `value`        |
+| set-shared-goal `shared-goal-id` `value`        |
+| set-signal `signal-id`        |
+| set-stance `player-number` `diplomatic-stance`        |
+| set-strategic-number `strategic-number`  `value`        |
 | spy        |
-| taunt  <value>        |
-| taunt-using-range  <taunt-start>  <taunt-range>        |
-| train <unit>        |
-| tribute-to-player <player-number>  <resource-type>  <value>        |
-| <tech-level>        |
-| <building>        |
-| <civ>        |
-| <commodity>        |
-| <difficulty>        |
-| <difficulty-parameter>        |
-| <diplomatic-stance>        |
-| <event-id>        |
-| <event-type>        |
-| <goal-id>        |
-| <map-size>        |
-| <map-type>        |
-| <perimeter>        |
-| <player-number>        |
-| <rel-op>        |
-| <research-item >        |
-| <resource-type>        |
-| <shared-goal-id>        |
-| <signal-id>        |
-| <starting-resources>        |
-| <strategic-number>        |
-| <string>        |
-| <string-id>        |
-| <string-id-range>        |
-| <string-id-start>        |
-| <taunt-id>        |
-| <taunt-range>        |
-| <taunt-start>        |
-| <timer-id>        |
-| <unit>        |
-| <value>        |
-| <victory-condition>        |
-| <wall>        |
+| taunt  `value`        |
+| taunt-using-range  `taunt-start`  `taunt-range`        |
+| train `unit`        |
+| tribute-to-player `player-number`  `resource-type`  `value`        |
+| `tech-level`        |
+| `building`        |
+| `civ`        |
+| `commodity`        |
+| `difficulty`        |
+| `difficulty-parameter`        |
+| `diplomatic-stance`        |
+| `event-id`        |
+| `event-type`        |
+| `goal-id`        |
+| `map-size`        |
+| `map-type`        |
+| `perimeter`        |
+| `player-number`        |
+| `rel-op`        |
+| `research-item `        |
+| `resource-type`        |
+| `shared-goal-id`        |
+| `signal-id`        |
+| `starting-resources`        |
+| `strategic-number`        |
+| `string`        |
+| `string-id`        |
+| `string-id-range`        |
+| `string-id-start`        |
+| `taunt-id`        |
+| `taunt-range`        |
+| `taunt-start`        |
+| `timer-id`        |
+| `unit`        |
+| `value`        |
+| `victory-condition`        |
+| `wall`        |
 
 
 
@@ -4482,277 +4489,277 @@ By setting the parameters to the appropriate value it is possible to avoid havin
 
 Note: Separate logic sets resource-needed goal.
 
-(defrule
+        (defrule
 
-        (goal resource-needed NO)
+                (goal resource-needed NO)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-        (civilian-population < 10)
+                (civilian-population < 10)
 
-        (not (strategic-number sn-carbon-gatherer-percentage == 10) )
+                (not (strategic-number sn-carbon-gatherer-percentage == 10) )
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 10)
+                (set-strategic-number sn-carbon-gatherer-percentage 10)
 
-        (set-strategic-number sn-food-gatherer-percentage 90)
+                (set-strategic-number sn-food-gatherer-percentage 90)
 
-        (set-strategic-number sn-nova-gatherer-percentage 0)
+                (set-strategic-number sn-nova-gatherer-percentage 0)
 
-        (set-strategic-number sn-metal-gatherer-percentage 0)
+                (set-strategic-number sn-metal-gatherer-percentage 0)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (goal resource-needed CARBON)
+                (goal resource-needed CARBON)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-        (civilian-population < 10)
+                (civilian-population < 10)
 
-        (not (strategic-number sn-carbon-gatherer-percentage == 20) )
+                (not (strategic-number sn-carbon-gatherer-percentage == 20) )
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 20)
+                (set-strategic-number sn-carbon-gatherer-percentage 20)
 
-        (set-strategic-number sn-food-gatherer-percentage 80)
+                (set-strategic-number sn-food-gatherer-percentage 80)
 
-        (set-strategic-number sn-nova-gatherer-percentage 0)
+                (set-strategic-number sn-nova-gatherer-percentage 0)
 
-        (set-strategic-number sn-metal-gatherer-percentage 0)
+                (set-strategic-number sn-metal-gatherer-percentage 0)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (goal resource-needed NO)
+                (goal resource-needed NO)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-        (civilian-population >= 10)
+                (civilian-population >= 10)
 
-        (not (strategic-number sn-carbon-gatherer-percentage == 30) )
+                (not (strategic-number sn-carbon-gatherer-percentage == 30) )
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 30)
+                (set-strategic-number sn-carbon-gatherer-percentage 30)
 
-        (set-strategic-number sn-food-gatherer-percentage 70)
+                (set-strategic-number sn-food-gatherer-percentage 70)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (goal resource-needed CARBON)
+                (goal resource-needed CARBON)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-        (civilian-population >= 10)
+                (civilian-population >= 10)
 
-        (not (strategic-number sn-carbon-gatherer-percentage == 40) )
+                (not (strategic-number sn-carbon-gatherer-percentage == 40) )
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 40)
+                (set-strategic-number sn-carbon-gatherer-percentage 40)
 
-        (set-strategic-number sn-food-gatherer-percentage 60)
+                (set-strategic-number sn-food-gatherer-percentage 60)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (goal resource-needed FOOD)
+                (goal resource-needed FOOD)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-        (civilian-population >= 10)
+                (civilian-population >= 10)
 
-        (not (strategic-number sn-carbon-gatherer-percentage == 20) )
+                (not (strategic-number sn-carbon-gatherer-percentage == 20) )
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 20)
+                (set-strategic-number sn-carbon-gatherer-percentage 20)
 
-        (set-strategic-number sn-food-gatherer-percentage 80)
+                (set-strategic-number sn-food-gatherer-percentage 80)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (goal resource-needed NOVA)
+                (goal resource-needed NOVA)
 
-        (current-age == tech-level-1)
+                (current-age == tech-level-1)
 
-=>
+        =>
 
-        (set-strategic-number sn-carbon-gatherer-percentage 25)
+                (set-strategic-number sn-carbon-gatherer-percentage 25)
 
-        (set-strategic-number sn-food-gatherer-percentage 65)
+                (set-strategic-number sn-food-gatherer-percentage 65)
 
-        (set-strategic-number sn-nova-gatherer-percentage 10)
+                (set-strategic-number sn-nova-gatherer-percentage 10)
 
-        (disable-self)
+                (disable-self)
 
-)
+        )
 
 ## How to trade
 
 ### Selling excess resources
 
- (defrule
+        (defrule
 
-        (carbon-amount > 1200)
-
-        (or
-
-                (food-amount < 1600)
-
-                (or
-
-                        (nova-amount < 1200)
-
-                        (metal-amount < 650)
-
-                )
-
-        )
-
-        (can-sell-commodity carbon)
-
-=>
-
-        (chat-local-to-self "excess carbon")
-
-        (release-escrow carbon)
-
-        (sell-commodity carbon)
-
-)
-
-(defrule
-
-        (food-amount > 1700)
-
-        (or
-
-                (carbon-amount < 1100)
-
-                (or
-
-                        (nova-amount < 1200)
-
-                        (metal-amount < 650)
-
-                )
-
-        )
-
-        (can-sell-commodity food)
-
-=>
-
-        (chat-local-to-self "excess food")
-
-        (release-escrow food)
-
-        (sell-commodity food)
-
-)
-
-(defrule
-
-        (metal-amount > 1400)
-
-        (or
-
-                (carbon-amount < 1100)
+                (carbon-amount > 1200)
 
                 (or
 
                         (food-amount < 1600)
 
-                        (nova-amount < 1200)
+                        (or
+
+                                (nova-amount < 1200)
+
+                                (metal-amount < 650)
+
+                        )
 
                 )
 
+                (can-sell-commodity carbon)
+
+        =>
+
+                (chat-local-to-self "excess carbon")
+
+                (release-escrow carbon)
+
+                (sell-commodity carbon)
+
         )
 
-        (can-sell-commodity metal)
+        (defrule
 
-=>
+                (food-amount > 1700)
 
-        (chat-local-to-self "excess ore")
+                (or
 
-        (release-escrow metal)
+                        (carbon-amount < 1100)
 
-        (sell-commodity metal)
+                        (or
 
-)
+                                (nova-amount < 1200)
+
+                                (metal-amount < 650)
+
+                        )
+
+                )
+
+                (can-sell-commodity food)
+
+        =>
+
+                (chat-local-to-self "excess food")
+
+                (release-escrow food)
+
+                (sell-commodity food)
+
+        )
+
+        (defrule
+
+                (metal-amount > 1400)
+
+                (or
+
+                        (carbon-amount < 1100)
+
+                        (or
+
+                                (food-amount < 1600)
+
+                                (nova-amount < 1200)
+
+                        )
+
+                )
+
+                (can-sell-commodity metal)
+
+        =>
+
+                (chat-local-to-self "excess ore")
+
+                (release-escrow metal)
+
+                (sell-commodity metal)
+
+        )
 
 ### Using excess nova to buy cheap resources
 
-(defrule
+        (defrule
 
-        (nova-amount > 1250)
+                (nova-amount > 1250)
 
-        (carbon-amount < 1100)
+                (carbon-amount < 1100)
 
-        (can-buy-commodity carbon)
+                (can-buy-commodity carbon)
 
-        (commodity-buying-price carbon < 50)
+                (commodity-buying-price carbon < 50)
 
-=>
+        =>
 
-        (chat-local-to-self "excess nova; buy carbon")
+                (chat-local-to-self "excess nova; buy carbon")
 
-        (release-escrow nova)
+                (release-escrow nova)
 
-        (buy-commodity carbon)
+                (buy-commodity carbon)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (nova-amount > 1250)
+                (nova-amount > 1250)
 
-        (food-amount < 1600)
+                (food-amount < 1600)
 
-        (can-buy-commodity food)
+                (can-buy-commodity food)
 
-        (commodity-buying-price food < 50)
+                (commodity-buying-price food < 50)
 
-=>
+        =>
 
-        (chat-local-to-self "excess nova; buy food")
+                (chat-local-to-self "excess nova; buy food")
 
-        (release-escrow nova)
+                (release-escrow nova)
 
-        (buy-commodity food)
+                (buy-commodity food)
 
-)
+        )
 
-(defrule
+        (defrule
 
-        (nova-amount > 1400)
+                (nova-amount > 1400)
 
-        (metal-amount < 650)
+                (metal-amount < 650)
 
-        (can-buy-commodity metal)
+                (can-buy-commodity metal)
 
-        (commodity-buying-price metal < 200)
+                (commodity-buying-price metal < 200)
 
-=>
+        =>
 
-        (chat-local-to-self "excess nova; buy metal")
+                (chat-local-to-self "excess nova; buy metal")
 
-        (release-escrow nova)
+                (release-escrow nova)
 
-        (buy-commodity metal)
+                (buy-commodity metal)
 
-)
+        )
 
 ## How to resign gracefully
 
@@ -4760,166 +4767,166 @@ Note: Separate logic sets resource-needed goal.
 
 The following code detects resign conditions and sets goal 1 to 19 as a signal to a different group of rules to start resigning. The resign condition is difficulty-dependent.
 
-(defrule
+        (defrule
 
-        (difficulty >= easy)
+                (difficulty >= easy)
 
-        (game-time > 300)
+                (game-time > 300)
 
-        (soldier-count == 0)
+                (soldier-count == 0)
 
-        (unit-type-count UNIT-WORKER < five-percent-pop)
+                (unit-type-count UNIT-WORKER < five-percent-pop)
 
-        (nand
+                (nand
 
-                (players-stance any-human ally)
+                        (players-stance any-human ally)
 
-                (stance-toward any-human ally)
+                        (stance-toward any-human ally)
 
-        )
+                )
 
-=>
+        =>
 
-        (set-goal 1 19)
+                (set-goal 1 19)
 
-        (disable-self)
-
-)
-
-(defrule
-
-        (difficulty == moderate)
-
-        (game-time > 300)
-
-        (building-type-count BLDG-MONUMENT < 1)
-
-        (soldier-count == 0)
-
-        (unit-type-count UNIT-WORKER < five-percent-pop)
-
-        (nand
-
-                (players-stance any-human ally)
-
-                (stance-toward any-human ally)
+                (disable-self)
 
         )
 
-        (not (can-train UNIT-WORKER) )
+        (defrule
 
-=>
+                (difficulty == moderate)
 
-        (set-goal 1 19)
+                (game-time > 300)
 
-        (disable-self)
+                (building-type-count BLDG-MONUMENT < 1)
 
-)
+                (soldier-count == 0)
 
-(defrule
+                (unit-type-count UNIT-WORKER < five-percent-pop)
 
-        (difficulty <= hard)
+                (nand
 
-        (game-time > 300)
+                        (players-stance any-human ally)
 
-        (building-type-count BLDG-MONUMENT < 1)
+                        (stance-toward any-human ally)
 
-        (soldier-count == 0)
+                )
 
-        (unit-type-count UNIT-AIR-CRUISER == 0)
+                (not (can-train UNIT-WORKER) )
 
-        (unit-type-count UNIT-WORKER == 0)
+        =>
 
-        (nand
+                (set-goal 1 19)
 
-                (players-stance any-human ally)
-
-                (stance-toward any-human ally)
+                (disable-self)
 
         )
 
-        (not (can-train UNIT-WORKER) )
+        (defrule
 
-=>
+                (difficulty <= hard)
 
-        (set-goal 1 19)
+                (game-time > 300)
 
-        (disable-self)
+                (building-type-count BLDG-MONUMENT < 1)
 
-)
+                (soldier-count == 0)
+
+                (unit-type-count UNIT-AIR-CRUISER == 0)
+
+                (unit-type-count UNIT-WORKER == 0)
+
+                (nand
+
+                        (players-stance any-human ally)
+
+                        (stance-toward any-human ally)
+
+                )
+
+                (not (can-train UNIT-WORKER) )
+
+        =>
+
+                (set-goal 1 19)
+
+                (disable-self)
+
+        )
 
 ### Tributing to allies and deleting all buildings before resigning
 
 Note: Goal 1 set to 19 signals a resign condition.
 
-; Tribute all resources to ally that is still in the game
+        ; Tribute all resources to ally that is still in the game
 
-(defrule
+        (defrule
 
-        (goal 1 19)
+                (goal 1 19)
 
-        (players-population any-ally > 10)
+                (players-population any-ally > 10)
 
-=>
+        =>
 
-        (release-escrow carbon)
+                (release-escrow carbon)
 
-        (release-escrow food)
+                (release-escrow food)
 
-        (release-escrow nova)
+                (release-escrow nova)
 
-        (release-escrow metal)
+                (release-escrow metal)
 
-        (tribute-to-player this-any-ally carbon 10000)
+                (tribute-to-player this-any-ally carbon 10000)
 
-        (tribute-to-player this-any-ally food 10000)
+                (tribute-to-player this-any-ally food 10000)
 
-        (tribute-to-player this-any-ally nova 10000)
+                (tribute-to-player this-any-ally nova 10000)
 
-        (tribute-to-player this-any-ally metal 10000)
+                (tribute-to-player this-any-ally metal 10000)
 
-        (disable-self)
+                (disable-self)
 
-)
+        )
 
-;\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+        ;\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 
-;delete all military buildings one at the time
+        ;delete all military buildings one at the time
 
-(defrule
+        (defrule
 
-        (goal 1 19)
+                (goal 1 19)
 
-=>
+        =>
 
-        (delete-building BLDG-TURRET-LINE)
+                (delete-building BLDG-TURRET-LINE)
 
-        (delete-building BLDG-MISSILE-LINE)
+                (delete-building BLDG-MISSILE-LINE)
 
-        (delete-building BLDG-GOVTCTR)
+                (delete-building BLDG-GOVTCTR)
 
-        (delete-building BLDG-SHLDGEN)
+                (delete-building BLDG-SHLDGEN)
 
-)
+        )
 
-; When all military buildings are deleted, resign
+        ; When all military buildings are deleted, resign
 
-(defrule
+        (defrule
 
-        (goal 1 19)
+                (goal 1 19)
 
-        (building-type-count BLDG-TURRET-LINE == 0)
+                (building-type-count BLDG-TURRET-LINE == 0)
 
-        (building-type-count BLDG-MISSILE-LINE == 0)
+                (building-type-count BLDG-MISSILE-LINE == 0)
 
-        (building-type-count BLDG-GOVTCTR == 0)
+                (building-type-count BLDG-GOVTCTR == 0)
 
-        (building-type-count BLDG-SHLDGEN == 0)
+                (building-type-count BLDG-SHLDGEN == 0)
 
-=>
+        =>
 
-        (resign)
+                (resign)
 
-        (disable-self)
+                (disable-self)
 
-)
+        )
